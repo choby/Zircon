@@ -4214,7 +4214,7 @@ namespace Client.Scenes.Views
                 return;
             }
 
-            DXMessageBox box = new DXMessageBox($"Are you sure you want to use a {item.ItemName}?\n\n" + $"" + $"This will unlock the {SelectedCompanionInfo.MonsterInfo.MonsterName} appearance for new companions", "Unlock Appearance", DXMessageBoxButtons.YesNo);
+            DXMessageBox box = new DXMessageBox($"确定要使用 {item.ItemName} 吗？\n\n" + $"" + $"这将为新宠物解锁 {SelectedCompanionInfo.MonsterInfo.MonsterName} 外观。", "解锁外观", DXMessageBoxButtons.YesNo);
 
             box.YesButton.MouseClick += (o1, e1) =>
             {
@@ -4763,7 +4763,7 @@ namespace Client.Scenes.Views
 
         private void ReleaseButton_MouseClick(object sender, MouseEventArgs e)
         {
-            DXMessageBox window = new DXMessageBox("Are you sure you wish to release your companion?", "Confirm Release", DXMessageBoxButtons.YesNo);
+            DXMessageBox window = new DXMessageBox("确定要放生你的宠物吗？", "确认放生", DXMessageBoxButtons.YesNo);
 
             window.YesButton.MouseClick += (o1, e1) =>
             {
@@ -6004,7 +6004,7 @@ namespace Client.Scenes.Views
                     return;
                 }
 
-                DXMessageBox box = new DXMessageBox("Are you sure you want to pay for an evaluation?", "Evaluation", DXMessageBoxButtons.YesNo);
+                DXMessageBox box = new DXMessageBox("确定要支付鉴定费用吗？", "物品鉴定", DXMessageBoxButtons.YesNo);
 
                 box.YesButton.MouseClick += (o1, e1) => CEnvir.Enqueue(new C.NPCMasterRefineEvaluate { RefineType = RefineType, Fragment1s = frag1, Fragment2s = frag2, Fragment3s = frag3, Stones = stone, Specials = special });
             };

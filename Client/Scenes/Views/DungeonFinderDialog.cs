@@ -396,7 +396,7 @@ namespace Client.Scenes.Views
                     return;
                 }
 
-                DXMessageBox box = new DXMessageBox("Your group will be teleported to the instance. Are you ready?", "Instance Confirmation", DXMessageBoxButtons.YesNo);
+                DXMessageBox box = new DXMessageBox("你的队伍将被传送至副本，准备好了吗？", "副本确认", DXMessageBoxButtons.YesNo);
 
                 box.YesButton.MouseClick += (o1, e1) =>
                 {

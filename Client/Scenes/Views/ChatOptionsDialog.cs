@@ -89,7 +89,7 @@ namespace Client.Scenes.Views
             };
             button.MouseClick += (o, e) =>
             {
-                // DXMessageBox box = new DXMessageBox("Are you sure you want to reset ALL chat windows", "Chat Reset", DXMessageBoxButtons.YesNo);
+                // DXMessageBox box = new DXMessageBox("确定要重置所有聊天窗口吗？", "重置聊天窗口", DXMessageBoxButtons.YesNo);
 
                 GameScene.Game.SaveChatTabs();
                 GameScene.Game.ReceiveChat(CEnvir.Language.ChatLayoutSaved, MessageType.Announcement);
