@@ -19,11 +19,11 @@ namespace Server
             }
             catch (Exception)
             {
-                throw new ApplicationException($"Invalid format encryption key, expected a base64 with 32 bytes");
+                throw new ApplicationException($"加密密钥格式无效，应为 32 字节的 Base64 字符串");
             }
 
             if (Config.EncryptionEnabled && SEnvir.CryptoKey == null)
-                throw new ApplicationException($"Encryption is enabled but not specified key [System] => DatabaseKey");
+                throw new ApplicationException($"已启用加密，但未指定密钥 [System] => DatabaseKey");
 
             if (Config.EncryptionEnabled)
                 Encryption.SetKey(SEnvir.CryptoKey);

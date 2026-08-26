@@ -436,7 +436,7 @@ namespace Server.Views.DirectX
         public IDisposable ActivatePipeline()
         {
             if (_pipelineSession == null)
-                throw new InvalidOperationException("Rendering pipeline has not been initialized.");
+                throw new InvalidOperationException("渲染管线尚未初始化。");
 
             return _pipelineSession.Activate();
         }

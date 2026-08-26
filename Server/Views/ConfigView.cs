@@ -36,7 +36,7 @@ namespace Server.Views
 
         private void SyncronizeLocalButton_Click(object sender, EventArgs e)
         {
-            SEnvir.Log($"Starting local syncronization...");
+            SEnvir.Log($"正在开始本地同步...");
 
             SMain.Session.Save(true);
 
@@ -44,7 +44,7 @@ namespace Server.Views
 
             File.Copy(SMain.Session.SystemPath, Path.Combine(dataPath, Path.GetFileName(SMain.Session.SystemPath)), true);
 
-            SEnvir.Log($"Syncronization completed...");
+            SEnvir.Log($"同步完成...");
         }
 
         protected override void OnLoad(EventArgs e)

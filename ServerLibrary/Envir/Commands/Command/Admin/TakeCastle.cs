@@ -21,13 +21,13 @@ namespace Server.Envir.Commands.Command.Admin
 
             CastleInfo castle = SEnvir.CastleInfoList.Binding.FirstOrDefault(x => string.Compare(x.Name.Replace(" ", ""), vals[1], StringComparison.OrdinalIgnoreCase) == 0);
             if (castle == null)
-                throw new UserCommandException(string.Format("Could not find castle {0}.", vals[1]));
+                throw new UserCommandException(string.Format("找不到城堡 {0}。", vals[1]));
 
             if (player.Character.Account.GuildMember?.Guild == null)
             {
                 GuildInfo ownerGuild = SEnvir.GuildInfoList.Binding.FirstOrDefault(x => x.Castle == castle);
                 if (ownerGuild == null)
-                    throw new UserCommandException(string.Format("No guild currently owns {0} castle.", castle.Name));
+                    throw new UserCommandException(string.Format("当前没有行会拥有城堡 {0}。", castle.Name));
                 ownerGuild.Castle = null;
 
                 foreach (SConnection con in SEnvir.Connections)

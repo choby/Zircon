@@ -21,7 +21,7 @@ namespace Server.Envir.Commands.Command.Admin
             var character = SEnvir.GetCharacter(characterName);
 
             if (character is null)
-                throw new UserCommandException(string.Format("Could not find player: {0}.", characterName));
+                throw new UserCommandException(string.Format("找不到玩家：{0}。", characterName));
 
             character.Caption = null;
             SEnvir.CharacterInfoList.RaisePropertyChanges = true;
@@ -36,4 +36,3 @@ namespace Server.Envir.Commands.Command.Admin
         }
     }
 }
-

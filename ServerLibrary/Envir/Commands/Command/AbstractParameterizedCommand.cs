@@ -13,7 +13,7 @@ namespace Server.Envir.Commands.Command
 
         public UserCommandException ThrowNewInvalidParametersException()
         {
-            throw new UserCommandException(string.Format("Invalid Parameters for command @{0}", VALUE));
+            throw new UserCommandException(string.Format("命令 @{0} 的参数无效", VALUE));
         }
     }
 }

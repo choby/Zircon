@@ -19,11 +19,11 @@ namespace Server.Envir.Commands.Command.Admin
 
             player = SEnvir.GetPlayerByCharacter(vals[1]);
             if (player == null)
-                throw new UserCommandException(string.Format("Could not find player: {0}", vals[1]));
+                throw new UserCommandException(string.Format("找不到玩家：{0}", vals[1]));
 
             MagicInfo tinfo = SEnvir.MagicInfoList.Binding.FirstOrDefault(m => m.Name.Replace(" ", "").ToUpper().Equals(vals[2].ToUpper()));
             if (tinfo == null)
-                throw new UserCommandException(string.Format("Could not find spell: {0}", vals[2]));
+                throw new UserCommandException(string.Format("找不到技能：{0}", vals[2]));
 
             if (int.TryParse(vals[3], out int tlevel))
             {

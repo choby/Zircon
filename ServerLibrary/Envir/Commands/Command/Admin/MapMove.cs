@@ -22,21 +22,21 @@ namespace Server.Envir.Commands.Command.Admin
             if (vals.Length == 4)
             {
                 if (!int.TryParse(vals[2], out x))
-                    throw new UserCommandException(string.Format("Failed to parse X coord: {0}", vals[2]));
+                    throw new UserCommandException(string.Format("解析 X 坐标失败：{0}", vals[2]));
 
                 if (!int.TryParse(vals[3], out y))
-                    throw new UserCommandException(string.Format("Failed to parse Y coord: {0}", vals[3]));
+                    throw new UserCommandException(string.Format("解析 Y 坐标失败：{0}", vals[3]));
             }
 
             MapInfo info = SEnvir.MapInfoList.Binding.FirstOrDefault(x => string.Compare(x.FileName, vals[1], StringComparison.OrdinalIgnoreCase) == 0);
             Map map = SEnvir.GetMap(info);
             if (map == null)
-                throw new UserCommandException(string.Format("Could not find map with index: {0}", vals[1]));
+                throw new UserCommandException(string.Format("找不到索引为 {0} 的地图", vals[1]));
 
             if (x > 0 && y > 0)
             {
                 if (x > map.Width || y > map.Height)
-                    throw new UserCommandException(string.Format("Coords {0}:{1} outside of map boundary", x, y));
+                    throw new UserCommandException(string.Format("坐标 {0}:{1} 超出地图边界", x, y));
 
                 player.Teleport(map, new Point(x, y));
                 return;

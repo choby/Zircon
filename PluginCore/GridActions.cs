@@ -57,7 +57,7 @@ namespace PluginCore
                 }
                 catch (Exception ex)
                 {
-                    plugin.LogMessage($"Unable to load grid actions for {rowType.Name}: {ex}");
+                    plugin.LogMessage($"无法为 {rowType.Name} 加载网格操作：{ex}");
                     continue;
                 }
 
@@ -119,7 +119,7 @@ namespace PluginCore
                 }
                 catch (Exception ex)
                 {
-                    plugin.LogMessage($"Grid action {action.Key} failed: {ex}");
+                    plugin.LogMessage($"网格操作 {action.Key} 执行失败：{ex}");
                 }
             };
         }

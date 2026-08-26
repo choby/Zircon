@@ -186,7 +186,7 @@ namespace Shared.Rendering.SilkVulkan
         public void ResizeBackBuffer(Size size)
         {
             if (!IsBackBuffer)
-                throw new InvalidOperationException("Only the back buffer render target can be resized.");
+                throw new InvalidOperationException("只能调整后备缓冲区渲染目标的大小。");
 
             Size = size;
         }

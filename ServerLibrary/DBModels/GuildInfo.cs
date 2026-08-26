@@ -318,7 +318,7 @@ namespace Server.DBModels
             {
                 if (item.Slot < 0 || item.Slot >= Storage.Length)
                 {
-                    SEnvir.Log(string.Format("[BAD ITEM] Guild: {0}, Slot: {1}", GuildName, item.Slot));
+                    SEnvir.Log(string.Format("[异常物品] 行会：{0}，槽位：{1}", GuildName, item.Slot));
                     continue;
                 }
 

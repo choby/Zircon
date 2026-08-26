@@ -973,7 +973,7 @@ namespace Client.Envir
                 const string LogPath = @".\Errors\";
 
                 LastError = ex;
-                string state = $"State = {Target?.DisplayRectangle}";
+                string state = $"状态 = {Target?.DisplayRectangle}";
 
                 if (!Directory.Exists(LogPath))
                     Directory.CreateDirectory(LogPath);

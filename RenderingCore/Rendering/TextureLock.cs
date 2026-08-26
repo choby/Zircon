@@ -21,7 +21,7 @@ namespace Shared.Rendering
         public static TextureLock From(IntPtr dataPointer, int pitch, Action dispose)
         {
             if (dataPointer == IntPtr.Zero)
-                throw new ArgumentException("A valid data pointer is required.", nameof(dataPointer));
+                throw new ArgumentException("需要有效的数据指针。", nameof(dataPointer));
 
             if (dispose == null)
                 throw new ArgumentNullException(nameof(dispose));

@@ -1130,7 +1130,7 @@ namespace Client.Controls
             }
 
             if (!ControlSurface.IsValid)
-                throw new InvalidOperationException("Control surface is not available.");
+                throw new InvalidOperationException("控件表面不可用。");
 
             RenderSurface previous = RenderingPipelineManager.GetCurrentSurface();
             RenderingPipelineManager.SetSurface(ControlSurface);

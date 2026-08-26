@@ -11,7 +11,7 @@ namespace Server.Envir.Commands.Command.Player
         public override void Action(PlayerObject player)
         {
             if (player.Stats[Stat.RecallSet] <= 0)
-                throw new UserCommandException("You do not have the ability to recall.");
+                throw new UserCommandException("你没有召回能力。");
 
             if (player.GroupMembers == null)
                 throw new UserCommandException(player.Connection.Language.GroupNoGroup);

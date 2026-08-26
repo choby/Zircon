@@ -16,7 +16,7 @@ namespace Server.Envir.Commands.Command.Admin
 
             var monsterInfo = SEnvir.GetMonsterInfo(vals[1]);
             if (monsterInfo == null)
-                throw new UserCommandException(string.Format("Could not find monster: {0}", vals[1]));
+                throw new UserCommandException(string.Format("找不到怪物：{0}", vals[1]));
 
             int value = 0;
             if (vals.Length < 3 || !int.TryParse(vals[2], out value) || value == 0)

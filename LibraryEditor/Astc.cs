@@ -435,7 +435,7 @@ namespace Astc
                             SetEndpointBlueClamp(data.endpoints[cem], m_ev[v] + m_ev[v + 1], m_ev[v + 2] + m_ev[v + 3], m_ev[v + 4] + m_ev[v + 5], m_ev[v + 6] + m_ev[v + 7], m_ev[v], m_ev[v + 2], m_ev[v + 4], m_ev[v + 6]);
                         break;
                     default:
-                        throw new Exception("Unsupported ASTC format");
+                        throw new Exception("不支持的 ASTC 格式");
                 }
             }
         }

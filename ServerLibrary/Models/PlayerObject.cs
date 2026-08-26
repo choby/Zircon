@@ -900,7 +900,7 @@ namespace Server.Models
         {
             if (!SetBindPoint())
             {
-                SEnvir.Log($"[Failed to spawn Character] Index: {Character.Index}, Name: {Character.CharacterName}, Failed to reset bind point.");
+                SEnvir.Log($"[生成角色失败] 索引：{Character.Index}，名称：{Character.CharacterName}，重置绑定点失败。");
                 Enqueue(new S.StartGame { Result = StartGameResult.UnableToSpawn });
                 Connection = null;
                 Character = null;
@@ -929,7 +929,7 @@ namespace Server.Models
                 }
                 else
                 {
-                    SEnvir.Log($"[Failed to spawn Character] Index: {Character.Index}, Name: {Character.CharacterName}");
+                    SEnvir.Log($"[生成角色失败] 索引：{Character.Index}，名称：{Character.CharacterName}");
                     Enqueue(new S.StartGame { Result = StartGameResult.UnableToSpawn });
                     Connection = null;
                     Character = null;
@@ -938,7 +938,7 @@ namespace Server.Models
             }
             else if (!Spawn(Character.CurrentMap, null, 0, CurrentLocation) && !Spawn(Character.BindPoint.BindRegion, null, 0))
             {
-                SEnvir.Log($"[Failed to spawn Character] Index: {Character.Index}, Name: {Character.CharacterName}");
+                SEnvir.Log($"[生成角色失败] 索引：{Character.Index}，名称：{Character.CharacterName}");
                 Enqueue(new S.StartGame { Result = StartGameResult.UnableToSpawn });
                 Connection = null;
                 Character = null;
@@ -7762,7 +7762,7 @@ namespace Server.Models
                 case GridType.Equipment:
                     sendShape = true;
                     if (toItem == null) break;
-                    throw new Exception("Shitty Move Item Logic");
+                    throw new Exception("移动物品逻辑异常");
                 case GridType.CompanionInventory:
                     if (toItem == null) break;
 
@@ -7772,7 +7772,7 @@ namespace Server.Models
                 case GridType.CompanionEquipment:
                     sendCompanionShape = true;
                     if (toItem == null) break;
-                    throw new Exception("Shitty Move Item Logic");
+                    throw new Exception("移动物品逻辑异常");
                 case GridType.PartsStorage:
                     if (toItem == null) break;
 
@@ -8155,7 +8155,7 @@ namespace Server.Models
                 if (count == 0) return;
             }
 
-            throw new Exception(string.Format("Unable to Take {0}x{1} from {2}", info.ItemName, count, Name));
+            throw new Exception(string.Format("无法从 {2} 取走 {0} × {1}", info.ItemName, count, Name));
         }
         public void ItemLock(C.ItemLock p)
         {
@@ -9111,7 +9111,7 @@ namespace Server.Models
                 result.Link.Count = 0;
             }
 
-            SEnvir.Log($"[NAME CHANGED] Old: {Name}, New: {newName}.", true);
+            SEnvir.Log($"[名称已更改] 原名称：{Name}，新名称：{newName}。", true);
             Name = newName;
 
             SendChangeUpdate();
@@ -9157,7 +9157,7 @@ namespace Server.Models
             }
             Character.Caption = newCaption;
             Caption = newCaption;
-            SEnvir.Log($"[CAPTION CHANGED] {Character.CharacterName} caption changed to: {Caption}", true);
+            SEnvir.Log($"[称号已更改] {Character.CharacterName} 的称号已更改为：{Caption}", true);
             Connection.ReceiveChat($"Your caption changed to: {Caption}.", MessageType.System);
 
 
@@ -14722,7 +14722,7 @@ namespace Server.Models
 
             if (attackMagic != validMagic)
             {
-                SEnvir.Log($"[ERROR] {Name} requested Attack Skill '{attackMagic}' but valid magic was '{validMagic}'.");
+                SEnvir.Log($"[错误] {Name} 请求使用攻击技能“{attackMagic}”，但有效技能为“{validMagic}”。");
                 Enqueue(new S.UserLocation { Direction = Direction, Location = CurrentLocation });
                 return;
             }

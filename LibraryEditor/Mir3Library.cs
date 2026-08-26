@@ -578,20 +578,20 @@ namespace LibraryEditor
         private string BuildCompressionReport(string path, ZlContainerCompression compression, List<Zl2EntryCompressionStats> stats)
         {
             StringBuilder report = new StringBuilder();
-            report.AppendLine($"ZL v2 conversion report: {Path.GetFileName(path)}");
-            report.AppendLine($"Compression selected: {compression}");
-            report.AppendLine($"Images: {Images.Count:N0}");
-            report.AppendLine($"Atlas pages: {AtlasPages.Count:N0}");
-            report.AppendLine($"Atlas group split: {AtlasGroupImageCount:N0}");
-            report.AppendLine($"Atlas page size: {AtlasPageSize:N0}");
+            report.AppendLine($"ZL v2 转换报告：{Path.GetFileName(path)}");
+            report.AppendLine($"所选压缩方式：{compression}");
+            report.AppendLine($"图像数量：{Images.Count:N0}");
+            report.AppendLine($"图集页数量：{AtlasPages.Count:N0}");
+            report.AppendLine($"图集分组大小：{AtlasGroupImageCount:N0}");
+            report.AppendLine($"图集页尺寸：{AtlasPageSize:N0}");
             report.AppendLine();
             report.AppendLine(BuildStoredPayloadReport());
             report.AppendLine();
-            report.AppendLine(BuildCompressionSummary("All entries", stats));
-            report.AppendLine(BuildCompressionSummary("Image entries", stats.FindAll(x => x.Type == ZlEntryType.ImagePayload)));
-            report.AppendLine(BuildCompressionSummary("Atlas page entries", stats.FindAll(x => x.Type == ZlEntryType.AtlasPagePayload)));
+            report.AppendLine(BuildCompressionSummary("所有条目", stats));
+            report.AppendLine(BuildCompressionSummary("图像条目", stats.FindAll(x => x.Type == ZlEntryType.ImagePayload)));
+            report.AppendLine(BuildCompressionSummary("图集页条目", stats.FindAll(x => x.Type == ZlEntryType.AtlasPagePayload)));
             report.AppendLine();
-            report.AppendLine("Atlas page ranges:");
+            report.AppendLine("图集页范围：");
             AppendAtlasPageRanges(report);
             report.AppendLine();
             report.AppendLine(ValidateAtlasMetadata());
@@ -605,10 +605,10 @@ namespace LibraryEditor
             PayloadLayerStats overlayStats = BuildOverlayPayloadStats();
             StringBuilder report = new StringBuilder();
 
-            report.AppendLine("Stored payloads:");
-            report.AppendLine(BuildLayerPayloadLine("Image", imageStats));
-            report.AppendLine(BuildLayerPayloadLine("Shadow", shadowStats));
-            report.AppendLine(BuildLayerPayloadLine("Overlay", overlayStats));
+            report.AppendLine("已存储的载荷：");
+            report.AppendLine(BuildLayerPayloadLine("图像", imageStats));
+            report.AppendLine(BuildLayerPayloadLine("阴影", shadowStats));
+            report.AppendLine(BuildLayerPayloadLine("叠加层", overlayStats));
             report.AppendLine(BuildAtlasPayloadLine(ZlAtlasLayer.Image));
             report.AppendLine(BuildAtlasPayloadLine(ZlAtlasLayer.Shadow));
             report.AppendLine(BuildAtlasPayloadLine(ZlAtlasLayer.Overlay));
@@ -669,7 +669,7 @@ namespace LibraryEditor
 
         private string BuildLayerPayloadLine(string name, PayloadLayerStats stats)
         {
-            return $"{name}: entries {stats.Count:N0}, primary/source {FormatBytes(stats.SourceBytes)}, individual runtime {FormatBytes(stats.Bc7Bytes)}, fallback {FormatBytes(stats.FallbackBytes)}, total {FormatBytes(stats.TotalBytes)}.";
+            return $"{name}：条目 {stats.Count:N0}，主要/源数据 {FormatBytes(stats.SourceBytes)}，独立运行时数据 {FormatBytes(stats.Bc7Bytes)}，回退数据 {FormatBytes(stats.FallbackBytes)}，总计 {FormatBytes(stats.TotalBytes)}。";
         }
 
         private string BuildAtlasPayloadLine(ZlAtlasLayer layer)
@@ -690,7 +690,7 @@ namespace LibraryEditor
                 fallbackBytes += page.FallbackBytes?.Length ?? page.FallbackDataSize;
             }
 
-            return $"{GetAtlasLayerName(layer)} atlas: pages {count:N0}, PNG/source {FormatBytes(sourceBytes)}, runtime {FormatBytes(bc7Bytes)}, fallback {FormatBytes(fallbackBytes)}, total {FormatBytes(sourceBytes + bc7Bytes + fallbackBytes)}.";
+            return $"{GetAtlasLayerName(layer)}图集：页数 {count:N0}，PNG/源数据 {FormatBytes(sourceBytes)}，运行时数据 {FormatBytes(bc7Bytes)}，回退数据 {FormatBytes(fallbackBytes)}，总计 {FormatBytes(sourceBytes + bc7Bytes + fallbackBytes)}。";
         }
 
         private void ReadAtlasLayerMappings(BinaryReader reader)
@@ -763,9 +763,9 @@ namespace LibraryEditor
             }
 
             if (uncompressed <= 0)
-                return $"{title}: no payloads.";
+                return $"{title}：没有载荷。";
 
-            return $"{title}: entries {stats.Count:N0}, raw {FormatBytes(uncompressed)}, stored {FormatBytes(stored)} ({FormatRatio(stored, uncompressed)}), DeflateBest {FormatBytes(deflateBest)} ({FormatRatio(deflateBest, uncompressed)}), None {FormatBytes(none)}.";
+            return $"{title}：条目 {stats.Count:N0}，原始大小 {FormatBytes(uncompressed)}，存储大小 {FormatBytes(stored)}（{FormatRatio(stored, uncompressed)}），DeflateBest {FormatBytes(deflateBest)}（{FormatRatio(deflateBest, uncompressed)}），未压缩 {FormatBytes(none)}。";
         }
 
         private void WriteCompressionReport(string path)
@@ -992,12 +992,12 @@ namespace LibraryEditor
                     return;
 
                 int currentGroup = Math.Max(group, 0);
-                progress?.Report(new LibraryProgress($"Encoding atlas page {page + 1} for {progressName}", 0, 0, true)
+                progress?.Report(new LibraryProgress($"正在为 {progressName} 编码图集页 {page + 1}", 0, 0, true)
                 {
-                    CountText = $"Encoding atlas page {page + 1:N0}",
+                    CountText = $"正在编码图集页 {page + 1:N0}",
                     GroupValue = currentGroup + 1,
                     GroupMaximum = groupCount,
-                    GroupText = $"{layerName} atlas group {currentGroup + 1:N0} of {groupCount:N0}: page {page + 1:N0}"
+                    GroupText = $"{layerName}图集分组 {currentGroup + 1:N0}/{groupCount:N0}：第 {page + 1:N0} 页"
                 });
 
                 AtlasPages.Add(Mir3AtlasPage.FromBitmap(page, atlas, atlasRuntimePreference, layer));
@@ -1039,12 +1039,12 @@ namespace LibraryEditor
                 int groupValue = GetGroupValue(imageIndex, currentGroup);
                 int groupMaximum = GetGroupMaximum(currentGroup);
 
-                progress?.Report(new LibraryProgress($"Building {layerName.ToLowerInvariant()} atlas for {progressName}", imageIndex + 1, Images.Count)
+                progress?.Report(new LibraryProgress($"正在为 {progressName} 构建{layerName}图集", imageIndex + 1, Images.Count)
                 {
-                    CountText = $"{layerName} atlas image {imageIndex + 1:N0} of {Images.Count:N0}",
+                    CountText = $"{layerName}图集图像 {imageIndex + 1:N0}/{Images.Count:N0}",
                     GroupValue = currentGroup + 1,
                     GroupMaximum = groupCount,
-                    GroupText = $"{layerName} atlas group {currentGroup + 1:N0} of {groupCount:N0}: image {groupValue:N0} of {groupMaximum:N0}, page {page + 1:N0}"
+                    GroupText = $"{layerName}图集分组 {currentGroup + 1:N0}/{groupCount:N0}：图像 {groupValue:N0}/{groupMaximum:N0}，第 {page + 1:N0} 页"
                 });
 
                 int paddedWidth = sourceSize.Width + padding * 2;
@@ -1081,9 +1081,9 @@ namespace LibraryEditor
         {
             return layer switch
             {
-                ZlAtlasLayer.Shadow => "Shadow",
-                ZlAtlasLayer.Overlay => "Overlay",
-                _ => "Image",
+                ZlAtlasLayer.Shadow => "阴影",
+                ZlAtlasLayer.Overlay => "叠加层",
+                _ => "图像",
             };
         }
 
@@ -1137,9 +1137,9 @@ namespace LibraryEditor
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
-                progress?.Report(new LibraryProgress($"Building runtime textures for {progressName}", i + 1, maximum)
+                progress?.Report(new LibraryProgress($"正在为 {progressName} 构建运行时纹理", i + 1, maximum)
                 {
-                    CountText = $"Runtime image {i + 1:N0} of {maximum:N0}",
+                    CountText = $"运行时图像 {i + 1:N0}/{maximum:N0}",
                     GroupText = GetRuntimeProgressText(preference, storePngSourceImages)
                 });
 
@@ -1149,14 +1149,14 @@ namespace LibraryEditor
 
         private static string GetRuntimeProgressText(ZlRuntimeTexturePreference preference, bool storePngSourceImages)
         {
-            string sourceText = storePngSourceImages ? "existing PNG source where present" : "runtime-only";
+            string sourceText = storePngSourceImages ? "现有 PNG 源数据（如有）" : "仅运行时数据";
             return preference switch
             {
-                ZlRuntimeTexturePreference.Source => "Preserving source texture type where possible",
-                ZlRuntimeTexturePreference.Dxt1 => $"Encoding {sourceText} + DXT1 textures",
-                ZlRuntimeTexturePreference.Dxt5 => $"Encoding {sourceText} + DXT5 textures",
-                ZlRuntimeTexturePreference.Bc7 => $"Encoding {sourceText} + BC7 textures",
-                _ => storePngSourceImages ? "Preserving existing PNG source textures" : "Encoding runtime textures",
+                ZlRuntimeTexturePreference.Source => "尽可能保留源纹理类型",
+                ZlRuntimeTexturePreference.Dxt1 => $"正在编码{sourceText}和 DXT1 纹理",
+                ZlRuntimeTexturePreference.Dxt5 => $"正在编码{sourceText}和 DXT5 纹理",
+                ZlRuntimeTexturePreference.Bc7 => $"正在编码{sourceText}和 BC7 纹理",
+                _ => storePngSourceImages ? "保留现有 PNG 源纹理" : "正在编码运行时纹理",
             };
         }
 
@@ -1195,7 +1195,7 @@ namespace LibraryEditor
         public string ValidateAtlasMetadata(int groupImageCount = 0)
         {
             if (AtlasPages.Count == 0)
-                return $"Atlas metadata not present. Images: {Images.Count}, Group split: {AtlasGroupImageCount:N0}, Page size: {AtlasPageSize:N0}.";
+                return $"不存在图集元数据。图像数量：{Images.Count}，分组大小：{AtlasGroupImageCount:N0}，页面尺寸：{AtlasPageSize:N0}。";
 
             StringBuilder report = new StringBuilder();
             int issues = 0;
@@ -1206,15 +1206,15 @@ namespace LibraryEditor
                 Mir3AtlasPage page = AtlasPages[i];
                 if (page == null)
                 {
-                    AppendAtlasIssue(report, ref issues, $"Atlas page slot {i} is empty.");
+                    AppendAtlasIssue(report, ref issues, $"图集页槽位 {i} 为空。");
                     continue;
                 }
 
                 if (page.Id != i)
-                    AppendAtlasIssue(report, ref issues, $"Atlas page slot {i} has id {page.Id}.");
+                    AppendAtlasIssue(report, ref issues, $"图集页槽位 {i} 的 ID 为 {page.Id}。");
 
                 if (page.Width <= 0 || page.Height <= 0 || page.DataSize == 0)
-                    AppendAtlasIssue(report, ref issues, $"Atlas page {page.Id} has no payload.");
+                    AppendAtlasIssue(report, ref issues, $"图集页 {page.Id} 没有载荷。");
             }
 
             for (int i = 0; i < Images.Count; i++)
@@ -1225,7 +1225,7 @@ namespace LibraryEditor
 
                 if (image.AtlasPage < 0 || image.AtlasPage >= AtlasPages.Count)
                 {
-                    AppendAtlasIssue(report, ref issues, $"Image {i} points at missing atlas page {image.AtlasPage}.");
+                    AppendAtlasIssue(report, ref issues, $"图像 {i} 指向缺失的图集页 {image.AtlasPage}。");
                     continue;
                 }
 
@@ -1233,14 +1233,14 @@ namespace LibraryEditor
                 Rectangle source = image.SourceRectangle;
 
                 if (source.Width != image.Width || source.Height != image.Height)
-                    AppendAtlasIssue(report, ref issues, $"Image {i} source size {source.Width}x{source.Height} does not match image size {image.Width}x{image.Height}.");
+                    AppendAtlasIssue(report, ref issues, $"图像 {i} 的源尺寸 {source.Width}x{source.Height} 与图像尺寸 {image.Width}x{image.Height} 不匹配。");
 
                 if (source.X < 0 || source.Y < 0 || source.Right > page.Width || source.Bottom > page.Height)
-                    AppendAtlasIssue(report, ref issues, $"Image {i} source rectangle {source} is outside atlas page {page.Id} ({page.Width}x{page.Height}).");
+                    AppendAtlasIssue(report, ref issues, $"图像 {i} 的源矩形 {source} 超出图集页 {page.Id}（{page.Width}x{page.Height}）的范围。");
 
                 Rectangle visible = image.VisibleBounds;
                 if (visible != Rectangle.Empty && (visible.X < 0 || visible.Y < 0 || visible.Right > image.Width || visible.Bottom > image.Height))
-                    AppendAtlasIssue(report, ref issues, $"Image {i} visible bounds {visible} are outside image size {image.Width}x{image.Height}.");
+                    AppendAtlasIssue(report, ref issues, $"图像 {i} 的可见边界 {visible} 超出图像尺寸 {image.Width}x{image.Height} 的范围。");
             }
 
             ValidateAtlasLayerMetadata(report, ref issues, ZlAtlasLayer.Shadow);
@@ -1250,9 +1250,9 @@ namespace LibraryEditor
                 ValidateAtlasGroupBoundaries(report, ref issues, validationGroupImageCount);
 
             if (issues == 0)
-                report.Insert(0, $"Atlas metadata valid. Pages: {AtlasPages.Count}, Images: {Images.Count}, Group split: {validationGroupImageCount:N0}, Page size: {AtlasPageSize:N0}.{Environment.NewLine}");
+                report.Insert(0, $"图集元数据有效。页数：{AtlasPages.Count}，图像数量：{Images.Count}，分组大小：{validationGroupImageCount:N0}，页面尺寸：{AtlasPageSize:N0}。{Environment.NewLine}");
             else
-                report.Insert(0, $"Atlas metadata has {issues} issue(s).{Environment.NewLine}");
+                report.Insert(0, $"图集元数据存在 {issues} 个问题。{Environment.NewLine}");
 
             return report.ToString();
         }
@@ -1274,25 +1274,25 @@ namespace LibraryEditor
 
                 if (atlasPage >= AtlasPages.Count)
                 {
-                    AppendAtlasIssue(report, ref issues, $"{layerName} image {i} points at missing atlas page {atlasPage}.");
+                    AppendAtlasIssue(report, ref issues, $"{layerName}图像 {i} 指向缺失的图集页 {atlasPage}。");
                     continue;
                 }
 
                 Mir3AtlasPage page = AtlasPages[atlasPage];
                 if (page == null)
                 {
-                    AppendAtlasIssue(report, ref issues, $"{layerName} image {i} points at empty atlas page slot {atlasPage}.");
+                    AppendAtlasIssue(report, ref issues, $"{layerName}图像 {i} 指向空的图集页槽位 {atlasPage}。");
                     continue;
                 }
 
                 if (page.Layer != layer)
-                    AppendAtlasIssue(report, ref issues, $"{layerName} image {i} points at {GetAtlasLayerName(page.Layer).ToLowerInvariant()} atlas page {atlasPage}.");
+                    AppendAtlasIssue(report, ref issues, $"{layerName}图像 {i} 指向{GetAtlasLayerName(page.Layer)}图集页 {atlasPage}。");
 
                 if (source.Width != size.Width || source.Height != size.Height)
-                    AppendAtlasIssue(report, ref issues, $"{layerName} image {i} source size {source.Width}x{source.Height} does not match layer size {size.Width}x{size.Height}.");
+                    AppendAtlasIssue(report, ref issues, $"{layerName}图像 {i} 的源尺寸 {source.Width}x{source.Height} 与图层尺寸 {size.Width}x{size.Height} 不匹配。");
 
                 if (source.X < 0 || source.Y < 0 || source.Right > page.Width || source.Bottom > page.Height)
-                    AppendAtlasIssue(report, ref issues, $"{layerName} image {i} source rectangle {source} is outside atlas page {page.Id} ({page.Width}x{page.Height}).");
+                    AppendAtlasIssue(report, ref issues, $"{layerName}图像 {i} 的源矩形 {source} 超出图集页 {page.Id}（{page.Width}x{page.Height}）的范围。");
             }
         }
 
@@ -1350,7 +1350,7 @@ namespace LibraryEditor
                 int minGroup = minIndex / groupImageCount;
                 int maxGroup = maxIndex / groupImageCount;
                 if (minGroup != maxGroup)
-                    AppendAtlasIssue(report, ref issues, $"{GetAtlasLayerName(page.Layer)} atlas page {page.Id} crosses group boundary {groupImageCount:N0}: image {minIndex:N0} to {maxIndex:N0}.");
+                    AppendAtlasIssue(report, ref issues, $"{GetAtlasLayerName(page.Layer)}图集页 {page.Id} 跨越分组边界 {groupImageCount:N0}：图像 {minIndex:N0} 至 {maxIndex:N0}。");
             }
         }
 
@@ -1424,9 +1424,9 @@ namespace LibraryEditor
                 }
 
                 if (count == 0)
-                    report.AppendLine($"{GetAtlasLayerName(page.Layer)} page {page.Id:N0}: no images");
+                    report.AppendLine($"{GetAtlasLayerName(page.Layer)}页 {page.Id:N0}：没有图像");
                 else
-                    report.AppendLine($"{GetAtlasLayerName(page.Layer)} page {page.Id:N0}: {count:N0} images, index {minIndex:N0} to {maxIndex:N0}");
+                    report.AppendLine($"{GetAtlasLayerName(page.Layer)}页 {page.Id:N0}：{count:N0} 个图像，索引 {minIndex:N0} 至 {maxIndex:N0}");
             }
         }
 
@@ -1435,8 +1435,8 @@ namespace LibraryEditor
             StringBuilder report = new StringBuilder();
             report.AppendLine(ValidateAtlasMetadata());
             report.AppendLine(BuildCompressionDebugReport());
-            report.AppendLine("Atlas page image ranges:");
-            report.AppendLine($"Atlas group split: {AtlasGroupImageCount:N0}; atlas page size: {AtlasPageSize:N0}");
+            report.AppendLine("图集页图像范围：");
+            report.AppendLine($"图集分组大小：{AtlasGroupImageCount:N0}；图集页尺寸：{AtlasPageSize:N0}");
 
             AppendAtlasPageRanges(report);
 
@@ -1471,7 +1471,7 @@ namespace LibraryEditor
                     }
                 }
 
-                return $"Compressed payload totals: image entries {FormatBytes(imageCompressed)} / {FormatBytes(imageUncompressed)}, atlas entries {FormatBytes(atlasCompressed)} / {FormatBytes(atlasUncompressed)}, combined {FormatBytes(compressed)} / {FormatBytes(uncompressed)}.";
+                return $"压缩载荷总计：图像条目 {FormatBytes(imageCompressed)} / {FormatBytes(imageUncompressed)}，图集条目 {FormatBytes(atlasCompressed)} / {FormatBytes(atlasUncompressed)}，合计 {FormatBytes(compressed)} / {FormatBytes(uncompressed)}。";
             }
 
             long imageSourceBytes = 0;
@@ -1502,7 +1502,7 @@ namespace LibraryEditor
                 atlasBytes += page.DataSize;
             }
 
-            return $"Payload totals: image source {FormatBytes(imageSourceBytes)}, per-image runtime {FormatBytes(imageRuntimeBytes)}, atlas pages {FormatBytes(atlasBytes)}, combined {FormatBytes(imageSourceBytes + imageRuntimeBytes + atlasBytes)}.";
+            return $"载荷总计：图像源数据 {FormatBytes(imageSourceBytes)}，逐图像运行时数据 {FormatBytes(imageRuntimeBytes)}，图集页 {FormatBytes(atlasBytes)}，合计 {FormatBytes(imageSourceBytes + imageRuntimeBytes + atlasBytes)}。";
         }
 
         private static string FormatBytes(long bytes)
@@ -1853,7 +1853,7 @@ namespace LibraryEditor
                 return payload;
 
             if (compression != ZlContainerCompression.DeflateFast && compression != ZlContainerCompression.DeflateBest)
-                throw new InvalidDataException($"Unsupported ZL v2 compression method: {(byte)compression}.");
+                throw new InvalidDataException($"不支持的 ZL v2 压缩方法：{(byte)compression}。");
 
             using (MemoryStream input = new MemoryStream(payload))
             using (DeflateStream deflate = new DeflateStream(input, CompressionMode.Decompress))

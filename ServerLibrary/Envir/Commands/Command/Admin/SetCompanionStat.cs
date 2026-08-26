@@ -26,9 +26,9 @@ namespace Server.Envir.Commands.Command.Admin
                 ThrowNewInvalidParametersException();
 
             if (player.Companion == null)
-                throw new UserCommandException("You do not have a companion.");
+                throw new UserCommandException("你没有宠物。");
             if (player.Companion.UserCompanion.Level <= level)
-                throw new UserCommandException("Companion is not a high enough level.");
+                throw new UserCommandException("宠物等级不足。");
 
             switch (level)
             {
@@ -54,7 +54,7 @@ namespace Server.Envir.Commands.Command.Admin
                     player.Companion.UserCompanion.Level15 = new Stats { [stat] = value };
                     break;
                 default:
-                    throw new UserCommandException(string.Format("Companion level {0} does not exist.", level));
+                    throw new UserCommandException(string.Format("宠物等级 {0} 不存在。", level));
             }
 
             player.CompanionRefreshBuff();

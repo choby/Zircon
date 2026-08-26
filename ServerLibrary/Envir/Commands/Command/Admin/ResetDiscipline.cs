@@ -19,7 +19,7 @@ namespace Server.Envir.Commands.Command.Admin
             {
                 targetCharacter = SEnvir.GetCharacter(vals[1]);
                 if (targetCharacter == null)
-                    throw new UserCommandException(string.Format("Could not find character: {0}", vals[1]));
+                    throw new UserCommandException(string.Format("找不到角色：{0}", vals[1]));
             }
 
             if (targetCharacter.Discipline != null)

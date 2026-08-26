@@ -19,10 +19,10 @@ namespace Shared.Rendering
         public static RenderTargetResource From(RenderTexture texture, RenderSurface surface)
         {
             if (!texture.IsValid)
-                throw new ArgumentException("A valid texture handle is required.", nameof(texture));
+                throw new ArgumentException("需要有效的纹理句柄。", nameof(texture));
 
             if (!surface.IsValid)
-                throw new ArgumentException("A valid surface handle is required.", nameof(surface));
+                throw new ArgumentException("需要有效的表面句柄。", nameof(surface));
 
             return new RenderTargetResource(texture, surface);
         }

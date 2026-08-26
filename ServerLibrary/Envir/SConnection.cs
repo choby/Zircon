@@ -49,13 +49,13 @@ namespace Server.Envir
 
             OnException += (o, e) =>
             {
-                SEnvir.Log(string.Format("Crashed: Account: {0}, Character: {1}.", Account?.EMailAddress, Player?.Name));
+                SEnvir.Log(string.Format("连接崩溃：账号：{0}，角色：{1}。", Account?.EMailAddress, Player?.Name));
                 SEnvir.Log(e.ToString());
                 SEnvir.Log(e.StackTrace.ToString());
                 File.AppendAllText(@".\Errors.txt", e.StackTrace + Environment.NewLine);
             };
 
-            SEnvir.Log(string.Format("[Connection] IP Address:{0}", IPAddress));
+            SEnvir.Log(string.Format("[连接] IP 地址：{0}", IPAddress));
 
             UpdateTimeOut();
             BeginReceive();
@@ -72,7 +72,7 @@ namespace Server.Envir
             CleanUp();
 
             if (!SEnvir.Connections.Contains(this))
-                throw new InvalidOperationException("Connection was not found in list");
+                throw new InvalidOperationException("连接列表中找不到该连接");
 
             SEnvir.Connections.Remove(this);
             SEnvir.IPCount[IPAddress]--;
@@ -186,7 +186,7 @@ namespace Server.Envir
                     if (SEnvir.Connections[i].IPAddress == IPAddress)
                         SEnvir.Connections[i].TryDisconnect();
 
-                SEnvir.Log($"{IPAddress} Disconnected, Large Packet");
+                SEnvir.Log($"{IPAddress} 因数据包过大而断开连接");
                 return;
             }
 
@@ -199,7 +199,7 @@ namespace Server.Envir
                     if (SEnvir.Connections[i].IPAddress == IPAddress)
                         SEnvir.Connections[i].TryDisconnect();
 
-                SEnvir.Log($"{IPAddress} Disconnected, Large amount of Packets");
+                SEnvir.Log($"{IPAddress} 因数据包数量过多而断开连接");
                 return;
             }
 

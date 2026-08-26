@@ -19,7 +19,7 @@ namespace Server.Models.Monsters
             base.OnSpawned();
 
             if (Castle == null)
-                throw new InvalidOperationException("Cannot spawn objective without a castle.");
+                throw new InvalidOperationException("没有城堡时无法生成目标对象。");
 
             Guild = SEnvir.GuildInfoList.Binding.FirstOrDefault(x => x.Castle == Castle);
         }

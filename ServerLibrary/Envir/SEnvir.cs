@@ -96,7 +96,7 @@ namespace Server.Envir
                 _userCountListener.BeginAcceptTcpClient(CountConnection, null);
 
                 NetworkStarted = true;
-                if (log) Log($"Network Started. Listen: {Config.IPAddress}:{Config.Port}");
+                if (log) Log($"网络已启动。监听地址：{Config.IPAddress}:{Config.Port}");
             }
             catch (Exception ex)
             {
@@ -138,7 +138,7 @@ namespace Server.Envir
             Connections.Clear();
             IPCount.Clear();
 
-            if (log) Log("Network Stopped.");
+            if (log) Log("网络已停止。");
         }
 
         private static void Connection(IAsyncResult result)
@@ -426,11 +426,11 @@ namespace Server.Envir
                     }
                     catch (Exception)
                     {
-                        Log(string.Format("ExperienceList: Error parsing line {0} - {1}", i, lines[i]));
+                        Log(string.Format("经验列表：解析第 {0} 行失败 - {1}", i, lines[i]));
                     }
                 }
             }
-            Log("Experience List Loaded.");
+            Log("经验列表已加载。");
         }
 
         private static void LoadDatabase()
@@ -742,7 +742,7 @@ namespace Server.Envir
 
             if (!Config.LazyLoadMaps)
             {
-                Log("Map lazy loading disabled, loading all maps on startup.");
+                Log("地图延迟加载已禁用，将在启动时加载所有地图。");
 
                 for (int i = 0; i < MapInfoList.Count; i++)
                 {
@@ -801,13 +801,13 @@ namespace Server.Envir
             {
                 if (movement.SourceRegion == null && movement.DestinationRegion == null)
                 {
-                    Log($"[Movement] No Source or Destination Region, Index: {movement.Index}");
+                    Log($"[移动] 缺少来源区域或目标区域，索引：{movement.Index}");
                     continue;
                 }
 
                 if (movement.SourceRegion == null)
                 {
-                    Log($"[Movement] No Source Region, Destination: {movement.DestinationRegion.ServerDescription}");
+                    Log($"[移动] 缺少来源区域，目标：{movement.DestinationRegion.ServerDescription}");
                     continue;
                 }
 
@@ -819,7 +819,7 @@ namespace Server.Envir
                 {
                     if (instance == null)
                     {
-                        Log($"[Movement] Bad Source Map, Source: {movement.SourceRegion.ServerDescription}");
+                        Log($"[移动] 来源地图无效，来源：{movement.SourceRegion.ServerDescription}");
                     }
 
                     continue;
@@ -827,7 +827,7 @@ namespace Server.Envir
 
                 if (movement.DestinationRegion == null)
                 {
-                    Log($"[Movement] No Destination Region, Source: {movement.SourceRegion.ServerDescription}");
+                    Log($"[移动] 缺少目标区域，来源：{movement.SourceRegion.ServerDescription}");
                     continue;
                 }
 
@@ -846,7 +846,7 @@ namespace Server.Envir
                 if (movement.DestinationRegion.PointList == null || movement.DestinationRegion.PointList.Count == 0)
                 {
                     if (targetMap == null)
-                        Log($"[Movement] Bad Destination, Dest: {movement.DestinationRegion.ServerDescription}, No Points");
+                        Log($"[移动] 目标无效，目标：{movement.DestinationRegion.ServerDescription}，没有可用坐标");
 
                     continue;
                 }
@@ -860,7 +860,7 @@ namespace Server.Envir
                 {
                     if (instance == null)
                     {
-                        Log($"[Movement] Bad Destination Map, Destination: {movement.DestinationRegion.ServerDescription}");
+                        Log($"[移动] 目标地图无效，目标：{movement.DestinationRegion.ServerDescription}");
                     }
 
                     if (movement.NeedInstance == null || movement.NeedInstance != instance)
@@ -877,7 +877,7 @@ namespace Server.Envir
                     {
                         if (!movement.SkipValidation)
                         {
-                            Log($"[Movement] Bad Origin, Source: {movement.SourceRegion.ServerDescription}, X:{sPoint.X}, Y:{sPoint.Y}");
+                            Log($"[移动] 起点无效，来源：{movement.SourceRegion.ServerDescription}，X：{sPoint.X}，Y：{sPoint.Y}");
                         }
 
                         continue;
@@ -926,7 +926,7 @@ namespace Server.Envir
                 {
                     if (instance == null)
                     {
-                        Log(string.Format("[NPC] Bad Map, NPC: {0}, Map: {1}", info.NPCName, info.Region.ServerDescription));
+                        Log(string.Format("[NPC] 地图无效，NPC：{0}，地图：{1}", info.NPCName, info.Region.ServerDescription));
                     }
 
                     continue;
@@ -938,7 +938,7 @@ namespace Server.Envir
                 };
 
                 if (!ob.Spawn(info.Region, instance, instanceSequence))
-                    Log($"[NPC] Failed to spawn NPC, Region: {info.Region.ServerDescription}, NPC: {info.NPCName}");
+                    Log($"[NPC] 生成 NPC 失败，区域：{info.Region.ServerDescription}，NPC：{info.NPCName}");
             }
         }
 
@@ -971,7 +971,7 @@ namespace Server.Envir
                     {
                         if (instance == null)
                         {
-                            Log($"[Quest Region] Bad Map, Map: {task.RegionParameter.ServerDescription}");
+                            Log($"[任务区域] 地图无效，地图：{task.RegionParameter.ServerDescription}");
                         }
 
                         continue;
@@ -983,7 +983,7 @@ namespace Server.Envir
 
                         if (source == null)
                         {
-                            Log($"[Quest Region] Bad Quest Region, Source: {task.RegionParameter.ServerDescription}, X:{sPoint.X}, Y:{sPoint.Y}");
+                            Log($"[任务区域] 任务区域无效，来源：{task.RegionParameter.ServerDescription}，X：{sPoint.X}，Y：{sPoint.Y}");
                             continue;
                         }
 
@@ -1013,7 +1013,7 @@ namespace Server.Envir
                     {
                         if (instance == null)
                         {
-                            Log($"[Quest Region] Bad Map, Map: {task.RegionParameter.ServerDescription}");
+                            Log($"[任务区域] 地图无效，地图：{task.RegionParameter.ServerDescription}");
                         }
 
                         continue;
@@ -1025,7 +1025,7 @@ namespace Server.Envir
 
                         if (source == null)
                         {
-                            Log($"[Quest Region] Bad Quest Region, Source: {task.RegionParameter.ServerDescription}, X:{sPoint.X}, Y:{sPoint.Y}");
+                            Log($"[任务区域] 任务区域无效，来源：{task.RegionParameter.ServerDescription}，X：{sPoint.X}，Y：{sPoint.Y}");
                             continue;
                         }
 
@@ -1088,7 +1088,7 @@ namespace Server.Envir
                     {
                         if (instance == null)
                         {
-                            Log($"[Safe Zone] Bad Map, Map: {info.Region.ServerDescription}");
+                            Log($"[安全区] 地图无效，地图：{info.Region.ServerDescription}");
                         }
 
                         continue;
@@ -1104,7 +1104,7 @@ namespace Server.Envir
 
                         if (cell == null)
                         {
-                            Log($"[Safe Zone] Bad Location, Region: {info.Region.ServerDescription}, X: {point.X}, Y: {point.Y}.");
+                            Log($"[安全区] 位置无效，区域：{info.Region.ServerDescription}，X：{point.X}，Y：{point.Y}。");
 
                             continue;
                         }
@@ -1158,7 +1158,7 @@ namespace Server.Envir
 
             if (bindMap == null)
             {
-                Log($"[Safe Zone] Bad Bind Map, Map: {info.Region?.ServerDescription ?? info.BindRegion.ServerDescription}");
+                Log($"[安全区] 绑定地图无效，地图：{info.Region?.ServerDescription ?? info.BindRegion.ServerDescription}");
 
                 return false;
             }
@@ -1169,7 +1169,7 @@ namespace Server.Envir
 
                 if (cell == null)
                 {
-                    Log($"[Safe Zone] Bad Location, Region: {info.BindRegion.ServerDescription}, X: {point.X}, Y: {point.Y}.");
+                    Log($"[安全区] 位置无效，区域：{info.BindRegion.ServerDescription}，X：{point.X}，Y：{point.Y}。");
                     continue;
                 }
 
@@ -1226,7 +1226,7 @@ namespace Server.Envir
                 {
                     if (instance == null)
                     {
-                        Log(string.Format("[Respawn] Bad Map, Map: {0}", info.Region.ServerDescription));
+                        Log(string.Format("[重生] 地图无效，地图：{0}", info.Region.ServerDescription));
                     }
 
                     continue;
@@ -1392,7 +1392,7 @@ namespace Server.Envir
 
             LastWarTime = Now;
 
-            Log($"Loading Time: {Functions.ToString(Time.Now - Now, true)}");
+            Log($"加载耗时：{Functions.ToString(Time.Now - Now, true)}");
 
             while (Started)
             {
@@ -1654,7 +1654,7 @@ namespace Server.Envir
 
                 if (!message.Verified)
                 {
-                    SEnvir.Log("INVALID PAYPAL TRANSACTION " + message.Message);
+                    SEnvir.Log("无效的 PAYPAL 交易：" + message.Message);
                     continue;
                 }
 
@@ -1690,7 +1690,7 @@ namespace Server.Envir
                     if (SEnvir.GameGoldPaymentList[i].Status != paymentStatus) continue;
 
 
-                    SEnvir.Log(string.Format("[Duplicated Transaction] ID:{0} Status:{1}.", transactionID, paymentStatus));
+                    SEnvir.Log(string.Format("[重复交易] ID：{0}，状态：{1}。", transactionID, paymentStatus));
                     message.Duplicate = true;
                     return;
                 }
@@ -1765,7 +1765,7 @@ namespace Server.Envir
 
                 if (character == null || payment.Error)
                 {
-                    SEnvir.Log($"[Transaction Error] ID:{transactionID} Status:{paymentStatus}, Amount{payment.Price}.");
+                    SEnvir.Log($"[交易错误] ID：{transactionID}，状态：{paymentStatus}，金额：{payment.Price}。");
                     continue;
                 }
 
@@ -1787,7 +1787,7 @@ namespace Server.Envir
                     }
                 }
 
-                SEnvir.Log($"[Game Gold Purchase] Character: {character.CharacterName}, Amount: {payment.GameGoldAmount}.");
+                SEnvir.Log($"[游戏币购买] 角色：{character.CharacterName}，数量：{payment.GameGoldAmount}。");
             }
         }
 
@@ -3267,7 +3267,7 @@ namespace Server.Envir
             {
                 account = GetCharacter(p.EMailAddress)?.Account;
                 admin = true;
-                Log($"[Admin Attempted] Character: {p.EMailAddress}, IP Address: {con.IPAddress}, Security: {p.CheckSum}");
+                Log($"[管理员登录尝试] 账号：{p.EMailAddress}，IP 地址：{con.IPAddress}，安全码：{p.CheckSum}");
             }
             else
             {
@@ -3325,7 +3325,7 @@ namespace Server.Envir
 
             if (!admin && !PasswordMatch(p.Password, account.Password))
             {
-                Log($"[Wrong Password] IP Address: {con.IPAddress}, Account: {account.EMailAddress}, Security: {p.CheckSum}");
+                Log($"[密码错误] IP 地址：{con.IPAddress}，账号：{account.EMailAddress}，安全码：{p.CheckSum}");
 
                 if (account.WrongPasswordCount++ >= 5)
                 {
@@ -3355,7 +3355,7 @@ namespace Server.Envir
                     //  account.Connection.SendDisconnect(new G.Disconnect { Reason = DisconnectReason.AnotherUserAdmin });
                 }
 
-                Log($"[Account in Use] Account: {account.EMailAddress}, Current IP: {account.LastIP}, New IP: {con.IPAddress}, Security: {p.CheckSum}");
+                Log($"[账号正在使用] 账号：{account.EMailAddress}，当前 IP：{account.LastIP}，新 IP：{con.IPAddress}，安全码：{p.CheckSum}");
 
                 if (account.TempAdmin)
                 {
@@ -3414,7 +3414,7 @@ namespace Server.Envir
                 account.LastSum = p.CheckSum;
             }
 
-            Log($"[Account Logon] Admin: {admin}, Account: {account.EMailAddress}, IP Address: {account.LastIP}, Security: {p.CheckSum}");
+            Log($"[账号登录] 管理员：{admin}，账号：{account.EMailAddress}，IP 地址：{account.LastIP}，安全码：{p.CheckSum}");
         }
         public static void NewAccount(C.NewAccount p, SConnection con)
         {
@@ -3473,7 +3473,7 @@ namespace Server.Envir
                     if (Connections[i].IPAddress == con.IPAddress)
                         Connections[i].Disconnecting = true;
 
-                Log($"{con.IPAddress} Disconnected and banned for trying too many accounts");
+                Log($"{con.IPAddress} 因尝试登录过多账号而被断开并封禁");
                 return;
             }
 
@@ -3545,7 +3545,7 @@ namespace Server.Envir
 
             con.Enqueue(new S.NewAccount { Result = NewAccountResult.Success });
 
-            Log($"[Account Created] Account: {account.EMailAddress}, IP Address: {con.IPAddress}, Security: {p.CheckSum}");
+            Log($"[账号已创建] 账号：{account.EMailAddress}，IP 地址：{con.IPAddress}，安全码：{p.CheckSum}");
         }
 
         private static bool IsServerMachineIPAddress(string ipAddress)
@@ -3627,7 +3627,7 @@ namespace Server.Envir
 
             if (!PasswordMatch(p.CurrentPassword, account.Password))
             {
-                Log($"[Wrong Password] IP Address: {con.IPAddress}, Account: {account.EMailAddress}, Security: {p.CheckSum}");
+                Log($"[密码错误] IP 地址：{con.IPAddress}，账号：{account.EMailAddress}，安全码：{p.CheckSum}");
 
                 if (account.WrongPasswordCount++ >= 5)
                 {
@@ -3647,7 +3647,7 @@ namespace Server.Envir
             EmailService.SendChangePasswordEmail(account, con.IPAddress);
             con.Enqueue(new S.ChangePassword { Result = ChangePasswordResult.Success });
 
-            Log($"[Password Changed] Account: {account.EMailAddress}, IP Address: {con.IPAddress}, Security: {p.CheckSum}");
+            Log($"[密码已更改] 账号：{account.EMailAddress}，IP 地址：{con.IPAddress}，安全码：{p.CheckSum}");
         }
         public static void RequestPasswordReset(C.RequestPasswordReset p, SConnection con)
         {
@@ -3692,7 +3692,7 @@ namespace Server.Envir
             EmailService.SendResetPasswordRequestEmail(account, con.IPAddress);
             con.Enqueue(new S.RequestPasswordReset { Result = RequestPasswordResetResult.Success });
 
-            Log($"[Request Password] Account: {account.EMailAddress}, IP Address: {con.IPAddress}, Security: {p.CheckSum}");
+            Log($"[请求找回密码] 账号：{account.EMailAddress}，IP 地址：{con.IPAddress}，安全码：{p.CheckSum}");
         }
         public static void ResetPassword(C.ResetPassword p, SConnection con)
         {
@@ -3735,7 +3735,7 @@ namespace Server.Envir
             EmailService.SendChangePasswordEmail(account, con.IPAddress);
             con.Enqueue(new S.ResetPassword { Result = ResetPasswordResult.Success });
 
-            Log($"[Reset Password] Account: {account.EMailAddress}, IP Address: {con.IPAddress}, Security: {p.CheckSum}");
+            Log($"[密码已重置] 账号：{account.EMailAddress}，IP 地址：{con.IPAddress}，安全码：{p.CheckSum}");
         }
         public static void Activation(C.Activation p, SConnection con)
         {
@@ -3764,7 +3764,7 @@ namespace Server.Envir
 
             con.Enqueue(new S.Activation { Result = ActivationResult.Success });
 
-            Log($"[Activation] Account: {account.EMailAddress}, IP Address: {con.IPAddress}, Security: {p.CheckSum}");
+            Log($"[账号激活] 账号：{account.EMailAddress}，IP 地址：{con.IPAddress}，安全码：{p.CheckSum}");
         }
         public static void RequestActivationKey(C.RequestActivationKey p, SConnection con)
         {
@@ -3807,7 +3807,7 @@ namespace Server.Envir
             }
             EmailService.ResendActivationEmail(account);
             con.Enqueue(new S.RequestActivationKey { Result = RequestActivationKeyResult.Success });
-            Log($"[Request Activation] Account: {account.EMailAddress}, IP Address: {con.IPAddress}, Security: {p.CheckSum}");
+            Log($"[请求激活] 账号：{account.EMailAddress}，IP 地址：{con.IPAddress}，安全码：{p.CheckSum}");
         }
 
         public static void NewCharacter(C.NewCharacter p, SConnection con)
@@ -3965,7 +3965,7 @@ namespace Server.Envir
                 Character = cInfo.ToSelectInfo(),
             });
 
-            Log($"[Character Created] Character: {p.CharacterName}, IP Address: {con.IPAddress}, Security: {p.CheckSum}");
+            Log($"[角色已创建] 角色：{p.CharacterName}，IP 地址：{con.IPAddress}，安全码：{p.CheckSum}");
         }
         public static void DeleteCharacter(C.DeleteCharacter p, SConnection con)
         {
@@ -3988,7 +3988,7 @@ namespace Server.Envir
                 character.Deleted = true;
                 con.Enqueue(new S.DeleteCharacter { Result = DeleteCharacterResult.Success, DeletedIndex = character.Index });
 
-                Log($"[Character Deleted] Character: {character.CharacterName}, IP Address: {con.IPAddress}, Security: {p.CheckSum}");
+                Log($"[角色已删除] 角色：{character.CharacterName}，IP 地址：{con.IPAddress}，安全码：{p.CheckSum}");
                 return;
             }
 
@@ -4231,7 +4231,7 @@ namespace Server.Envir
                 ? $"{map.Info.Description} [{map.Info.FileName}]"
                 : $"{map.Info.Description} [{map.Instance.Name}:{map.InstanceSequence}:{map.Info.FileName}]";
 
-            Log($"Map loaded: {scope}");
+            Log($"地图已加载：{scope}");
         }
 
         public static Map GetMap(MapInfo info, InstanceInfo instance = null, byte instanceSequence = 0)
@@ -4305,7 +4305,7 @@ namespace Server.Envir
                 FinaliseMapLoad(map);
             }
 
-            Log($"Loaded Instance {instance.Name} at index {instanceSequence}");
+            Log($"已加载副本 {instance.Name}，索引：{instanceSequence}");
 
             return instanceSequence;
         }
@@ -4379,7 +4379,7 @@ namespace Server.Envir
                 }
             }
 
-            Log($"Unloaded Instance {instance.Name} at index {instanceSequence} and removed {users.Count} user records");
+            Log($"已卸载副本 {instance.Name}（索引：{instanceSequence}），并移除 {users.Count} 条用户记录");
         }
 
         public static UserConquestStats GetConquestStats(PlayerObject player)

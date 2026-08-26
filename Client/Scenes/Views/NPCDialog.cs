@@ -246,7 +246,7 @@ namespace Client.Scenes.Views
                 CreateTexture();
 
                 if (!WindowSurface.IsValid)
-                    throw new InvalidOperationException("Window surface is not available.");
+                    throw new InvalidOperationException("窗口表面不可用。");
 
                 RenderSurface oldSurface = RenderingPipelineManager.GetCurrentSurface();
                 RenderingPipelineManager.SetSurface(WindowSurface);

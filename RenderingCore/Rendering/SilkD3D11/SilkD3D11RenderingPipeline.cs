@@ -436,7 +436,7 @@ namespace Shared.Rendering.SilkD3D11
         public void SetSurface(RenderSurface surface)
         {
             if (surface.NativeHandle is not SilkD3D11RenderTarget target)
-                throw new ArgumentException("Surface handle must wrap a Silk.NET D3D11 render target.", nameof(surface));
+                throw new ArgumentException("表面句柄必须封装 Silk.NET D3D11 渲染目标。", nameof(surface));
 
             if (ReferenceEquals(_currentTarget, target))
                 return;
@@ -462,7 +462,7 @@ namespace Shared.Rendering.SilkD3D11
         public void ColorFill(RenderSurface surface, Rectangle rectangle, GdiColor color)
         {
             if (surface.NativeHandle is not SilkD3D11RenderTarget target)
-                throw new ArgumentException("Surface handle must wrap a Silk.NET D3D11 render target.", nameof(surface));
+                throw new ArgumentException("表面句柄必须封装 Silk.NET D3D11 渲染目标。", nameof(surface));
 
             if (rectangle.Width <= 0 || rectangle.Height <= 0)
                 return;
@@ -555,7 +555,7 @@ namespace Shared.Rendering.SilkD3D11
         public TextureLock LockTexture(RenderTexture texture, TextureLockMode mode)
         {
             if (texture.NativeHandle is not SilkD3D11TextureResource resource)
-                throw new InvalidOperationException("Silk.NET D3D11 texture handle expected.");
+                throw new InvalidOperationException("需要 Silk.NET D3D11 纹理句柄。");
 
             EndSpriteBatch();
 
@@ -787,7 +787,7 @@ namespace Shared.Rendering.SilkD3D11
                     return i;
 
             if (_batchTextureSlots.Count >= MaxBatchTextures)
-                throw new InvalidOperationException("Sprite batch exceeded the available texture slots.");
+                throw new InvalidOperationException("Sprite 批次超出了可用纹理槽位数量。");
 
             _batchTextureSlots.Add(texture);
             return _batchTextureSlots.Count - 1;
@@ -1242,7 +1242,7 @@ namespace Shared.Rendering.SilkD3D11
         {
             string path = FindShaderPath(fileName);
             if (path == null)
-                throw new FileNotFoundException($"Unable to locate Silk D3D11 shader file '{fileName}'.");
+                throw new FileNotFoundException($"找不到 Silk D3D11 着色器文件“{fileName}”。");
 
             return CompileShader(File.ReadAllText(path), entryPoint, target, path);
         }
@@ -1285,15 +1285,15 @@ namespace Shared.Rendering.SilkD3D11
             try
             {
                 if (code == null)
-                    throw new InvalidOperationException("Shader compiler returned a null bytecode blob.");
+                    throw new InvalidOperationException("着色器编译器返回了空字节码 Blob。");
 
                 IntPtr pointer = code.GetBufferPointer();
                 if (pointer == IntPtr.Zero)
-                    throw new InvalidOperationException("Shader compiler returned a bytecode blob with a null buffer.");
+                    throw new InvalidOperationException("着色器编译器返回的字节码 Blob 缓冲区为空。");
 
                 int size = checked((int)code.GetBufferSize());
                 if (size == 0)
-                    throw new InvalidOperationException("Shader compiler returned an empty bytecode blob.");
+                    throw new InvalidOperationException("着色器编译器返回了空的字节码 Blob。");
 
                 byte[] bytecode = new byte[size];
                 Marshal.Copy(pointer, bytecode, 0, size);
@@ -1729,7 +1729,7 @@ namespace Shared.Rendering.SilkD3D11
         private static void Check(int result, string operation)
         {
             if (result < 0)
-                throw new InvalidOperationException($"{operation} failed with HRESULT 0x{result:X8}.");
+                throw new InvalidOperationException($"{operation} 执行失败，HRESULT：0x{result:X8}。");
         }
 
         [StructLayout(LayoutKind.Sequential)]

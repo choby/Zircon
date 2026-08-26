@@ -19,15 +19,15 @@ namespace Server.Envir.Commands.Command.Admin
 
             CharacterInfo character = vals.Length < 3 ? player.Character : SEnvir.GetCharacter(vals[1]);
             if (character == null)
-                throw new UserCommandException(string.Format("Could not find player: {0}", vals[1]));
+                throw new UserCommandException(string.Format("找不到玩家：{0}", vals[1]));
             if (player.Character.Account.GuildMember != null)
-                throw new UserCommandException(string.Format("{0} already belongs to a guild.", character.CharacterName));
+                throw new UserCommandException(string.Format("{0} 已经加入了行会。", character.CharacterName));
 
             var guildName = vals.Length < 3 ? vals[1] : vals[2];
             if (!Globals.GuildNameRegex.IsMatch(guildName))
-                throw new UserCommandException(string.Format("{0} is not a valid guild name.", guildName));
+                throw new UserCommandException(string.Format("{0} 不是有效的行会名称。", guildName));
             if (SEnvir.GuildInfoList.Binding.FirstOrDefault(x => string.Compare(x.GuildName, guildName, StringComparison.OrdinalIgnoreCase) == 0) != null)
-                throw new UserCommandException(string.Format("Guild already exists with name: {0}.", guildName));
+                throw new UserCommandException(string.Format("已存在名为 {0} 的行会。", guildName));
 
             GuildInfo newGuild = CreateGuildFrom(guildName);
             GuildMemberInfo leaderRole = CreateLeaderRole();

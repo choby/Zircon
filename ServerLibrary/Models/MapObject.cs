@@ -816,7 +816,7 @@ namespace Server.Models
         public bool Spawn(Map map, Point location)
         {
             if (Node != null)
-                throw new InvalidOperationException("Node is not null, Object already spawned");
+                throw new InvalidOperationException("节点不为空，对象已经生成");
 
             if (map == null || map.Info == null) return false;
 
@@ -1101,7 +1101,7 @@ namespace Server.Models
         public void Despawn()
         {
             if (Node == null)
-                throw new InvalidOperationException("Node is null, Object already Despawned");
+                throw new InvalidOperationException("节点为空，对象已经移除");
 
             OnBeforeDespawned();
 

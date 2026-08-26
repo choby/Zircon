@@ -229,7 +229,7 @@ namespace Shared.Rendering
         public static void RegisterFactory(string pipelineId, Func<IRenderingPipeline> factory)
         {
             if (string.IsNullOrWhiteSpace(pipelineId))
-                throw new ArgumentException("Pipeline identifier must be provided.", nameof(pipelineId));
+                throw new ArgumentException("必须提供渲染管线标识符。", nameof(pipelineId));
             if (factory == null)
                 throw new ArgumentNullException(nameof(factory));
 
@@ -247,7 +247,7 @@ namespace Shared.Rendering
                 throw new ArgumentNullException(nameof(context));
 
             if (!PipelineFactories.TryGetValue(pipelineId, out Func<IRenderingPipeline> factory))
-                throw new ArgumentException($"Unknown rendering pipeline '{pipelineId}'.", nameof(pipelineId));
+                throw new ArgumentException($"未知的渲染管线“{pipelineId}”。", nameof(pipelineId));
 
             IRenderingPipeline pipeline = factory();
             PipelineSession session = new(pipeline, context);
@@ -293,7 +293,7 @@ namespace Shared.Rendering
                     throw;
 
                 PipelineSession session = CreateSession(DefaultPipelineId, context);
-                Console.WriteLine($"Falling back to rendering pipeline '{DefaultPipelineId}' after '{pipelineToUse}' failed: {ex.Message}");
+                Console.WriteLine($"渲染管线“{pipelineToUse}”失败，回退到渲染管线“{DefaultPipelineId}”：{ex.Message}");
                 return session;
             }
         }
@@ -319,7 +319,7 @@ namespace Shared.Rendering
 
             if (string.Equals(ActivePipelineId, pipelineId, StringComparison.OrdinalIgnoreCase)) return;
 
-            RenderingPipelineContext context = _context ?? throw new InvalidOperationException("No rendering pipeline context is available.");
+            RenderingPipelineContext context = _context ?? throw new InvalidOperationException("没有可用的渲染管线上下文。");
 
             InvalidateAllControlTextures();
             Shutdown();
@@ -347,7 +347,7 @@ namespace Shared.Rendering
                 return false;
 
             string previousPipelineId = ActivePipelineId;
-            RenderingPipelineContext context = _context ?? throw new InvalidOperationException("No rendering pipeline context is available.");
+            RenderingPipelineContext context = _context ?? throw new InvalidOperationException("没有可用的渲染管线上下文。");
             RenderingHostSettings settings = context.Settings;
 
             try
@@ -406,7 +406,7 @@ namespace Shared.Rendering
         public static void RunMessageLoop(Form form, Action loop)
         {
             if (_activePipeline == null)
-                throw new InvalidOperationException("No rendering pipeline has been initialized.");
+                throw new InvalidOperationException("尚未初始化任何渲染管线。");
 
             if (form == null)
                 throw new ArgumentNullException(nameof(form));
@@ -420,7 +420,7 @@ namespace Shared.Rendering
         public static bool RenderFrame(Action drawScene)
         {
             if (_activePipeline == null)
-                throw new InvalidOperationException("No rendering pipeline has been initialized.");
+                throw new InvalidOperationException("尚未初始化任何渲染管线。");
 
             return _activePipeline.RenderFrame(drawScene);
         }
@@ -428,7 +428,7 @@ namespace Shared.Rendering
         public static void ToggleFullScreen()
         {
             if (_activePipeline == null)
-                throw new InvalidOperationException("No rendering pipeline has been initialized.");
+                throw new InvalidOperationException("尚未初始化任何渲染管线。");
 
             _activePipeline.ToggleFullScreen();
         }
@@ -436,7 +436,7 @@ namespace Shared.Rendering
         public static void SetResolution(Size size)
         {
             if (_activePipeline == null)
-                throw new InvalidOperationException("No rendering pipeline has been initialized.");
+                throw new InvalidOperationException("尚未初始化任何渲染管线。");
 
             _activePipeline.SetResolution(size);
         }
@@ -444,7 +444,7 @@ namespace Shared.Rendering
         public static void SetTargetMonitor(int monitorIndex)
         {
             if (_activePipeline == null)
-                throw new InvalidOperationException("No rendering pipeline has been initialized.");
+                throw new InvalidOperationException("尚未初始化任何渲染管线。");
 
             IReadOnlyList<DisplayMonitorInfo> monitors = GetDisplayMonitors();
             if (monitorIndex >= 0 && monitorIndex < monitors.Count)
@@ -456,7 +456,7 @@ namespace Shared.Rendering
         public static void CenterOnSelectedMonitor()
         {
             if (_activePipeline == null)
-                throw new InvalidOperationException("No rendering pipeline has been initialized.");
+                throw new InvalidOperationException("尚未初始化任何渲染管线。");
 
             _activePipeline.CenterOnSelectedMonitor();
         }
@@ -464,7 +464,7 @@ namespace Shared.Rendering
         public static void ResetDevice()
         {
             if (_activePipeline == null)
-                throw new InvalidOperationException("No rendering pipeline has been initialized.");
+                throw new InvalidOperationException("尚未初始化任何渲染管线。");
 
             _activePipeline.ResetDevice();
         }
@@ -472,7 +472,7 @@ namespace Shared.Rendering
         public static void OnSceneChanged(bool isGameScene)
         {
             if (_activePipeline == null)
-                throw new InvalidOperationException("No rendering pipeline has been initialized.");
+                throw new InvalidOperationException("尚未初始化任何渲染管线。");
 
             _activePipeline.OnSceneChanged(isGameScene);
         }
@@ -480,7 +480,7 @@ namespace Shared.Rendering
         public static IReadOnlyList<Size> GetSupportedResolutions()
         {
             if (_activePipeline == null)
-                throw new InvalidOperationException("No rendering pipeline has been initialized.");
+                throw new InvalidOperationException("尚未初始化任何渲染管线。");
 
             return _activePipeline.GetSupportedResolutions();
         }
@@ -666,10 +666,10 @@ namespace Shared.Rendering
         public static void DrawTextureBlend(RenderTexture texture, Rectangle? sourceRectangle, Matrix3x2 transform, Vector3 center, Vector3 translation, Color colour, float blendRate, BlendMode mode = BlendMode.NORMAL)
         {
             if (!texture.IsValid)
-                throw new ArgumentException("A valid texture handle is required.", nameof(texture));
+                throw new ArgumentException("需要有效的纹理句柄。", nameof(texture));
 
             if (_activePipeline == null)
-                throw new InvalidOperationException("No rendering pipeline has been initialized.");
+                throw new InvalidOperationException("尚未初始化任何渲染管线。");
 
             if (_activePipeline is SilkVulkan.SilkVulkanRenderingPipeline vulkanPipeline)
             {
@@ -695,7 +695,7 @@ namespace Shared.Rendering
         public static void DrawTexture(RenderTexture texture, Rectangle sourceRectangle, RectangleF destinationRectangle, Color colour)
         {
             if (!texture.IsValid)
-                throw new ArgumentException("A valid texture handle is required.", nameof(texture));
+                throw new ArgumentException("需要有效的纹理句柄。", nameof(texture));
 
             if (sourceRectangle.Width <= 0 || sourceRectangle.Height <= 0)
                 return;
@@ -704,7 +704,7 @@ namespace Shared.Rendering
                 return;
 
             if (_activePipeline == null)
-                throw new InvalidOperationException("No rendering pipeline has been initialized.");
+                throw new InvalidOperationException("尚未初始化任何渲染管线。");
 
             _activePipeline.DrawTexture(texture, sourceRectangle, destinationRectangle, colour);
         }
@@ -712,10 +712,10 @@ namespace Shared.Rendering
         public static void DrawTexture(RenderTexture texture, Rectangle? sourceRectangle, Matrix3x2 transform, Vector3 center, Vector3 translation, Color colour)
         {
             if (!texture.IsValid)
-                throw new ArgumentException("A valid texture handle is required.", nameof(texture));
+                throw new ArgumentException("需要有效的纹理句柄。", nameof(texture));
 
             if (_activePipeline == null)
-                throw new InvalidOperationException("No rendering pipeline has been initialized.");
+                throw new InvalidOperationException("尚未初始化任何渲染管线。");
 
             _activePipeline.DrawTexture(texture, sourceRectangle, transform, center, translation, colour);
         }
@@ -728,10 +728,10 @@ namespace Shared.Rendering
         public static void QueueSprite(RenderTexture texture, Rectangle sourceRectangle, RectangleF destinationRectangle, Color colour)
         {
             if (!texture.IsValid)
-                throw new ArgumentException("A valid texture handle is required.", nameof(texture));
+                throw new ArgumentException("需要有效的纹理句柄。", nameof(texture));
 
             if (_activePipeline == null)
-                throw new InvalidOperationException("No rendering pipeline has been initialized.");
+                throw new InvalidOperationException("尚未初始化任何渲染管线。");
 
             _activePipeline.QueueSprite(texture, sourceRectangle, destinationRectangle, colour);
         }
@@ -744,7 +744,7 @@ namespace Shared.Rendering
         public static RenderSurface GetCurrentSurface()
         {
             if (_activePipeline == null)
-                throw new InvalidOperationException("No rendering pipeline has been initialized.");
+                throw new InvalidOperationException("尚未初始化任何渲染管线。");
 
             return _activePipeline.GetCurrentSurface();
         }
@@ -752,10 +752,10 @@ namespace Shared.Rendering
         public static void SetSurface(RenderSurface surface)
         {
             if (!surface.IsValid)
-                throw new ArgumentException("A valid surface handle is required.", nameof(surface));
+                throw new ArgumentException("需要有效的表面句柄。", nameof(surface));
 
             if (_activePipeline == null)
-                throw new InvalidOperationException("No rendering pipeline has been initialized.");
+                throw new InvalidOperationException("尚未初始化任何渲染管线。");
 
             _activePipeline.SetSurface(surface);
         }
@@ -763,7 +763,7 @@ namespace Shared.Rendering
         public static RenderSurface GetScratchSurface()
         {
             if (_activePipeline == null)
-                throw new InvalidOperationException("No rendering pipeline has been initialized.");
+                throw new InvalidOperationException("尚未初始化任何渲染管线。");
 
             return _activePipeline.GetScratchSurface();
         }
@@ -771,7 +771,7 @@ namespace Shared.Rendering
         public static RenderTexture GetScratchTexture()
         {
             if (_activePipeline == null)
-                throw new InvalidOperationException("No rendering pipeline has been initialized.");
+                throw new InvalidOperationException("尚未初始化任何渲染管线。");
 
             return _activePipeline.GetScratchTexture();
         }
@@ -779,10 +779,10 @@ namespace Shared.Rendering
         public static void ColorFill(RenderSurface surface, Rectangle rectangle, Color colorFill)
         {
             if (!surface.IsValid)
-                throw new ArgumentException("A valid surface handle is required.", nameof(surface));
+                throw new ArgumentException("需要有效的表面句柄。", nameof(surface));
 
             if (_activePipeline == null)
-                throw new InvalidOperationException("No rendering pipeline has been initialized.");
+                throw new InvalidOperationException("尚未初始化任何渲染管线。");
 
             _activePipeline.ColorFill(surface, rectangle, colorFill);
         }
@@ -799,7 +799,7 @@ namespace Shared.Rendering
         private static RenderTexture GetSolidFillTexture()
         {
             if (_activeSession == null)
-                throw new InvalidOperationException("No rendering pipeline has been initialized.");
+                throw new InvalidOperationException("尚未初始化任何渲染管线。");
 
             if (SolidFillTextures.TryGetValue(_activeSession, out RenderTexture solidFillTexture) && solidFillTexture.IsValid)
                 return solidFillTexture;
@@ -819,7 +819,7 @@ namespace Shared.Rendering
         public static RenderTargetResource CreateRenderTarget(Size size)
         {
             if (_activePipeline == null)
-                throw new InvalidOperationException("No rendering pipeline has been initialized.");
+                throw new InvalidOperationException("尚未初始化任何渲染管线。");
 
             return _activePipeline.CreateRenderTarget(size);
         }
@@ -846,7 +846,7 @@ namespace Shared.Rendering
         public static Size GetBackBufferSize()
         {
             if (_activePipeline == null)
-                throw new InvalidOperationException("No rendering pipeline has been initialized.");
+                throw new InvalidOperationException("尚未初始化任何渲染管线。");
 
             return _activePipeline.GetBackBufferSize();
         }
@@ -854,7 +854,7 @@ namespace Shared.Rendering
         public static RenderTexture GetColourPaletteTexture()
         {
             if (_activePipeline == null)
-                throw new InvalidOperationException("No rendering pipeline has been initialized.");
+                throw new InvalidOperationException("尚未初始化任何渲染管线。");
 
             return _activePipeline.GetColourPaletteTexture();
         }
@@ -862,7 +862,7 @@ namespace Shared.Rendering
         public static byte[] GetColourPaletteData()
         {
             if (_activePipeline == null)
-                throw new InvalidOperationException("No rendering pipeline has been initialized.");
+                throw new InvalidOperationException("尚未初始化任何渲染管线。");
 
             return _activePipeline.GetColourPaletteData();
         }
@@ -870,7 +870,7 @@ namespace Shared.Rendering
         public static RenderTexture GetLightTexture()
         {
             if (_activePipeline == null)
-                throw new InvalidOperationException("No rendering pipeline has been initialized.");
+                throw new InvalidOperationException("尚未初始化任何渲染管线。");
 
             return _activePipeline.GetLightTexture();
         }
@@ -878,7 +878,7 @@ namespace Shared.Rendering
         public static Size GetLightTextureSize()
         {
             if (_activePipeline == null)
-                throw new InvalidOperationException("No rendering pipeline has been initialized.");
+                throw new InvalidOperationException("尚未初始化任何渲染管线。");
 
             return _activePipeline.GetLightTextureSize();
         }
@@ -886,7 +886,7 @@ namespace Shared.Rendering
         public static RenderTexture GetPoisonTexture()
         {
             if (_activePipeline == null)
-                throw new InvalidOperationException("No rendering pipeline has been initialized.");
+                throw new InvalidOperationException("尚未初始化任何渲染管线。");
 
             return _activePipeline.GetPoisonTexture();
         }
@@ -894,7 +894,7 @@ namespace Shared.Rendering
         public static Size GetPoisonTextureSize()
         {
             if (_activePipeline == null)
-                throw new InvalidOperationException("No rendering pipeline has been initialized.");
+                throw new InvalidOperationException("尚未初始化任何渲染管线。");
 
             return _activePipeline.GetPoisonTextureSize();
         }
@@ -970,7 +970,7 @@ namespace Shared.Rendering
             if (_activePipeline != null)
                 return _activePipeline.CreateTexture(size, format, usage, pool);
 
-            throw new InvalidOperationException("Rendering pipeline is not initialized.");
+            throw new InvalidOperationException("渲染管线尚未初始化。");
         }
 
         public static void ReleaseTexture(RenderTexture texture)
@@ -984,20 +984,20 @@ namespace Shared.Rendering
                 return;
             }
 
-            throw new InvalidOperationException("Rendering pipeline is not initialized.");
+            throw new InvalidOperationException("渲染管线尚未初始化。");
         }
 
         public static TextureLock LockTexture(RenderTexture texture, TextureLockMode mode)
         {
             if (!texture.IsValid)
-                throw new ArgumentException("A valid texture handle is required.", nameof(texture));
+                throw new ArgumentException("需要有效的纹理句柄。", nameof(texture));
 
             if (_activePipeline != null)
             {
                 return _activePipeline.LockTexture(texture, mode);
             }
 
-            throw new InvalidOperationException("Rendering pipeline is not initialized.");
+            throw new InvalidOperationException("渲染管线尚未初始化。");
         }
 
         public static void RegisterTextureCache(ITextureCacheItem texture)

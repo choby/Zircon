@@ -41,7 +41,7 @@ namespace Server.Envir.Commands.Player
                 case 15:
                     return p.CompanionLevelLock15 = !p.CompanionLevelLock15;
                 default:
-                    throw new UserCommandFatalException(string.Format("Trying to run non-existant command: {0}.", string.Format(VALUE, level)));
+                    throw new UserCommandFatalException(string.Format("尝试执行不存在的命令：{0}。", string.Format(VALUE, level)));
             }
         }
     }

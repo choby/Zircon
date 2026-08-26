@@ -85,11 +85,11 @@ namespace Server
             }
             catch (Exception)
             {
-                throw new ApplicationException($"Invalid format encryption key, expected a base64 with 32 bytes");
+                throw new ApplicationException($"加密密钥格式无效，应为 32 字节的 Base64 字符串");
             }
 
             if (Config.EncryptionEnabled && SEnvir.CryptoKey == null)
-                throw new ApplicationException($"Encryption is enabled but not specified key [System] => DatabaseKey");
+                throw new ApplicationException($"已启用加密，但未指定密钥 [System] => DatabaseKey");
 
             if (Config.EncryptionEnabled)
                 Encryption.SetKey(SEnvir.CryptoKey);
@@ -252,7 +252,7 @@ namespace Server
             }
             catch (Exception ex)
             {
-                SEnvir.Log($"Exception: " + ex.ToString(), true);
+                SEnvir.Log($"异常：" + ex.ToString(), true);
             }
         }
 
@@ -754,7 +754,7 @@ namespace Server
             }
             catch (Exception ex)
             {
-                SEnvir.Log($"Failed to load UI cache: {ex}");
+                SEnvir.Log($"加载 UI 缓存失败：{ex}");
             }
         }
 
@@ -776,7 +776,7 @@ namespace Server
             }
             catch (Exception ex)
             {
-                SEnvir.Log($"Failed to save UI cache: {ex}");
+                SEnvir.Log($"保存 UI 缓存失败：{ex}");
             }
         }
 

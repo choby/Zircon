@@ -18,10 +18,10 @@ namespace Server.Envir.Commands.Command.Admin
 
             CharacterInfo character = SEnvir.GetCharacter(vals[1]);
             if (character == null)
-                throw new UserCommandException(string.Format("Could not find player: {0}.", vals[1]));
+                throw new UserCommandException(string.Format("找不到玩家：{0}。", vals[1]));
 
             if (!Enum.TryParse(vals[2], true, out HorseType type))
-                throw new UserCommandException(string.Format("Could not find horse: {0}.", vals[2]));
+                throw new UserCommandException(string.Format("找不到坐骑：{0}。", vals[2]));
 
             if (character.Player != null)
                 character.Player.GiveHorse(type);

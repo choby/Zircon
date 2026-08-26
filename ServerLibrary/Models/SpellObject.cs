@@ -97,13 +97,13 @@ namespace Server.Models
 
                     if (CurrentCell == null)
                     {
-                        SEnvir.Log($"[ERROR] {Effect} CurrentCell Null.");
+                        SEnvir.Log($"[错误] {Effect} 的 CurrentCell 为空。");
                         return;
                     }
 
                     if (CurrentCell.Objects == null)
                     {
-                        SEnvir.Log($"[ERROR] {Effect} CurrentCell.Objects Null.");
+                        SEnvir.Log($"[错误] {Effect} 的 CurrentCell.Objects 为空。");
                         return;
                     }
 
@@ -116,13 +116,13 @@ namespace Server.Models
 
                         if (CurrentCell == null)
                         {
-                            SEnvir.Log($"[ERROR] {Effect} CurrentCell Null Loop.");
+                            SEnvir.Log($"[错误] {Effect} 循环中的 CurrentCell 为空。");
                             return;
                         }
 
                         if (CurrentCell.Objects == null)
                         {
-                            SEnvir.Log($"[ERROR] {Effect} CurrentCell.Objects Null Loop.");
+                            SEnvir.Log($"[错误] {Effect} 循环中的 CurrentCell.Objects 为空。");
                             return;
                         }
                     }

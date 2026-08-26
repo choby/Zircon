@@ -424,7 +424,7 @@ namespace Shared.Rendering
                 return payload;
 
             if (compression != ZlContainerCompression.DeflateFast && compression != ZlContainerCompression.DeflateBest)
-                throw new InvalidDataException($"Unsupported ZL v2 compression method: {(byte)compression}.");
+                throw new InvalidDataException($"不支持的 ZL v2 压缩方法：{(byte)compression}。");
 
             using (MemoryStream input = new MemoryStream(payload))
             using (DeflateStream deflate = new DeflateStream(input, CompressionMode.Decompress))

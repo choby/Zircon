@@ -73,34 +73,34 @@ namespace Server.Diagnostics
         {
             StringBuilder builder = new StringBuilder();
 
-            builder.AppendLine(cleanRun ? "=== MirDB orphan clean ===" : "=== MirDB orphan scan ===");
-            builder.AppendLine("Scope: configured dependent user-data tables from currently loaded SEnvir DB collections.");
-            builder.AppendLine($"Total dependent rows scanned: {result.TotalRowsScanned:N0}");
-            builder.AppendLine($"Total cleanable orphan rows: {result.TotalCleanableOrphans:N0}");
+            builder.AppendLine(cleanRun ? "=== MirDB 孤立数据清理 ===" : "=== MirDB 孤立数据扫描 ===");
+            builder.AppendLine("范围：当前已加载的 SEnvir 数据库集合中配置的从属用户数据表。");
+            builder.AppendLine($"扫描的从属数据总行数：{result.TotalRowsScanned:N0}");
+            builder.AppendLine($"可清理的孤立数据总行数：{result.TotalCleanableOrphans:N0}");
 
             if (cleanRun)
-                builder.AppendLine($"Rows marked IsTemporary: {result.TotalMarkedTemporary:N0}");
+                builder.AppendLine($"标记为 IsTemporary 的行数：{result.TotalMarkedTemporary:N0}");
 
             foreach (OrphanTypeResult row in result.Results.Where(x => x.CleanableOrphans > 0 || x.ExistingTemporaryOrphans > 0 || x.MarkedTemporary > 0))
             {
                 builder.AppendLine();
-                builder.AppendLine($"{row.ObjectType} via {row.ParentType}.{row.ParentList}");
-                builder.AppendLine($"  Total rows: {row.TotalRows:N0}");
-                builder.AppendLine($"  Linked rows: {row.LinkedRows:N0}");
-                builder.AppendLine($"  Cleanable orphans: {row.CleanableOrphans:N0}");
-                builder.AppendLine($"  Already temporary orphans: {row.ExistingTemporaryOrphans:N0}");
-                builder.AppendLine($"  Missing parent: {row.MissingParent:N0}");
-                builder.AppendLine($"  Deleted parent: {row.DeletedParent:N0}");
-                builder.AppendLine($"  Missing parent list link: {row.MissingParentListLink:N0}");
+                builder.AppendLine($"{row.ObjectType}，关联路径：{row.ParentType}.{row.ParentList}");
+                builder.AppendLine($"  总行数：{row.TotalRows:N0}");
+                builder.AppendLine($"  已关联行数：{row.LinkedRows:N0}");
+                builder.AppendLine($"  可清理的孤立数据：{row.CleanableOrphans:N0}");
+                builder.AppendLine($"  已标记为临时的孤立数据：{row.ExistingTemporaryOrphans:N0}");
+                builder.AppendLine($"  缺失父对象：{row.MissingParent:N0}");
+                builder.AppendLine($"  父对象已删除：{row.DeletedParent:N0}");
+                builder.AppendLine($"  缺失父列表链接：{row.MissingParentListLink:N0}");
 
                 if (cleanRun)
-                    builder.AppendLine($"  Marked IsTemporary: {row.MarkedTemporary:N0}");
+                    builder.AppendLine($"  已标记为 IsTemporary：{row.MarkedTemporary:N0}");
 
                 if (!string.IsNullOrWhiteSpace(row.SampleIndices))
-                    builder.AppendLine($"  Sample indices: {row.SampleIndices}");
+                    builder.AppendLine($"  示例索引：{row.SampleIndices}");
             }
 
-            builder.AppendLine(cleanRun ? "=== End MirDB orphan clean ===" : "=== End MirDB orphan scan ===");
+            builder.AppendLine(cleanRun ? "=== MirDB 孤立数据清理结束 ===" : "=== MirDB 孤立数据扫描结束 ===");
 
             return builder.ToString();
         }

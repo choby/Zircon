@@ -67,7 +67,7 @@ namespace Server.Views
             }
             catch (Exception ex)
             {
-                string message = cleanRun ? "DB orphan clean failed: " + ex.Message : "DB orphan scan failed: " + ex.Message;
+                string message = cleanRun ? "清理数据库孤立数据失败：" + ex.Message : "扫描数据库孤立数据失败：" + ex.Message;
                 memoEdit1.EditValue = message;
                 SEnvir.Log(message);
                 XtraMessageBox.Show(this, message, "DB Orphans", MessageBoxButtons.OK, MessageBoxIcon.Error);

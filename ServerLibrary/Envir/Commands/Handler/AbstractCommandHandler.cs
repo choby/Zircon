@@ -42,7 +42,7 @@ namespace Server.Envir.Commands.Handler
 
                 ICommand command = Commands.Find(userCommand => userCommand.VALUE.Equals(CommandInput));
                 if (command == null)
-                    throw new UserCommandException(string.Format("Command @{0} does not exist.", CommandInput));
+                    throw new UserCommandException(string.Format("命令 @{0} 不存在。", CommandInput));
 
                 if (command is AbstractParameterizedCommand<CommandType>)
                     (command as AbstractParameterizedCommand<CommandType>).Action(player, input);

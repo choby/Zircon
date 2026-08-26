@@ -16,7 +16,7 @@ namespace Server.Envir.Commands.Command.Admin
 
             CharacterInfo character = SEnvir.GetCharacter(vals[1]);
             if (character == null)
-                throw new UserCommandException(string.Format("Could not find player: {0}.", vals[1]));
+                throw new UserCommandException(string.Format("找不到玩家：{0}。", vals[1]));
 
             int count;
             if (vals.Length < 3 || !int.TryParse(vals[2], out count))

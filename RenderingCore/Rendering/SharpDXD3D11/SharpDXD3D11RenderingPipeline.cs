@@ -780,7 +780,7 @@ namespace Shared.Rendering.SharpDXD3D11
         public RenderSurface GetCurrentSurface()
         {
             if (SharpDXD3D11Manager.CurrentTarget == null)
-                throw new InvalidOperationException("Current surface is not available.");
+                throw new InvalidOperationException("当前表面不可用。");
 
             return RenderSurface.From(SharpDXD3D11Manager.CurrentTarget);
         }
@@ -788,10 +788,10 @@ namespace Shared.Rendering.SharpDXD3D11
         public void SetSurface(RenderSurface surface)
         {
             if (!surface.IsValid)
-                throw new ArgumentException("A valid surface handle is required.", nameof(surface));
+                throw new ArgumentException("需要有效的表面句柄。", nameof(surface));
 
             if (surface.NativeHandle is not SharpD3D11RenderTarget target)
-                throw new ArgumentException("Surface handle must wrap a Direct3D11 render target.", nameof(surface));
+                throw new ArgumentException("表面句柄必须封装 Direct3D 11 渲染目标。", nameof(surface));
 
             if (target.IsDisposed)
                 return;
@@ -808,7 +808,7 @@ namespace Shared.Rendering.SharpDXD3D11
         public RenderSurface GetScratchSurface()
         {
             if (SharpDXD3D11Manager.ScratchTarget == null)
-                throw new InvalidOperationException("Scratch surface is not available.");
+                throw new InvalidOperationException("暂存表面不可用。");
 
             return RenderSurface.From(SharpDXD3D11Manager.ScratchTarget);
         }
@@ -816,7 +816,7 @@ namespace Shared.Rendering.SharpDXD3D11
         public RenderTexture GetScratchTexture()
         {
             if (SharpDXD3D11Manager.ScratchTarget == null)
-                throw new InvalidOperationException("Scratch texture is not available.");
+                throw new InvalidOperationException("暂存纹理不可用。");
 
             return RenderTexture.From(SharpDXD3D11Manager.ScratchTarget);
         }
@@ -920,7 +920,7 @@ namespace Shared.Rendering.SharpDXD3D11
         public TextureLock LockTexture(RenderTexture texture, TextureLockMode mode)
         {
             if (texture.NativeHandle is not SharpD3D11TextureResource dxTexture)
-                throw new InvalidOperationException("SharpDX Direct3D11 texture handle expected.");
+                throw new InvalidOperationException("需要 SharpDX Direct3D 11 纹理句柄。");
 
             return SharpDXD3D11Manager.LockTexture(dxTexture, mode);
         }
@@ -965,7 +965,7 @@ namespace Shared.Rendering.SharpDXD3D11
         public RenderTexture GetColourPaletteTexture()
         {
             if (SharpDXD3D11Manager.ColourPallete == null)
-                throw new InvalidOperationException("Colour palette texture has not been initialized.");
+                throw new InvalidOperationException("调色板纹理尚未初始化。");
 
             return RenderTexture.From(SharpDXD3D11Manager.ColourPallete);
         }
@@ -973,7 +973,7 @@ namespace Shared.Rendering.SharpDXD3D11
         public byte[] GetColourPaletteData()
         {
             if (SharpDXD3D11Manager.PalleteData == null)
-                throw new InvalidOperationException("Colour palette data has not been initialized.");
+                throw new InvalidOperationException("调色板数据尚未初始化。");
 
             return SharpDXD3D11Manager.PalleteData;
         }
@@ -981,7 +981,7 @@ namespace Shared.Rendering.SharpDXD3D11
         public RenderTexture GetLightTexture()
         {
             if (SharpDXD3D11Manager.LightTexture == null)
-                throw new InvalidOperationException("Light texture has not been initialized.");
+                throw new InvalidOperationException("光照纹理尚未初始化。");
 
             return RenderTexture.From(SharpDXD3D11Manager.LightTexture);
         }
@@ -994,7 +994,7 @@ namespace Shared.Rendering.SharpDXD3D11
         public RenderTexture GetPoisonTexture()
         {
             if (SharpDXD3D11Manager.PoisonTexture == null)
-                throw new InvalidOperationException("Poison texture has not been initialized.");
+                throw new InvalidOperationException("毒素纹理尚未初始化。");
 
             return RenderTexture.From(SharpDXD3D11Manager.PoisonTexture);
         }
@@ -1029,7 +1029,7 @@ namespace Shared.Rendering.SharpDXD3D11
             {
                 SharpD3D11TextureResource dxTexture => dxTexture.Bitmap,
                 SharpD3D11RenderTarget renderTarget => renderTarget.TargetBitmap,
-                _ => throw new ArgumentException("Texture handle must wrap a SharpDX Direct3D11 texture instance.", nameof(texture))
+                _ => throw new ArgumentException("纹理句柄必须封装 SharpDX Direct3D 11 纹理实例。", nameof(texture))
             };
         }
 

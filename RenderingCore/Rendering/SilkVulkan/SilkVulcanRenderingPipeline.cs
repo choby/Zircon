@@ -455,10 +455,10 @@ namespace Shared.Rendering.SilkVulkan
         public void ColorFill(RenderSurface surface, Rectangle rectangle, Color color)
         {
             if (!surface.IsValid)
-                throw new ArgumentException("A valid surface handle is required.", nameof(surface));
+                throw new ArgumentException("需要有效的表面句柄。", nameof(surface));
 
             if (surface.NativeHandle is not SilkVulkanRenderTarget target)
-                throw new ArgumentException("Surface handle must wrap a Silk.NET Vulkan render target.", nameof(surface));
+                throw new ArgumentException("表面句柄必须封装 Silk.NET Vulkan 渲染目标。", nameof(surface));
 
             if (rectangle.Width <= 0 || rectangle.Height <= 0)
                 return;
@@ -598,7 +598,7 @@ namespace Shared.Rendering.SilkVulkan
         public void SetSurface(RenderSurface surface)
         {
             if (surface.NativeHandle is not SilkVulkanRenderTarget target)
-                throw new ArgumentException("Surface handle must wrap a Silk.NET Vulkan render target.", nameof(surface));
+                throw new ArgumentException("表面句柄必须封装 Silk.NET Vulkan 渲染目标。", nameof(surface));
 
             if (_currentTarget == target)
                 return;
@@ -728,7 +728,7 @@ namespace Shared.Rendering.SilkVulkan
         public TextureLock LockTexture(RenderTexture texture, TextureLockMode mode)
         {
             if (texture.NativeHandle is not SilkVulkanTextureResource resource)
-                throw new InvalidOperationException("Silk.NET Vulkan texture handle expected.");
+                throw new InvalidOperationException("需要 Silk.NET Vulkan 纹理句柄。");
 
             FlushSpriteBatch();
 
@@ -1167,10 +1167,10 @@ namespace Shared.Rendering.SilkVulkan
             }
 
             if (!_vk.TryGetInstanceExtension(_instance, out _surfaceApi))
-                throw new InvalidOperationException("VK_KHR_surface is unavailable.");
+                throw new InvalidOperationException("VK_KHR_surface 不可用。");
 
             if (!_vk.TryGetInstanceExtension(_instance, out _win32SurfaceApi))
-                throw new InvalidOperationException("VK_KHR_win32_surface is unavailable.");
+                throw new InvalidOperationException("VK_KHR_win32_surface 不可用。");
         }
 
         private void CreateSurface()
@@ -1190,7 +1190,7 @@ namespace Shared.Rendering.SilkVulkan
             uint count = 0;
             Check(_vk.EnumeratePhysicalDevices(_instance, ref count, null), "count Vulkan physical devices");
             if (count == 0)
-                throw new InvalidOperationException("No Vulkan-capable physical devices were found.");
+                throw new InvalidOperationException("未找到支持 Vulkan 的物理设备。");
 
             PhysicalDevice[] devices = new PhysicalDevice[count];
             fixed (PhysicalDevice* devicePtr = devices)
@@ -1227,7 +1227,7 @@ namespace Shared.Rendering.SilkVulkan
             }
 
             if (selectedDevice.Handle == 0)
-                throw new InvalidOperationException("No Vulkan device supports graphics and presentation for this window.");
+                throw new InvalidOperationException("没有 Vulkan 设备同时支持此窗口的图形处理和呈现。");
 
             _physicalDevice = selectedDevice;
             _graphicsQueueFamilyIndex = selectedQueueFamily;
@@ -1466,7 +1466,7 @@ namespace Shared.Rendering.SilkVulkan
             _vk.GetDeviceQueue(_device, _graphicsQueueFamilyIndex, 0, out _graphicsQueue);
 
             if (!_vk.TryGetDeviceExtension(_instance, _device, out _swapchainApi))
-                throw new InvalidOperationException("VK_KHR_swapchain is unavailable.");
+                throw new InvalidOperationException("VK_KHR_swapchain 不可用。");
         }
 
         private void CreateCommandPools()
@@ -1644,7 +1644,7 @@ namespace Shared.Rendering.SilkVulkan
                     return format;
             }
 
-            throw new InvalidOperationException("The Vulkan surface does not expose B8G8R8A8Unorm, which is required by the current client texture pipeline.");
+            throw new InvalidOperationException("Vulkan 表面未提供当前客户端纹理管线所需的 B8G8R8A8Unorm 格式。");
         }
 
         private PresentModeKHR ChoosePresentMode()
@@ -1808,7 +1808,7 @@ namespace Shared.Rendering.SilkVulkan
             string shaderPath = FindShaderPath(fileName);
 
             if (string.IsNullOrEmpty(shaderPath) || !File.Exists(shaderPath))
-                throw new FileNotFoundException($"Vulkan shader file '{fileName}' was not found.", shaderPath);
+                throw new FileNotFoundException($"找不到 Vulkan 着色器文件“{fileName}”。", shaderPath);
 
             string source = File.ReadAllText(shaderPath);
             return SilkVulkanShaderCompiler.Compile(source, shaderKind, fileName);
@@ -2581,7 +2581,7 @@ namespace Shared.Rendering.SilkVulkan
             push.Colour.X = IsNativeCompressedTexture(resource.Format) ? 1F : 0F;
 
             if (!HasFrameSpace((ulong)sizeof(SpriteInstance), 16))
-                throw new InvalidOperationException("The Vulkan dynamic sprite instance buffer is full for this frame.");
+                throw new InvalidOperationException("本帧的 Vulkan 动态精灵实例缓冲区已满。");
 
             SpriteInstance* instances = AllocateSpriteInstances(1, out ulong offset);
             instances[0] = new SpriteInstance(
@@ -2739,7 +2739,7 @@ namespace Shared.Rendering.SilkVulkan
             ulong bytes = (ulong)(vertexCount * sizeof(TextureVertex));
             ulong alignedOffset = Align(_activeFrame.VertexOffset, 16);
             if (alignedOffset + bytes > _activeFrame.VertexBuffer.Size)
-                throw new InvalidOperationException("The Vulkan dynamic vertex buffer is full for this frame.");
+                throw new InvalidOperationException("本帧的 Vulkan 动态顶点缓冲区已满。");
 
             offset = alignedOffset;
             _activeFrame.VertexOffset = alignedOffset + bytes;
@@ -2751,7 +2751,7 @@ namespace Shared.Rendering.SilkVulkan
             ulong bytes = (ulong)(instanceCount * sizeof(SpriteInstance));
             ulong alignedOffset = Align(_activeFrame.VertexOffset, 16);
             if (alignedOffset + bytes > _activeFrame.VertexBuffer.Size)
-                throw new InvalidOperationException("The Vulkan dynamic sprite instance buffer is full for this frame.");
+                throw new InvalidOperationException("本帧的 Vulkan 动态精灵实例缓冲区已满。");
 
             offset = alignedOffset;
             _activeFrame.VertexOffset = alignedOffset + bytes;
@@ -2836,7 +2836,7 @@ namespace Shared.Rendering.SilkVulkan
                     return i;
             }
 
-            throw new InvalidOperationException($"No Vulkan memory type supports {properties}.");
+            throw new InvalidOperationException($"没有 Vulkan 内存类型支持 {properties}。");
         }
 
         private void ExecuteImmediate(Action<CommandBuffer> record)
@@ -3058,7 +3058,7 @@ namespace Shared.Rendering.SilkVulkan
                     return;
             }
 
-            throw new InvalidOperationException($"Failed to {operation}: {result}.");
+            throw new InvalidOperationException($"执行 {operation} 失败：{result}。");
         }
 
         private Format ConvertTextureFormat(RenderTextureFormat format)

@@ -22,12 +22,12 @@ namespace Server.Envir.Commands.Command.Admin
             {
                 player = SEnvir.GetPlayerByCharacter(vals[3]);
                 if (player == null)
-                    throw new UserCommandException(string.Format("Could not find player: {0}", vals[3]));
+                    throw new UserCommandException(string.Format("找不到玩家：{0}", vals[3]));
             }
 
             ItemInfo item = SEnvir.GetItemInfo(vals[1]);
             if (item == null)
-                throw new UserCommandException(string.Format("Could not find item: {0}", vals[1]));
+                throw new UserCommandException(string.Format("找不到物品：{0}", vals[1]));
 
             int value;
             if (vals.Length < 3 || !int.TryParse(vals[2], out value) || value == 0)
@@ -57,7 +57,7 @@ namespace Server.Envir.Commands.Command.Admin
             {
                 int count = Math.Min(value, item.StackSize);
                 if (!player.CanGainItems(false, new ItemCheck(item, count, UserItemFlags.None, TimeSpan.Zero)))
-                    throw new UserCommandException(string.Format("Can not hold anymore {0}.", vals[1]));
+                    throw new UserCommandException(string.Format("无法再获取更多 {0}。", vals[1]));
 
                 UserItem userItem = SEnvir.CreateDropItem(item, 0);
                 userItem.Count = count;

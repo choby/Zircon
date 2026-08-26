@@ -23,7 +23,7 @@ namespace PluginStandalone
 
                 if (string.IsNullOrWhiteSpace(pluginFilename))
                 {
-                    throw new Exception("Plugin filename must be referenced in the application config under the 'Plugin' key.");
+                    throw new Exception("必须在应用程序配置的“Plugin”键中指定插件文件名。");
                 }
 
                 PluginLoader.Instance.Log += Loader_Log;
@@ -32,15 +32,15 @@ namespace PluginStandalone
 
                 if (plugin == null)
                 {
-                    throw new Exception($"Failed to load {pluginFilename}.");
+                    throw new Exception($"加载 {pluginFilename} 失败。");
                 }
 
                 if (plugin.Type is not IPluginForm form || !form.SupportsStandaloneLoading)
                 {
-                    throw new Exception($"{pluginFilename} does not support being loaded as a standalone application.");
+                    throw new Exception($"{pluginFilename} 不支持作为独立应用程序加载。");
                 }
 
-                Console.WriteLine($"Loading {pluginFilename}...");
+                Console.WriteLine($"正在加载 {pluginFilename}...");
                 Application.Run(form.CreateStandaloneForm());
             }
             catch (Exception ex)

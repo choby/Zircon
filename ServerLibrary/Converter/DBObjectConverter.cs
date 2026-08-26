@@ -82,7 +82,7 @@ namespace Server
 
                 if (reader.TokenType != JsonTokenType.PropertyName)
                 {
-                    throw new JsonException("Expected PropertyName token.");
+                    throw new JsonException("应为 PropertyName 标记。");
                 }
 
                 string propertyName = reader.GetString();
@@ -110,7 +110,7 @@ namespace Server
             {
                 if (reader.TokenType != JsonTokenType.StartArray)
                 {
-                    throw new JsonException($"Expected StartArray token for DBBindingList at '{property.Name}'.");
+                    throw new JsonException($"属性“{property.Name}”的 DBBindingList 应以 StartArray 标记开始。");
                 }
 
                 Type bindingListType = property.PropertyType.GetGenericArguments().First();
@@ -301,7 +301,7 @@ namespace Server
 
                 if (reader.TokenType != JsonTokenType.PropertyName)
                 {
-                    throw new JsonException("Expected PropertyName token.");
+                    throw new JsonException("应为 PropertyName 标记。");
                 }
 
                 string propertyName = reader.GetString();
@@ -439,7 +439,7 @@ namespace Server
 
             if (obj == null && throwOnMissing)
             {
-                throw new JsonException($"Object not found for '{typeof(T).Name}' using values '{JoinIdentityValues(identityValues.ToArray())}'.");
+                throw new JsonException($"使用标识值“{JoinIdentityValues(identityValues.ToArray())}”找不到类型“{typeof(T).Name}”的对象。");
             }
 
             return obj;

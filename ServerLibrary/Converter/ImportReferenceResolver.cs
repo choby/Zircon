@@ -68,7 +68,7 @@ namespace Server
                 });
             }
 
-            SEnvir.Log($"Deferred missing reference for '{referenceType.Name}' using values '{string.Join('/', identityValues)}' on '{_currentContext.Owner?.GetType().Name}.{_currentContext.Property?.Name}'.");
+            SEnvir.Log($"已延后处理缺失的引用：类型“{referenceType.Name}”，标识值“{string.Join('/', identityValues)}”，位置“{_currentContext.Owner?.GetType().Name}.{_currentContext.Property?.Name}”。");
 
             return true;
         }
@@ -99,13 +99,13 @@ namespace Server
                     reference.Property.SetValue(reference.Owner, resolvedReference);
                     resolved++;
 
-                    SEnvir.Log($"Resolved deferred reference for '{reference.Owner.GetType().Name}.{reference.Property.Name}'.");
+                    SEnvir.Log($"已解析延后的引用“{reference.Owner.GetType().Name}.{reference.Property.Name}”。");
                 }
                 else
                 {
                     stillPending.Add(reference);
 
-                    SEnvir.Log($"Pending reference still missing for '{reference.ReferenceType.Name}' using values '{string.Join('/', reference.IdentityValues)}' on '{reference.Owner.GetType().Name}.{reference.Property.Name}'.");
+                    SEnvir.Log($"待处理的引用仍然缺失：类型“{reference.ReferenceType.Name}”，标识值“{string.Join('/', reference.IdentityValues)}”，位置“{reference.Owner.GetType().Name}.{reference.Property.Name}”。");
                 }
             }
 

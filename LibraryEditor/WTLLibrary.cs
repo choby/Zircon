@@ -510,7 +510,7 @@ namespace LibraryEditor
                 {
                     int requiredLength = textureWidth * textureHeight * 4;
                     if (decompressedBuffer.Length < requiredLength)
-                        throw new InvalidDataException($"WTL BGRA texture is truncated. Expected {requiredLength} bytes, found {decompressedBuffer.Length}.");
+                        throw new InvalidDataException($"WTL BGRA 纹理数据不完整。应有 {requiredLength} 字节，实际为 {decompressedBuffer.Length} 字节。");
 
                     Marshal.Copy(decompressedBuffer, 0, data.Scan0, requiredLength);
                 }

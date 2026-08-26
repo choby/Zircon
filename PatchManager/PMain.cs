@@ -410,8 +410,8 @@ namespace PatchManager
 
             List<string> report = new List<string>
             {
-                $"Patch update report - {created:yyyy-MM-dd HH:mm:ss}",
-                $"Files updated: {updatedFiles.Count}",
+                $"补丁更新报告 - {created:yyyy-MM-dd HH:mm:ss}",
+                $"已更新文件数：{updatedFiles.Count}",
                 string.Empty
             };
 

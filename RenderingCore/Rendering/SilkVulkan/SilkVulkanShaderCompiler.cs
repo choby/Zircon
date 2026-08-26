@@ -10,18 +10,18 @@ namespace Shared.Rendering.SilkVulkan
         public static byte[] Compile(string source, ShaderKind shaderKind, string name)
         {
             if (string.IsNullOrWhiteSpace(source))
-                throw new ArgumentException("Shader source must be provided.", nameof(source));
+                throw new ArgumentException("必须提供着色器源代码。", nameof(source));
 
             Shaderc shaderc = Shaderc.GetApi();
             Compiler* compiler = shaderc.CompilerInitialize();
             if (compiler == null)
-                throw new InvalidOperationException("Unable to initialize shaderc.");
+                throw new InvalidOperationException("无法初始化 Shaderc。");
 
             CompileOptions* options = shaderc.CompileOptionsInitialize();
             if (options == null)
             {
                 shaderc.CompilerRelease(compiler);
-                throw new InvalidOperationException("Unable to initialize shaderc compile options.");
+                throw new InvalidOperationException("无法初始化 Shaderc 编译选项。");
             }
 
             CompilationResult* result = null;
@@ -37,11 +37,11 @@ namespace Shared.Rendering.SilkVulkan
                 }
 
                 if (result == null)
-                    throw new InvalidOperationException($"Shaderc returned no result for {name}.");
+                    throw new InvalidOperationException($"Shaderc 未返回 {name} 的编译结果。");
 
                 CompilationStatus status = shaderc.ResultGetCompilationStatus(result);
                 if (status != CompilationStatus.Success)
-                    throw new InvalidOperationException($"{name} shader compile failed: {shaderc.ResultGetErrorMessageS(result)}");
+                    throw new InvalidOperationException($"{name} 着色器编译失败：{shaderc.ResultGetErrorMessageS(result)}");
 
                 nuint length = shaderc.ResultGetLength(result);
                 byte* bytes = shaderc.ResultGetBytes(result);

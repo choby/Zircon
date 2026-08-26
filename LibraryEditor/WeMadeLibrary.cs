@@ -374,7 +374,7 @@ namespace LibraryEditor
                                 break;
 
                             default:
-                                throw new InvalidDataException($"Unsupported Mir 3 WIL opcode 0x{(FileBytes[OffSet + 1] << 8 | FileBytes[OffSet]):X4} at compressed byte offset {OffSet}.");
+                                throw new InvalidDataException($"压缩数据字节偏移 {OffSet} 处存在不支持的 Mir 3 WIL 操作码 0x{(FileBytes[OffSet + 1] << 8 | FileBytes[OffSet]):X4}。");
                         }
                     }
                     End++;

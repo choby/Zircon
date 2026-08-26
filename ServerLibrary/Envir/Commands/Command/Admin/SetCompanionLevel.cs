@@ -19,7 +19,7 @@ namespace Server.Envir.Commands.Command.Admin
                 ThrowNewInvalidParametersException();
 
             if (player.Companion == null)
-                throw new UserCommandException(string.Format("{0} does not have a companion active.", player.Name));
+                throw new UserCommandException(string.Format("{0} 当前没有激活的宠物。", player.Name));
 
             player.Companion.UserCompanion.Level = level;
             player.Enqueue(new S.CompanionUpdate

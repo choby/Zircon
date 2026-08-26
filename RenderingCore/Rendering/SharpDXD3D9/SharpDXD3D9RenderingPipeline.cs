@@ -93,7 +93,7 @@ namespace Shared.Rendering.SharpDXD3D9
                 throw new ArgumentNullException(nameof(drawScene));
 
             if (_context == null)
-                throw new InvalidOperationException("Pipeline has not been initialized.");
+                throw new InvalidOperationException("渲染管线尚未初始化。");
 
             try
             {
@@ -213,10 +213,10 @@ namespace Shared.Rendering.SharpDXD3D9
         public void ColorFill(RenderSurface surface, GdiRectangle rectangle, System.Drawing.Color color)
         {
             if (!surface.IsValid)
-                throw new ArgumentException("A valid surface handle is required.", nameof(surface));
+                throw new ArgumentException("需要有效的表面句柄。", nameof(surface));
 
             if (surface.NativeHandle is not Surface dxSurface)
-                throw new ArgumentException("Surface handle must wrap a SharpDX surface instance.", nameof(surface));
+                throw new ArgumentException("表面句柄必须封装 SharpDX 表面实例。", nameof(surface));
 
             SharpDXD3D9Manager.Device.ColorFill(dxSurface, ToRawRectangle(rectangle), ToRawColor(color));
         }
@@ -277,7 +277,7 @@ namespace Shared.Rendering.SharpDXD3D9
                 return;
 
             if (texture.NativeHandle is not Texture dxTexture)
-                throw new ArgumentException("Texture handle must wrap a SharpDX texture instance.", nameof(texture));
+                throw new ArgumentException("纹理句柄必须封装 SharpDX 纹理实例。", nameof(texture));
 
             if (dxTexture.IsDisposed)
                 return;
@@ -326,7 +326,7 @@ namespace Shared.Rendering.SharpDXD3D9
                 return;
 
             if (texture.NativeHandle is not Texture dxTexture)
-                throw new ArgumentException("Texture handle must wrap a SharpDX texture instance.", nameof(texture));
+                throw new ArgumentException("纹理句柄必须封装 SharpDX 纹理实例。", nameof(texture));
 
             if (dxTexture.IsDisposed)
                 return;
@@ -482,7 +482,7 @@ namespace Shared.Rendering.SharpDXD3D9
         {
             Surface current = SharpDXD3D9Manager.CurrentSurface;
             if (current == null)
-                throw new InvalidOperationException("Current surface is not available.");
+                throw new InvalidOperationException("当前表面不可用。");
 
             return RenderSurface.From(current);
         }
@@ -490,10 +490,10 @@ namespace Shared.Rendering.SharpDXD3D9
         public void SetSurface(RenderSurface surface)
         {
             if (!surface.IsValid)
-                throw new ArgumentException("A valid surface handle is required.", nameof(surface));
+                throw new ArgumentException("需要有效的表面句柄。", nameof(surface));
 
             if (surface.NativeHandle is not Surface dxSurface)
-                throw new ArgumentException("Surface handle must wrap a SharpDX surface instance.", nameof(surface));
+                throw new ArgumentException("表面句柄必须封装 SharpDX 表面实例。", nameof(surface));
 
             if (SharpDXD3D9Manager.CurrentSurface == dxSurface)
                 return;
@@ -505,7 +505,7 @@ namespace Shared.Rendering.SharpDXD3D9
         {
             Surface scratchSurface = SharpDXD3D9Manager.ScratchSurface;
             if (scratchSurface == null)
-                throw new InvalidOperationException("Scratch surface is not available.");
+                throw new InvalidOperationException("暂存表面不可用。");
 
             return RenderSurface.From(scratchSurface);
         }
@@ -514,7 +514,7 @@ namespace Shared.Rendering.SharpDXD3D9
         {
             Texture scratchTexture = SharpDXD3D9Manager.ScratchTexture;
             if (scratchTexture == null)
-                throw new InvalidOperationException("Scratch texture is not available.");
+                throw new InvalidOperationException("暂存纹理不可用。");
 
             return RenderTexture.From(scratchTexture);
         }
@@ -582,7 +582,7 @@ namespace Shared.Rendering.SharpDXD3D9
         public TextureLock LockTexture(RenderTexture texture, TextureLockMode mode)
         {
             if (texture.NativeHandle is not Texture dxTexture)
-                throw new InvalidOperationException("SharpDX texture handle expected.");
+                throw new InvalidOperationException("需要 SharpDX 纹理句柄。");
 
             LockFlags flags = ConvertLockFlags(mode);
             DataRectangle rect = dxTexture.LockRectangle(0, flags);
@@ -652,7 +652,7 @@ namespace Shared.Rendering.SharpDXD3D9
         {
             Texture poisonTexture = SharpDXD3D9Manager.PoisonTexture;
             if (poisonTexture == null || poisonTexture.IsDisposed)
-                throw new InvalidOperationException("Poison texture has not been initialized.");
+                throw new InvalidOperationException("毒素纹理尚未初始化。");
 
             return RenderTexture.From(poisonTexture);
         }
@@ -661,7 +661,7 @@ namespace Shared.Rendering.SharpDXD3D9
         {
             Texture poisonTexture = SharpDXD3D9Manager.PoisonTexture;
             if (poisonTexture == null || poisonTexture.IsDisposed)
-                throw new InvalidOperationException("Poison texture has not been initialized.");
+                throw new InvalidOperationException("毒素纹理尚未初始化。");
 
             SurfaceDescription description = poisonTexture.GetLevelDescription(0);
             return new Size(description.Width, description.Height);
@@ -676,7 +676,7 @@ namespace Shared.Rendering.SharpDXD3D9
         public byte[] GetColourPaletteData()
         {
             if (SharpDXD3D9Manager.PalleteData == null)
-                throw new InvalidOperationException("Colour palette data has not been initialized.");
+                throw new InvalidOperationException("调色板数据尚未初始化。");
 
             return SharpDXD3D9Manager.PalleteData;
         }
@@ -761,7 +761,7 @@ namespace Shared.Rendering.SharpDXD3D9
                 RenderTextureFormat.Bgra32 => Format.A8R8G8B8,
                 RenderTextureFormat.Dxt1 => Format.Dxt1,
                 RenderTextureFormat.Dxt5 => Format.Dxt5,
-                RenderTextureFormat.Bc7 => throw new NotSupportedException("BC7 textures require a DirectX 11 capable renderer."),
+                RenderTextureFormat.Bc7 => throw new NotSupportedException("BC7 纹理需要支持 DirectX 11 的渲染器。"),
                 _ => throw new ArgumentOutOfRangeException(nameof(format), format, null)
             };
         }

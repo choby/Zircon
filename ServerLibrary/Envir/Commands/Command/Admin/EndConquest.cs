@@ -18,11 +18,11 @@ namespace Server.Envir.Commands.Command.Admin
 
             CastleInfo castle = SEnvir.CastleInfoList.Binding.FirstOrDefault(x => string.Compare(x.Name.Replace(" ", ""), vals[1], StringComparison.OrdinalIgnoreCase) == 0);
             if (castle == null)
-                throw new UserCommandException(string.Format("Could not find castle: {0}.", vals[1]));
+                throw new UserCommandException(string.Format("找不到城堡：{0}。", vals[1]));
 
             ConquestWar war = SEnvir.ConquestWars.FirstOrDefault(x => x.Castle == castle);
             if (war == null)
-                throw new UserCommandException(string.Format("{0} is not currently at war.", vals[1]));
+                throw new UserCommandException(string.Format("{0} 当前未处于战争状态。", vals[1]));
 
             war.EndTime = DateTime.MinValue;
         }
