@@ -359,7 +359,7 @@ namespace Library.Network
 
         protected virtual void ProcessUnhandledPacket(Packet p)
         {
-            throw new NotImplementedException($"Not Implemented Exception: Method Process({p.PacketType}).");
+            throw new NotImplementedException($"尚未实现 Process({p.PacketType}) 方法");
         }
 
         public void UpdateTimeOut()

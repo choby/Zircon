@@ -71,7 +71,7 @@ namespace MirDB
             }
 
 
-            throw new ArgumentException($"Unable to find Association {Parent.ThisType.Name}, Link: {Link.Identity ?? "Empty"} -> {ob.GetType()}");
+            throw new ArgumentException($"无法找到关联 {Parent.ThisType.Name}，链接：{Link.Identity ?? "空"} -> {ob.GetType()}");
         }
         public void RemoveLink(T ob)
         {
@@ -99,7 +99,7 @@ namespace MirDB
                 return;
             }
 
-            throw new ArgumentException($"Unable to find Association {Parent.ThisType.Name}, Link: {Link.Identity ?? "Empty"} -> {ob.GetType()}");
+            throw new ArgumentException($"无法找到关联 {Parent.ThisType.Name}，链接：{Link.Identity ?? "空"} -> {ob.GetType()}");
         }
     }
 }

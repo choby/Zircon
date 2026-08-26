@@ -41,7 +41,7 @@ namespace Library
             var isEncrypted = IsEncrypted(stream);
 
             if (isEncrypted && !HasCryptoKey)
-                throw new ApplicationException("Database is encrypted but not specified Crypto Key");
+                throw new ApplicationException("数据库已加密，但未指定加密密钥");
 
             stream.Seek(0, SeekOrigin.Begin);
 

@@ -279,7 +279,7 @@ namespace Library.Network
                     else if (item.PropertyType.IsClass)
                         WriteObject(writer, item.GetValue(ob));
                     else
-                        throw new NotImplementedException($"Not Implemented Exception: WirteObject: Type:{item.PropertyType}.");
+                        throw new NotImplementedException($"类型：{item.PropertyType} 尚未实现 WriteObject");
 
                     continue;
                 }
@@ -403,7 +403,7 @@ namespace Library.Network
                     else if (item.PropertyType.IsClass)
                         ReadObject(reader, item.GetValue(ob));
                     else
-                        throw new NotImplementedException($"Not Implemented Exception: ReadObject: Type: {item.PropertyType}.");
+                        throw new NotImplementedException($"类型：{item.PropertyType} 尚未实现 ReadObject");
 
                     continue;
                 }

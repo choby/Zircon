@@ -252,7 +252,7 @@ namespace MirDB
             }
 
 
-            throw new ArgumentException($"Unable to find Association {ThisType.Name}, Link: {link.Identity ?? "Empty"} -> {info.PropertyType.Name}");
+            throw new ArgumentException($"无法找到关联 {ThisType.Name}，链接：{link.Identity ?? "空"} -> {info.PropertyType.Name}");
         }
         private void RemoveLink(object ob, PropertyInfo info)
         {
@@ -307,7 +307,7 @@ namespace MirDB
             }
 
 
-            throw new ArgumentException($"Unable to find Association {ThisType.Name}, Link: {link.Identity ?? "Empty"} -> {info.PropertyType.Name}");
+            throw new ArgumentException($"无法找到关联 {ThisType.Name}，链接：{link.Identity ?? "空"} -> {info.PropertyType.Name}");
         }
 
         protected Session GetCurrencySession()

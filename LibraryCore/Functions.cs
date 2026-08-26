@@ -344,7 +344,7 @@ namespace Library
                     return MirAnimation.HorseLeaping;
 
                 default:
-                    throw new NotImplementedException();
+                    throw new NotImplementedException($"尚未实现魔法类型 {m} 对应的动画");
             }
         }
 

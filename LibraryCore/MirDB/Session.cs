@@ -50,20 +50,20 @@ namespace MirDB
         public Session(string connectionString)
         {
             if (string.IsNullOrEmpty(connectionString))
-                throw new ArgumentNullException(nameof(connectionString), "Database:DBConnStr is empty");
+                throw new ArgumentNullException(nameof(connectionString), "数据库连接字符串 Database:DBConnStr 为空");
 
             var args = connectionString.Split(';').Select(x => x.Split(new char[] { '=' }, 2)).ToDictionary(x => x[0].ToUpperInvariant(), x => x[1]);
 
             if (!args.ContainsKey("MODE") || !args.ContainsKey("ROOT") || !args.ContainsKey("BACKUP"))
-                throw new ArgumentException($"Connection string is not valid");
+                throw new ArgumentException($"连接字符串无效");
 
             if (!Enum.TryParse(args["MODE"], out SessionMode mode))
-                throw new ArgumentException($"{args["MODE"]} is not valid option for Mode");
+                throw new ArgumentException($"{args["MODE"]} 不是有效的运行模式选项");
 
             if (args.ContainsKey("BACKUPDELAY"))
             {
                 if (!int.TryParse(args["BACKUPDELAY"], out int backupDelay))
-                    throw new ArgumentException($"{args["BACKUPDELAY"]} is not valid number");
+                    throw new ArgumentException($"{args["BACKUPDELAY"]} 不是有效的数字");
                 BackUpDelay = backupDelay;
             }
 
@@ -371,7 +371,7 @@ namespace MirDB
             DBCollection<T> collection = GetCollection<T>();
 
             if (insertAfterIndex < 0 || insertAfterIndex > collection.Index)
-                throw new ArgumentOutOfRangeException(nameof(insertAfterIndex), $"Value must be between 0 and {collection.Index}");
+                throw new ArgumentOutOfRangeException(nameof(insertAfterIndex), $"值必须介于 0 和 {collection.Index} 之间");
 
             List<DBObject> shiftedObjects = new List<DBObject>();
 
