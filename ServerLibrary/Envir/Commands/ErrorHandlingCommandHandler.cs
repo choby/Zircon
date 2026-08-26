@@ -33,7 +33,7 @@ namespace Server.Envir.Commands
                 }
                 else
                 {
-                    player.Connection.ReceiveChat(string.Format("Command @{0} does not exist.", commandIdentifier), MessageType.System);
+                    player.Connection.ReceiveChat(string.Format("命令 @{0} 不存在。", commandIdentifier), MessageType.System);
                 }
             }
             catch (UserCommandException exception)
@@ -48,7 +48,7 @@ namespace Server.Envir.Commands
             catch (Exception exception)
             {
                 SEnvir.Log("致命命令错误 [" + player.Name + "]：" + exception.Message);
-                player.Connection.ReceiveChat("FatalCommandError: The error has been logged. Contact an admin.", MessageType.System);
+                player.Connection.ReceiveChat("致命命令错误：错误已记录，请联系管理员。", MessageType.System);
             }
         }
     }

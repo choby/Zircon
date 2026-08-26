@@ -157,7 +157,7 @@ namespace Client.Scenes.Views
             if (map == null || map.MiniMap == 0)
             {
                 if (sendMessage)
-                    GameScene.Game.ReceiveChat("No map available.", MessageType.System);
+                    GameScene.Game.ReceiveChat("没有可用的地图。", MessageType.System);
 
                 return false;
             }

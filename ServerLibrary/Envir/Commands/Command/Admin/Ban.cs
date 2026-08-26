@@ -28,7 +28,7 @@ namespace Server.Envir.Commands.Command.Admin
             character.Account.BanReason = $"{player.Name} banned by command.";
             character.Account.BanExpiry = SEnvir.Now.AddMinutes(count);
 
-            player.Connection.ReceiveChat($"You have banned {character.CharacterName} for {count} minutes.", MessageType.System);
+            player.Connection.ReceiveChat($"你已封禁 {character.CharacterName}，时长为 {count} 分钟。", MessageType.System);
 
             if (character.Account.Connection != null)
             {

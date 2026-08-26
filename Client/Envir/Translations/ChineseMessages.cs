@@ -79,7 +79,7 @@ namespace Client.Envir.Translations
         public override string GameSceneCastNoEnoughMana { get; set; } = "Unable to cast {0}, You do not have enough Mana.";
         public override string GameSceneCastTooFar { get; set; } = "Unable to cast {0}, Your target is too far.";
 
-        public override string GameSceneThrowTooFar { get; set; } = "Unable to throw {0}, Your target is too far.";
+        public override string GameSceneThrowTooFar { get; set; } = "目标距离太远，无法使用{0}";
         public override string GameSceneHoldTooHeavy { get; set; } = "Unable to hold {0}, it is too heavy.";
         public override string GameSceneNeedFishingRod { get; set; } = "Unable to hold {0}, must be holding fishing rod.";
         public override string GameSceneWearTooHeavy { get; set; } = "Unable to wear {0}, it is too heavy.";

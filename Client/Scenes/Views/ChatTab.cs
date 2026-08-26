@@ -430,7 +430,7 @@ namespace Client.Scenes.Views
                     label = new DXLabel
                     {
                         AutoSize = false,
-                        Text = "You have died, Click here to revive in town.",
+                        Text = "你已经死亡，点击此处在城镇复活。",
                         Outline = false,
                         DrawFormat = TextFormatFlags.WordBreak | TextFormatFlags.WordEllipsis,
                         Parent = TextPanel,

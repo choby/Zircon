@@ -34,7 +34,7 @@ namespace Server.Envir.Commands.Command.Admin
 
                     player.Enqueue(new S.MagicLeveled { InfoIndex = tinfo.Index, Level = tlevel, Experience = 0 });
                     player.RefreshStats();
-                    player.Connection.ReceiveChat(string.Format("{0}'s {1} has been leveled to {2}", vals[1], vals[2], vals[3]), MessageType.System);
+                    player.Connection.ReceiveChat(string.Format("已将 {0} 的 {1} 提升至 {2} 级", vals[1], vals[2], vals[3]), MessageType.System);
                 }
             }
         }

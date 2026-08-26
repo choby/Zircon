@@ -716,7 +716,7 @@ namespace Client.Scenes.Views
                 {
 
                     GameScene.Game.OutputTime = CEnvir.Now.AddSeconds(1);
-                    GameScene.Game.ReceiveChat(string.Format(CEnvir.Language.GameSceneThrowTooFar, "Shuriken"), MessageType.Hint);
+                    GameScene.Game.ReceiveChat(string.Format(CEnvir.Language.GameSceneThrowTooFar, "投掷武器"), MessageType.Hint);
 
                     Stop();
 

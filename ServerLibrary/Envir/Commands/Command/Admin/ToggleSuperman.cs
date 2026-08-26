@@ -13,7 +13,7 @@ namespace Server.Envir.Commands.Command.Admin
         public override void Action(PlayerObject player)
         {
             player.Superman = !player.Superman;
-            player.Connection.ReceiveChat($"{VALUE} {(player.Superman ? "activated" : "deactivated")}", MessageType.System);
+            player.Connection.ReceiveChat($"{VALUE} {(player.Superman ? "已启用" : "已禁用")}", MessageType.System);
         }
     }
 }

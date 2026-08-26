@@ -12,7 +12,7 @@ namespace Server.Envir.Commands.Player
         public override void Action(PlayerObject player)
         {
             player.ExtractorLock = !player.ExtractorLock;
-            player.Connection.ReceiveChat(player.ExtractorLock ? "Extraction Enabled" : "Extraction Locked", MessageType.System);
+            player.Connection.ReceiveChat(player.ExtractorLock ? "属性提取已启用" : "属性提取已锁定", MessageType.System);
         }
     }
 }

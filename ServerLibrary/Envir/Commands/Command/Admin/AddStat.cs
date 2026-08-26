@@ -31,7 +31,7 @@ namespace Server.Envir.Commands.Command.Admin
                 player.RefreshStats();
 
                 player.Enqueue(new S.ItemStatsRefreshed { GridType = GridType.Equipment, Slot = (int)tslot, NewStats = new Stats(player.Equipment[(int)tslot].Stats) });
-                player.Connection.ReceiveChat(string.Format("{0} added {1} + {2}", player.Equipment[(int)tslot].Info.ItemName, tstat, tamount), MessageType.System);
+                player.Connection.ReceiveChat(string.Format("已为 {0} 添加 {1} + {2}", player.Equipment[(int)tslot].Info.ItemName, tstat, tamount), MessageType.System);
             }
         }
     }

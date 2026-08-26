@@ -12,7 +12,7 @@ namespace Server.Envir.Commands.Command.Admin
         {
             DateTime time = Time.Now;
             player.MarketPlaceCancelSuperior();
-            player.Connection.ReceiveChat($"[Reboot Command] {(Time.Now - time).Ticks / TimeSpan.TicksPerMillisecond}ms", MessageType.System);
+            player.Connection.ReceiveChat($"[重启命令] {(Time.Now - time).Ticks / TimeSpan.TicksPerMillisecond}ms", MessageType.System);
         }
     }
 }

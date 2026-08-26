@@ -1193,7 +1193,7 @@ namespace Client.Scenes
             if (e.Control && e.Shift && e.KeyCode == Keys.F12)
             {
                 MapControl.ShadowPixelShaderEnabled = !MapControl.ShadowPixelShaderEnabled;
-                ReceiveChat($"Shadow pixel shader: {(MapControl.ShadowPixelShaderEnabled ? "ON" : "OFF")}", MessageType.System);
+                ReceiveChat($"阴影像素着色器：{(MapControl.ShadowPixelShaderEnabled ? "开启" : "关闭")}", MessageType.System);
                 e.Handled = true;
                 return;
             }
@@ -3168,7 +3168,7 @@ namespace Client.Scenes
                         if (CEnvir.Now >= OutputTime)
                         {
                             OutputTime = CEnvir.Now.AddSeconds(1);
-                            ReceiveChat($"Unable to cast {magic.Info.Name}, You do not have enough Mana.", MessageType.Hint);
+                            ReceiveChat($"无法施放 {magic.Info.Name}，你的魔法值不足。", MessageType.Hint);
                         }
                         return;
                     }

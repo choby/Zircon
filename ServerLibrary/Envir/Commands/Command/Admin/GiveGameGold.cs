@@ -38,7 +38,7 @@ namespace Server.Envir.Commands.Admin
                         character.Account.Referral.Connection.Player.HuntGoldChanged();
                 }
             }
-            player.Connection.ReceiveChat(string.Format("[GIVE GAME GOLD] {0} Amount: {1}", character.CharacterName, count), MessageType.System);
+            player.Connection.ReceiveChat(string.Format("[发放游戏币] {0}，数量：{1}", character.CharacterName, count), MessageType.System);
         }
     }
 }

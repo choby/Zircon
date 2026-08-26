@@ -15,7 +15,7 @@ namespace Server.Envir.Commands.Command.Admin
 
             if (weapon == null)
             {
-                player.Connection.ReceiveChat("You are not holding a weapon.", MessageType.System);
+                player.Connection.ReceiveChat("你没有装备武器。", MessageType.System);
                 return;
             }
 
@@ -23,7 +23,7 @@ namespace Server.Envir.Commands.Command.Admin
 
             if (weapon.Level >= maxLevel)
             {
-                player.Connection.ReceiveChat($"{weapon.Info.ItemName} is already at the max level.", MessageType.System);
+                player.Connection.ReceiveChat($"{weapon.Info.ItemName} 已达到最高等级。", MessageType.System);
                 return;
             }
 
@@ -42,7 +42,7 @@ namespace Server.Envir.Commands.Command.Admin
             });
 
             string level = weapon.Level == maxLevel ? "Max" : weapon.Level.ToString();
-            player.Connection.ReceiveChat($"{weapon.Info.ItemName} increased to weapon level {level}.", MessageType.System);
+            player.Connection.ReceiveChat($"{weapon.Info.ItemName} 已提升至武器等级 {level}。", MessageType.System);
         }
     }
 }

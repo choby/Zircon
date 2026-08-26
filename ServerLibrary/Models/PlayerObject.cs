@@ -6821,7 +6821,7 @@ namespace Server.Models
                                         }
 
 
-                                        string text = $"A [{item.Info.ItemName}] has been used in {CurrentMap.Info.Description}";
+                                        string text = $"[{item.Info.ItemName}] 已在 {CurrentMap.Info.Description} 中被使用";
 
                                         foreach (SConnection con in SEnvir.Connections)
                                         {
@@ -6844,31 +6844,31 @@ namespace Server.Models
 
                             if (weapon == null)
                             {
-                                Connection.ReceiveChat("You are not holding a weapon.", MessageType.System);
+                                Connection.ReceiveChat("你没有装备武器。", MessageType.System);
                                 return;
                             }
 
                             if (!ExtractorLock)
                             {
-                                Connection.ReceiveChat("Extraction functions are locked, please type @ExtractorLock and try again", MessageType.System);
+                                Connection.ReceiveChat("属性提取功能已锁定，请输入 @ExtractorLock 后重试。", MessageType.System);
                                 return;
                             }
 
                             if (weapon.Info.ItemEffect == ItemEffect.SpiritBlade)
                             {
-                                Connection.ReceiveChat($"You cannot extract a {weapon.Info.ItemName}.", MessageType.System);
+                                Connection.ReceiveChat($"无法提取 {weapon.Info.ItemName} 的属性。", MessageType.System);
                                 return;
                             }
 
                             if (weapon.Level != Globals.WeaponExperienceList.Count)
                             {
-                                Connection.ReceiveChat("Your weapon is not the max level.", MessageType.System);
+                                Connection.ReceiveChat("你的武器尚未达到最高等级。", MessageType.System);
                                 return;
                             }
 
                             if (weapon.AddedStats.Count == 0)
                             {
-                                Connection.ReceiveChat("Your weapon does not have any added stats.", MessageType.System);
+                                Connection.ReceiveChat("你的武器没有任何附加属性。", MessageType.System);
                                 return;
                             }
 
@@ -6884,7 +6884,7 @@ namespace Server.Models
 
                             if (!hasSpace)
                             {
-                                Connection.ReceiveChat("You do not have any empty inventory slot", MessageType.System);
+                                Connection.ReceiveChat("你的背包没有空余位置。", MessageType.System);
                                 return;
                             }
 
@@ -6914,24 +6914,24 @@ namespace Server.Models
 
                             if (weapon == null)
                             {
-                                Connection.ReceiveChat("You are not holding a weapon.", MessageType.System);
+                                Connection.ReceiveChat("你没有装备武器。", MessageType.System);
                                 return;
                             }
                             if (!ExtractorLock)
                             {
-                                Connection.ReceiveChat("Extraction functions are locked, please type @ExtractorLock and try again", MessageType.System);
+                                Connection.ReceiveChat("属性提取功能已锁定，请输入 @ExtractorLock 后重试。", MessageType.System);
                                 return;
                             }
 
                             if (weapon.Info.ItemEffect == ItemEffect.SpiritBlade)
                             {
-                                Connection.ReceiveChat($"You cannot apply to a {weapon.Info.ItemName}.", MessageType.System);
+                                Connection.ReceiveChat($"无法将属性应用到 {weapon.Info.ItemName}。", MessageType.System);
                                 return;
                             }
 
                             if (weapon.Level != Globals.WeaponExperienceList.Count)
                             {
-                                Connection.ReceiveChat("Your weapon is not the max level.", MessageType.System);
+                                Connection.ReceiveChat("你的武器尚未达到最高等级。", MessageType.System);
                                 return;
                             }
 
@@ -6961,18 +6961,18 @@ namespace Server.Models
 
                             if (weapon == null)
                             {
-                                Connection.ReceiveChat("You are not holding a weapon.", MessageType.System);
+                                Connection.ReceiveChat("你没有装备武器。", MessageType.System);
                                 return;
                             }
                             if (!ExtractorLock)
                             {
-                                Connection.ReceiveChat("Extraction functions are locked, please type @ExtractorLock and try again", MessageType.System);
+                                Connection.ReceiveChat("属性提取功能已锁定，请输入 @ExtractorLock 后重试。", MessageType.System);
                                 return;
                             }
 
                             if (weapon.Level != Globals.WeaponExperienceList.Count)
                             {
-                                Connection.ReceiveChat("Your weapon is not the max level.", MessageType.System);
+                                Connection.ReceiveChat("你的武器尚未达到最高等级。", MessageType.System);
                                 return;
                             }
 
@@ -6988,7 +6988,7 @@ namespace Server.Models
 
                             if (!hasRefine)
                             {
-                                Connection.ReceiveChat("Your weapon does not have any refine stats.", MessageType.System);
+                                Connection.ReceiveChat("你的武器没有任何精炼属性。", MessageType.System);
                                 return;
                             }
 
@@ -7004,7 +7004,7 @@ namespace Server.Models
 
                             if (!hasSpace)
                             {
-                                Connection.ReceiveChat("You do not have any empty inventory slot", MessageType.System);
+                                Connection.ReceiveChat("你的背包没有空余位置。", MessageType.System);
                                 return;
                             }
 
@@ -7036,18 +7036,18 @@ namespace Server.Models
 
                             if (weapon == null)
                             {
-                                Connection.ReceiveChat("You are not holding a weapon.", MessageType.System);
+                                Connection.ReceiveChat("你没有装备武器。", MessageType.System);
                                 return;
                             }
                             if (!ExtractorLock)
                             {
-                                Connection.ReceiveChat("Extraction functions are locked, please type @ExtractorLock and try again", MessageType.System);
+                                Connection.ReceiveChat("属性提取功能已锁定，请输入 @ExtractorLock 后重试。", MessageType.System);
                                 return;
                             }
 
                             if (weapon.Level != Globals.WeaponExperienceList.Count)
                             {
-                                Connection.ReceiveChat("Your weapon is not the max level.", MessageType.System);
+                                Connection.ReceiveChat("你的武器尚未达到最高等级。", MessageType.System);
                                 return;
                             }
 
@@ -9055,13 +9055,13 @@ namespace Server.Models
         {
             if (!Globals.CharacterReg.IsMatch(newName))
             {
-                Connection.ReceiveChat("Unacceptable character name.", MessageType.System);
+                Connection.ReceiveChat("角色名称不符合要求。", MessageType.System);
                 return;
             }
 
             if (newName == Name)
             {
-                Connection.ReceiveChat($"Your name is already {newName}.", MessageType.System);
+                Connection.ReceiveChat($"你当前的名称已经是 {newName}。", MessageType.System);
                 return;
             }
 
@@ -9070,7 +9070,7 @@ namespace Server.Models
                 {
                     if (SEnvir.CharacterInfoList[i].Account == Character.Account) continue;
 
-                    Connection.ReceiveChat("This name is already in use.", MessageType.System);
+                    Connection.ReceiveChat("该名称已被使用。", MessageType.System);
                     return;
                 }
 
@@ -9158,7 +9158,7 @@ namespace Server.Models
             Character.Caption = newCaption;
             Caption = newCaption;
             SEnvir.Log($"[称号已更改] {Character.CharacterName} 的称号已更改为：{Caption}", true);
-            Connection.ReceiveChat($"Your caption changed to: {Caption}.", MessageType.System);
+            Connection.ReceiveChat($"你的称号已更改为：{Caption}。", MessageType.System);
 
 
             SendChangeUpdate();
@@ -9731,13 +9731,13 @@ namespace Server.Models
 
                     if (!Character.GuildMemberInfo.Permissions.HasFlag(GuildPermissions.GetItem))
                     {
-                        ReceiveChat("You do no have the permissions to take from the guild storage", ChatType.System);
+                        ReceiveChat("你没有从行会仓库取出物品的权限。", ChatType.System);
                         return;
                     }
 
                     if (!CurrentCell.IsSafeZone)
                     {
-                        ReceiveChat("You cannot use guild storage unless you are in a safe zone", ChatType.Hint);
+                        ReceiveChat("只有在安全区内才能使用行会仓库。", ChatType.Hint);
                         return;
                     }
 
@@ -13678,7 +13678,7 @@ namespace Server.Models
 
                 if (!CanGainItems(false, new ItemCheck(weap, 1, UserItemFlags.None, TimeSpan.Zero)))
                 {
-                    Connection.ReceiveChat("Not enough bag space available.", MessageType.System);
+                    Connection.ReceiveChat("背包空间不足。", MessageType.System);
                     return;
                 }
             }
@@ -14221,7 +14221,7 @@ namespace Server.Models
                     {
                         state = FishingState.Reel;
 
-                        Connection.ReceiveChat("Not enough bait.", MessageType.System);
+                        Connection.ReceiveChat("鱼饵不足。", MessageType.System);
                     }
                     else
                     {
@@ -14272,7 +14272,7 @@ namespace Server.Models
                         {
                             perfectCatch = true;
 
-                            Connection.ReceiveChat("Perfect Catch!", MessageType.System);
+                            Connection.ReceiveChat("完美捕获！", MessageType.System);
 
                             LogMilestone(MilestoneType.FishingPerfect, 1);
                         }
@@ -14868,7 +14868,7 @@ namespace Server.Models
 
             if (!GetMagic(p.Magic, out MagicObject magic))
             {
-                Connection.ReceiveChat("Spell Not Implemented", MessageType.System);
+                Connection.ReceiveChat("该技能尚未实现。", MessageType.System);
                 Enqueue(new S.UserLocation { Direction = Direction, Location = CurrentLocation });
                 return;
             }

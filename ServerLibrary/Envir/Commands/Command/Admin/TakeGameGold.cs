@@ -29,7 +29,7 @@ namespace Server.Envir.Commands.Admin
             character.Account.Connection?.ReceiveChat(string.Format(character.Account.Connection.Language.GameGoldLost, count), MessageType.System);
             character.Player?.GameGoldChanged();
 
-            player.Connection.ReceiveChat(string.Format("[TAKE GAME GOLD] {0} Amount: {1}", character.CharacterName, count), MessageType.System);
+            player.Connection.ReceiveChat(string.Format("[扣除游戏币] {0}，数量：{1}", character.CharacterName, count), MessageType.System);
         }
     }
 }
