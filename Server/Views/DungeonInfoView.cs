@@ -59,9 +59,9 @@ namespace Server.Views
 
             lookUpEdit.Columns.AddRange(
             [
-                new DevExpress.XtraEditors.Controls.LookUpColumnInfo(nameof(MapInfo.Index), "Index"),
-                new DevExpress.XtraEditors.Controls.LookUpColumnInfo(nameof(MapInfo.FileName), "File Name"),
-                new DevExpress.XtraEditors.Controls.LookUpColumnInfo(nameof(MapInfo.ServerDescription), "Description")
+                new DevExpress.XtraEditors.Controls.LookUpColumnInfo(nameof(MapInfo.Index), "索引"),
+                new DevExpress.XtraEditors.Controls.LookUpColumnInfo(nameof(MapInfo.FileName), "文件名"),
+                new DevExpress.XtraEditors.Controls.LookUpColumnInfo(nameof(MapInfo.ServerDescription), "服务器描述")
             ]);
 
             return lookUpEdit;

@@ -89,7 +89,7 @@
             // 
             ItemLookUpEdit.AutoHeight = false;
             ItemLookUpEdit.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            ItemLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "Index"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ItemName", "Item Name"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ItemType", "Item Type"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Price", "Price"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("StackSize", "Stack Size") });
+            ItemLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "索引"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ItemName", "物品名称"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ItemType", "物品类型"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Price", "价格"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("StackSize", "堆叠上限") });
             ItemLookUpEdit.DisplayMember = "ItemName";
             ItemLookUpEdit.Name = "ItemLookUpEdit";
             ItemLookUpEdit.NullText = "[物品为空]";
@@ -121,6 +121,7 @@
             // 
             // gridColumn1
             // 
+            gridColumn1.Caption = "描述";
             gridColumn1.FieldName = "Description";
             gridColumn1.Name = "gridColumn1";
             gridColumn1.Visible = true;
@@ -128,6 +129,7 @@
             // 
             // gridColumn3
             // 
+            gridColumn3.Caption = "索引";
             gridColumn3.FieldName = "Index";
             gridColumn3.Name = "gridColumn3";
             gridColumn3.Visible = true;
@@ -136,6 +138,7 @@
             // gridColumn5
             // 
             gridColumn5.ColumnEdit = CurrencyLookUpEdit;
+            gridColumn5.Caption = "货币";
             gridColumn5.FieldName = "Currency";
             gridColumn5.Name = "gridColumn5";
             gridColumn5.Visible = true;
@@ -145,7 +148,7 @@
             // 
             CurrencyLookUpEdit.AutoHeight = false;
             CurrencyLookUpEdit.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            CurrencyLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "Name"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Abbreviation", "Abbreviation") });
+            CurrencyLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "名称"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Abbreviation", "缩写") });
             CurrencyLookUpEdit.DisplayMember = "Name";
             CurrencyLookUpEdit.Name = "CurrencyLookUpEdit";
             CurrencyLookUpEdit.NullText = "[货币为空]";
@@ -215,7 +218,7 @@
             LootBoxItemLookUpEdit.AutoHeight = false;
             LootBoxItemLookUpEdit.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
             LootBoxItemLookUpEdit.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            LootBoxItemLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "Index"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ItemName", "Item Name"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ItemType", "Item Type"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Price", "Price"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("StackSize", "Stack Size") });
+            LootBoxItemLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "索引"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ItemName", "物品名称"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ItemType", "物品类型"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Price", "价格"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("StackSize", "堆叠上限") });
             LootBoxItemLookUpEdit.DisplayMember = "ItemName";
             LootBoxItemLookUpEdit.Name = "LootBoxItemLookUpEdit";
             LootBoxItemLookUpEdit.NullText = "[物品为空]";

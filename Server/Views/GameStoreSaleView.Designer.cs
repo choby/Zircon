@@ -78,6 +78,7 @@
             // 
             // gridColumn1
             // 
+            this.gridColumn1.Caption = "索引";
             this.gridColumn1.FieldName = "Index";
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.Visible = true;
@@ -86,6 +87,7 @@
             // gridColumn5
             // 
             this.gridColumn5.ColumnEdit = this.AccountLookUpEdit;
+            this.gridColumn5.Caption = "账号";
             this.gridColumn5.FieldName = "Account";
             this.gridColumn5.Name = "gridColumn5";
             this.gridColumn5.Visible = true;
@@ -98,10 +100,10 @@
             this.AccountLookUpEdit.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.AccountLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "Index"),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("EMailAddress", "EMailAddress"),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Referral", "Referral"),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Banned", "Banned")});
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "索引"),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("EMailAddress", "电子邮箱地址"),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Referral", "推荐人"),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Banned", "已封禁")});
             this.AccountLookUpEdit.DisplayMember = "EMailAddress";
             this.AccountLookUpEdit.Name = "AccountLookUpEdit";
             this.AccountLookUpEdit.NullText = "";
@@ -109,6 +111,7 @@
             // gridColumn2
             // 
             this.gridColumn2.ColumnEdit = this.ItemLookUpEdit;
+            this.gridColumn2.Caption = "物品";
             this.gridColumn2.FieldName = "Item";
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.Visible = true;
@@ -121,11 +124,11 @@
             this.ItemLookUpEdit.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.ItemLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "Index"),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ItemName", "Item Name"),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ItemType", "Item Type"),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Price", "Price"),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("StackSize", "Stack Szie")});
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "索引"),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ItemName", "物品名称"),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ItemType", "物品类型"),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Price", "价格"),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("StackSize", "堆叠上限")});
             this.ItemLookUpEdit.DisplayMember = "ItemName";
             this.ItemLookUpEdit.Name = "ItemLookUpEdit";
             this.ItemLookUpEdit.NullText = "[物品为空]";
@@ -134,6 +137,7 @@
             // 
             this.gridColumn3.DisplayFormat.FormatString = "F";
             this.gridColumn3.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.gridColumn3.Caption = "日期";
             this.gridColumn3.FieldName = "Date";
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
@@ -141,6 +145,7 @@
             // 
             // gridColumn4
             // 
+            this.gridColumn4.Caption = "价格";
             this.gridColumn4.FieldName = "Price";
             this.gridColumn4.Name = "gridColumn4";
             this.gridColumn4.Visible = true;
@@ -148,6 +153,7 @@
             // 
             // gridColumn6
             // 
+            this.gridColumn6.Caption = "数量";
             this.gridColumn6.FieldName = "Count";
             this.gridColumn6.Name = "gridColumn6";
             this.gridColumn6.Visible = true;
@@ -155,6 +161,7 @@
             // 
             // gridColumn7
             // 
+            this.gridColumn7.Caption = "狩猎金币";
             this.gridColumn7.FieldName = "HuntGold";
             this.gridColumn7.Name = "gridColumn7";
             this.gridColumn7.Visible = true;

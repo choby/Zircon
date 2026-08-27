@@ -93,6 +93,7 @@
             // 
             this.gridColumn1.DisplayFormat.FormatString = "f";
             this.gridColumn1.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.gridColumn1.Caption = "战争开始日期";
             this.gridColumn1.FieldName = "WarStartDate";
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.Visible = true;
@@ -100,6 +101,7 @@
             // 
             // gridColumn2
             // 
+            this.gridColumn2.Caption = "城堡名称";
             this.gridColumn2.FieldName = "CastleName";
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.Visible = true;
@@ -107,6 +109,7 @@
             // 
             // gridColumn3
             // 
+            this.gridColumn3.Caption = "角色名称";
             this.gridColumn3.FieldName = "CharacterName";
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
@@ -114,6 +117,7 @@
             // 
             // gridColumn4
             // 
+            this.gridColumn4.Caption = "行会名称";
             this.gridColumn4.FieldName = "GuildName";
             this.gridColumn4.Name = "gridColumn4";
             this.gridColumn4.Visible = true;
@@ -121,6 +125,7 @@
             // 
             // gridColumn5
             // 
+            this.gridColumn5.Caption = "等级";
             this.gridColumn5.FieldName = "Level";
             this.gridColumn5.Name = "gridColumn5";
             this.gridColumn5.Visible = true;
@@ -128,6 +133,7 @@
             // 
             // gridColumn6
             // 
+            this.gridColumn6.Caption = "职业";
             this.gridColumn6.FieldName = "Class";
             this.gridColumn6.Name = "gridColumn6";
             this.gridColumn6.Visible = true;
@@ -137,6 +143,7 @@
             // 
             this.gridColumn7.DisplayFormat.FormatString = "#,##0";
             this.gridColumn7.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.gridColumn7.Caption = "承受首领伤害";
             this.gridColumn7.FieldName = "BossDamageTaken";
             this.gridColumn7.Name = "gridColumn7";
             this.gridColumn7.Visible = true;
@@ -146,6 +153,7 @@
             // 
             this.gridColumn8.DisplayFormat.FormatString = "#,##0";
             this.gridColumn8.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.gridColumn8.Caption = "对首领造成的伤害";
             this.gridColumn8.FieldName = "BossDamageDealt";
             this.gridColumn8.Name = "gridColumn8";
             this.gridColumn8.Visible = true;
@@ -155,6 +163,7 @@
             // 
             this.gridColumn9.DisplayFormat.FormatString = "#,##0";
             this.gridColumn9.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.gridColumn9.Caption = "首领战死亡次数";
             this.gridColumn9.FieldName = "BossDeathCount";
             this.gridColumn9.Name = "gridColumn9";
             this.gridColumn9.Visible = true;
@@ -164,6 +173,7 @@
             // 
             this.gridColumn10.DisplayFormat.FormatString = "#,##0";
             this.gridColumn10.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.gridColumn10.Caption = "首领击杀数";
             this.gridColumn10.FieldName = "BossKillCount";
             this.gridColumn10.Name = "gridColumn10";
             this.gridColumn10.Visible = true;
@@ -216,7 +226,7 @@
             this.AccountLookUpEdit.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.AccountLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("EMailAddress", "EMail")});
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("EMailAddress", "电子邮箱地址")});
             this.AccountLookUpEdit.DisplayMember = "EMailAddress";
             this.AccountLookUpEdit.Name = "AccountLookUpEdit";
             this.AccountLookUpEdit.NullText = "[账号为空]";
@@ -228,11 +238,11 @@
             this.ItemLookUpEdit.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.ItemLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "Index"),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ItemName", "Item Name"),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ItemType", "Item Type"),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Price", "Price"),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("StackSize", "Stack Size")});
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "索引"),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ItemName", "物品名称"),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ItemType", "物品类型"),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Price", "价格"),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("StackSize", "堆叠上限")});
             this.ItemLookUpEdit.DisplayMember = "ItemName";
             this.ItemLookUpEdit.Name = "ItemLookUpEdit";
             // 

@@ -87,11 +87,11 @@
             this.ItemLookUpEdit.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.ItemLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "Index"),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ItemName", "Item Name"),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ItemType", "Item Type"),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Price", "Price"),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("StackSize", "Stack Size")});
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "索引"),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ItemName", "物品名称"),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ItemType", "物品类型"),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Price", "价格"),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("StackSize", "堆叠上限")});
             this.ItemLookUpEdit.DisplayMember = "ItemName";
             this.ItemLookUpEdit.Name = "ItemLookUpEdit";
             this.ItemLookUpEdit.NullText = "[物品为空]";
@@ -179,9 +179,9 @@
             this.RegionLookUpEdit.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.RegionLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "Index"),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ServerDescription", "Server Description"),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Size", "Size")});
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "索引"),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ServerDescription", "服务器描述"),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Size", "大小")});
             this.RegionLookUpEdit.DisplayMember = "ServerDescription";
             this.RegionLookUpEdit.Name = "RegionLookUpEdit";
             this.RegionLookUpEdit.NullText = "[区域为空]";

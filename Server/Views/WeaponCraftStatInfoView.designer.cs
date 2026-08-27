@@ -127,6 +127,7 @@
             // 
             // gridColumn5
             // 
+            this.gridColumn5.Caption = "所需职业";
             this.gridColumn5.FieldName = "RequiredClass";
             this.gridColumn5.Name = "gridColumn5";
             this.gridColumn5.Visible = true;
@@ -135,6 +136,7 @@
             // gridColumn2
             // 
             this.gridColumn2.ColumnEdit = this.StatImageComboBox;
+            this.gridColumn2.Caption = "属性";
             this.gridColumn2.FieldName = "Stat";
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.Visible = true;
@@ -149,6 +151,7 @@
             // 
             // gridColumn1
             // 
+            this.gridColumn1.Caption = "最小值";
             this.gridColumn1.FieldName = "MinValue";
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.Visible = true;
@@ -156,6 +159,7 @@
             // 
             // gridColumn3
             // 
+            this.gridColumn3.Caption = "最大值";
             this.gridColumn3.FieldName = "MaxValue";
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
@@ -163,6 +167,7 @@
             // 
             // gridColumn4
             // 
+            this.gridColumn4.Caption = "重量";
             this.gridColumn4.FieldName = "Weight";
             this.gridColumn4.Name = "gridColumn4";
             this.gridColumn4.Visible = true;
@@ -175,11 +180,11 @@
             this.ItemLookUpEdit.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.ItemLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "Index"),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ItemName", "Item Name"),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ItemType", "Item Type"),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Price", "Price"),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("StackSize", "Stack Size")});
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "索引"),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ItemName", "物品名称"),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ItemType", "物品类型"),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Price", "价格"),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("StackSize", "堆叠上限")});
             this.ItemLookUpEdit.DisplayMember = "ItemName";
             this.ItemLookUpEdit.Name = "ItemLookUpEdit";
             this.ItemLookUpEdit.NullText = "[物品为空]";

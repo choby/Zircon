@@ -143,6 +143,7 @@
             // gridColumn1
             // 
             gridColumn1.ColumnEdit = MonsterLookUpEdit;
+            gridColumn1.Caption = "怪物";
             gridColumn1.FieldName = "Monster";
             gridColumn1.Name = "gridColumn1";
             gridColumn1.OptionsColumn.AllowSort = DevExpress.Utils.DefaultBoolean.True;
@@ -155,7 +156,7 @@
             MonsterLookUpEdit.AutoHeight = false;
             MonsterLookUpEdit.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
             MonsterLookUpEdit.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            MonsterLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "Index"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("MonsterName", "Monster Name"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("AI", "AI"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Level", "Level"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Experience", "Experience"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("IsBoss", "IsBoss") });
+            MonsterLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "索引"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("MonsterName", "怪物名称"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("AI", "AI"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Level", "等级"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Experience", "经验"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("IsBoss", "是否首领") });
             MonsterLookUpEdit.DisplayMember = "MonsterName";
             MonsterLookUpEdit.Name = "MonsterLookUpEdit";
             MonsterLookUpEdit.NullText = "[怪物为空]";
@@ -163,6 +164,7 @@
             // gridColumn2
             // 
             gridColumn2.ColumnEdit = RegionLookUpEdit;
+            gridColumn2.Caption = "区域";
             gridColumn2.FieldName = "Region";
             gridColumn2.Name = "gridColumn2";
             gridColumn2.OptionsColumn.AllowSort = DevExpress.Utils.DefaultBoolean.True;
@@ -175,13 +177,14 @@
             RegionLookUpEdit.AutoHeight = false;
             RegionLookUpEdit.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
             RegionLookUpEdit.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            RegionLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "Index"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ServerDescription", "Server Description"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Size", "Size") });
+            RegionLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "索引"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ServerDescription", "服务器描述"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Size", "大小") });
             RegionLookUpEdit.DisplayMember = "ServerDescription";
             RegionLookUpEdit.Name = "RegionLookUpEdit";
             RegionLookUpEdit.NullText = "[区域为空]";
             // 
             // gridColumn3
             // 
+            gridColumn3.Caption = "延迟";
             gridColumn3.FieldName = "Delay";
             gridColumn3.Name = "gridColumn3";
             gridColumn3.Visible = true;
@@ -189,6 +192,7 @@
             // 
             // gridColumn4
             // 
+            gridColumn4.Caption = "数量";
             gridColumn4.FieldName = "Count";
             gridColumn4.Name = "gridColumn4";
             gridColumn4.Visible = true;
@@ -196,6 +200,7 @@
             // 
             // gridColumn5
             // 
+            gridColumn5.Caption = "掉落组";
             gridColumn5.FieldName = "DropSet";
             gridColumn5.Name = "gridColumn5";
             gridColumn5.Visible = true;
@@ -203,6 +208,7 @@
             // 
             // gridColumn6
             // 
+            gridColumn6.Caption = "活动刷新";
             gridColumn6.FieldName = "EventSpawn";
             gridColumn6.Name = "gridColumn6";
             gridColumn6.Visible = true;
@@ -210,6 +216,7 @@
             // 
             // gridColumn7
             // 
+            gridColumn7.Caption = "公告";
             gridColumn7.FieldName = "Announce";
             gridColumn7.Name = "gridColumn7";
             gridColumn7.Visible = true;
@@ -217,6 +224,7 @@
             // 
             // gridColumn8
             // 
+            gridColumn8.Caption = "复活节活动几率";
             gridColumn8.FieldName = "EasterEventChance";
             gridColumn8.Name = "gridColumn8";
             gridColumn8.Visible = true;
@@ -224,6 +232,7 @@
             // 
             // gridColumn9
             // 
+            gridColumn9.Caption = "刷新索引";
             gridColumn9.FieldName = "RespawnIndex";
             gridColumn9.Name = "gridColumn9";
             gridColumn9.Visible = true;

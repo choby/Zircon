@@ -73,6 +73,7 @@
             // gridColumn2
             // 
             this.gridColumn2.ColumnEdit = this.StatImageComboBox;
+            this.gridColumn2.Caption = "属性";
             this.gridColumn2.FieldName = "Stat";
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.Visible = true;
@@ -87,6 +88,7 @@
             // 
             // gridColumn3
             // 
+            this.gridColumn3.Caption = "数量";
             this.gridColumn3.FieldName = "Amount";
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
@@ -95,6 +97,7 @@
             // gridColumn4
             // 
             this.gridColumn4.ColumnEdit = this.RequiredClassImageComboBox;
+            this.gridColumn4.Caption = "职业";
             this.gridColumn4.FieldName = "Class";
             this.gridColumn4.Name = "gridColumn4";
             this.gridColumn4.Visible = true;
@@ -109,6 +112,7 @@
             // 
             // gridColumn5
             // 
+            this.gridColumn5.Caption = "等级";
             this.gridColumn5.FieldName = "Level";
             this.gridColumn5.Name = "gridColumn5";
             this.gridColumn5.Visible = true;
@@ -150,6 +154,7 @@
             // 
             // gridColumn1
             // 
+            this.gridColumn1.Caption = "套装名称";
             this.gridColumn1.FieldName = "SetName";
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.Visible = true;

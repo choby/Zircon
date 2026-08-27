@@ -146,6 +146,7 @@
             // gridColumn1
             // 
             gridColumn1.ColumnEdit = MapLookUpEdit;
+            gridColumn1.Caption = "地图";
             gridColumn1.FieldName = "Map";
             gridColumn1.Name = "gridColumn1";
             gridColumn1.Visible = true;
@@ -156,13 +157,14 @@
             MapLookUpEdit.AutoHeight = false;
             MapLookUpEdit.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
             MapLookUpEdit.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            MapLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "Index"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("FileName", "File Name"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Description", "Description") });
+            MapLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "索引"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("FileName", "文件名"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Description", "描述") });
             MapLookUpEdit.DisplayMember = "Description";
             MapLookUpEdit.Name = "MapLookUpEdit";
             MapLookUpEdit.NullText = "[地图为空]";
             // 
             // gridColumn2
             // 
+            gridColumn2.Caption = "描述";
             gridColumn2.FieldName = "Description";
             gridColumn2.Name = "gridColumn2";
             gridColumn2.Visible = true;
@@ -198,6 +200,7 @@
             // gridColumn5
             // 
             gridColumn5.ColumnEdit = RegionTypeImageComboBox;
+            gridColumn5.Caption = "区域类型";
             gridColumn5.FieldName = "RegionType";
             gridColumn5.Name = "gridColumn5";
             gridColumn5.Visible = true;

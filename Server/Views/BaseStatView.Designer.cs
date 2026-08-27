@@ -173,6 +173,7 @@
             // 
             // gridColumn1
             // 
+            this.gridColumn1.Caption = "职业";
             this.gridColumn1.FieldName = "Class";
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.Visible = true;
@@ -180,6 +181,7 @@
             // 
             // gridColumn2
             // 
+            this.gridColumn2.Caption = "等级";
             this.gridColumn2.FieldName = "Level";
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.Visible = true;
@@ -187,6 +189,7 @@
             // 
             // gridColumn3
             // 
+            this.gridColumn3.Caption = "生命值";
             this.gridColumn3.FieldName = "Health";
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
@@ -194,6 +197,7 @@
             // 
             // gridColumn4
             // 
+            this.gridColumn4.Caption = "魔法值";
             this.gridColumn4.FieldName = "Mana";
             this.gridColumn4.Name = "gridColumn4";
             this.gridColumn4.Visible = true;
@@ -201,6 +205,7 @@
             // 
             // gridColumn5
             // 
+            this.gridColumn5.Caption = "背包负重";
             this.gridColumn5.FieldName = "BagWeight";
             this.gridColumn5.Name = "gridColumn5";
             this.gridColumn5.Visible = true;
@@ -208,6 +213,7 @@
             // 
             // gridColumn6
             // 
+            this.gridColumn6.Caption = "穿戴负重";
             this.gridColumn6.FieldName = "WearWeight";
             this.gridColumn6.Name = "gridColumn6";
             this.gridColumn6.Visible = true;
@@ -215,6 +221,7 @@
             // 
             // gridColumn7
             // 
+            this.gridColumn7.Caption = "腕力负重";
             this.gridColumn7.FieldName = "HandWeight";
             this.gridColumn7.Name = "gridColumn7";
             this.gridColumn7.Visible = true;
@@ -222,6 +229,7 @@
             // 
             // gridColumn8
             // 
+            this.gridColumn8.Caption = "准确";
             this.gridColumn8.FieldName = "Accuracy";
             this.gridColumn8.Name = "gridColumn8";
             this.gridColumn8.Visible = true;
@@ -229,6 +237,7 @@
             // 
             // gridColumn9
             // 
+            this.gridColumn9.Caption = "敏捷";
             this.gridColumn9.FieldName = "Agility";
             this.gridColumn9.Name = "gridColumn9";
             this.gridColumn9.Visible = true;
@@ -236,6 +245,7 @@
             // 
             // gridColumn10
             // 
+            this.gridColumn10.Caption = "最低物防";
             this.gridColumn10.FieldName = "MinAC";
             this.gridColumn10.Name = "gridColumn10";
             this.gridColumn10.Visible = true;
@@ -243,6 +253,7 @@
             // 
             // gridColumn11
             // 
+            this.gridColumn11.Caption = "最高物防";
             this.gridColumn11.FieldName = "MaxAC";
             this.gridColumn11.Name = "gridColumn11";
             this.gridColumn11.Visible = true;
@@ -250,6 +261,7 @@
             // 
             // gridColumn12
             // 
+            this.gridColumn12.Caption = "最低魔防";
             this.gridColumn12.FieldName = "MinMR";
             this.gridColumn12.Name = "gridColumn12";
             this.gridColumn12.Visible = true;
@@ -257,6 +269,7 @@
             // 
             // gridColumn13
             // 
+            this.gridColumn13.Caption = "最高魔防";
             this.gridColumn13.FieldName = "MaxMR";
             this.gridColumn13.Name = "gridColumn13";
             this.gridColumn13.Visible = true;
@@ -264,6 +277,7 @@
             // 
             // gridColumn14
             // 
+            this.gridColumn14.Caption = "最低破坏力";
             this.gridColumn14.FieldName = "MinDC";
             this.gridColumn14.Name = "gridColumn14";
             this.gridColumn14.Visible = true;
@@ -271,6 +285,7 @@
             // 
             // gridColumn15
             // 
+            this.gridColumn15.Caption = "最高破坏力";
             this.gridColumn15.FieldName = "MaxDC";
             this.gridColumn15.Name = "gridColumn15";
             this.gridColumn15.Visible = true;
@@ -278,6 +293,7 @@
             // 
             // gridColumn16
             // 
+            this.gridColumn16.Caption = "最低魔法力";
             this.gridColumn16.FieldName = "MinMC";
             this.gridColumn16.Name = "gridColumn16";
             this.gridColumn16.Visible = true;
@@ -285,6 +301,7 @@
             // 
             // gridColumn17
             // 
+            this.gridColumn17.Caption = "最高魔法力";
             this.gridColumn17.FieldName = "MaxMC";
             this.gridColumn17.Name = "gridColumn17";
             this.gridColumn17.Visible = true;
@@ -292,6 +309,7 @@
             // 
             // gridColumn18
             // 
+            this.gridColumn18.Caption = "最低灵魂力";
             this.gridColumn18.FieldName = "MinSC";
             this.gridColumn18.Name = "gridColumn18";
             this.gridColumn18.Visible = true;
@@ -299,6 +317,7 @@
             // 
             // gridColumn19
             // 
+            this.gridColumn19.Caption = "最高灵魂力";
             this.gridColumn19.FieldName = "MaxSC";
             this.gridColumn19.Name = "gridColumn19";
             this.gridColumn19.Visible = true;

@@ -135,6 +135,7 @@
             // gridColumn1
             // 
             gridColumn1.ColumnEdit = RegionLookUpEdit;
+            gridColumn1.Caption = "区域";
             gridColumn1.FieldName = "Region";
             gridColumn1.Name = "gridColumn1";
             gridColumn1.Visible = true;
@@ -145,7 +146,7 @@
             RegionLookUpEdit.AutoHeight = false;
             RegionLookUpEdit.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
             RegionLookUpEdit.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            RegionLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "Index"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ServerDescription", "Server Description"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Size", "Size") });
+            RegionLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "索引"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ServerDescription", "服务器描述"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Size", "大小") });
             RegionLookUpEdit.DisplayMember = "ServerDescription";
             RegionLookUpEdit.Name = "RegionLookUpEdit";
             RegionLookUpEdit.NullText = "[区域为空]";
@@ -153,6 +154,7 @@
             // gridColumn2
             // 
             gridColumn2.ColumnEdit = RegionLookUpEdit;
+            gridColumn2.Caption = "绑定区域";
             gridColumn2.FieldName = "BindRegion";
             gridColumn2.Name = "gridColumn2";
             gridColumn2.Visible = true;
@@ -160,6 +162,7 @@
             // 
             // gridColumn3
             // 
+            gridColumn3.Caption = "初始职业";
             gridColumn3.FieldName = "StartClass";
             gridColumn3.Name = "gridColumn3";
             gridColumn3.Visible = true;

@@ -99,6 +99,7 @@ namespace Server.Views
             // gridColumn16
             // 
             gridColumn16.ColumnEdit = RequiredClassImageComboBox;
+            gridColumn16.Caption = "职业";
             gridColumn16.FieldName = "Class";
             gridColumn16.Name = "gridColumn16";
             gridColumn16.Visible = true;
@@ -113,6 +114,7 @@ namespace Server.Views
             // gridColumn17
             // 
             gridColumn17.ColumnEdit = ItemInfoLookUpEdit;
+            gridColumn17.Caption = "物品";
             gridColumn17.FieldName = "Item";
             gridColumn17.Name = "gridColumn17";
             gridColumn17.Visible = true;
@@ -123,7 +125,7 @@ namespace Server.Views
             ItemInfoLookUpEdit.AutoHeight = false;
             ItemInfoLookUpEdit.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
             ItemInfoLookUpEdit.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            ItemInfoLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "Index"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ItemName", "Item Name"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ItemType", "Item Type"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Price", "Price"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("StackSize", "Stack Size") });
+            ItemInfoLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "索引"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ItemName", "物品名称"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ItemType", "物品类型"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Price", "价格"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("StackSize", "堆叠上限") });
             ItemInfoLookUpEdit.DisplayMember = "ItemName";
             ItemInfoLookUpEdit.Name = "ItemInfoLookUpEdit";
             ItemInfoLookUpEdit.NullText = "[物品为空]";
@@ -131,6 +133,7 @@ namespace Server.Views
             // gridColumn18
             // 
             gridColumn18.ColumnEdit = MonsterInfoLookUpEdit;
+            gridColumn18.Caption = "怪物";
             gridColumn18.FieldName = "Monster";
             gridColumn18.Name = "gridColumn18";
             gridColumn18.Visible = true;
@@ -141,7 +144,7 @@ namespace Server.Views
             MonsterInfoLookUpEdit.AutoHeight = false;
             MonsterInfoLookUpEdit.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
             MonsterInfoLookUpEdit.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            MonsterInfoLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "Index"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("MonsterName", "Monster Name"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("AI", "AI"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Level", "Level"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Experience", "Experience"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("IsBoss", "IsBoss") });
+            MonsterInfoLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "索引"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("MonsterName", "怪物名称"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("AI", "AI"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Level", "等级"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Experience", "经验"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("IsBoss", "是否首领") });
             MonsterInfoLookUpEdit.DisplayMember = "MonsterName";
             MonsterInfoLookUpEdit.Name = "MonsterInfoLookUpEdit";
             MonsterInfoLookUpEdit.NullText = "[怪物为空]";
@@ -149,6 +152,7 @@ namespace Server.Views
             // gridColumn19
             // 
             gridColumn19.ColumnEdit = RegionLookUpEdit;
+            gridColumn19.Caption = "区域";
             gridColumn19.FieldName = "Region";
             gridColumn19.Name = "gridColumn19";
             gridColumn19.Visible = true;
@@ -158,7 +162,7 @@ namespace Server.Views
             // 
             RegionLookUpEdit.AutoHeight = false;
             RegionLookUpEdit.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            RegionLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "Index"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ServerDescription", "Server Description"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Size", "Size") });
+            RegionLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "索引"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ServerDescription", "服务器描述"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Size", "大小") });
             RegionLookUpEdit.DisplayMember = "ServerDescription";
             RegionLookUpEdit.Name = "RegionLookUpEdit";
             RegionLookUpEdit.NullText = "[区域为空]";
@@ -166,6 +170,7 @@ namespace Server.Views
             // gridColumn20
             // 
             gridColumn20.ColumnEdit = CurrencyInfoLookUpEdit;
+            gridColumn20.Caption = "货币";
             gridColumn20.FieldName = "Currency";
             gridColumn20.Name = "gridColumn20";
             gridColumn20.Visible = true;
@@ -175,7 +180,7 @@ namespace Server.Views
             // 
             CurrencyInfoLookUpEdit.AutoHeight = false;
             CurrencyInfoLookUpEdit.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            CurrencyInfoLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "Name"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Abbreviation", "Abbreviation") });
+            CurrencyInfoLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "名称"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Abbreviation", "缩写") });
             CurrencyInfoLookUpEdit.DisplayMember = "Name";
             CurrencyInfoLookUpEdit.Name = "CurrencyInfoLookUpEdit";
             CurrencyInfoLookUpEdit.NullText = "[货币为空]";
@@ -183,6 +188,7 @@ namespace Server.Views
             // gridColumn21
             // 
             gridColumn21.ColumnEdit = InstanceInfoLookUpEdit;
+            gridColumn21.Caption = "副本";
             gridColumn21.FieldName = "Instance";
             gridColumn21.Name = "gridColumn21";
             gridColumn21.Visible = true;
@@ -192,13 +198,14 @@ namespace Server.Views
             // 
             InstanceInfoLookUpEdit.AutoHeight = false;
             InstanceInfoLookUpEdit.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            InstanceInfoLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "Name"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Type", "Type") });
+            InstanceInfoLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "名称"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Type", "类型") });
             InstanceInfoLookUpEdit.DisplayMember = "Name";
             InstanceInfoLookUpEdit.Name = "InstanceInfoLookUpEdit";
             InstanceInfoLookUpEdit.NullText = "[副本为空]";
             // 
             // gridColumn22
             // 
+            gridColumn22.Caption = "数量";
             gridColumn22.FieldName = "Amount";
             gridColumn22.Name = "gridColumn22";
             gridColumn22.Visible = true;
@@ -206,6 +213,7 @@ namespace Server.Views
             // 
             // gridColumn5
             // 
+            gridColumn5.Caption = "类型";
             gridColumn5.FieldName = "Type";
             gridColumn5.Name = "gridColumn5";
             gridColumn5.Visible = true;
@@ -214,6 +222,7 @@ namespace Server.Views
             // gridColumn9
             // 
             gridColumn9.ColumnEdit = QuestInfoLookUpEdit;
+            gridColumn9.Caption = "任务";
             gridColumn9.FieldName = "Quest";
             gridColumn9.Name = "gridColumn9";
             gridColumn9.Visible = true;
@@ -223,7 +232,7 @@ namespace Server.Views
             // 
             QuestInfoLookUpEdit.AutoHeight = false;
             QuestInfoLookUpEdit.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            QuestInfoLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("QuestName", "Quest Name"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("QuestType", "Quest Type") });
+            QuestInfoLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("QuestName", "任务名称"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("QuestType", "任务类型") });
             QuestInfoLookUpEdit.Name = "QuestInfoLookUpEdit";
             QuestInfoLookUpEdit.NullText = "[任务为空]";
             // 
@@ -256,6 +265,7 @@ namespace Server.Views
             // 
             // gridColumn1
             // 
+            gridColumn1.Caption = "标题";
             gridColumn1.FieldName = "Title";
             gridColumn1.MinWidth = 80;
             gridColumn1.Name = "gridColumn1";
@@ -265,6 +275,7 @@ namespace Server.Views
             // 
             // gridColumn2
             // 
+            gridColumn2.Caption = "分类";
             gridColumn2.FieldName = "Category";
             gridColumn2.Name = "gridColumn2";
             gridColumn2.Visible = true;
@@ -273,6 +284,7 @@ namespace Server.Views
             // 
             // gridColumn3
             // 
+            gridColumn3.Caption = "描述";
             gridColumn3.FieldName = "Description";
             gridColumn3.Name = "gridColumn3";
             gridColumn3.Visible = true;
@@ -282,6 +294,7 @@ namespace Server.Views
             // gridColumn4
             // 
             gridColumn4.ColumnEdit = ItemInfoLookUpEdit;
+            gridColumn4.Caption = "奖励";
             gridColumn4.FieldName = "Reward";
             gridColumn4.Name = "gridColumn4";
             gridColumn4.Visible = true;
@@ -289,6 +302,7 @@ namespace Server.Views
             // 
             // gridColumn11
             // 
+            gridColumn11.Caption = "奖励数量";
             gridColumn11.FieldName = "RewardAmount";
             gridColumn11.Name = "gridColumn11";
             gridColumn11.Visible = true;
@@ -297,6 +311,7 @@ namespace Server.Views
             // gridColumn15
             // 
             gridColumn15.ColumnEdit = RequiredClassImageComboBox;
+            gridColumn15.Caption = "所需职业";
             gridColumn15.FieldName = "RequiredClass";
             gridColumn15.Name = "gridColumn15";
             gridColumn15.Visible = true;
@@ -304,6 +319,7 @@ namespace Server.Views
             // 
             // gridColumn6
             // 
+            gridColumn6.Caption = "任务内容";
             gridColumn6.FieldName = "Task";
             gridColumn6.Name = "gridColumn6";
             gridColumn6.Visible = true;
@@ -311,6 +327,7 @@ namespace Server.Views
             // 
             // gridColumn7
             // 
+            gridColumn7.Caption = "显示数量";
             gridColumn7.FieldName = "ShowCount";
             gridColumn7.Name = "gridColumn7";
             gridColumn7.Visible = true;
@@ -319,6 +336,7 @@ namespace Server.Views
             // gridColumn8
             // 
             gridColumn8.ColumnEdit = GradeImageComboBox;
+            gridColumn8.Caption = "等级";
             gridColumn8.FieldName = "Grade";
             gridColumn8.Name = "gridColumn8";
             gridColumn8.Visible = true;
@@ -398,6 +416,7 @@ namespace Server.Views
             // gridColumn10
             // 
             gridColumn10.ColumnEdit = MagicInfoLookUpEdit;
+            gridColumn10.Caption = "技能";
             gridColumn10.FieldName = "Magic";
             gridColumn10.Name = "gridColumn10";
             gridColumn10.Visible = true;
@@ -407,7 +426,7 @@ namespace Server.Views
             // 
             MagicInfoLookUpEdit.AutoHeight = false;
             MagicInfoLookUpEdit.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            MagicInfoLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "Name") });
+            MagicInfoLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "名称") });
             MagicInfoLookUpEdit.Name = "MagicInfoLookUpEdit";
             MagicInfoLookUpEdit.NullText = "[技能为空]";
             // 

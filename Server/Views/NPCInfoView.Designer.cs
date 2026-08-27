@@ -127,7 +127,7 @@
             // 
             QuestInfoLookUpEdit.AutoHeight = false;
             QuestInfoLookUpEdit.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            QuestInfoLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "Index"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("QuestName", "Quest Name") });
+            QuestInfoLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "索引"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("QuestName", "任务名称") });
             QuestInfoLookUpEdit.DisplayMember = "QuestName";
             QuestInfoLookUpEdit.Name = "QuestInfoLookUpEdit";
             QuestInfoLookUpEdit.NullText = "[任务为空]";
@@ -190,6 +190,7 @@
             // 
             // colNPCName
             // 
+            colNPCName.Caption = "NPC 名称";
             colNPCName.FieldName = "NPCName";
             colNPCName.Name = "colNPCName";
             colNPCName.Visible = true;
@@ -197,6 +198,7 @@
             // 
             // colImage
             // 
+            colImage.Caption = "图像";
             colImage.FieldName = "Image";
             colImage.Name = "colImage";
             colImage.Visible = true;
@@ -205,6 +207,7 @@
             // colEntryPage
             // 
             colEntryPage.ColumnEdit = PageLookUpEdit;
+            colEntryPage.Caption = "入口页面";
             colEntryPage.FieldName = "EntryPage";
             colEntryPage.Name = "colEntryPage";
             colEntryPage.Visible = true;
@@ -215,7 +218,7 @@
             PageLookUpEdit.AutoHeight = false;
             PageLookUpEdit.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
             PageLookUpEdit.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            PageLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "Index"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Description", "Description"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("DialogType", "DialogType"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Say", "Say") });
+            PageLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "索引"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Description", "描述"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("DialogType", "对话类型"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Say", "对话内容") });
             PageLookUpEdit.DisplayMember = "Description";
             PageLookUpEdit.Name = "PageLookUpEdit";
             PageLookUpEdit.NullText = "[页面为空]";
@@ -223,6 +226,7 @@
             // gridColumn1
             // 
             gridColumn1.ColumnEdit = RegionLookUpEdit;
+            gridColumn1.Caption = "区域";
             gridColumn1.FieldName = "Region";
             gridColumn1.Name = "gridColumn1";
             gridColumn1.OptionsColumn.AllowSort = DevExpress.Utils.DefaultBoolean.True;
@@ -235,7 +239,7 @@
             RegionLookUpEdit.AutoHeight = false;
             RegionLookUpEdit.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
             RegionLookUpEdit.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            RegionLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "Index"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ServerDescription", "Server Description"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Size", "Size") });
+            RegionLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "索引"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ServerDescription", "服务器描述"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Size", "大小") });
             RegionLookUpEdit.DisplayMember = "ServerDescription";
             RegionLookUpEdit.Name = "RegionLookUpEdit";
             RegionLookUpEdit.NullText = "[区域为空]";
@@ -266,6 +270,7 @@
             // colMapIcon
             // 
             colMapIcon.ColumnEdit = MapIconImageComboBox;
+            colMapIcon.Caption = "地图图标";
             colMapIcon.FieldName = "MapIcon";
             colMapIcon.Name = "colMapIcon";
             colMapIcon.Visible = true;
@@ -273,6 +278,7 @@
             // 
             // colGoodsIndex
             // 
+            colGoodsIndex.Caption = "商品索引";
             colGoodsIndex.FieldName = "GoodsIndex";
             colGoodsIndex.Name = "colGoodsIndex";
             colGoodsIndex.Visible = true;
@@ -348,7 +354,7 @@
             ItemInfoLookUpEdit.AutoHeight = false;
             ItemInfoLookUpEdit.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
             ItemInfoLookUpEdit.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            ItemInfoLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "Index"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ItemName", "Item Name"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ItemType", "Item Type"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Price", "Price"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("StackSize", "Stack Size") });
+            ItemInfoLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "索引"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ItemName", "物品名称"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ItemType", "物品类型"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Price", "价格"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("StackSize", "堆叠上限") });
             ItemInfoLookUpEdit.Name = "ItemInfoLookUpEdit";
             ItemInfoLookUpEdit.NullText = "[奖励为空]";
             // 

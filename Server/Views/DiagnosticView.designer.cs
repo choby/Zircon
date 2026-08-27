@@ -114,6 +114,7 @@ namespace Server.Views
             // 
             // gridColumn1
             // 
+            gridColumn1.Caption = "名称";
             gridColumn1.FieldName = "Name";
             gridColumn1.Name = "gridColumn1";
             gridColumn1.Visible = true;
@@ -121,6 +122,7 @@ namespace Server.Views
             // 
             // gridColumn2
             // 
+            gridColumn2.Caption = "数量";
             gridColumn2.FieldName = "Count";
             gridColumn2.Name = "gridColumn2";
             gridColumn2.Visible = true;
@@ -128,6 +130,7 @@ namespace Server.Views
             // 
             // gridColumn3
             // 
+            gridColumn3.Caption = "总耗时（毫秒）";
             gridColumn3.FieldName = "TotalMilliseconds";
             gridColumn3.Name = "gridColumn3";
             gridColumn3.Visible = true;
@@ -135,6 +138,7 @@ namespace Server.Views
             // 
             // gridColumn4
             // 
+            gridColumn4.Caption = "最长耗时（毫秒）";
             gridColumn4.FieldName = "LargestMilliseconds";
             gridColumn4.Name = "gridColumn4";
             gridColumn4.Visible = true;
@@ -142,6 +146,7 @@ namespace Server.Views
             // 
             // gridColumn5
             // 
+            gridColumn5.Caption = "总大小";
             gridColumn5.FieldName = "TotalSize";
             gridColumn5.Name = "gridColumn5";
             gridColumn5.Visible = true;
@@ -149,6 +154,7 @@ namespace Server.Views
             // 
             // gridColumn6
             // 
+            gridColumn6.Caption = "最大大小";
             gridColumn6.FieldName = "LargestSize";
             gridColumn6.Name = "gridColumn6";
             gridColumn6.Visible = true;

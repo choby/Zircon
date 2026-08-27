@@ -89,7 +89,7 @@
             // 
             ItemLookUpEdit.AutoHeight = false;
             ItemLookUpEdit.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            ItemLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "Index"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ItemName", "Item Name"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ItemType", "Item Type"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Price", "Price"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("StackSize", "Stack Size") });
+            ItemLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "索引"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ItemName", "物品名称"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ItemType", "物品类型"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Price", "价格"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("StackSize", "堆叠上限") });
             ItemLookUpEdit.DisplayMember = "ItemName";
             ItemLookUpEdit.Name = "ItemLookUpEdit";
             ItemLookUpEdit.NullText = "[物品为空]";
@@ -121,6 +121,7 @@
             // 
             // gridColumn1
             // 
+            gridColumn1.Caption = "描述";
             gridColumn1.FieldName = "Description";
             gridColumn1.Name = "gridColumn1";
             gridColumn1.Visible = true;
@@ -128,6 +129,7 @@
             // 
             // gridColumn2
             // 
+            gridColumn2.Caption = "类型";
             gridColumn2.FieldName = "Type";
             gridColumn2.Name = "gridColumn2";
             gridColumn2.Visible = true;
@@ -135,6 +137,7 @@
             // 
             // gridColumn3
             // 
+            gridColumn3.Caption = "索引";
             gridColumn3.FieldName = "Index";
             gridColumn3.Name = "gridColumn3";
             gridColumn3.Visible = true;
@@ -142,6 +145,7 @@
             // 
             // gridColumn4
             // 
+            gridColumn4.Caption = "栏位数量";
             gridColumn4.FieldName = "SlotSize";
             gridColumn4.Name = "gridColumn4";
             gridColumn4.Visible = true;
@@ -149,6 +153,7 @@
             // 
             // gridColumn5
             // 
+            gridColumn5.Caption = "自动开启";
             gridColumn5.FieldName = "AutoOpen";
             gridColumn5.Name = "gridColumn5";
             gridColumn5.Visible = true;
@@ -219,7 +224,7 @@
             BundleItemLookUpEdit.AutoHeight = false;
             BundleItemLookUpEdit.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
             BundleItemLookUpEdit.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            BundleItemLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "Index"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ItemName", "Item Name"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ItemType", "Item Type"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Price", "Price"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("StackSize", "Stack Size") });
+            BundleItemLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "索引"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ItemName", "物品名称"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ItemType", "物品类型"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Price", "价格"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("StackSize", "堆叠上限") });
             BundleItemLookUpEdit.DisplayMember = "ItemName";
             BundleItemLookUpEdit.Name = "BundleItemLookUpEdit";
             BundleItemLookUpEdit.NullText = "[物品为空]";

@@ -74,6 +74,7 @@
             // 
             // gridColumn1
             // 
+            gridColumn1.Caption = "索引";
             gridColumn1.FieldName = "Index";
             gridColumn1.Name = "gridColumn1";
             gridColumn1.Visible = true;
@@ -81,6 +82,7 @@
             // 
             // gridColumn2
             // 
+            gridColumn2.Caption = "电子邮箱地址";
             gridColumn2.FieldName = "EMailAddress";
             gridColumn2.Name = "gridColumn2";
             gridColumn2.Visible = true;
@@ -88,6 +90,7 @@
             // 
             // gridColumn3
             // 
+            gridColumn3.Caption = "真实姓名";
             gridColumn3.FieldName = "RealName";
             gridColumn3.Name = "gridColumn3";
             gridColumn3.Visible = true;
@@ -95,6 +98,7 @@
             // 
             // gridColumn4
             // 
+            gridColumn4.Caption = "出生日期";
             gridColumn4.FieldName = "BirthDate";
             gridColumn4.Name = "gridColumn4";
             gridColumn4.Visible = true;
@@ -103,6 +107,7 @@
             // gridColumn5
             // 
             gridColumn5.ColumnEdit = AccountLookUpEdit;
+            gridColumn5.Caption = "推荐人";
             gridColumn5.FieldName = "Referral";
             gridColumn5.Name = "gridColumn5";
             gridColumn5.Visible = true;
@@ -113,13 +118,14 @@
             AccountLookUpEdit.AutoHeight = false;
             AccountLookUpEdit.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
             AccountLookUpEdit.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            AccountLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "Index"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("EMailAddress", "EMailAddress"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Referral", "Referral"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Banned", "Banned") });
+            AccountLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "索引"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("EMailAddress", "电子邮箱地址"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Referral", "推荐人"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Banned", "已封禁") });
             AccountLookUpEdit.DisplayMember = "EMailAddress";
             AccountLookUpEdit.Name = "AccountLookUpEdit";
             AccountLookUpEdit.NullText = "";
             // 
             // gridColumn6
             // 
+            gridColumn6.Caption = "创建 IP";
             gridColumn6.FieldName = "CreationIP";
             gridColumn6.Name = "gridColumn6";
             gridColumn6.Visible = true;
@@ -127,6 +133,7 @@
             // 
             // gridColumn7
             // 
+            gridColumn7.Caption = "创建日期";
             gridColumn7.FieldName = "CreationDate";
             gridColumn7.Name = "gridColumn7";
             gridColumn7.Visible = true;
@@ -134,6 +141,7 @@
             // 
             // gridColumn8
             // 
+            gridColumn8.Caption = "最后登录 IP";
             gridColumn8.FieldName = "LastIP";
             gridColumn8.Name = "gridColumn8";
             gridColumn8.Visible = true;
@@ -141,6 +149,7 @@
             // 
             // gridColumn9
             // 
+            gridColumn9.Caption = "最后登录时间";
             gridColumn9.FieldName = "LastLogin";
             gridColumn9.Name = "gridColumn9";
             gridColumn9.Visible = true;
@@ -148,6 +157,7 @@
             // 
             // gridColumn10
             // 
+            gridColumn10.Caption = "已激活";
             gridColumn10.FieldName = "Activated";
             gridColumn10.Name = "gridColumn10";
             gridColumn10.Visible = true;
@@ -155,6 +165,7 @@
             // 
             // gridColumn11
             // 
+            gridColumn11.Caption = "已封禁";
             gridColumn11.FieldName = "Banned";
             gridColumn11.Name = "gridColumn11";
             gridColumn11.Visible = true;
@@ -162,6 +173,7 @@
             // 
             // gridColumn12
             // 
+            gridColumn12.Caption = "到期日期";
             gridColumn12.FieldName = "ExpiryDate";
             gridColumn12.Name = "gridColumn12";
             gridColumn12.Visible = true;
@@ -169,6 +181,7 @@
             // 
             // gridColumn13
             // 
+            gridColumn13.Caption = "封禁原因";
             gridColumn13.FieldName = "BanReason";
             gridColumn13.Name = "gridColumn13";
             gridColumn13.Visible = true;
@@ -176,6 +189,7 @@
             // 
             // gridColumn17
             // 
+            gridColumn17.Caption = "管理员";
             gridColumn17.FieldName = "Admin";
             gridColumn17.Name = "gridColumn17";
             gridColumn17.Visible = true;
@@ -183,6 +197,7 @@
             // 
             // gridColumn18
             // 
+            gridColumn18.Caption = "观察员";
             gridColumn18.FieldName = "Observer";
             gridColumn18.Name = "gridColumn18";
             gridColumn18.Visible = true;

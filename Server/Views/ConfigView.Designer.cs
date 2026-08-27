@@ -2041,7 +2041,7 @@ namespace Server.Views
             LairRegionIndexEdit.Name = "LairRegionIndexEdit";
             LairRegionIndexEdit.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
             LairRegionIndexEdit.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            LairRegionIndexEdit.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "Index"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ServerDescription", "Server Description"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Size", "Size") });
+            LairRegionIndexEdit.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "索引"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ServerDescription", "服务器描述"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Size", "大小") });
             LairRegionIndexEdit.Properties.DisplayMember = "ServerDescription";
             LairRegionIndexEdit.Properties.NullText = "[区域为空]";
             LairRegionIndexEdit.Properties.ValueMember = "Index";
@@ -2063,7 +2063,7 @@ namespace Server.Views
             MysteryShipRegionIndexEdit.Name = "MysteryShipRegionIndexEdit";
             MysteryShipRegionIndexEdit.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
             MysteryShipRegionIndexEdit.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            MysteryShipRegionIndexEdit.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "Index"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ServerDescription", "Server Description"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Size", "Size") });
+            MysteryShipRegionIndexEdit.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "索引"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ServerDescription", "服务器描述"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Size", "大小") });
             MysteryShipRegionIndexEdit.Properties.DisplayMember = "ServerDescription";
             MysteryShipRegionIndexEdit.Properties.NullText = "[区域为空]";
             MysteryShipRegionIndexEdit.Properties.ValueMember = "Index";

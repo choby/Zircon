@@ -125,6 +125,7 @@ namespace Server.Views
             // 
             // gridColumn1
             // 
+            gridColumn1.Caption = "对象类型";
             gridColumn1.FieldName = "ObjectType";
             gridColumn1.Name = "gridColumn1";
             gridColumn1.Visible = true;
@@ -132,6 +133,7 @@ namespace Server.Views
             // 
             // gridColumn2
             // 
+            gridColumn2.Caption = "父对象类型";
             gridColumn2.FieldName = "ParentType";
             gridColumn2.Name = "gridColumn2";
             gridColumn2.Visible = true;
@@ -139,6 +141,7 @@ namespace Server.Views
             // 
             // gridColumn3
             // 
+            gridColumn3.Caption = "父属性";
             gridColumn3.FieldName = "ParentProperty";
             gridColumn3.Name = "gridColumn3";
             gridColumn3.Visible = true;
@@ -146,6 +149,7 @@ namespace Server.Views
             // 
             // gridColumn4
             // 
+            gridColumn4.Caption = "父列表";
             gridColumn4.FieldName = "ParentList";
             gridColumn4.Name = "gridColumn4";
             gridColumn4.Visible = true;
@@ -153,6 +157,7 @@ namespace Server.Views
             // 
             // gridColumn5
             // 
+            gridColumn5.Caption = "总行数";
             gridColumn5.FieldName = "TotalRows";
             gridColumn5.Name = "gridColumn5";
             gridColumn5.Visible = true;
@@ -160,6 +165,7 @@ namespace Server.Views
             // 
             // gridColumn6
             // 
+            gridColumn6.Caption = "已关联行数";
             gridColumn6.FieldName = "LinkedRows";
             gridColumn6.Name = "gridColumn6";
             gridColumn6.Visible = true;
@@ -167,6 +173,7 @@ namespace Server.Views
             // 
             // gridColumn7
             // 
+            gridColumn7.Caption = "可清理孤立数据";
             gridColumn7.FieldName = "CleanableOrphans";
             gridColumn7.Name = "gridColumn7";
             gridColumn7.Visible = true;
@@ -174,6 +181,7 @@ namespace Server.Views
             // 
             // gridColumn8
             // 
+            gridColumn8.Caption = "现有临时孤立数据";
             gridColumn8.FieldName = "ExistingTemporaryOrphans";
             gridColumn8.Name = "gridColumn8";
             gridColumn8.Visible = true;
@@ -181,6 +189,7 @@ namespace Server.Views
             // 
             // gridColumn9
             // 
+            gridColumn9.Caption = "缺少父对象";
             gridColumn9.FieldName = "MissingParent";
             gridColumn9.Name = "gridColumn9";
             gridColumn9.Visible = true;
@@ -188,6 +197,7 @@ namespace Server.Views
             // 
             // gridColumn10
             // 
+            gridColumn10.Caption = "父对象已删除";
             gridColumn10.FieldName = "DeletedParent";
             gridColumn10.Name = "gridColumn10";
             gridColumn10.Visible = true;
@@ -195,6 +205,7 @@ namespace Server.Views
             // 
             // gridColumn11
             // 
+            gridColumn11.Caption = "缺少父列表关联";
             gridColumn11.FieldName = "MissingParentListLink";
             gridColumn11.Name = "gridColumn11";
             gridColumn11.Visible = true;
@@ -202,6 +213,7 @@ namespace Server.Views
             // 
             // gridColumn12
             // 
+            gridColumn12.Caption = "已标记为临时";
             gridColumn12.FieldName = "MarkedTemporary";
             gridColumn12.Name = "gridColumn12";
             gridColumn12.Visible = true;
@@ -209,6 +221,7 @@ namespace Server.Views
             // 
             // gridColumn13
             // 
+            gridColumn13.Caption = "示例索引";
             gridColumn13.FieldName = "SampleIndices";
             gridColumn13.Name = "gridColumn13";
             gridColumn13.Visible = true;

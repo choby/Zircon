@@ -198,6 +198,7 @@
             // gridColumn1
             // 
             gridColumn1.ColumnEdit = MapLookUpEdit;
+            gridColumn1.Caption = "来源区域";
             gridColumn1.FieldName = "SourceRegion";
             gridColumn1.FilterMode = DevExpress.XtraGrid.ColumnFilterMode.DisplayText;
             gridColumn1.Name = "gridColumn1";
@@ -211,7 +212,7 @@
             MapLookUpEdit.AutoHeight = false;
             MapLookUpEdit.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
             MapLookUpEdit.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            MapLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Text", "Description"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Size", "Size") });
+            MapLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Text", "描述"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Size", "大小") });
             MapLookUpEdit.DisplayMember = "Text";
             MapLookUpEdit.Name = "MapLookUpEdit";
             MapLookUpEdit.NullText = "[区域为空]";
@@ -225,6 +226,7 @@
             // gridColumn2
             // 
             gridColumn2.ColumnEdit = DestinationMapLookUpEdit;
+            gridColumn2.Caption = "目标区域";
             gridColumn2.FieldName = "DestinationRegion";
             gridColumn2.FilterMode = DevExpress.XtraGrid.ColumnFilterMode.DisplayText;
             gridColumn2.Name = "gridColumn2";
@@ -238,7 +240,7 @@
             DestinationMapLookUpEdit.AutoHeight = false;
             DestinationMapLookUpEdit.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
             DestinationMapLookUpEdit.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            DestinationMapLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Text", "Description"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Size", "Size") });
+            DestinationMapLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Text", "描述"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Size", "大小") });
             DestinationMapLookUpEdit.DisplayMember = "Text";
             DestinationMapLookUpEdit.Name = "DestinationMapLookUpEdit";
             DestinationMapLookUpEdit.NullText = "[区域为空]";
@@ -251,6 +253,7 @@
             // 
             // gridColumn3
             // 
+            gridColumn3.Caption = "图标";
             gridColumn3.FieldName = "Icon";
             gridColumn3.Name = "gridColumn3";
             gridColumn3.Visible = true;
@@ -259,6 +262,7 @@
             // gridColumn4
             // 
             gridColumn4.ColumnEdit = ItemLookUpEdit;
+            gridColumn4.Caption = "所需物品";
             gridColumn4.FieldName = "NeedItem";
             gridColumn4.Name = "gridColumn4";
             gridColumn4.ToolTip = "仅当玩家持有所需物品时连接才生效（移动时会扣除该物品）";
@@ -270,7 +274,7 @@
             ItemLookUpEdit.AutoHeight = false;
             ItemLookUpEdit.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
             ItemLookUpEdit.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            ItemLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "Index"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ItemName", "Item Name"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ItemType", "Item Type"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Price", "Price"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("StackSize", "Stack Size") });
+            ItemLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "索引"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ItemName", "物品名称"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ItemType", "物品类型"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Price", "价格"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("StackSize", "堆叠上限") });
             ItemLookUpEdit.DisplayMember = "ItemName";
             ItemLookUpEdit.Name = "ItemLookUpEdit";
             ItemLookUpEdit.NullText = "[物品为空]";
@@ -278,6 +282,7 @@
             // gridColumn5
             // 
             gridColumn5.ColumnEdit = SpawnLookUpEdit;
+            gridColumn5.Caption = "所需刷新点";
             gridColumn5.FieldName = "NeedSpawn";
             gridColumn5.Name = "gridColumn5";
             gridColumn5.ToolTip = "仅当指定怪物刷新点存活时连接才生效";
@@ -289,13 +294,14 @@
             SpawnLookUpEdit.AutoHeight = false;
             SpawnLookUpEdit.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
             SpawnLookUpEdit.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            SpawnLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "Index"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("RegionName", "Region"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("MonsterName", "Monster") });
+            SpawnLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "索引"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("RegionName", "区域名称"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("MonsterName", "怪物名称") });
             SpawnLookUpEdit.DisplayMember = "MonsterName";
             SpawnLookUpEdit.Name = "SpawnLookUpEdit";
             SpawnLookUpEdit.NullText = "[刷新点为空]";
             // 
             // gridColumn6
             // 
+            gridColumn6.Caption = "效果";
             gridColumn6.FieldName = "Effect";
             gridColumn6.Name = "gridColumn6";
             gridColumn6.Visible = true;
@@ -303,6 +309,7 @@
             // 
             // gridColumn7
             // 
+            gridColumn7.Caption = "所需职业";
             gridColumn7.FieldName = "RequiredClass";
             gridColumn7.Name = "gridColumn7";
             gridColumn7.Visible = true;
@@ -322,13 +329,14 @@
             // 
             InstanceLookUpEdit.AutoHeight = false;
             InstanceLookUpEdit.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            InstanceLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "Name"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Type", "Type") });
+            InstanceLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "名称"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Type", "类型") });
             InstanceLookUpEdit.DisplayMember = "Name";
             InstanceLookUpEdit.Name = "InstanceLookUpEdit";
             InstanceLookUpEdit.NullText = "[副本为空]";
             // 
             // gridColumn9
             // 
+            gridColumn9.Caption = "需要洞口";
             gridColumn9.FieldName = "NeedHole";
             gridColumn9.Name = "gridColumn9";
             gridColumn9.ToolTip = "仅当上方存在僵尸洞时连接才生效";
@@ -337,6 +345,7 @@
             // 
             // gridColumn10
             // 
+            gridColumn10.Caption = "跳过验证";
             gridColumn10.FieldName = "SkipValidation";
             gridColumn10.Name = "gridColumn10";
             gridColumn10.ToolTip = "允许无效连接（用于显示小地图图标）";

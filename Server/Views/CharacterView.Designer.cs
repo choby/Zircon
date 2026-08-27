@@ -57,6 +57,7 @@ namespace Server.Views
             // gridColumn6
             // 
             gridColumn6.ColumnEdit = AccountLookUpEdit;
+            gridColumn6.Caption = "账号";
             gridColumn6.FieldName = "Account";
             gridColumn6.Name = "gridColumn6";
             gridColumn6.OptionsColumn.AllowSort = DevExpress.Utils.DefaultBoolean.True;
@@ -70,7 +71,7 @@ namespace Server.Views
             AccountLookUpEdit.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
             AccountLookUpEdit.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             AccountLookUpEdit.CloseUpKey = new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.F5);
-            AccountLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("EMailAddress", "E-Mail") });
+            AccountLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("EMailAddress", "电子邮箱地址") });
             AccountLookUpEdit.DisplayMember = "EMailAddress";
             AccountLookUpEdit.Name = "AccountLookUpEdit";
             AccountLookUpEdit.NullText = "[账号为空]";
@@ -96,6 +97,7 @@ namespace Server.Views
             // 
             // gridColumn1
             // 
+            gridColumn1.Caption = "角色名称";
             gridColumn1.FieldName = "CharacterName";
             gridColumn1.Name = "gridColumn1";
             gridColumn1.Visible = true;
@@ -103,6 +105,7 @@ namespace Server.Views
             // 
             // gridColumn2
             // 
+            gridColumn2.Caption = "职业";
             gridColumn2.FieldName = "Class";
             gridColumn2.Name = "gridColumn2";
             gridColumn2.Visible = true;
@@ -110,6 +113,7 @@ namespace Server.Views
             // 
             // gridColumn3
             // 
+            gridColumn3.Caption = "性别";
             gridColumn3.FieldName = "Gender";
             gridColumn3.Name = "gridColumn3";
             gridColumn3.Visible = true;
@@ -117,6 +121,7 @@ namespace Server.Views
             // 
             // gridColumn4
             // 
+            gridColumn4.Caption = "等级";
             gridColumn4.FieldName = "Level";
             gridColumn4.Name = "gridColumn4";
             gridColumn4.Visible = true;
@@ -124,6 +129,7 @@ namespace Server.Views
             // 
             // gridColumn5
             // 
+            gridColumn5.Caption = "发型";
             gridColumn5.FieldName = "HairType";
             gridColumn5.Name = "gridColumn5";
             gridColumn5.Visible = true;
@@ -131,6 +137,7 @@ namespace Server.Views
             // 
             // gridColumn7
             // 
+            gridColumn7.Caption = "已删除";
             gridColumn7.FieldName = "Deleted";
             gridColumn7.Name = "gridColumn7";
             gridColumn7.Visible = true;
@@ -139,6 +146,7 @@ namespace Server.Views
             // gridColumn8
             // 
             gridColumn8.ColumnEdit = repositoryItemTextEdit1;
+            gridColumn8.Caption = "经验";
             gridColumn8.FieldName = "Experience";
             gridColumn8.Name = "gridColumn8";
             gridColumn8.Visible = true;
@@ -153,6 +161,7 @@ namespace Server.Views
             // 
             // Caption
             // 
+            Caption.Caption = "称号";
             Caption.FieldName = "Caption";
             Caption.Name = "Caption";
             Caption.Visible = true;
@@ -176,6 +185,7 @@ namespace Server.Views
             // gridColumn9
             // 
             gridColumn9.ColumnEdit = repositoryItemTextEdit1;
+            gridColumn9.Caption = "经验";
             gridColumn9.FieldName = "Experience";
             gridColumn9.Name = "gridColumn9";
             gridColumn9.Visible = true;

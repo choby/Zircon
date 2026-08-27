@@ -162,6 +162,7 @@
             // 
             // gridColumn15
             // 
+            gridColumn15.Caption = "索引";
             gridColumn15.FieldName = "Index";
             gridColumn15.Name = "gridColumn15";
             gridColumn15.OptionsColumn.AllowEdit = false;
@@ -171,6 +172,7 @@
             // 
             // gridColumn1
             // 
+            gridColumn1.Caption = "名称";
             gridColumn1.FieldName = "Name";
             gridColumn1.Name = "gridColumn1";
             gridColumn1.Visible = true;
@@ -179,6 +181,7 @@
             // gridColumn2
             // 
             gridColumn2.ColumnEdit = MagicImageComboBox;
+            gridColumn2.Caption = "技能";
             gridColumn2.FieldName = "Magic";
             gridColumn2.Name = "gridColumn2";
             gridColumn2.Visible = true;
@@ -187,6 +190,7 @@
             // gridColumn3
             // 
             gridColumn3.ColumnEdit = SchoolImageComboBox;
+            gridColumn3.Caption = "流派";
             gridColumn3.FieldName = "School";
             gridColumn3.Name = "gridColumn3";
             gridColumn3.Visible = true;
@@ -195,6 +199,7 @@
             // gridColumn4
             // 
             gridColumn4.ColumnEdit = RequiredClassImageComboBox;
+            gridColumn4.Caption = "所需职业";
             gridColumn4.FieldName = "RequiredClass";
             gridColumn4.Name = "gridColumn4";
             gridColumn4.Visible = true;
@@ -202,6 +207,7 @@
             // 
             // gridColumn16
             // 
+            gridColumn16.Caption = "图标";
             gridColumn16.FieldName = "Icon";
             gridColumn16.Name = "gridColumn16";
             gridColumn16.Visible = true;
@@ -209,6 +215,7 @@
             // 
             // gridColumn5
             // 
+            gridColumn5.Caption = "基础消耗";
             gridColumn5.FieldName = "BaseCost";
             gridColumn5.Name = "gridColumn5";
             gridColumn5.Visible = true;
@@ -216,6 +223,7 @@
             // 
             // gridColumn6
             // 
+            gridColumn6.Caption = "等级消耗";
             gridColumn6.FieldName = "LevelCost";
             gridColumn6.Name = "gridColumn6";
             gridColumn6.Visible = true;
@@ -223,6 +231,7 @@
             // 
             // gridColumn7
             // 
+            gridColumn7.Caption = "最小基础威力";
             gridColumn7.FieldName = "MinBasePower";
             gridColumn7.Name = "gridColumn7";
             gridColumn7.Visible = true;
@@ -230,6 +239,7 @@
             // 
             // gridColumn13
             // 
+            gridColumn13.Caption = "最大基础威力";
             gridColumn13.FieldName = "MaxBasePower";
             gridColumn13.Name = "gridColumn13";
             gridColumn13.Visible = true;
@@ -237,6 +247,7 @@
             // 
             // gridColumn8
             // 
+            gridColumn8.Caption = "最小等级威力";
             gridColumn8.FieldName = "MinLevelPower";
             gridColumn8.Name = "gridColumn8";
             gridColumn8.Visible = true;
@@ -244,6 +255,7 @@
             // 
             // gridColumn17
             // 
+            gridColumn17.Caption = "最大等级威力";
             gridColumn17.FieldName = "MaxLevelPower";
             gridColumn17.Name = "gridColumn17";
             gridColumn17.Visible = true;
@@ -299,6 +311,7 @@
             // 
             // gridColumn14
             // 
+            gridColumn14.Caption = "延迟";
             gridColumn14.FieldName = "Delay";
             gridColumn14.Name = "gridColumn14";
             gridColumn14.Visible = true;
@@ -306,6 +319,7 @@
             // 
             // gridColumn20
             // 
+            gridColumn20.Caption = "描述";
             gridColumn20.FieldName = "Description";
             gridColumn20.Name = "gridColumn20";
             gridColumn20.Visible = true;
@@ -332,6 +346,7 @@
             // gridColumn21
             // 
             gridColumn21.ColumnEdit = PropertyImageComboBox;
+            gridColumn21.Caption = "属性";
             gridColumn21.FieldName = "Property";
             gridColumn21.Name = "gridColumn21";
             gridColumn21.Visible = true;

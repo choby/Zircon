@@ -50,7 +50,7 @@ namespace Server.Views
                     NullText = "[区域为空]"
                 };
 
-                lookupEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "Index"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Description", "Description"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Size", "Size") });
+                lookupEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "索引"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Description", "描述"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Size", "大小") });
 
                 e.RepositoryItem = lookupEdit;
             }

@@ -91,6 +91,7 @@
             // 
             // gridColumn1
             // 
+            this.gridColumn1.Caption = "索引";
             this.gridColumn1.FieldName = "Index";
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.Visible = true;
@@ -98,6 +99,7 @@
             // 
             // gridColumn2
             // 
+            this.gridColumn2.Caption = "角色名称";
             this.gridColumn2.FieldName = "CharacterName";
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.Visible = true;
@@ -105,6 +107,7 @@
             // 
             // gridColumn3
             // 
+            this.gridColumn3.Caption = "名称";
             this.gridColumn3.FieldName = "Name";
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
@@ -112,6 +115,7 @@
             // 
             // gridColumn4
             // 
+            this.gridColumn4.Caption = "支付日期";
             this.gridColumn4.FieldName = "PaymentDate";
             this.gridColumn4.Name = "gridColumn4";
             this.gridColumn4.Visible = true;
@@ -120,6 +124,7 @@
             // gridColumn5
             // 
             this.gridColumn5.ColumnEdit = this.AccountLookUpEdit;
+            this.gridColumn5.Caption = "账号";
             this.gridColumn5.FieldName = "Account";
             this.gridColumn5.Name = "gridColumn5";
             this.gridColumn5.Visible = true;
@@ -132,16 +137,17 @@
             this.AccountLookUpEdit.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.AccountLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "Index"),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("EMailAddress", "EMailAddress"),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Referral", "Referral"),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Banned", "Banned")});
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "索引"),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("EMailAddress", "电子邮箱地址"),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Referral", "推荐人"),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Banned", "已封禁")});
             this.AccountLookUpEdit.DisplayMember = "EMailAddress";
             this.AccountLookUpEdit.Name = "AccountLookUpEdit";
             this.AccountLookUpEdit.NullText = "";
             // 
             // gridColumn6
             // 
+            this.gridColumn6.Caption = "交易 ID";
             this.gridColumn6.FieldName = "TransactionID";
             this.gridColumn6.Name = "gridColumn6";
             this.gridColumn6.Visible = true;
@@ -149,6 +155,7 @@
             // 
             // gridColumn7
             // 
+            this.gridColumn7.Caption = "交易类型";
             this.gridColumn7.FieldName = "TransactionType";
             this.gridColumn7.Name = "gridColumn7";
             this.gridColumn7.Visible = true;
@@ -156,6 +163,7 @@
             // 
             // gridColumn8
             // 
+            this.gridColumn8.Caption = "状态";
             this.gridColumn8.FieldName = "Status";
             this.gridColumn8.Name = "gridColumn8";
             this.gridColumn8.Visible = true;
@@ -163,6 +171,7 @@
             // 
             // gridColumn9
             // 
+            this.gridColumn9.Caption = "游戏币数量";
             this.gridColumn9.FieldName = "GameGoldAmount";
             this.gridColumn9.Name = "gridColumn9";
             this.gridColumn9.Visible = true;
@@ -170,6 +179,7 @@
             // 
             // gridColumn10
             // 
+            this.gridColumn10.Caption = "付款人邮箱";
             this.gridColumn10.FieldName = "Payer_EMail";
             this.gridColumn10.Name = "gridColumn10";
             this.gridColumn10.Visible = true;
@@ -177,6 +187,7 @@
             // 
             // gridColumn11
             // 
+            this.gridColumn11.Caption = "付款人 ID";
             this.gridColumn11.FieldName = "Payer_ID";
             this.gridColumn11.Name = "gridColumn11";
             this.gridColumn11.Visible = true;
@@ -184,6 +195,7 @@
             // 
             // gridColumn12
             // 
+            this.gridColumn12.Caption = "价格";
             this.gridColumn12.FieldName = "Price";
             this.gridColumn12.Name = "gridColumn12";
             this.gridColumn12.Visible = true;
@@ -191,6 +203,7 @@
             // 
             // gridColumn13
             // 
+            this.gridColumn13.Caption = "货币";
             this.gridColumn13.FieldName = "Currency";
             this.gridColumn13.Name = "gridColumn13";
             this.gridColumn13.Visible = true;
@@ -198,6 +211,7 @@
             // 
             // gridColumn14
             // 
+            this.gridColumn14.Caption = "手续费";
             this.gridColumn14.FieldName = "Fee";
             this.gridColumn14.Name = "gridColumn14";
             this.gridColumn14.Visible = true;
@@ -205,6 +219,7 @@
             // 
             // gridColumn15
             // 
+            this.gridColumn15.Caption = "错误";
             this.gridColumn15.FieldName = "Error";
             this.gridColumn15.Name = "gridColumn15";
             this.gridColumn15.Visible = true;
