@@ -122,9 +122,9 @@ namespace PatchManager
             if (Directory.Exists(TempDownloadDirectory))
                 Directory.Delete(TempDownloadDirectory, true);
 
-            StatusLabel.Text = "Complete.";
-            UploadSizeLabel.Text = "Complete.";
-            UploadSpeedLabel.Text = "Complete.";
+            StatusLabel.Text = "已完成。";
+            UploadSizeLabel.Text = "已完成。";
+            UploadSpeedLabel.Text = "已完成。";
         }
 
         private void CreateSizeLabel()

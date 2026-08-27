@@ -34,7 +34,7 @@ namespace LibraryEditor
             _cancelRequested = true;
             _cancelButton.Enabled = false;
             _cancelButton.Text = "Cancelling";
-            _messageLabel.Text = "Cancelling...";
+            _messageLabel.Text = "正在取消...";
             CancelRequested?.Invoke(this, EventArgs.Empty);
         }
 
@@ -55,7 +55,7 @@ namespace LibraryEditor
         {
             if (progress.OverallMaximum <= 0)
             {
-                _overallLabel.Text = progress.OverallText ?? "Files";
+                _overallLabel.Text = progress.OverallText ?? "文件";
                 _overallProgressBar.Value = 0;
                 return;
             }
@@ -63,7 +63,7 @@ namespace LibraryEditor
             int value = Math.Min(Math.Max(0, progress.OverallValue), progress.OverallMaximum);
             _overallLabel.Text = !string.IsNullOrEmpty(progress.OverallText)
                 ? progress.OverallText
-                : $"File {value:N0} of {progress.OverallMaximum:N0}";
+                : $"文件 {value:N0} / {progress.OverallMaximum:N0}";
             SetProgressValue(_overallProgressBar, value, Math.Max(1, progress.OverallMaximum));
         }
 
@@ -71,7 +71,7 @@ namespace LibraryEditor
         {
             if (progress.IsMarquee || progress.Maximum <= 0)
             {
-                _currentLabel.Text = progress.CountText ?? "Current file";
+                _currentLabel.Text = progress.CountText ?? "当前文件";
                 _currentProgressBar.Style = ProgressBarStyle.Marquee;
                 return;
             }
@@ -82,7 +82,7 @@ namespace LibraryEditor
             int value = Math.Min(Math.Max(0, progress.Value), progress.Maximum);
             _currentLabel.Text = !string.IsNullOrEmpty(progress.CountText)
                 ? progress.CountText
-                : $"Image {value:N0} of {progress.Maximum:N0}";
+                : $"图像 {value:N0} / {progress.Maximum:N0}";
             SetProgressValue(_currentProgressBar, value, Math.Max(1, progress.Maximum));
         }
 
@@ -90,7 +90,7 @@ namespace LibraryEditor
         {
             if (progress.GroupMaximum <= 0)
             {
-                _groupLabel.Text = progress.GroupText ?? "Current step";
+                _groupLabel.Text = progress.GroupText ?? "当前步骤";
                 _groupProgressBar.Value = 0;
                 return;
             }
@@ -98,7 +98,7 @@ namespace LibraryEditor
             int value = Math.Min(Math.Max(0, progress.GroupValue), progress.GroupMaximum);
             _groupLabel.Text = !string.IsNullOrEmpty(progress.GroupText)
                 ? progress.GroupText
-                : $"Group {value:N0} of {progress.GroupMaximum:N0}";
+                : $"分组 {value:N0} / {progress.GroupMaximum:N0}";
             SetProgressValue(_groupProgressBar, value, Math.Max(1, progress.GroupMaximum));
         }
 

@@ -94,13 +94,13 @@ namespace ImageManager
                 await Task.Delay(100);
             }
 
-            ProgressLabel.Text = "Compeleted.";
+            ProgressLabel.Text = "已完成。";
         }
 
 
         public void UpdateProgress()
         {
-            ProgressLabel.Text = $"{ProgressCount} of {TotleCount}.";
+            ProgressLabel.Text = $"{ProgressCount} / {TotleCount}";
         }
 
         private void SelectedFolderButtonEdit_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
@@ -177,7 +177,7 @@ namespace ImageManager
                 await Task.Delay(100);
             }
 
-            ProgressLabel.Text = "Compeleted.";
+            ProgressLabel.Text = "已完成。";
         }
 
         //WTLLibrary lib = new WTLLibrary(@"C:\Zircon Server\Data Works\Test\WM-Hum.wtl");

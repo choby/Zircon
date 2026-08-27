@@ -69,7 +69,7 @@ namespace Server
 
             file.WriteLine(json);
 
-            XtraMessageBox.Show($"All selected rows have been exported to '{path}'.", "Success", MessageBoxButtons.OK);
+            XtraMessageBox.Show($"所有选中行已导出至“{path}”。", "成功", MessageBoxButtons.OK);
         }
     }
 
@@ -100,7 +100,7 @@ namespace Server
 
             LabelControl confirmationLabel = new()
             {
-                Text = $"You're about to export {RowCount} rows.",
+                Text = $"即将导出 {RowCount} 行数据。",
                 Location = new Point(18, 18),
                 AutoSizeMode = LabelAutoSizeMode.None,
                 Size = new Size(424, 20)
@@ -108,7 +108,7 @@ namespace Server
 
             LabelControl exportNameLabel = new()
             {
-                Text = "Export name (optional):",
+                Text = "导出名称（可选）：",
                 Location = new Point(18, 49),
                 AutoSizeMode = LabelAutoSizeMode.None,
                 Size = new Size(135, 20)
@@ -166,7 +166,7 @@ namespace Server
 
         private void UpdateFileName()
         {
-            FileNameLabel.Text = $"File: {BuildFileName(ExportNameEdit.Text)}";
+            FileNameLabel.Text = $"文件：{BuildFileName(ExportNameEdit.Text)}";
         }
 
         private string BuildFileName(string customName)

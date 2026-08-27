@@ -278,7 +278,7 @@ namespace Client.Controls
 
             TitleLabel = new DXLabel
             {
-                Text = "Window",
+                Text = "窗口",
                 Parent = this,
                 Font = new Font(Config.FontName, CEnvir.FontSize(10F), FontStyle.Bold),
                 ForeColour = Constants.PrimaryColour,

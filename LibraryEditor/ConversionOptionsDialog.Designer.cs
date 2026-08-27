@@ -186,7 +186,7 @@ namespace LibraryEditor
             _individualRuntimeLabel.Name = "_individualRuntimeLabel";
             _individualRuntimeLabel.Size = new Size(135, 18);
             _individualRuntimeLabel.TabIndex = 6;
-            _individualRuntimeLabel.Text = "Individual textures:";
+            _individualRuntimeLabel.Text = "独立纹理：";
             // 
             // _runtimeLabel
             // 
@@ -194,7 +194,7 @@ namespace LibraryEditor
             _runtimeLabel.Name = "_runtimeLabel";
             _runtimeLabel.Size = new Size(130, 18);
             _runtimeLabel.TabIndex = 8;
-            _runtimeLabel.Text = "Atlas runtime format:";
+            _runtimeLabel.Text = "图集运行时格式：";
             // 
             // _compressionLabel
             // 
@@ -202,7 +202,7 @@ namespace LibraryEditor
             _compressionLabel.Name = "_compressionLabel";
             _compressionLabel.Size = new Size(130, 18);
             _compressionLabel.TabIndex = 10;
-            _compressionLabel.Text = "Container compression:";
+            _compressionLabel.Text = "容器压缩方式：";
             // 
             // _groupLabel
             // 
@@ -210,7 +210,7 @@ namespace LibraryEditor
             _groupLabel.Name = "_groupLabel";
             _groupLabel.Size = new Size(130, 18);
             _groupLabel.TabIndex = 12;
-            _groupLabel.Text = "Atlas group count:";
+            _groupLabel.Text = "图集分组数量：";
             // 
             // _groupHintLabel
             // 
@@ -218,7 +218,7 @@ namespace LibraryEditor
             _groupHintLabel.Name = "_groupHintLabel";
             _groupHintLabel.Size = new Size(58, 18);
             _groupHintLabel.TabIndex = 14;
-            _groupHintLabel.Text = "0 = none";
+            _groupHintLabel.Text = "0 = 无";
             // 
             // _pageSizeLabel
             // 
@@ -226,7 +226,7 @@ namespace LibraryEditor
             _pageSizeLabel.Name = "_pageSizeLabel";
             _pageSizeLabel.Size = new Size(130, 18);
             _pageSizeLabel.TabIndex = 15;
-            _pageSizeLabel.Text = "Atlas page size:";
+            _pageSizeLabel.Text = "图集页面大小：";
             // 
             // _summaryTitleLabel
             // 
@@ -234,7 +234,7 @@ namespace LibraryEditor
             _summaryTitleLabel.Name = "_summaryTitleLabel";
             _summaryTitleLabel.Size = new Size(190, 18);
             _summaryTitleLabel.TabIndex = 17;
-            _summaryTitleLabel.Text = "Summary";
+            _summaryTitleLabel.Text = "摘要";
             // 
             // _okButton
             // 

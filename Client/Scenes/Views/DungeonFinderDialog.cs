@@ -80,7 +80,7 @@ namespace Client.Scenes.Views
 
         public DungeonFinderDialog()
         {
-            TitleLabel.Text = "Dungeon Finder";
+            TitleLabel.Text = "副本查找器";
             DropShadow = true;
             SetClientSize(new Size(560, 461));
 
@@ -94,14 +94,14 @@ namespace Client.Scenes.Views
             DungeonTab = new DXTab
             {
                 Parent = TabControl,
-                TabButton = { Label = { Text = "Dungeons" }, Size = new Size(100, TabHeight) },
+                TabButton = { Label = { Text = "副本" }, Size = new Size(100, TabHeight) },
                 Border = true,
             };
 
             RaidTab = new DXTab
             {
                 Parent = TabControl,
-                TabButton = { Label = { Text = "Raids" }, Size = new Size(100, TabHeight) },
+                TabButton = { Label = { Text = "团队副本" }, Size = new Size(100, TabHeight) },
                 Border = true,
             };
 
@@ -118,7 +118,7 @@ namespace Client.Scenes.Views
             {
                 Parent = filterPanel,
                 Location = new Point(5, 5),
-                Text = "Name:",
+                Text = "名称：",
             };
 
             DungeonNameBox = new DXTextBox
@@ -135,7 +135,7 @@ namespace Client.Scenes.Views
             {
                 Parent = filterPanel,
                 Location = new Point(DungeonNameBox.Location.X + DungeonNameBox.Size.Width + 10, 5),
-                Text = "Type:",
+                Text = "类型：",
             };
 
 
@@ -152,7 +152,7 @@ namespace Client.Scenes.Views
             //new DXListBoxItem
             //{
             //    Parent = DungeonTypeBox.ListBox,
-            //    Label = { Text = $"All" },
+            //    Label = { Text = $"全部" },
             //    Item = null
             //};
 
@@ -160,7 +160,7 @@ namespace Client.Scenes.Views
             //{
             //    Parent = filterPanel,
             //    Location = new Point(DungeonTypeBox.Location.X + DungeonTypeBox.Size.Width + 10, 5),
-            //    Text = "Sort:",
+            //    Text = "排序：",
             //};
 
             SortBox = new DXComboBox
@@ -193,7 +193,7 @@ namespace Client.Scenes.Views
                 Location = new Point(SortBox.Location.X + SortBox.Size.Width + 25, label.Location.Y - 1),
                 Parent = filterPanel,
                 ButtonType = ButtonType.SmallButton,
-                Label = { Text = "Search" }
+                Label = { Text = "搜索" }
             };
             SearchButton.MouseClick += (o, e) => DungeonSearch();
 
@@ -203,7 +203,7 @@ namespace Client.Scenes.Views
             //    Location = new Point(SearchButton.Location.X + SearchButton.Size.Width + 40, label.Location.Y - 1),
             //    Parent = filterPanel,
             //    ButtonType = ButtonType.SmallButton,
-            //    Label = { Text = "Clear" }
+            //    Label = { Text = "清除" }
             //};
             //ClearButton.MouseClick += (o, e) =>
             //{
@@ -246,7 +246,7 @@ namespace Client.Scenes.Views
                 Location = new Point(490, 35),
                 Parent = this,
                 ButtonType = ButtonType.SmallButton,
-                Label = { Text = "Join Instance" },
+                Label = { Text = "加入副本" },
                 Visible = false
             };
             JoinButton.MouseClick += (o, e) => JoinInstance();
@@ -581,9 +581,9 @@ namespace Client.Scenes.Views
 
             NameLabel.Text = InstanceInfo.Name;
             TypeLabel.Text = InstanceInfo.Type.ToString();
-            LevelLabel.Text = $"Level: {GetLevel(InstanceInfo)}";
-            CountLabel.Text = $"Player Count: {GetPlayerCount(InstanceInfo)}";
-            //FreeSlotLabel.Text = $"Slots: 0 / {InstanceInfo.MaxInstances}";
+            LevelLabel.Text = $"等级：{GetLevel(InstanceInfo)}";
+            CountLabel.Text = $"玩家人数：{GetPlayerCount(InstanceInfo)}";
+            //FreeSlotLabel.Text = $"空位：0 / {InstanceInfo.MaxInstances}";
 
             if (GameScene.Game.DungeonFinderBox.SelectedDungeonRow == this)
                 GameScene.Game.DungeonFinderBox.SelectedDungeonRow = null;
@@ -671,7 +671,7 @@ namespace Client.Scenes.Views
                 LibraryFile = LibraryFile.GameInter,
                 Index = 6570,
                 Parent = this,
-                Hint = "Favourite (NOT YET ENABLED)",
+                Hint = "收藏（尚未启用）",
                 Enabled = false,
                 Visible = false,
             };

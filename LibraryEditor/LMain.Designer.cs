@@ -334,7 +334,7 @@ namespace LibraryEditor
             label2.Name = "label2";
             label2.Size = new System.Drawing.Size(80, 15);
             label2.TabIndex = 26;
-            label2.Text = "Shadow Type:";
+            label2.Text = "阴影类型：";
             // 
             // ShadowTypeLabel
             // 
@@ -345,7 +345,7 @@ namespace LibraryEditor
             ShadowTypeLabel.Name = "ShadowTypeLabel";
             ShadowTypeLabel.Size = new System.Drawing.Size(75, 15);
             ShadowTypeLabel.TabIndex = 25;
-            ShadowTypeLabel.Text = "<No Image>";
+            ShadowTypeLabel.Text = "<无图像>";
             // 
             // label3
             // 
@@ -356,7 +356,7 @@ namespace LibraryEditor
             label3.Name = "label3";
             label3.Size = new System.Drawing.Size(87, 15);
             label3.TabIndex = 27;
-            label3.Text = "Library Format:";
+            label3.Text = "资源库格式：";
             // 
             // LibraryVersionLabel
             // 
@@ -367,7 +367,7 @@ namespace LibraryEditor
             LibraryVersionLabel.Name = "LibraryVersionLabel";
             LibraryVersionLabel.Size = new System.Drawing.Size(126, 15);
             LibraryVersionLabel.TabIndex = 28;
-            LibraryVersionLabel.Text = "<None>";
+            LibraryVersionLabel.Text = "<无>";
             // 
             // label4
             // 
@@ -378,7 +378,7 @@ namespace LibraryEditor
             label4.Name = "label4";
             label4.Size = new System.Drawing.Size(36, 15);
             label4.TabIndex = 29;
-            label4.Text = "Atlas:";
+            label4.Text = "图集：";
             // 
             // AtlasLabel
             // 
@@ -389,7 +389,7 @@ namespace LibraryEditor
             AtlasLabel.Name = "AtlasLabel";
             AtlasLabel.Size = new System.Drawing.Size(126, 15);
             AtlasLabel.TabIndex = 30;
-            AtlasLabel.Text = "<None>";
+            AtlasLabel.Text = "<无>";
             // 
             // InsertBlankButton
             // 
@@ -635,7 +635,7 @@ namespace LibraryEditor
             label10.Name = "label10";
             label10.Size = new System.Drawing.Size(53, 15);
             label10.TabIndex = 12;
-            label10.Text = "OffSet Y:";
+            label10.Text = "Y 偏移：";
             // 
             // label8
             // 
@@ -646,7 +646,7 @@ namespace LibraryEditor
             label8.Name = "label8";
             label8.Size = new System.Drawing.Size(53, 15);
             label8.TabIndex = 11;
-            label8.Text = "OffSet X:";
+            label8.Text = "X 偏移：";
             // 
             // HeightLabel
             // 
@@ -657,7 +657,7 @@ namespace LibraryEditor
             HeightLabel.Name = "HeightLabel";
             HeightLabel.Size = new System.Drawing.Size(75, 15);
             HeightLabel.TabIndex = 10;
-            HeightLabel.Text = "<No Image>";
+            HeightLabel.Text = "<无图像>";
             // 
             // label6
             // 
@@ -668,7 +668,7 @@ namespace LibraryEditor
             label6.Name = "label6";
             label6.Size = new System.Drawing.Size(46, 15);
             label6.TabIndex = 9;
-            label6.Text = "Height:";
+            label6.Text = "高度：";
             // 
             // WidthLabel
             // 
@@ -679,7 +679,7 @@ namespace LibraryEditor
             WidthLabel.Name = "WidthLabel";
             WidthLabel.Size = new System.Drawing.Size(75, 15);
             WidthLabel.TabIndex = 8;
-            WidthLabel.Text = "<No Image>";
+            WidthLabel.Text = "<无图像>";
             // 
             // label1
             // 
@@ -690,7 +690,7 @@ namespace LibraryEditor
             label1.Name = "label1";
             label1.Size = new System.Drawing.Size(42, 15);
             label1.TabIndex = 7;
-            label1.Text = "Width:";
+            label1.Text = "宽度：";
             // 
             // panel
             // 
@@ -779,7 +779,7 @@ namespace LibraryEditor
             // 
             toolStripStatusLabel.Name = "toolStripStatusLabel";
             toolStripStatusLabel.Size = new System.Drawing.Size(90, 19);
-            toolStripStatusLabel.Text = "Selected Image:";
+            toolStripStatusLabel.Text = "已选图像：";
             // 
             // toolStripProgressBar
             // 
@@ -953,4 +953,3 @@ namespace LibraryEditor
         private System.Windows.Forms.Label label4;
     }
 }
-

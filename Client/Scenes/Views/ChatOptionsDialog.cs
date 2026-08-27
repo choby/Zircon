@@ -161,7 +161,7 @@ namespace Client.Scenes.Views
                 TabButton =
                 {
                     Movable = true, AllowDragOut = true,
-                    Label = { Text = $"Window {ListBox.Controls.Count - 1}" }
+                    Label = { Text = $"窗口 {ListBox.Controls.Count - 1}" }
                 }
             };
 

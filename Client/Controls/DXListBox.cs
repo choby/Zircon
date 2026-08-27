@@ -247,7 +247,7 @@ namespace Client.Controls
             Label = new DXLabel
             {
                 Parent = this,
-                Text = "List Box Item",
+                Text = "列表项",
                 IsControl = false
             };
         }

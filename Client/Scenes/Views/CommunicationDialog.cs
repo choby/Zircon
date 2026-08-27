@@ -526,7 +526,7 @@ namespace Client.Scenes.Views
             new DXListBoxItem
             {
                 Parent = FriendViewStatusBox.ListBox,
-                Label = { Text = "All" },
+                Label = { Text = "全部" },
                 Item = "All"
             };
 
@@ -1002,7 +1002,7 @@ namespace Client.Scenes.Views
             label = new DXLabel
             {
                 Parent = ReadTab,
-                Text = "Sender:"
+                Text = "发件人："
             };
             label.Location = new Point(82 - label.Size.Width, 11);
 
@@ -1021,7 +1021,7 @@ namespace Client.Scenes.Views
             label = new DXLabel
             {
                 Parent = ReadTab,
-                Text = "Subject:"
+                Text = "主题："
             };
             label.Location = new Point(82 - label.Size.Width, 30);
 
@@ -1039,7 +1039,7 @@ namespace Client.Scenes.Views
             label = new DXLabel
             {
                 Parent = ReadTab,
-                Text = "Date Sent:"
+                Text = "发送日期："
             };
             label.Location = new Point(82 - label.Size.Width, 49);
 
@@ -1094,7 +1094,7 @@ namespace Client.Scenes.Views
             label = new DXLabel
             {
                 Parent = ReadTab,
-                Text = "Items:"
+                Text = "物品："
             };
             label.Location = new Point(10, 246);
 
@@ -1125,7 +1125,7 @@ namespace Client.Scenes.Views
 
                 LabelStyle = ButtonLabelStyle.Gold,
                 Parent = this,
-                Label = { Text = "Reply Mail" },
+                Label = { Text = "回复邮件" },
                 Visible = false
             };
             ReadReplyButton.Location = new Point(43, ReadTab.Size.Height + 67);
@@ -1150,7 +1150,7 @@ namespace Client.Scenes.Views
 
                 LabelStyle = ButtonLabelStyle.Gold,
                 Parent = this,
-                Label = { Text = "Delete Mail" },
+                Label = { Text = "删除邮件" },
                 Visible = false
             };
             ReadDeleteButton.Location = new Point(43 + ReadReplyButton.Size.Width + 10, ReadTab.Size.Height + 67);

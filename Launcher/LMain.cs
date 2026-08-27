@@ -67,7 +67,7 @@ namespace Launcher
 
             if (liveVersion == null)
             {
-                DownloadSizeLabel.Text = "Downloading failed.";
+                DownloadSizeLabel.Text = "下载失败。";
                 RepairButton.Enabled = true;
                 StartGameButton.Enabled = true;
                 return;
@@ -76,7 +76,7 @@ namespace Launcher
             List<PatchInformation> currentVersion = repair ? null : await LoadVersion(progress);
             List<PatchInformation> patch = await CalculatePatch(liveVersion, currentVersion, progress);
 
-            StatusLabel.Text = "Downloading";
+            StatusLabel.Text = "正在下载";
             CreateSizeLabel();
 
             Task task = DownloadPatch(patch, progress, new Progress<int>(percent =>
@@ -91,9 +91,9 @@ namespace Launcher
 
             SaveVersion(liveVersion);
 
-            StatusLabel.Text = "Complete";
-            DownloadSizeLabel.Text = "Complete.";
-            DownloadSpeedLabel.Text = "Complete.";
+            StatusLabel.Text = "已完成";
+            DownloadSizeLabel.Text = "已完成。";
+            DownloadSpeedLabel.Text = "已完成。";
 
             if (Directory.Exists(ClientPath + "Patch\\"))
                 Directory.Delete(ClientPath + "Patch\\", true);
@@ -408,7 +408,7 @@ namespace Launcher
 
                 if (HasError) return;
                 HasError = true;
-                MessageBox.Show(ex.Message + "\n\nFile might be in use, please make sure the game is closed.", "File Error", MessageBoxButtons.OK);
+                MessageBox.Show(ex.Message + "\n\n文件可能正在使用中，请确认游戏已经关闭。", "文件错误", MessageBoxButtons.OK);
             }
             catch (Exception)
             {

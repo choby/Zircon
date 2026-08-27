@@ -328,7 +328,7 @@ namespace Client.Scenes.Views
                 Index = 354,
                 Parent = this,
                 Location = new Point(218, 384),
-                Hint = "Sell All",
+                Hint = "全部出售",
                 Enabled = true,
                 Visible = false
             };
@@ -408,7 +408,7 @@ namespace Client.Scenes.Views
                 SecondaryCurrencyLabel.Text = sum.ToString("#,##0");
 
                 SellButton.Enabled = true;
-                SellButton.Hint = count == 1 ? "Sell" : "Sell All";
+                SellButton.Hint = count == 1 ? "出售" : "全部出售";
             }
         }
 
@@ -590,13 +590,13 @@ namespace Client.Scenes.Views
                     break;
                 case InventoryMode.Sell:
                     {
-                        SecondaryCurrencyTitle.Text = "Total";
+                    SecondaryCurrencyTitle.Text = "总计";
                         SecondaryCurrencyTitle.ForeColour = Color.CornflowerBlue;
                         SecondaryCurrencyLabel.Text = 0.ToString("#,##0");
 
                         SellButton.Visible = true;
 
-                        TitleLabel.Text = CEnvir.Language.InventoryDialogTitle + " [Sell]";
+                        TitleLabel.Text = CEnvir.Language.InventoryDialogTitle + " [出售]";
                         TitleLabel.Location = new Point((DisplayArea.Width - TitleLabel.Size.Width) / 2, 8);
                     }
                     break;

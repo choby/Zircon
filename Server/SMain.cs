@@ -69,7 +69,7 @@ namespace Server
 
             if (!System.IO.File.Exists(e.MapPath))
             {
-                XtraMessageBox.Show("Map file does not exist.");
+                XtraMessageBox.Show("地图文件不存在。");
                 return;
             }
 
@@ -306,11 +306,11 @@ namespace Server
         public static void InsertRowAfterFocusedObject<T>(GridView view) where T : DBObject, new()
         {
             var collection = Session.GetCollection<T>();
-            string title = $"Insert {typeof(T)}";
+            string title = $"插入 {typeof(T)}";
 
             if (view.GetFocusedRow() is not T focusedObject)
             {
-                XtraMessageBox.Show($"Please select a {typeof(T)} to insert after.", title, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                XtraMessageBox.Show($"请选择要在其后插入数据的 {typeof(T)}。", title, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -319,7 +319,7 @@ namespace Server
             if (string.IsNullOrWhiteSpace(description))
                 description = focusedObject.Index.ToString();
 
-            DialogResult result = XtraMessageBox.Show($"Do you want to insert row after {description}?", title, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult result = XtraMessageBox.Show($"确定要在 {description} 后插入一行吗？", title, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (result != DialogResult.Yes) return;
 
@@ -410,7 +410,7 @@ namespace Server
         {
             if (e.KeyCode != Keys.Delete) return;
 
-            if (XtraMessageBox.Show("Delete rows?", "Confirmation", MessageBoxButtons.YesNo) != DialogResult.Yes)
+            if (XtraMessageBox.Show("确定要删除所选行吗？", "确认删除", MessageBoxButtons.YesNo) != DialogResult.Yes)
                 return;
 
             GridView view = (GridView)sender;
@@ -484,7 +484,7 @@ namespace Server
 
                     if (cells.Length != row.Length)
                     {
-                        XtraMessageBox.Show("Column Count does not Copied Column Count");
+                        XtraMessageBox.Show("所选列数与复制的列数不一致。");
                         return;
                     }
 

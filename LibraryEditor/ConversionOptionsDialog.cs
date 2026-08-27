@@ -52,7 +52,7 @@ namespace LibraryEditor
         {
             if (_fileListBox.Items.Count == 0)
             {
-                MessageBox.Show(this, "Choose at least one library to convert.", "Convert Libraries");
+                MessageBox.Show(this, "请至少选择一个要转换的资源库。", "转换资源库");
                 DialogResult = DialogResult.None;
                 return;
             }

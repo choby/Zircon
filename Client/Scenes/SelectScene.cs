@@ -600,13 +600,13 @@ namespace Client.Scenes
                 {
                     if (CEnvir.Now > deleteTime)
                     {
-                        box.Label.Text = $"Are you sure you want to delete the character {character.CharacterName}.";
+                        box.Label.Text = $"确定要删除角色 {character.CharacterName} 吗？";
                         box.YesButton.Enabled = true;
                         box.ProcessAction = null;
                     }
                     else
-                        box.Label.Text = $"Are you sure you want to delete the character {character.CharacterName}\n" +
-                                         $"Please wait {(deleteTime - CEnvir.Now).TotalSeconds:0.0} seconds before confirming.";
+                        box.Label.Text = $"确定要删除角色 {character.CharacterName} 吗？\n" +
+                                         $"请等待 {(deleteTime - CEnvir.Now).TotalSeconds:0.0} 秒后再确认。";
                 };
             }
 
@@ -1636,7 +1636,7 @@ namespace Client.Scenes
                 NameLabel.Text = SelectInfo.CharacterName;
                 ClassLabel.Text = SelectInfo.Class.ToString();
                 LevelLabel.Text = SelectInfo.Level.ToString();
-                LocationLabel.Text = Globals.MapInfoList.Binding.FirstOrDefault(x => x.Index == SelectInfo.Location)?.Description ?? "New Character";
+                LocationLabel.Text = Globals.MapInfoList.Binding.FirstOrDefault(x => x.Index == SelectInfo.Location)?.Description ?? "新角色";
             }
 
             #endregion

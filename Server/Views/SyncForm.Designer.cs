@@ -42,7 +42,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(70, 16);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Remote IP";
+            this.label1.Text = "远程 IP";
             // 
             // txtRemoteIP
             // 
@@ -68,7 +68,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(30, 16);
             this.label2.TabIndex = 3;
-            this.label2.Text = "Key";
+            this.label2.Text = "密钥";
             // 
             // txtKey
             // 

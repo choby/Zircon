@@ -927,7 +927,7 @@ namespace Client.Controls
             HideChatBarCheckBox = new DXCheckBox
             {
                 Label = { Text = CEnvir.Language.CommonControlConfigWindowUITabHideChatBarLabel },
-                Hint = "Hide chat bar when not active"
+                Hint = "聊天栏未激活时自动隐藏"
             };
             HideChatBarCheckBox.MouseClick += (o, e) =>
             {

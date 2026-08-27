@@ -49,7 +49,7 @@ namespace Client.Scenes.Views
 
         public CaptionDialog()
         {
-            TitleLabel.Text = @"Caption";
+            TitleLabel.Text = @"标题";
 
             HasFooter = true;
             Movable = true;
@@ -59,7 +59,7 @@ namespace Client.Scenes.Views
             label = new DXLabel
             {
                 Parent = this,
-                Text = "Caption:",
+                Text = "标题：",
             };
 
             CaptionText = new DXTextBox
@@ -75,7 +75,7 @@ namespace Client.Scenes.Views
             {
                 Parent = this,
                 Text = "[?]",
-                Hint = $"Caption.\nAccepted characters: a-z A-Z 0-9.\nLength: between {Globals.MinCaptionLength} and {Globals.MaxCaptionLength} characters.\nAvoid harmful and racist words.",
+                Hint = $"称号。\n允许使用字符：a-z A-Z 0-9。\n长度：{Globals.MinCaptionLength} 至 {Globals.MaxCaptionLength} 个字符。\n请勿使用有害或带有种族歧视的词语。",
             };
 
             ChangeButton = new DXButton
@@ -83,7 +83,7 @@ namespace Client.Scenes.Views
                 ButtonType = ButtonType.SmallButton,
                 Parent = this,
                 Size = new Size(60, SmallButtonHeight),
-                Label = { Text = "Change" },
+                Label = { Text = "修改" },
             };
             ChangeButton.MouseClick += (o, e) =>
             {

@@ -536,7 +536,7 @@ namespace Client.Scenes.Views
             AmountLabel = new DXLabel
             {
                 Parent = this,
-                Text = "Amount",
+                Text = "数量",
                 IsControl = false,
                 ForeColour = Color.Aquamarine
             };

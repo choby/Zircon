@@ -84,7 +84,7 @@ namespace LibraryEditor
                 ? SystemColors.ControlText
                 : Color.Red;
             toolStripStatusLabel.Text = report.Split(new[] { Environment.NewLine }, StringSplitOptions.None)[0];
-            MessageBox.Show(report, "ZL Atlas Validation");
+            MessageBox.Show(report, "ZL 图集校验");
         }
 
         private void exportAtlasToolStripMenuItem_Click(object sender, EventArgs e)
@@ -100,8 +100,8 @@ namespace LibraryEditor
 
                 string reportPath = _library.ExportAtlasDebugPages(dialog.SelectedPath);
                 toolStripStatusLabel.ForeColor = SystemColors.ControlText;
-                toolStripStatusLabel.Text = $"Exported atlas debug pages. Report: {Path.GetFileName(reportPath)}";
-                MessageBox.Show($"Atlas debug pages exported to:{Environment.NewLine}{dialog.SelectedPath}", "ZL Atlas Debug Export");
+                toolStripStatusLabel.Text = $"已导出图集调试页。报告：{Path.GetFileName(reportPath)}";
+                MessageBox.Show($"图集调试页已导出至：{Environment.NewLine}{dialog.SelectedPath}", "ZL 图集调试导出");
             }
         }
 
@@ -187,9 +187,9 @@ namespace LibraryEditor
                 toolStripProgressBar.Value = 0;
 
                 MessageBox.Show(
-                    string.Format("Successfully converted {0} {1}",
+                    string.Format("已成功转换 {0} 个{1}",
                     (OpenWeMadeDialog.FileNames.Length).ToString(),
-                    (OpenWeMadeDialog.FileNames.Length > 1) ? "libraries" : "library"));
+                    (OpenWeMadeDialog.FileNames.Length > 1) ? "资源库" : "资源库"));
             }
             else if (Path.GetExtension(files[0]).ToUpper() == ".LIB")
             {
@@ -223,9 +223,9 @@ namespace LibraryEditor
             ImageBox.Image = null;
             ZoomTrackBar.Value = 1;
 
-            WidthLabel.Text = "<No Image>";
-            HeightLabel.Text = "<No Image>";
-            ShadowTypeLabel.Text = "<No Image>";
+            WidthLabel.Text = "<无图像>";
+            HeightLabel.Text = "<无图像>";
+            ShadowTypeLabel.Text = "<无图像>";
             OffSetXTextBox.Text = string.Empty;
             OffSetYTextBox.Text = string.Empty;
             OffSetXTextBox.BackColor = SystemColors.Window;
@@ -476,12 +476,12 @@ namespace LibraryEditor
             if (PreviewListView.SelectedIndices.Count > 1)
             {
                 toolStripStatusLabel.ForeColor = Color.Red;
-                toolStripStatusLabel.Text = "Multiple images selected.";
+                toolStripStatusLabel.Text = "已选择多张图像。";
             }
             else
             {
                 toolStripStatusLabel.ForeColor = SystemColors.ControlText;
-                toolStripStatusLabel.Text = "Selected Image: " + string.Format("{0} / {1}",
+                toolStripStatusLabel.Text = "已选图像：" + string.Format("{0} / {1}",
                 PreviewListView.SelectedIndices[0].ToString(),
                 (PreviewListView.Items.Count - 1).ToString());
             }
@@ -592,8 +592,8 @@ namespace LibraryEditor
                 _library = null;
                 PreviewListView.VirtualListSize = 0;
                 toolStripStatusLabel.ForeColor = Color.Red;
-                toolStripStatusLabel.Text = "Failed to open library.";
-                MessageBox.Show(this, ex.Message, "Open Library", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                toolStripStatusLabel.Text = "打开资源库失败。";
+                MessageBox.Show(this, ex.Message, "打开资源库", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -633,7 +633,7 @@ namespace LibraryEditor
             }
             catch (OperationCanceledException)
             {
-                toolStripStatusLabel.Text = "Save cancelled.";
+                toolStripStatusLabel.Text = "已取消保存。";
             }
             catch (Exception ex)
             {
@@ -665,7 +665,7 @@ namespace LibraryEditor
             }
             catch (OperationCanceledException)
             {
-                toolStripStatusLabel.Text = "Save cancelled.";
+                toolStripStatusLabel.Text = "已取消保存。";
             }
             catch (Exception ex)
             {
@@ -753,8 +753,8 @@ namespace LibraryEditor
         {
             toolStripStatusLabel.ForeColor = SystemColors.ControlText;
             toolStripStatusLabel.Text = options.BuildAtlasMetadata
-                ? $"Saved ZL v2 with atlas metadata using {options.ContainerCompression}."
-                : $"Saved ZL v2 without atlas metadata using {options.ContainerCompression}.";
+                ? $"已使用 {options.ContainerCompression} 保存含图集元数据的 ZL v2 文件。"
+                : $"已使用 {options.ContainerCompression} 保存不含图集元数据的 ZL v2 文件。";
 
             if (!string.IsNullOrEmpty(_library.LastCompressionReport))
                 toolStripStatusLabel.Text += $" Report: {Path.GetFileName(path)}.report.txt";
@@ -776,8 +776,8 @@ namespace LibraryEditor
             if (_library.FileName == null) return;
             if (PreviewListView.SelectedIndices.Count == 0) return;
 
-            if (MessageBox.Show("Are you sure you want to delete the selected Image?",
-                "Delete Selected.",
+            if (MessageBox.Show("确定要删除所选图像吗？",
+                "删除所选图像",
                 MessageBoxButtons.YesNoCancel) != DialogResult.Yes) return;
 
             var removeList = PreviewListView.SelectedIndices.Cast<int>().ToList();
@@ -834,7 +834,7 @@ namespace LibraryEditor
             catch (OperationCanceledException)
             {
                 toolStripProgressBar.Value = 0;
-                toolStripStatusLabel.Text = "Conversion cancelled.";
+                toolStripStatusLabel.Text = "已取消转换。";
                 return;
             }
             catch (Exception ex)
@@ -845,9 +845,9 @@ namespace LibraryEditor
 
             toolStripProgressBar.Value = 0;
 
-            MessageBox.Show(string.Format("Successfully converted {0} {1}",
+            MessageBox.Show(string.Format("已成功转换 {0} 个{1}",
                 (options.FileNames.Length).ToString(),
-                (options.FileNames.Length > 1) ? "libraries" : "library"));
+                (options.FileNames.Length > 1) ? "资源库" : "资源库"));
         }
 
         private void ConvertLibrary(string fileName, LibraryConversionOptions options, IProgress<LibraryProgress> progress, CancellationToken token)
@@ -945,8 +945,8 @@ namespace LibraryEditor
 
         private void removeBlanksToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Are you sure you want to remove the blank images?",
-                "Remove Blanks",
+            if (MessageBox.Show("确定要移除空白图像吗？",
+                "移除空白图像",
                 MessageBoxButtons.YesNo) != DialogResult.Yes) return;
 
             _library.RemoveBlanks();
@@ -1095,8 +1095,8 @@ namespace LibraryEditor
 
         private void safeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Are you sure you want to remove the blank images?",
-                "Remove Blanks", MessageBoxButtons.YesNo) != DialogResult.Yes) return;
+            if (MessageBox.Show("确定要移除空白图像吗？",
+                "移除空白图像", MessageBoxButtons.YesNo) != DialogResult.Yes) return;
 
             _library.RemoveBlanks(true);
             ImageList.Images.Clear();
@@ -1210,7 +1210,7 @@ namespace LibraryEditor
             }
 
             toolStripProgressBar.Value = 0;
-            MessageBox.Show("Saving to " + _folder + "...", "Image Saved", MessageBoxButtons.OK);
+            MessageBox.Show("正在保存至 " + _folder + "...", "图像已保存", MessageBoxButtons.OK);
         }
 
         // Don't let the splitter go out of sight on resizing.
@@ -1264,7 +1264,7 @@ namespace LibraryEditor
                     ImageBox.Image = _newBMP;
 
                     toolStripStatusLabel.ForeColor = SystemColors.ControlText;
-                    toolStripStatusLabel.Text = "Selected Image: " + string.Format("{0} / {1}",
+                    toolStripStatusLabel.Text = "已选图像：" + string.Format("{0} / {1}",
                         PreviewListView.SelectedIndices[0].ToString(),
                         (PreviewListView.Items.Count - 1).ToString());
                 }
@@ -1296,7 +1296,7 @@ namespace LibraryEditor
             if (_col.Count > 1)
             {
                 toolStripStatusLabel.ForeColor = Color.Red;
-                toolStripStatusLabel.Text = "Multiple images selected.";
+                toolStripStatusLabel.Text = "已选择多张图像。";
             }
         }
 
@@ -1594,12 +1594,12 @@ namespace LibraryEditor
             {
                 if (!int.TryParse(value, out temp))
                 {
-                    MessageBox.Show("Should be a numeric value");
+                    MessageBox.Show("请输入数值。");
                     return;
                 }
                 if (temp <= 0)
                 {
-                    MessageBox.Show("Must be atleast 1");
+                    MessageBox.Show("数值必须至少为 1。");
                     return;
                 }
                 newImages = temp;
@@ -1623,12 +1623,12 @@ namespace LibraryEditor
             {
                 if (!int.TryParse(value, out temp))
                 {
-                    MessageBox.Show("Should be a numeric value");
+                    MessageBox.Show("请输入数值。");
                     return;
                 }
                 if (temp <= 0)
                 {
-                    MessageBox.Show("Must be atleast 1");
+                    MessageBox.Show("数值必须至少为 1。");
                     return;
                 }
                 newImages = temp;
@@ -1655,12 +1655,12 @@ namespace LibraryEditor
             {
                 if (!int.TryParse(value, out temp))
                 {
-                    MessageBox.Show("Should be a numeric value");
+                    MessageBox.Show("请输入数值。");
                     return;
                 }
                 if (temp <= 0)
                 {
-                    MessageBox.Show("Must be atleast 1");
+                    MessageBox.Show("数值必须至少为 1。");
                     return;
                 }
                 newImages = temp;
@@ -1733,9 +1733,9 @@ namespace LibraryEditor
 
             toolStripProgressBar.Value = 0;
 
-            MessageBox.Show(string.Format("Successfully merged {0} {1}",
+            MessageBox.Show(string.Format("已成功合并 {0} 个{1}",
                 (OpenMergeDialog.FileNames.Length).ToString(),
-                (OpenMergeDialog.FileNames.Length > 1) ? "libraries" : "library"));
+                (OpenMergeDialog.FileNames.Length > 1) ? "资源库" : "资源库"));
 
             ImageList.Images.Clear();
             _indexList.Clear();

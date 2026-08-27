@@ -519,7 +519,7 @@ namespace Client.Scenes.Views
                 pair.Value.ForeColour = Functions.Lerp(Color.White, Color.CadetBlue, rate);
             }
 
-            Hint = Icons.Count > 0 ? null : "Buff Area";
+            Hint = Icons.Count > 0 ? null : "增益效果区域";
         }
         #endregion
 

@@ -66,7 +66,7 @@
             this.labelControl1.Name = "labelControl1";
             this.labelControl1.Size = new System.Drawing.Size(61, 13);
             this.labelControl1.TabIndex = 0;
-            this.labelControl1.Text = "Clean Client:";
+            this.labelControl1.Text = "清理客户端：";
             // 
             // CleanClientButtonEdit
             // 
@@ -88,7 +88,7 @@
             this.labelControl2.Name = "labelControl2";
             this.labelControl2.Size = new System.Drawing.Size(26, 13);
             this.labelControl2.TabIndex = 2;
-            this.labelControl2.Text = "Host:";
+            this.labelControl2.Text = "主机：";
             // 
             // UsernameTextEdit
             // 
@@ -113,7 +113,7 @@
             this.labelControl3.Name = "labelControl3";
             this.labelControl3.Size = new System.Drawing.Size(50, 13);
             this.labelControl3.TabIndex = 5;
-            this.labelControl3.Text = "Use Login:";
+            this.labelControl3.Text = "使用登录：";
             // 
             // labelControl4
             // 
@@ -121,7 +121,7 @@
             this.labelControl4.Name = "labelControl4";
             this.labelControl4.Size = new System.Drawing.Size(52, 13);
             this.labelControl4.TabIndex = 6;
-            this.labelControl4.Text = "Username:";
+            this.labelControl4.Text = "用户名：";
             // 
             // labelControl5
             // 
@@ -129,7 +129,7 @@
             this.labelControl5.Name = "labelControl5";
             this.labelControl5.Size = new System.Drawing.Size(50, 13);
             this.labelControl5.TabIndex = 7;
-            this.labelControl5.Text = "Password:";
+            this.labelControl5.Text = "密码：";
             // 
             // HostTextEdit
             // 
@@ -163,7 +163,7 @@
             this.labelControl6.Name = "labelControl6";
             this.labelControl6.Size = new System.Drawing.Size(35, 13);
             this.labelControl6.TabIndex = 11;
-            this.labelControl6.Text = "Status:";
+            this.labelControl6.Text = "状态：";
             // 
             // StatusLabel
             // 
@@ -171,7 +171,7 @@
             this.StatusLabel.Name = "StatusLabel";
             this.StatusLabel.Size = new System.Drawing.Size(41, 13);
             this.StatusLabel.TabIndex = 12;
-            this.StatusLabel.Text = "<None>";
+            this.StatusLabel.Text = "<无>";
             // 
             // labelControl8
             // 
@@ -179,7 +179,7 @@
             this.labelControl8.Name = "labelControl8";
             this.labelControl8.Size = new System.Drawing.Size(37, 13);
             this.labelControl8.TabIndex = 13;
-            this.labelControl8.Text = "Upload:";
+            this.labelControl8.Text = "上传：";
             // 
             // UploadSizeLabel
             // 
@@ -187,7 +187,7 @@
             this.UploadSizeLabel.Name = "UploadSizeLabel";
             this.UploadSizeLabel.Size = new System.Drawing.Size(41, 13);
             this.UploadSizeLabel.TabIndex = 14;
-            this.UploadSizeLabel.Text = "<None>";
+            this.UploadSizeLabel.Text = "<无>";
             // 
             // TotalProgressBar
             // 
@@ -202,7 +202,7 @@
             this.UploadSpeedLabel.Name = "UploadSpeedLabel";
             this.UploadSpeedLabel.Size = new System.Drawing.Size(41, 13);
             this.UploadSpeedLabel.TabIndex = 17;
-            this.UploadSpeedLabel.Text = "<None>";
+            this.UploadSpeedLabel.Text = "<无>";
             // 
             // labelControl10
             // 
@@ -210,7 +210,7 @@
             this.labelControl10.Name = "labelControl10";
             this.labelControl10.Size = new System.Drawing.Size(34, 13);
             this.labelControl10.TabIndex = 16;
-            this.labelControl10.Text = "Speed:";
+            this.labelControl10.Text = "速度：";
             // 
             // ProtocolDropDown
             // 
@@ -232,7 +232,7 @@
             this.labelControl7.Name = "labelControl7";
             this.labelControl7.Size = new System.Drawing.Size(43, 13);
             this.labelControl7.TabIndex = 19;
-            this.labelControl7.Text = "Protocol:";
+            this.labelControl7.Text = "协议：";
             // 
             // PMain
             // 
@@ -303,4 +303,3 @@
         private DevExpress.XtraEditors.LabelControl labelControl7;
     }
 }
-

@@ -2502,11 +2502,11 @@ namespace Client.Scenes.Views
 
                 if (!string.IsNullOrEmpty(Info.Task))
                 {
-                    RequirementLabel.Text = $"{Info.Task}: Complete";
+                    RequirementLabel.Text = $"{Info.Task}：已完成";
                 }
                 else
                 {
-                    RequirementLabel.Text = "Complete";
+                    RequirementLabel.Text = "已完成";
                 }
             }
             else if (started)
@@ -2523,11 +2523,11 @@ namespace Client.Scenes.Views
                 {
                     if (!string.IsNullOrWhiteSpace(Info.Task))
                     {
-                        RequirementLabel.Text = $"{Info.Task}: {currentCount}/{totalCount}";
+                        RequirementLabel.Text = $"{Info.Task}：{currentCount}/{totalCount}";
                     }
                     else
                     {
-                        RequirementLabel.Text = $"Tasks: {currentCount}/{totalCount}";
+                        RequirementLabel.Text = $"任务：{currentCount}/{totalCount}";
                     }
                 }
                 else
@@ -2538,11 +2538,11 @@ namespace Client.Scenes.Views
                     }
                     else if (currentCount > 0)
                     {
-                        RequirementLabel.Text = "In Progress";
+                        RequirementLabel.Text = "进行中";
                     }
                     else
                     {
-                        RequirementLabel.Text = "Not Started";
+                        RequirementLabel.Text = "未开始";
                     }
                 }
             }

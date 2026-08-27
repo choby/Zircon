@@ -203,7 +203,7 @@ namespace Client.Scenes.Views
                 {
                     DXLabel label1 = new DXLabel
                     {
-                        Text = $"Goto {quest.FinishNPC.NPCName} in {quest.FinishNPC.RegionName}",
+                        Text = $"前往 {quest.FinishNPC.RegionName} 的 {quest.FinishNPC.NPCName}",
                         Parent = TextPanel,
                         ForeColour = Color.White,
                         Outline = true,

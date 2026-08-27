@@ -380,7 +380,7 @@ namespace Client.Scenes.Views
 
                 if (lfg != null)
                 {
-                    window.EnableButton.Label.Text = "Update";
+                    window.EnableButton.Label.Text = "更新";
 
                     window.NameTextBox.TextBox.Text = lfg.GroupName;
                     window.CountNumberBox.Value = lfg.MaxCount;
@@ -389,7 +389,7 @@ namespace Client.Scenes.Views
                 }
                 else
                 {
-                    window.EnableButton.Label.Text = "Enable";
+                    window.EnableButton.Label.Text = "启用";
                     window.DisableButton.Enabled = false;
                 }
             };
@@ -401,12 +401,12 @@ namespace Client.Scenes.Views
                 Location = new Point(173, 217),
                 Parent = this,
                 Enabled = false,
-                Hint = "Settings"
+                Hint = "设置"
             };
 
             LFGNameLabel = new DXLabel
             {
-                Text = "Group Name",
+                Text = "队伍名称",
                 Parent = this,
                 IsControl = false,
                 Size = new Size(101, 20),
@@ -417,7 +417,7 @@ namespace Client.Scenes.Views
 
             LFGStatusLabel = new DXLabel
             {
-                Text = "Status",
+                Text = "状态",
                 Parent = this,
                 IsControl = false,
                 Size = new Size(95, 20),
@@ -1111,7 +1111,7 @@ namespace Client.Scenes.Views
         {
             HasFooter = true;
 
-            TitleLabel.Text = "Looking For Group";
+            TitleLabel.Text = "寻找队伍";
 
             Parent = ActiveScene;
             MessageBoxList.Add(this);
@@ -1121,7 +1121,7 @@ namespace Client.Scenes.Views
                 AutoSize = false,
                 Location = new Point(10, 35),
                 Parent = this,
-                Text = "Enter the name, size and type of your desired group. Group notifications will last for 1 hour or until you disable it.",
+                Text = "请输入队伍名称、人数和类型。队伍招募信息将保留 1 小时，或持续到你将其停用。",
                 DrawFormat = TextFormatFlags.VerticalCenter | TextFormatFlags.WordBreak | TextFormatFlags.HorizontalCenter
             };
             Label.Size = new Size(300, DXLabel.GetHeight(Label, 300).Height);
@@ -1149,13 +1149,13 @@ namespace Client.Scenes.Views
             _ = new DXListBoxItem
             {
                 Parent = TypeComboBox.ListBox,
-                Label = { Text = "PvE" },
+                Label = { Text = "打怪" },
                 Item = "PvE"
             };
             _ = new DXListBoxItem
             {
                 Parent = TypeComboBox.ListBox,
-                Label = { Text = "PvP" },
+                Label = { Text = "对战" },
                 Item = "PvP"
             };
             TypeComboBox.ListBox.SelectItem(TypeValue);
@@ -1181,7 +1181,7 @@ namespace Client.Scenes.Views
                 Size = new Size(80, DefaultHeight),
                 LabelStyle = ButtonLabelStyle.Gold,
                 Parent = this,
-                Label = { Text = "Enable" },
+                Label = { Text = "启用" },
             };
             EnableButton.MouseClick += (o, e) => Dispose();
 
@@ -1191,7 +1191,7 @@ namespace Client.Scenes.Views
                 Size = new Size(80, DefaultHeight),
                 LabelStyle = ButtonLabelStyle.Gold,
                 Parent = this,
-                Label = { Text = "Disable" }
+                Label = { Text = "停用" }
             };
             DisableButton.MouseClick += (o, e) =>
             {

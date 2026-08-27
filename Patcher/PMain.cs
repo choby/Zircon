@@ -58,7 +58,7 @@ namespace Patcher
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Update Failed.");
+                MessageBox.Show(ex.Message, "更新失败");
             }
 
             Close();

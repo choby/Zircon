@@ -28,11 +28,11 @@ namespace Server.Views
             {
                 HttpResponseMessage response = client.PostAsync(url, content).Result;
                 response.EnsureSuccessStatusCode();
-                MessageBox.Show("Syncronization completed", "Sync", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("同步完成。", "同步", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (HttpRequestException ex)
             {
-                MessageBox.Show(ex.ToString(), "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.ToString(), "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

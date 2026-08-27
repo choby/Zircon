@@ -79,7 +79,7 @@
             this.labelControl1.Name = "labelControl1";
             this.labelControl1.Size = new System.Drawing.Size(35, 13);
             this.labelControl1.TabIndex = 2;
-            this.labelControl1.Text = "Status:";
+            this.labelControl1.Text = "状态：";
             // 
             // StatusLabel
             // 
@@ -88,7 +88,7 @@
             this.StatusLabel.Name = "StatusLabel";
             this.StatusLabel.Size = new System.Drawing.Size(41, 13);
             this.StatusLabel.TabIndex = 3;
-            this.StatusLabel.Text = "<None>";
+            this.StatusLabel.Text = "<无>";
             // 
             // labelControl3
             // 
@@ -97,7 +97,7 @@
             this.labelControl3.Name = "labelControl3";
             this.labelControl3.Size = new System.Drawing.Size(51, 13);
             this.labelControl3.TabIndex = 4;
-            this.labelControl3.Text = "Download:";
+            this.labelControl3.Text = "下载：";
             // 
             // DownloadSizeLabel
             // 
@@ -106,7 +106,7 @@
             this.DownloadSizeLabel.Name = "DownloadSizeLabel";
             this.DownloadSizeLabel.Size = new System.Drawing.Size(41, 13);
             this.DownloadSizeLabel.TabIndex = 5;
-            this.DownloadSizeLabel.Text = "<None>";
+            this.DownloadSizeLabel.Text = "<无>";
             // 
             // DownloadSpeedLabel
             // 
@@ -115,7 +115,7 @@
             this.DownloadSpeedLabel.Name = "DownloadSpeedLabel";
             this.DownloadSpeedLabel.Size = new System.Drawing.Size(41, 13);
             this.DownloadSpeedLabel.TabIndex = 7;
-            this.DownloadSpeedLabel.Text = "<None>";
+            this.DownloadSpeedLabel.Text = "<无>";
             // 
             // labelControl6
             // 
@@ -124,7 +124,7 @@
             this.labelControl6.Name = "labelControl6";
             this.labelControl6.Size = new System.Drawing.Size(84, 13);
             this.labelControl6.TabIndex = 6;
-            this.labelControl6.Text = "Download Speed:";
+            this.labelControl6.Text = "下载速度：";
             // 
             // pictureBox1
             // 
@@ -205,4 +205,3 @@
         private DevExpress.XtraEditors.SimpleButton RepairButton;
     }
 }
-

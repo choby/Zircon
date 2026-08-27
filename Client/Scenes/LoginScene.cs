@@ -409,31 +409,31 @@ namespace Client.Scenes
 
             if (CEnvir.Loading)
             {
-                SystemDatabaseVersionLabel.Text = "Database: Loading";
+                SystemDatabaseVersionLabel.Text = "数据库：正在加载";
                 SystemDatabaseVersionLabel.ForeColour = Color.Yellow;
             }
             else if (!CEnvir.DatabaseLoadAttempted)
             {
-                SystemDatabaseVersionLabel.Text = "Database: Waiting";
+                SystemDatabaseVersionLabel.Text = "数据库：等待中";
                 SystemDatabaseVersionLabel.ForeColour = Color.Yellow;
             }
             else if (!CEnvir.ClientSystemDatabaseExists)
             {
                 SystemDatabaseVersionLabel.Text = string.IsNullOrWhiteSpace(serverVersion)
-                    ? "Database: Missing"
-                    : $"Database: Missing (Server {serverVersion})";
+                    ? "数据库：缺失"
+                    : $"数据库：缺失（服务器版本 {serverVersion}）";
                 SystemDatabaseVersionLabel.ForeColour = Color.Red;
             }
             else if (string.IsNullOrWhiteSpace(clientVersion))
             {
                 SystemDatabaseVersionLabel.Text = string.IsNullOrWhiteSpace(serverVersion)
-                    ? "Database: Unversioned"
-                    : $"Database: Unversioned (Expected {serverVersion})";
+                    ? "数据库：无版本信息"
+                    : $"数据库：无版本信息（预期版本 {serverVersion}）";
                 SystemDatabaseVersionLabel.ForeColour = Color.Red;
             }
             else if (string.IsNullOrWhiteSpace(serverVersion))
             {
-                SystemDatabaseVersionLabel.Text = $"Database: {clientVersion} (Server Version Missing)";
+                SystemDatabaseVersionLabel.Text = $"数据库：{clientVersion}（缺少服务器版本信息）";
                 SystemDatabaseVersionLabel.ForeColour = Color.Yellow;
             }
             else
@@ -442,17 +442,17 @@ namespace Client.Scenes
 
                 if (result < 0)
                 {
-                    SystemDatabaseVersionLabel.Text = $"Database: {clientVersion} (Outdated, Expected {serverVersion})";
+                    SystemDatabaseVersionLabel.Text = $"数据库：{clientVersion}（版本过旧，预期 {serverVersion}）";
                     SystemDatabaseVersionLabel.ForeColour = Color.OrangeRed;
                 }
                 else if (result > 0)
                 {
-                    SystemDatabaseVersionLabel.Text = $"Database: {clientVersion} (Newer {serverVersion})";
+                    SystemDatabaseVersionLabel.Text = $"数据库：{clientVersion}（高于服务器版本 {serverVersion}）";
                     SystemDatabaseVersionLabel.ForeColour = Color.Yellow;
                 }
                 else
                 {
-                    SystemDatabaseVersionLabel.Text = $"Database: {clientVersion}";
+                    SystemDatabaseVersionLabel.Text = $"数据库：{clientVersion}";
                     SystemDatabaseVersionLabel.ForeColour = Color.LimeGreen;
                 }
             }
@@ -3505,4 +3505,3 @@ namespace Client.Scenes
         }
     }
 }
-

@@ -67,7 +67,7 @@
             this.labelControl1.Name = "labelControl1";
             this.labelControl1.Size = new System.Drawing.Size(66, 13);
             this.labelControl1.TabIndex = 2;
-            this.labelControl1.Text = "Select Folder:";
+            this.labelControl1.Text = "选择文件夹：";
             // 
             // SubFoldersCheckEdit
             // 
@@ -83,7 +83,7 @@
             this.labelControl2.Name = "labelControl2";
             this.labelControl2.Size = new System.Drawing.Size(95, 13);
             this.labelControl2.TabIndex = 4;
-            this.labelControl2.Text = "Include SubFolders:";
+            this.labelControl2.Text = "包含子文件夹：";
             // 
             // ConvertButton
             // 
@@ -107,7 +107,7 @@
             this.labelControl3.Name = "labelControl3";
             this.labelControl3.Size = new System.Drawing.Size(46, 13);
             this.labelControl3.TabIndex = 7;
-            this.labelControl3.Text = "Progress:";
+            this.labelControl3.Text = "进度：";
             // 
             // ProgressLabel
             // 
@@ -115,7 +115,7 @@
             this.ProgressLabel.Name = "ProgressLabel";
             this.ProgressLabel.Size = new System.Drawing.Size(41, 13);
             this.ProgressLabel.TabIndex = 8;
-            this.ProgressLabel.Text = "<None>";
+            this.ProgressLabel.Text = "<无>";
             // 
             // CreaetLibrariesButton
             // 
@@ -181,4 +181,3 @@
         private DevExpress.XtraEditors.SimpleButton simpleButton1;
     }
 }
-

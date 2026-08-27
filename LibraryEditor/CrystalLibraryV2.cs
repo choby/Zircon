@@ -46,7 +46,7 @@ namespace LibraryEditor
             CurrentVersion = _reader.ReadInt32();
             if (CurrentVersion != LibVersion)
             {
-                MessageBox.Show("Wrong version, expecting lib version: " + LibVersion.ToString() + " found version: " + CurrentVersion.ToString() + ".", "Failed to open", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
+                MessageBox.Show("版本不正确，预期资源库版本：" + LibVersion.ToString() + "，实际版本：" + CurrentVersion.ToString() + "。", "打开失败", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
                 return;
             }
             Count = _reader.ReadInt32();
@@ -174,8 +174,8 @@ namespace LibraryEditor
             }
 
             // Operation finished.
-            // System.Windows.Forms.MessageBox.Show("Converted " + fileName + " successfully.",
-            //    "Wemade Information",
+            // System.Windows.Forms.MessageBox.Show("已成功转换 " + fileName + "。",
+            //    "Wemade 信息",
             //        System.Windows.Forms.MessageBoxButtons.OK,
             //            System.Windows.Forms.MessageBoxIcon.Information,
             //                System.Windows.Forms.MessageBoxDefaultButton.Button1);

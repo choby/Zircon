@@ -48,7 +48,7 @@ namespace LibraryEditor
             _messageLabel.Name = "_messageLabel";
             _messageLabel.Size = new Size(490, 18);
             _messageLabel.TabIndex = 0;
-            _messageLabel.Text = "Working...";
+            _messageLabel.Text = "正在处理...";
             // 
             // _overallLabel
             // 
@@ -57,7 +57,7 @@ namespace LibraryEditor
             _overallLabel.Name = "_overallLabel";
             _overallLabel.Size = new Size(490, 18);
             _overallLabel.TabIndex = 1;
-            _overallLabel.Text = "Files";
+            _overallLabel.Text = "文件";
             // 
             // _overallProgressBar
             // 
@@ -74,7 +74,7 @@ namespace LibraryEditor
             _currentLabel.Name = "_currentLabel";
             _currentLabel.Size = new Size(490, 18);
             _currentLabel.TabIndex = 3;
-            _currentLabel.Text = "Current file";
+            _currentLabel.Text = "当前文件";
             // 
             // _currentProgressBar
             // 
@@ -91,7 +91,7 @@ namespace LibraryEditor
             _groupLabel.Name = "_groupLabel";
             _groupLabel.Size = new Size(490, 18);
             _groupLabel.TabIndex = 5;
-            _groupLabel.Text = "Current step";
+            _groupLabel.Text = "当前步骤";
             // 
             // _groupProgressBar
             // 

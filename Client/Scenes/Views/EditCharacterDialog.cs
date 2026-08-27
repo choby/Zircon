@@ -256,7 +256,7 @@ namespace Client.Scenes.Views
             Size = new Size(260, 650 - 90);
             HasFooter = true;
             DropShadow = true;
-            TitleLabel.Text = "Change";
+            TitleLabel.Text = "修改";
             CloseButton.MouseClick += (o, e) => Close();
 
             ChangeButton = new DXButton
@@ -288,7 +288,7 @@ namespace Client.Scenes.Views
             {
                 Parent = panel,
                 Font = new Font(Config.FontName, CEnvir.FontSize(9F), FontStyle.Bold),
-                Text = "Select Class",
+                Text = "选择职业",
             };
             label.Location = new Point((panel.Size.Width - label.Size.Width) / 2, 0);
 
@@ -340,7 +340,7 @@ namespace Client.Scenes.Views
                 DrawFormat = TextFormatFlags.HorizontalCenter,
                 Size = new Size(80, 15),
                 Parent = panel,
-                Text = "Warrior",
+                Text = "战士",
                 BackColour = Constants.WindowBackColour,
                 Border = true,
                 BorderColour = Constants.PrimaryColour
@@ -367,7 +367,7 @@ namespace Client.Scenes.Views
             {
                 Parent = panel,
                 Font = new Font(Config.FontName, CEnvir.FontSize(9F), FontStyle.Bold),
-                Text = "Select Gender",
+                Text = "选择性别",
             };
             label.Location = new Point((panel.Size.Width - label.Size.Width) / 2, 0);
 
@@ -398,7 +398,7 @@ namespace Client.Scenes.Views
                 DrawFormat = TextFormatFlags.HorizontalCenter,
                 Size = new Size(80, 15),
                 Parent = panel,
-                Text = "Male",
+                Text = "男",
                 BackColour = Constants.WindowBackColour,
                 Border = true,
                 BorderColour = Constants.PrimaryColour
@@ -425,7 +425,7 @@ namespace Client.Scenes.Views
             {
                 Parent = panel,
                 Font = new Font(Config.FontName, CEnvir.FontSize(9F), FontStyle.Bold),
-                Text = "Customization",
+                Text = "自定义",
             };
             label.Location = new Point((panel.Size.Width - label.Size.Width) / 2, 0);
 
@@ -445,7 +445,7 @@ namespace Client.Scenes.Views
             HairTypeLabel = new DXLabel
             {
                 Parent = panel,
-                Text = "Hair Type:",
+                Text = "发型：",
             };
             HairTypeLabel.Location = new Point(HairNumberBox.Location.X - HairTypeLabel.Size.Width - 5, (HairNumberBox.Size.Height - HairTypeLabel.Size.Height) / 2 + HairNumberBox.Location.Y);
 
@@ -459,7 +459,7 @@ namespace Client.Scenes.Views
             HairColourLabel = new DXLabel
             {
                 Parent = panel,
-                Text = "Hair Colour:",
+                Text = "发色：",
             };
             HairColourLabel.Location = new Point(HairNumberBox.Location.X - HairColourLabel.Size.Width - 5, (HairColour.Size.Height - HairColourLabel.Size.Height) / 2 + HairColour.Location.Y);
 
@@ -473,7 +473,7 @@ namespace Client.Scenes.Views
             ArmourColourLabel = new DXLabel
             {
                 Parent = panel,
-                Text = "Armour Colour:",
+                Text = "盔甲颜色：",
             };
             ArmourColourLabel.Location = new Point(HairNumberBox.Location.X - ArmourColourLabel.Size.Width - 5, (ArmourColour.Size.Height - ArmourColourLabel.Size.Height) / 2 + ArmourColour.Location.Y);
 
@@ -494,7 +494,7 @@ namespace Client.Scenes.Views
             {
                 Parent = previewPanel,
                 Font = new Font(Config.FontName, CEnvir.FontSize(9F), FontStyle.Bold),
-                Text = "Preview",
+                Text = "预览",
             };
             label.Location = new Point((panel.Size.Width - label.Size.Width) / 2, 0);
 
@@ -515,7 +515,7 @@ namespace Client.Scenes.Views
             CharacterNameTextBoxLabel = new DXLabel
             {
                 Parent = this,
-                Text = "Name:",
+                Text = "名称：",
             };
             CharacterNameTextBoxLabel.Location = new Point(CharacterNameTextBox.Location.X - CharacterNameTextBoxLabel.Size.Width - 5, (CharacterNameTextBox.Size.Height - CharacterNameTextBoxLabel.Size.Height) / 2 + CharacterNameTextBox.Location.Y);
 
@@ -524,7 +524,7 @@ namespace Client.Scenes.Views
                 Visible = false,
                 Parent = this,
                 Text = "[?]",
-                Hint = $"Character Name.\nAccepted characters: a-z A-Z 0-9.\nLength: between {Globals.MinCharacterNameLength} and {Globals.MaxCharacterNameLength} characters.\nCan use previous names on same account.",
+                Hint = $"角色名称。\n允许使用字符：a-z A-Z 0-9。\n长度：{Globals.MinCharacterNameLength} 至 {Globals.MaxCharacterNameLength} 个字符。\n可以使用同一账号曾用过的角色名称。",
             };
             CharacterNameHelpLabel.Location = new Point(CharacterNameTextBox.Location.X + CharacterNameTextBox.Size.Width + 2, (CharacterNameTextBox.Size.Height - CharacterNameHelpLabel.Size.Height) / 2 + CharacterNameTextBox.Location.Y);
 

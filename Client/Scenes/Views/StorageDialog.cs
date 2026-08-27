@@ -205,7 +205,7 @@ namespace Client.Scenes.Views
             new DXListBoxItem
             {
                 Parent = ItemTypeComboBox.ListBox,
-                Label = { Text = $"All" },
+                Label = { Text = $"全部" },
                 Item = null
             };
 

@@ -3993,7 +3993,7 @@ namespace Client.Scenes
         {
             if (User == null) return;
 
-            MainPanel.ExperienceBar.Hint = User.MaxExperience > 0 ? $"(Experience) {User.Experience / User.MaxExperience:#,##0.00%}" : "(Experience) Max";
+            MainPanel.ExperienceBar.Hint = User.MaxExperience > 0 ? $"（经验）{User.Experience / User.MaxExperience:#,##0.00%}" : "（经验）已满";
         }
         public void HealthChanged()
         {
@@ -4071,7 +4071,7 @@ namespace Client.Scenes
         {
             if (User == null) return;
 
-            InventoryBox.WeightLabel.Text = $"{User.BagWeight} of {User.Stats[Stat.BagWeight]}";
+            InventoryBox.WeightLabel.Text = $"{User.BagWeight} / {User.Stats[Stat.BagWeight]}";
 
             InventoryBox.WeightLabel.ForeColour = User.BagWeight > User.Stats[Stat.BagWeight] ? Color.Red : Color.White;
 

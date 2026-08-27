@@ -246,8 +246,8 @@ namespace LibraryEditor
             }
 
             // Operation finished.
-            // System.Windows.Forms.MessageBox.Show("Converted " + fileName + " successfully.",
-            //    "Wemade Information",
+            // System.Windows.Forms.MessageBox.Show("已成功转换 " + fileName + "。",
+            //    "Wemade 信息",
             //        System.Windows.Forms.MessageBoxButtons.OK,
             //            System.Windows.Forms.MessageBoxIcon.Information,
             //                System.Windows.Forms.MessageBoxDefaultButton.Button1);

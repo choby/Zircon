@@ -1224,7 +1224,7 @@ namespace Client.Scenes.Views
 
         public void NewInformation(S.Inspect p)
         {
-            InspectLabel.Text = $"Lv. {p.Level} - Cl. {p.Class}";
+            InspectLabel.Text = $"等级 {p.Level} - 职业 {p.Class}";
 
             CharacterNameLabel.Text = p.Name;
             GuildNameLabel.Text = p.GuildName;
@@ -1561,12 +1561,12 @@ namespace Client.Scenes.Views
                 Visible = true;
                 RankLabel.ForeColour = Color.White;
                 RankLabel.Text = Rank.Rank.ToString();
-                NameLabel.Text = $"{Rank.Name}{(Rank.Rebirth > 0 ? $" [Rebirth: {Rank.Rebirth}]" : "")}";
+                NameLabel.Text = $"{Rank.Name}{(Rank.Rebirth > 0 ? $" [转生：{Rank.Rebirth}]" : "")}";
 
                 //decimal percent = 0;
                 //percent = Math.Min(1, Math.Max(0, Rank.MaxExperience > 0 ? Rank.Experience / Rank.MaxExperience : 0));
 
-                LevelLabel.Text = $"Lv. {Rank.Level}";
+                LevelLabel.Text = $"等级 {Rank.Level}";
 
                 var change = Rank.RankChange;
 
@@ -1624,7 +1624,7 @@ namespace Client.Scenes.Views
             }
 
             Rank = null;
-            NameLabel.Text = "Updating...";
+            NameLabel.Text = "正在更新...";
             NameLabel.ForeColour = Color.Orange;
             Visible = true;
             OnlineImage.Visible = false;

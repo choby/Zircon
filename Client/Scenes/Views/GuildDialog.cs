@@ -424,7 +424,7 @@ namespace Client.Scenes.Views
             for (int i = 0; i < GuildStorage.Length; i++)
                 GuildStorage[i] = null;
 
-            TitleLabel.Text = "Guild";
+            TitleLabel.Text = "行会";
 
             NoticeTextBox.TextBox.Text = string.Empty;
 
@@ -1325,7 +1325,7 @@ namespace Client.Scenes.Views
             };
             EditDefaultMemberButton.MouseClick += (o, e) =>
             {
-                GameScene.Game.GuildMemberBox.MemberNameLabel.Text = "Default Member";
+                GameScene.Game.GuildMemberBox.MemberNameLabel.Text = "默认成员";
                 GameScene.Game.GuildMemberBox.RankTextBox.TextBox.Text = GuildInfo.DefaultRank;
                 GameScene.Game.GuildMemberBox.Permission = GuildInfo.DefaultPermission;
                 GameScene.Game.GuildMemberBox.MemberIndex = 0;
@@ -1438,7 +1438,7 @@ namespace Client.Scenes.Views
             new DXListBoxItem
             {
                 Parent = ItemTypeComboBox.ListBox,
-                Label = { Text = $"All" },
+                Label = { Text = $"全部" },
                 Item = null
             };
 
@@ -1658,7 +1658,7 @@ namespace Client.Scenes.Views
 
             new DXLabel
             {
-                Text = "Desert Conquest",
+                Text = "沙漠争夺战",
                 Parent = panel,
                 Font = new Font(Config.FontName, CEnvir.FontSize(10F), FontStyle.Bold),
                 ForeColour = Constants.PrimaryColour,
@@ -1681,7 +1681,7 @@ namespace Client.Scenes.Views
         {
             StyleTab = new DXTab
             {
-                TabButton = { Label = { Text = "Style" } },
+                TabButton = { Label = { Text = "样式" } },
                 Parent = GuildTabs,
                 BackColour = Color.Empty,
                 Location = new Point(0, 23)
@@ -1708,7 +1708,7 @@ namespace Client.Scenes.Views
 
             new DXLabel
             {
-                Text = "Colour",
+                Text = "颜色",
                 Parent = StyleColourPanel,
                 Font = new Font(Config.FontName, CEnvir.FontSize(10F), FontStyle.Bold),
                 ForeColour = Constants.PrimaryColour,
@@ -1732,7 +1732,7 @@ namespace Client.Scenes.Views
                 Location = new Point(125, 34),
                 ButtonType = ButtonType.SmallButton,
                 Size = new Size(80, SmallButtonHeight),
-                Label = { Text = "Save" },
+                Label = { Text = "保存" },
             };
             StyleColourButton.MouseClick += (o, e) =>
             {
@@ -1749,7 +1749,7 @@ namespace Client.Scenes.Views
 
             new DXLabel
             {
-                Text = "Flag",
+                Text = "旗帜",
                 Parent = StyleFlagPanel,
                 Font = new Font(Config.FontName, CEnvir.FontSize(10F), FontStyle.Bold),
                 ForeColour = Constants.PrimaryColour,
@@ -1766,7 +1766,7 @@ namespace Client.Scenes.Views
                 Location = new Point(5, StyleFlagPanel.Size.Height - 23),
                 ButtonType = ButtonType.SmallButton,
                 Size = new Size(60, SmallButtonHeight),
-                Label = { Text = "Previous" },
+                Label = { Text = "上一页" },
             };
             StyleFlagPreviousButton.MouseClick += (o, e) =>
             {
@@ -1783,7 +1783,7 @@ namespace Client.Scenes.Views
                 Location = new Point(StyleFlagPanel.Size.Width - 65, StyleFlagPanel.Size.Height - 23),
                 ButtonType = ButtonType.SmallButton,
                 Size = new Size(60, SmallButtonHeight),
-                Label = { Text = "Next" },
+                Label = { Text = "下一页" },
             };
             StyleFlagNextButton.MouseClick += (o, e) =>
             {
@@ -1848,7 +1848,7 @@ namespace Client.Scenes.Views
                 ButtonType = ButtonType.Default,
                 Size = new Size(120, DefaultHeight),
                 LabelStyle = ButtonLabelStyle.Gold,
-                Label = { Text = "Open/Close Gates" },
+                Label = { Text = "开启/关闭城门" },
                 Enabled = false,
                 Visible = true
             };
@@ -1864,7 +1864,7 @@ namespace Client.Scenes.Views
                 ButtonType = ButtonType.Default,
                 Size = new Size(100, DefaultHeight),
                 LabelStyle = ButtonLabelStyle.Gold,
-                Label = { Text = "Repair Gates" },
+                Label = { Text = "修复城门" },
                 Enabled = false,
                 Visible = true
             };
@@ -1888,7 +1888,7 @@ namespace Client.Scenes.Views
                 ButtonType = ButtonType.Default,
                 Size = new Size(100, DefaultHeight),
                 LabelStyle = ButtonLabelStyle.Gold,
-                Label = { Text = "Repair Guards" },
+                Label = { Text = "修复守卫" },
                 Enabled = false,
                 Visible = true
             };
@@ -2614,7 +2614,7 @@ namespace Client.Scenes.Views
 
             if (MemberInfo.LastOnline == DateTime.MaxValue)
             {
-                OnlineLabel.Text = "Online";
+                OnlineLabel.Text = "在线";
                 OnlineLabel.ForeColour = Color.Green;
             }
             else
@@ -3128,7 +3128,7 @@ namespace Client.Scenes.Views
             if (Castle == null) return;
 
             CastleNameLabel.Text = Castle.Name;
-            ItemLabel.Text = Castle.Item?.ItemName ?? "None";
+            ItemLabel.Text = Castle.Item?.ItemName ?? "无";
         }
 
         #endregion

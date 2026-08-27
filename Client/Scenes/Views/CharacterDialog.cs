@@ -2950,7 +2950,7 @@ namespace Client.Scenes.Views
                 if (nextLevel != null)
                     DisciplineExperienceLabel.Text = $"{userDiscipline.Experience}/{nextLevel.RequiredExperience}";
                 else
-                    DisciplineExperienceLabel.Text = $"{userDiscipline.Experience}/Max";
+                    DisciplineExperienceLabel.Text = $"{userDiscipline.Experience}/最高";
             }
 
             int x = 51;

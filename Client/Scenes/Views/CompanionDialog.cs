@@ -599,7 +599,7 @@ namespace Client.Scenes.Views
                 ForeColour = Constants.PrimaryColour,
                 OutlineColour = Color.Black,
                 IsControl = false,
-                Text = "Class",
+                Text = "职业",
             };
             label.Location = new Point(10, 10);
 
@@ -613,7 +613,7 @@ namespace Client.Scenes.Views
                 ForeColour = Constants.PrimaryColour,
                 OutlineColour = Color.Black,
                 IsControl = false,
-                Text = "Rarity Type",
+                Text = "稀有度",
             };
             label.Location = new Point(10, 70);
 
@@ -627,7 +627,7 @@ namespace Client.Scenes.Views
                 ForeColour = Constants.PrimaryColour,
                 OutlineColour = Color.Black,
                 IsControl = false,
-                Text = "Item Type",
+                Text = "物品类型",
             };
             label.Location = new Point(10, 130);
 
@@ -636,7 +636,7 @@ namespace Client.Scenes.Views
             SaveFilterButton = new DXButton
             {
                 Parent = this,
-                Label = { Text = "Save settings", },
+                Label = { Text = "保存设置", },
                 ButtonType = ButtonType.SmallButton,
                 Size = new Size(80, SmallButtonHeight)
             };
@@ -731,8 +731,8 @@ namespace Client.Scenes.Views
 
             if (bonus == null) return;
 
-            bonus.LevelLabel.Text = $"Lv. {level} Bonus";
-            bonus.StatLabel.Text = stats == null ? "Not Gained" : stats.GetDisplay(stats.Values.Keys.First());
+            bonus.LevelLabel.Text = $"{level} 级加成";
+            bonus.StatLabel.Text = stats == null ? "未获得" : stats.GetDisplay(stats.Values.Keys.First());
             bonus.StatLabel.ForeColour = stats == null ? Color.Red : Color.LimeGreen;
         }
 
@@ -849,7 +849,7 @@ namespace Client.Scenes.Views
 
         public void Refresh()
         {
-            LevelLabel.Text = "Lv. " + GameScene.Game.Companion.Level.ToString();
+            LevelLabel.Text = "等级 " + GameScene.Game.Companion.Level.ToString();
 
             Info = Globals.CompanionLevelInfoList.Binding.First(x => x.Level == GameScene.Game.Companion.Level);
 
@@ -857,7 +857,7 @@ namespace Client.Scenes.Views
 
             ExperienceLabel.Text = Info.MaxExperience > 0 ? $"{GameScene.Game.Companion.Experience / (decimal)Info.MaxExperience:p2}" : "100%";
 
-            HungerLabel.Text = $"{GameScene.Game.Companion.Hunger} of {Info.MaxHunger}";
+            HungerLabel.Text = $"{GameScene.Game.Companion.Hunger} / {Info.MaxHunger}";
 
             WeightLabel.Text = $"{BagWeight} / {MaxBagWeight}";
             WeightLabel.ForeColour = BagWeight >= MaxBagWeight ? Color.Red : Color.White;
@@ -933,7 +933,7 @@ namespace Client.Scenes.Views
                 FilterType[itemType] = new DXCheckBox
                 {
                     Parent = FilterControl,
-                    Hint = "Pick " + item.ToLower() + " items",
+                    Hint = "拾取 " + item.ToLower() + " 类物品",
                 };
                 FilterType[itemType].Location = new Point(10 + (110 * index), 150 + (18 * row));
 
@@ -965,7 +965,7 @@ namespace Client.Scenes.Views
                 FilterClass[mirClass] = new DXCheckBox
                 {
                     Parent = FilterControl,
-                    Hint = "Pick " + mirClass.ToString().ToLower() + " items",
+                    Hint = "拾取 " + mirClass.ToString().ToLower() + " 职业物品",
                 };
                 FilterClass[mirClass].Location = new Point(10 + (110 * index), 30 + (18 * row));
 
@@ -998,7 +998,7 @@ namespace Client.Scenes.Views
                 FilterRarity[rarity] = new DXCheckBox
                 {
                     Parent = FilterControl,
-                    Hint = "Pick " + rarity.ToString().ToLower() + " items",
+                    Hint = "拾取 " + rarity.ToString().ToLower() + " 稀有度物品",
                 };
                 FilterRarity[rarity].Location = new Point(10 + (110 * index), 90 + (18 * row));
 
@@ -1443,7 +1443,7 @@ namespace Client.Scenes.Views
 
         public void Update(int level, Stats stat)
         {
-            LevelLabel.Text = $"Lv. {level} Skill";
+            LevelLabel.Text = $"{level} 级技能";
             StatLabel.Text = stat.GetDisplay(stat.Values.Keys.FirstOrDefault());
         }
 

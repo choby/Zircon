@@ -48,25 +48,25 @@ namespace Server
 
                     var (resolved, remaining) = ImportReferenceResolver.ResolvePendingReferences(SMain.Session);
 
-                    string message = $"{rows.Length} rows have been successfully imported.";
+                    string message = $"已成功导入 {rows.Length} 行数据。";
 
                     if (allowDeferredReferences)
                     {
-                        message += $"\n{resolved} deferred reference(s) were resolved.";
+                        message += $"\n已解析 {resolved} 个延迟引用。";
 
                         if (remaining > 0)
                         {
-                            message += $"\n{remaining} reference(s) are still pending and will be retried on the next import.";
+                            message += $"\n仍有 {remaining} 个引用等待解析，将在下次导入时重试。";
                         }
                     }
 
-                    XtraMessageBox.Show(message, "Success", MessageBoxButtons.OK);
+                    XtraMessageBox.Show(message, "成功", MessageBoxButtons.OK);
                 }
                 catch (Exception ex)
                 {
                     SEnvir.Log(ex.Message);
 
-                    XtraMessageBox.Show($"Failed to import all rows.\r\n\r\n{ex.Message}", "Fail", MessageBoxButtons.OK);
+                    XtraMessageBox.Show($"导入所有行失败。\r\n\r\n{ex.Message}", "失败", MessageBoxButtons.OK);
                 }
             }
         }
