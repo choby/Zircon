@@ -115,7 +115,7 @@ namespace LibraryEditor
             _cancelButton.Name = "_cancelButton";
             _cancelButton.Size = new Size(90, 26);
             _cancelButton.TabIndex = 8;
-            _cancelButton.Text = "Cancel";
+            _cancelButton.Text = "取消";
             _cancelButton.UseVisualStyleBackColor = true;
             _cancelButton.Click += CancelButton_Click;
             // 
@@ -144,7 +144,7 @@ namespace LibraryEditor
             MinimizeBox = false;
             Name = "ProgressDialog";
             StartPosition = FormStartPosition.CenterParent;
-            Text = "Progress";
+            Text = "进度";
             ResumeLayout(false);
         }
     }

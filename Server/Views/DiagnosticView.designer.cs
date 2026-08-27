@@ -52,7 +52,7 @@ namespace Server.Views
             // DiagnosticButton
             // 
             DiagnosticButton.ButtonStyle = DevExpress.XtraBars.BarButtonStyle.Check;
-            DiagnosticButton.Caption = "Diagnostics";
+            DiagnosticButton.Caption = "诊断";
             DiagnosticButton.Id = 4;
             DiagnosticButton.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("DiagnosticButton.ImageOptions.Image");
             DiagnosticButton.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("DiagnosticButton.ImageOptions.LargeImage");
@@ -61,7 +61,7 @@ namespace Server.Views
             // 
             // ResetTimeButton
             // 
-            ResetTimeButton.Caption = "Reset Times";
+            ResetTimeButton.Caption = "重置次数";
             ResetTimeButton.Id = 5;
             ResetTimeButton.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("ResetTimeButton.ImageOptions.Image");
             ResetTimeButton.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("ResetTimeButton.ImageOptions.LargeImage");
@@ -73,7 +73,7 @@ namespace Server.Views
             // 
             ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] { ribbonPageGroup1 });
             ribbonPage1.Name = "ribbonPage1";
-            ribbonPage1.Text = "Home";
+            ribbonPage1.Text = "主页";
             // 
             // ribbonPageGroup1
             // 
@@ -82,7 +82,7 @@ namespace Server.Views
             ribbonPageGroup1.ItemLinks.Add(DiagnosticButton);
             ribbonPageGroup1.ItemLinks.Add(ResetTimeButton);
             ribbonPageGroup1.Name = "ribbonPageGroup1";
-            ribbonPageGroup1.Text = "Saving";
+            ribbonPageGroup1.Text = "保存";
             // 
             // repositoryItemToggleSwitch1
             // 
@@ -163,7 +163,7 @@ namespace Server.Views
             Controls.Add(ribbon);
             Name = "DiagnosticView";
             Ribbon = ribbon;
-            Text = "Diagnostics";
+            Text = "诊断";
             ((System.ComponentModel.ISupportInitialize)ribbon).EndInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemToggleSwitch1).EndInit();
             ((System.ComponentModel.ISupportInitialize)DiagnosticGridControl).EndInit();

@@ -151,7 +151,7 @@
             PageLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "Index"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Description", "Description"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("DialogType", "DialogType"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Say", "Say") });
             PageLookUpEdit.DisplayMember = "Description";
             PageLookUpEdit.Name = "PageLookUpEdit";
-            PageLookUpEdit.NullText = "[Page is null]";
+            PageLookUpEdit.NullText = "[页面为空]";
             // 
             // gridColumn1
             // 
@@ -211,7 +211,7 @@
             ItemInfoLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "Index"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ItemName", "Item Name"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ItemType", "Item Type"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Price", "Price"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("StackSize", "Stack Size") });
             ItemInfoLookUpEdit.DisplayMember = "ItemName";
             ItemInfoLookUpEdit.Name = "ItemInfoLookUpEdit";
-            ItemInfoLookUpEdit.NullText = "[Item is null]";
+            ItemInfoLookUpEdit.NullText = "[物品为空]";
             // 
             // gridColumn21
             // 
@@ -308,11 +308,11 @@
             MapLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "Index"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("FileName", "File Name"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Description", "Description") });
             MapLookUpEdit.DisplayMember = "Description";
             MapLookUpEdit.Name = "MapLookUpEdit";
-            MapLookUpEdit.NullText = "[Map is null]";
+            MapLookUpEdit.NullText = "[地图为空]";
             // 
             // gridColumn22
             // 
-            gridColumn22.Caption = "Instance Parameter 1";
+            gridColumn22.Caption = "副本参数 1";
             gridColumn22.ColumnEdit = InstanceLookUpEdit;
             gridColumn22.FieldName = "InstanceParameter1";
             gridColumn22.Name = "gridColumn22";
@@ -327,7 +327,7 @@
             InstanceLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "Index"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "Name") });
             InstanceLookUpEdit.DisplayMember = "Name";
             InstanceLookUpEdit.Name = "InstanceLookUpEdit";
-            InstanceLookUpEdit.NullText = "[Instance is null]";
+            InstanceLookUpEdit.NullText = "[副本为空]";
             // 
             // gridColumn19
             // 
@@ -383,7 +383,7 @@
             // 
             // gridColumn26
             // 
-            gridColumn26.Caption = "Value ID";
+            gridColumn26.Caption = "值 ID";
             gridColumn26.FieldName = "ValueID";
             gridColumn26.Name = "gridColumn26";
             gridColumn26.Visible = true;
@@ -391,7 +391,7 @@
             // 
             // gridColumn27
             // 
-            gridColumn27.Caption = "Data Category";
+            gridColumn27.Caption = "数据分类";
             gridColumn27.FieldName = "DataCategory";
             gridColumn27.Name = "gridColumn27";
             gridColumn27.Visible = true;
@@ -399,7 +399,7 @@
             // 
             // gridColumn29
             // 
-            gridColumn29.Caption = "Field Type";
+            gridColumn29.Caption = "字段类型";
             gridColumn29.ColumnEdit = FieldTypeImageComboBox;
             gridColumn29.FieldName = "FieldType";
             gridColumn29.Name = "gridColumn29";
@@ -414,7 +414,7 @@
             // 
             // gridColumn30
             // 
-            gridColumn30.Caption = "Value Type";
+            gridColumn30.Caption = "值类型";
             gridColumn30.ColumnEdit = ValueTypeImageComboBox;
             gridColumn30.FieldName = "ValueType";
             gridColumn30.Name = "gridColumn30";
@@ -429,7 +429,7 @@
             // 
             // gridColumn24
             // 
-            gridColumn24.Caption = "Data Type";
+            gridColumn24.Caption = "数据类型";
             gridColumn24.ColumnEdit = DataTypeImageComboBox;
             gridColumn24.FieldName = "DataType";
             gridColumn24.Name = "gridColumn24";
@@ -574,7 +574,7 @@
             // 
             // gridColumn23
             // 
-            gridColumn23.Caption = "Currency";
+            gridColumn23.Caption = "货币";
             gridColumn23.ColumnEdit = CurrencyInfoLookUpEdit;
             gridColumn23.FieldName = "Currency";
             gridColumn23.Name = "gridColumn23";
@@ -588,7 +588,7 @@
             CurrencyInfoLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "Index"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "Name") });
             CurrencyInfoLookUpEdit.DisplayMember = "Name";
             CurrencyInfoLookUpEdit.Name = "CurrencyInfoLookUpEdit";
-            CurrencyInfoLookUpEdit.NullText = "[Currency is null]";
+            CurrencyInfoLookUpEdit.NullText = "[货币为空]";
             // 
             // ribbon
             // 
@@ -602,7 +602,7 @@
             // 
             // SaveButton
             // 
-            SaveButton.Caption = "Save Database";
+            SaveButton.Caption = "保存数据库";
             SaveButton.Id = 1;
             SaveButton.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("SaveButton.ImageOptions.Image");
             SaveButton.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("SaveButton.ImageOptions.LargeImage");
@@ -612,7 +612,7 @@
             // 
             // ImportButton
             // 
-            ImportButton.Caption = "Import";
+            ImportButton.Caption = "导入";
             ImportButton.Id = 2;
             ImportButton.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("ImportButton.ImageOptions.Image");
             ImportButton.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("ImportButton.ImageOptions.LargeImage");
@@ -621,7 +621,7 @@
             // 
             // ExportButton
             // 
-            ExportButton.Caption = "Export";
+            ExportButton.Caption = "导出";
             ExportButton.Id = 3;
             ExportButton.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("ExportButton.ImageOptions.Image");
             ExportButton.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("ExportButton.ImageOptions.LargeImage");
@@ -632,7 +632,7 @@
             // 
             ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] { ribbonPageGroup1, JsonImportButton, ribbonPageGroup2 });
             ribbonPage1.Name = "ribbonPage1";
-            ribbonPage1.Text = "Home";
+            ribbonPage1.Text = "主页";
             // 
             // ribbonPageGroup1
             // 
@@ -640,24 +640,24 @@
             ribbonPageGroup1.CaptionButtonVisible = DevExpress.Utils.DefaultBoolean.False;
             ribbonPageGroup1.ItemLinks.Add(SaveButton);
             ribbonPageGroup1.Name = "ribbonPageGroup1";
-            ribbonPageGroup1.Text = "Saving";
+            ribbonPageGroup1.Text = "保存";
             // 
             // JsonImportButton
             // 
             JsonImportButton.ItemLinks.Add(ImportButton);
             JsonImportButton.ItemLinks.Add(ExportButton);
             JsonImportButton.Name = "JsonImportButton";
-            JsonImportButton.Text = "Json";
+            JsonImportButton.Text = "JSON";
             // 
             // ribbonPageGroup2
             // 
             ribbonPageGroup2.ItemLinks.Add(InsertRowButton);
             ribbonPageGroup2.Name = "ribbonPageGroup2";
-            ribbonPageGroup2.Text = "Edit";
+            ribbonPageGroup2.Text = "编辑";
             // 
             // InsertRowButton
             // 
-            InsertRowButton.Caption = "Insert Row";
+            InsertRowButton.Caption = "插入行";
             InsertRowButton.Id = 4;
             InsertRowButton.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("InsertRowButton.ImageOptions.Image");
             InsertRowButton.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("InsertRowButton.ImageOptions.LargeImage");
@@ -674,7 +674,7 @@
             Controls.Add(ribbon);
             Name = "NPCPageView";
             Ribbon = ribbon;
-            Text = "NPC Page";
+            Text = "NPC 页面";
             ((System.ComponentModel.ISupportInitialize)ChecksGridView).EndInit();
             ((System.ComponentModel.ISupportInitialize)PageLookUpEdit).EndInit();
             ((System.ComponentModel.ISupportInitialize)CheckTypeImageComboBox).EndInit();

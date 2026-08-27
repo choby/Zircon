@@ -78,7 +78,7 @@
             // 
             // ZoomResetButton
             // 
-            ZoomResetButton.Caption = "Reset";
+            ZoomResetButton.Caption = "重置";
             ZoomResetButton.Id = 2;
             ZoomResetButton.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("ZoomResetButton.ImageOptions.Image");
             ZoomResetButton.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("ZoomResetButton.ImageOptions.LargeImage");
@@ -87,7 +87,7 @@
             // 
             // ZoomInButton
             // 
-            ZoomInButton.Caption = "Zoom In";
+            ZoomInButton.Caption = "放大";
             ZoomInButton.Id = 3;
             ZoomInButton.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("ZoomInButton.ImageOptions.Image");
             ZoomInButton.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("ZoomInButton.ImageOptions.LargeImage");
@@ -96,7 +96,7 @@
             // 
             // ZoomOutButton
             // 
-            ZoomOutButton.Caption = "Zoom Out";
+            ZoomOutButton.Caption = "缩小";
             ZoomOutButton.Id = 4;
             ZoomOutButton.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("ZoomOutButton.ImageOptions.Image");
             ZoomOutButton.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("ZoomOutButton.ImageOptions.LargeImage");
@@ -105,7 +105,7 @@
             // 
             // AttributesButton
             // 
-            AttributesButton.Caption = "Attributes";
+            AttributesButton.Caption = "属性";
             AttributesButton.Id = 5;
             AttributesButton.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("AttributesButton.ImageOptions.Image");
             AttributesButton.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("AttributesButton.ImageOptions.LargeImage");
@@ -114,7 +114,7 @@
             // 
             // SelectionButton
             // 
-            SelectionButton.Caption = "Selection";
+            SelectionButton.Caption = "选择";
             SelectionButton.Id = 6;
             SelectionButton.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("SelectionButton.ImageOptions.Image");
             SelectionButton.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("SelectionButton.ImageOptions.LargeImage");
@@ -123,7 +123,7 @@
             // 
             // SaveButton
             // 
-            SaveButton.Caption = "Save";
+            SaveButton.Caption = "保存";
             SaveButton.Id = 10;
             SaveButton.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("SaveButton.ImageOptions.Image");
             SaveButton.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("SaveButton.ImageOptions.LargeImage");
@@ -132,7 +132,7 @@
             // 
             // CancelButton1
             // 
-            CancelButton1.Caption = "Cancel";
+            CancelButton1.Caption = "取消";
             CancelButton1.Id = 11;
             CancelButton1.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("CancelButton1.ImageOptions.Image");
             CancelButton1.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("CancelButton1.ImageOptions.LargeImage");
@@ -141,7 +141,7 @@
             // 
             // BlockedOnlyButton
             // 
-            BlockedOnlyButton.Caption = "Attribute Selection";
+            BlockedOnlyButton.Caption = "属性选择";
             BlockedOnlyButton.Id = 12;
             BlockedOnlyButton.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("BlockedOnlyButton.ImageOptions.Image");
             BlockedOnlyButton.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("BlockedOnlyButton.ImageOptions.LargeImage");
@@ -152,7 +152,7 @@
             // 
             ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] { ribbonPageGroup2, ribbonPageGroup1 });
             ribbonPage1.Name = "ribbonPage1";
-            ribbonPage1.Text = "Home";
+            ribbonPage1.Text = "主页";
             // 
             // ribbonPageGroup2
             // 
@@ -161,7 +161,7 @@
             ribbonPageGroup2.ItemLinks.Add(SaveButton);
             ribbonPageGroup2.ItemLinks.Add(CancelButton1);
             ribbonPageGroup2.Name = "ribbonPageGroup2";
-            ribbonPageGroup2.Text = "Selection";
+            ribbonPageGroup2.Text = "选择";
             // 
             // ribbonPageGroup1
             // 
@@ -174,7 +174,7 @@
             ribbonPageGroup1.ItemLinks.Add(BlockedOnlyButton);
             ribbonPageGroup1.ItemLinks.Add(SelectionButton);
             ribbonPageGroup1.Name = "ribbonPageGroup1";
-            ribbonPageGroup1.Text = "View";
+            ribbonPageGroup1.Text = "视图";
             // 
             // DXPanel
             // 
@@ -261,23 +261,23 @@
             bar3.OptionsBar.AllowQuickCustomization = false;
             bar3.OptionsBar.DrawDragBorder = false;
             bar3.OptionsBar.UseWholeRow = true;
-            bar3.Text = "Status bar";
+            bar3.Text = "状态栏";
             // 
             // MapSizeLabel
             // 
-            MapSizeLabel.Caption = "Map Size : 0,0";
+            MapSizeLabel.Caption = "地图大小：0,0";
             MapSizeLabel.Id = 0;
             MapSizeLabel.Name = "MapSizeLabel";
             // 
             // PositionLabel
             // 
-            PositionLabel.Caption = "Position: 0,0";
+            PositionLabel.Caption = "位置：0,0";
             PositionLabel.Id = 1;
             PositionLabel.Name = "PositionLabel";
             // 
             // SelectedCellsLabel
             // 
-            SelectedCellsLabel.Caption = "Selected Cells : 0";
+            SelectedCellsLabel.Caption = "已选单元格：0";
             SelectedCellsLabel.Id = 2;
             SelectedCellsLabel.Name = "SelectedCellsLabel";
             // 
@@ -296,7 +296,7 @@
             Controls.Add(barDockControlTop);
             Name = "MapViewer";
             Ribbon = ribbon;
-            Text = "Map Viewer";
+            Text = "地图查看器";
             ((System.ComponentModel.ISupportInitialize)ribbon).EndInit();
             ((System.ComponentModel.ISupportInitialize)DXPanel).EndInit();
             ((System.ComponentModel.ISupportInitialize)barManager1).EndInit();

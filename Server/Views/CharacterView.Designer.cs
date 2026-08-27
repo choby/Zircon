@@ -73,7 +73,7 @@ namespace Server.Views
             AccountLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("EMailAddress", "E-Mail") });
             AccountLookUpEdit.DisplayMember = "EMailAddress";
             AccountLookUpEdit.Name = "AccountLookUpEdit";
-            AccountLookUpEdit.NullText = "[Account is null]";
+            AccountLookUpEdit.NullText = "[账号为空]";
             // 
             // CharacterGridControl
             // 
@@ -171,7 +171,7 @@ namespace Server.Views
             // ribbonPage1
             // 
             ribbonPage1.Name = "ribbonPage1";
-            ribbonPage1.Text = "Home";
+            ribbonPage1.Text = "主页";
             // 
             // gridColumn9
             // 
@@ -190,7 +190,7 @@ namespace Server.Views
             Controls.Add(ribbon);
             Name = "CharacterView";
             Ribbon = ribbon;
-            Text = "Character";
+            Text = "角色";
             ((System.ComponentModel.ISupportInitialize)AccountLookUpEdit).EndInit();
             ((System.ComponentModel.ISupportInitialize)CharacterGridControl).EndInit();
             ((System.ComponentModel.ISupportInitialize)CharacterGridView).EndInit();

@@ -142,13 +142,13 @@
             // 
             // skinRibbonGalleryBarItem1
             // 
-            skinRibbonGalleryBarItem1.Caption = "skinRibbonGalleryBarItem1";
+            skinRibbonGalleryBarItem1.Caption = "皮肤";
             skinRibbonGalleryBarItem1.Id = 1;
             skinRibbonGalleryBarItem1.Name = "skinRibbonGalleryBarItem1";
             // 
             // StartServerButton
             // 
-            StartServerButton.Caption = "Start Server";
+            StartServerButton.Caption = "启动服务器";
             StartServerButton.Id = 2;
             StartServerButton.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("StartServerButton.ImageOptions.Image");
             StartServerButton.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("StartServerButton.ImageOptions.LargeImage");
@@ -158,7 +158,7 @@
             // 
             // StopServerButton
             // 
-            StopServerButton.Caption = "Stop Server";
+            StopServerButton.Caption = "停止服务器";
             StopServerButton.Id = 3;
             StopServerButton.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("StopServerButton.ImageOptions.Image");
             StopServerButton.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("StopServerButton.ImageOptions.LargeImage");
@@ -170,7 +170,7 @@
             // 
             ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] { ribbonPageGroup1 });
             ribbonPage1.Name = "ribbonPage1";
-            ribbonPage1.Text = "Home";
+            ribbonPage1.Text = "主页";
             // 
             // ribbonPageGroup1
             // 
@@ -178,24 +178,24 @@
             ribbonPageGroup1.ItemLinks.Add(StartServerButton);
             ribbonPageGroup1.ItemLinks.Add(StopServerButton);
             ribbonPageGroup1.Name = "ribbonPageGroup1";
-            ribbonPageGroup1.Text = "Control";
+            ribbonPageGroup1.Text = "控制";
             // 
             // ribbonPage2
             // 
             ribbonPage2.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] { ribbonPageGroup2 });
             ribbonPage2.Name = "ribbonPage2";
-            ribbonPage2.Text = "View";
+            ribbonPage2.Text = "视图";
             // 
             // ribbonPageGroup2
             // 
             ribbonPageGroup2.ItemLinks.Add(skinRibbonGalleryBarItem1);
             ribbonPageGroup2.Name = "ribbonPageGroup2";
-            ribbonPageGroup2.Text = "Skin";
+            ribbonPageGroup2.Text = "皮肤";
             // 
             // ribbonPage3
             // 
             ribbonPage3.Name = "ribbonPage3";
-            ribbonPage3.Text = "Plugins";
+            ribbonPage3.Text = "插件";
             // 
             // navBarControl1
             // 
@@ -208,11 +208,11 @@
             navBarControl1.OptionsNavPane.ExpandedWidth = 144;
             navBarControl1.Size = new System.Drawing.Size(144, 688);
             navBarControl1.TabIndex = 1;
-            navBarControl1.Text = "navBarControl1";
+            navBarControl1.Text = "导航栏";
             // 
             // navBarGroup1
             // 
-            navBarGroup1.Caption = "Operations";
+            navBarGroup1.Caption = "操作";
             navBarGroup1.Expanded = true;
             navBarGroup1.ImageOptions.SmallImage = (System.Drawing.Image)resources.GetObject("navBarGroup1.ImageOptions.SmallImage");
             navBarGroup1.ItemLinks.AddRange(new DevExpress.XtraNavBar.NavBarItemLink[] { new DevExpress.XtraNavBar.NavBarItemLink(LogNavButton), new DevExpress.XtraNavBar.NavBarItemLink(ChatLogButton), new DevExpress.XtraNavBar.NavBarItemLink(ConfigButton) });
@@ -220,28 +220,28 @@
             // 
             // LogNavButton
             // 
-            LogNavButton.Caption = "System Log";
+            LogNavButton.Caption = "系统日志";
             LogNavButton.ImageOptions.SmallImage = (System.Drawing.Image)resources.GetObject("LogNavButton.ImageOptions.SmallImage");
             LogNavButton.Name = "LogNavButton";
             LogNavButton.LinkClicked += LogNavButton_LinkClicked;
             // 
             // ChatLogButton
             // 
-            ChatLogButton.Caption = "Chat Log";
+            ChatLogButton.Caption = "聊天日志";
             ChatLogButton.ImageOptions.SmallImage = (System.Drawing.Image)resources.GetObject("ChatLogButton.ImageOptions.SmallImage");
             ChatLogButton.Name = "ChatLogButton";
             ChatLogButton.LinkClicked += ChatLogNavButton_LinkClicked;
             // 
             // ConfigButton
             // 
-            ConfigButton.Caption = "Config";
+            ConfigButton.Caption = "配置";
             ConfigButton.ImageOptions.SmallImage = (System.Drawing.Image)resources.GetObject("ConfigButton.ImageOptions.SmallImage");
             ConfigButton.Name = "ConfigButton";
             ConfigButton.LinkClicked += ConfigButton_LinkClicked;
             // 
             // navBarGroup4
             // 
-            navBarGroup4.Caption = "Player";
+            navBarGroup4.Caption = "玩家";
             navBarGroup4.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("navBarGroup4.ImageOptions.LargeImage");
             navBarGroup4.ImageOptions.SmallImage = (System.Drawing.Image)resources.GetObject("navBarGroup4.ImageOptions.SmallImage");
             navBarGroup4.ItemLinks.AddRange(new DevExpress.XtraNavBar.NavBarItemLink[] { new DevExpress.XtraNavBar.NavBarItemLink(BaseStatButton), new DevExpress.XtraNavBar.NavBarItemLink(MagicInfoButton), new DevExpress.XtraNavBar.NavBarItemLink(FameInfoButton), new DevExpress.XtraNavBar.NavBarItemLink(DisciplineInfoButton), new DevExpress.XtraNavBar.NavBarItemLink(CompanionInfoButton), new DevExpress.XtraNavBar.NavBarItemLink(CurrencyInfoButton), new DevExpress.XtraNavBar.NavBarItemLink(HelpInfoButton) });
@@ -249,21 +249,21 @@
             // 
             // BaseStatButton
             // 
-            BaseStatButton.Caption = "Base Stats";
+            BaseStatButton.Caption = "基础属性";
             BaseStatButton.ImageOptions.SmallImage = (System.Drawing.Image)resources.GetObject("BaseStatButton.ImageOptions.SmallImage");
             BaseStatButton.Name = "BaseStatButton";
             BaseStatButton.LinkClicked += BaseStatButton_LinkClicked;
             // 
             // MagicInfoButton
             // 
-            MagicInfoButton.Caption = "Magic Info";
+            MagicInfoButton.Caption = "技能信息";
             MagicInfoButton.ImageOptions.SmallImage = (System.Drawing.Image)resources.GetObject("MagicInfoButton.ImageOptions.SmallImage");
             MagicInfoButton.Name = "MagicInfoButton";
             MagicInfoButton.LinkClicked += MagicInfoButton_LinkClicked;
             // 
             // FameInfoButton
             // 
-            FameInfoButton.Caption = "Fame Info";
+            FameInfoButton.Caption = "声望信息";
             FameInfoButton.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("FameInfoButton.ImageOptions.LargeImage");
             FameInfoButton.ImageOptions.SmallImage = (System.Drawing.Image)resources.GetObject("FameInfoButton.ImageOptions.SmallImage");
             FameInfoButton.Name = "FameInfoButton";
@@ -271,7 +271,7 @@
             // 
             // DisciplineInfoButton
             // 
-            DisciplineInfoButton.Caption = "Discipline Info";
+            DisciplineInfoButton.Caption = "修炼信息";
             DisciplineInfoButton.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("DisciplineInfoButton.ImageOptions.LargeImage");
             DisciplineInfoButton.ImageOptions.SmallImage = (System.Drawing.Image)resources.GetObject("DisciplineInfoButton.ImageOptions.SmallImage");
             DisciplineInfoButton.Name = "DisciplineInfoButton";
@@ -279,21 +279,21 @@
             // 
             // CompanionInfoButton
             // 
-            CompanionInfoButton.Caption = "Companion Info";
+            CompanionInfoButton.Caption = "宠物信息";
             CompanionInfoButton.ImageOptions.SmallImage = (System.Drawing.Image)resources.GetObject("CompanionInfoButton.ImageOptions.SmallImage");
             CompanionInfoButton.Name = "CompanionInfoButton";
             CompanionInfoButton.LinkClicked += CompanionInfoButton_LinkClicked;
             // 
             // CurrencyInfoButton
             // 
-            CurrencyInfoButton.Caption = "Currency Info";
+            CurrencyInfoButton.Caption = "货币信息";
             CurrencyInfoButton.ImageOptions.SmallImage = (System.Drawing.Image)resources.GetObject("CurrencyInfoButton.ImageOptions.SmallImage");
             CurrencyInfoButton.Name = "CurrencyInfoButton";
             CurrencyInfoButton.LinkClicked += CurrencyInfoButton_LinkClicked;
             // 
             // HelpInfoButton
             // 
-            HelpInfoButton.Caption = "Help Info";
+            HelpInfoButton.Caption = "帮助信息";
             HelpInfoButton.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("HelpInfoButton.ImageOptions.LargeImage");
             HelpInfoButton.ImageOptions.SmallImage = (System.Drawing.Image)resources.GetObject("HelpInfoButton.ImageOptions.SmallImage");
             HelpInfoButton.Name = "HelpInfoButton";
@@ -301,7 +301,7 @@
             // 
             // navBarGroup5
             // 
-            navBarGroup5.Caption = "Map";
+            navBarGroup5.Caption = "地图";
             navBarGroup5.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("navBarGroup5.ImageOptions.LargeImage");
             navBarGroup5.ImageOptions.SmallImage = (System.Drawing.Image)resources.GetObject("navBarGroup5.ImageOptions.SmallImage");
             navBarGroup5.ItemLinks.AddRange(new DevExpress.XtraNavBar.NavBarItemLink[] { new DevExpress.XtraNavBar.NavBarItemLink(MapInfoButton), new DevExpress.XtraNavBar.NavBarItemLink(InstanceInfoButton), new DevExpress.XtraNavBar.NavBarItemLink(DungeonInfoButton), new DevExpress.XtraNavBar.NavBarItemLink(MapRegionButton), new DevExpress.XtraNavBar.NavBarItemLink(MovementInfoButton), new DevExpress.XtraNavBar.NavBarItemLink(SafeZoneInfoButton), new DevExpress.XtraNavBar.NavBarItemLink(FishingInfoButton), new DevExpress.XtraNavBar.NavBarItemLink(CastleInfoButton), new DevExpress.XtraNavBar.NavBarItemLink(EventInfoButton) });
@@ -309,21 +309,21 @@
             // 
             // MapInfoButton
             // 
-            MapInfoButton.Caption = "Map Info";
+            MapInfoButton.Caption = "地图信息";
             MapInfoButton.ImageOptions.SmallImage = (System.Drawing.Image)resources.GetObject("MapInfoButton.ImageOptions.SmallImage");
             MapInfoButton.Name = "MapInfoButton";
             MapInfoButton.LinkClicked += MapInfoButton_LinkClicked;
             // 
             // InstanceInfoButton
             // 
-            InstanceInfoButton.Caption = "Instance Info";
+            InstanceInfoButton.Caption = "副本信息";
             InstanceInfoButton.ImageOptions.SmallImage = (System.Drawing.Image)resources.GetObject("InstanceInfoButton.ImageOptions.SmallImage");
             InstanceInfoButton.Name = "InstanceInfoButton";
             InstanceInfoButton.LinkClicked += InstanceInfoButton_LinkClicked;
             // 
             // DungeonInfoButton
             // 
-            DungeonInfoButton.Caption = "Dungeon Info";
+            DungeonInfoButton.Caption = "副本信息";
             DungeonInfoButton.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("DungeonInfoButton.ImageOptions.LargeImage");
             DungeonInfoButton.ImageOptions.SmallImage = (System.Drawing.Image)resources.GetObject("DungeonInfoButton.ImageOptions.SmallImage");
             DungeonInfoButton.Name = "DungeonInfoButton";
@@ -331,28 +331,28 @@
             // 
             // MapRegionButton
             // 
-            MapRegionButton.Caption = "Map Region";
+            MapRegionButton.Caption = "地图区域";
             MapRegionButton.ImageOptions.SmallImage = (System.Drawing.Image)resources.GetObject("MapRegionButton.ImageOptions.SmallImage");
             MapRegionButton.Name = "MapRegionButton";
             MapRegionButton.LinkClicked += MapRegionButton_LinkClicked;
             // 
             // MovementInfoButton
             // 
-            MovementInfoButton.Caption = "Movement Info";
+            MovementInfoButton.Caption = "移动信息";
             MovementInfoButton.ImageOptions.SmallImage = (System.Drawing.Image)resources.GetObject("MovementInfoButton.ImageOptions.SmallImage");
             MovementInfoButton.Name = "MovementInfoButton";
             MovementInfoButton.LinkClicked += MovementInfoButton_LinkClicked;
             // 
             // SafeZoneInfoButton
             // 
-            SafeZoneInfoButton.Caption = "Safe Zone Info";
+            SafeZoneInfoButton.Caption = "安全区信息";
             SafeZoneInfoButton.ImageOptions.SmallImage = (System.Drawing.Image)resources.GetObject("SafeZoneInfoButton.ImageOptions.SmallImage");
             SafeZoneInfoButton.Name = "SafeZoneInfoButton";
             SafeZoneInfoButton.LinkClicked += SafeZoneInfoButton_LinkClicked;
             // 
             // FishingInfoButton
             // 
-            FishingInfoButton.Caption = "Fishing Info";
+            FishingInfoButton.Caption = "钓鱼信息";
             FishingInfoButton.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("FishingInfoButton.ImageOptions.LargeImage");
             FishingInfoButton.ImageOptions.SmallImage = (System.Drawing.Image)resources.GetObject("FishingInfoButton.ImageOptions.SmallImage");
             FishingInfoButton.Name = "FishingInfoButton";
@@ -360,14 +360,14 @@
             // 
             // CastleInfoButton
             // 
-            CastleInfoButton.Caption = "Castle Info";
+            CastleInfoButton.Caption = "城堡信息";
             CastleInfoButton.ImageOptions.SmallImage = (System.Drawing.Image)resources.GetObject("CastleInfoButton.ImageOptions.SmallImage");
             CastleInfoButton.Name = "CastleInfoButton";
             CastleInfoButton.LinkClicked += CastleInfoButton_LinkClicked;
             // 
             // EventInfoButton
             // 
-            EventInfoButton.Caption = "Event Info";
+            EventInfoButton.Caption = "事件信息";
             EventInfoButton.ImageOptions.SmallImage = (System.Drawing.Image)resources.GetObject("EventInfoButton.ImageOptions.SmallImage");
             EventInfoButton.Name = "EventInfoButton";
             EventInfoButton.LinkClicked += EventInfoButton_LinkClicked;
@@ -382,28 +382,28 @@
             // 
             // NPCInfoButton
             // 
-            NPCInfoButton.Caption = "NPC Info";
+            NPCInfoButton.Caption = "NPC 信息";
             NPCInfoButton.ImageOptions.SmallImage = (System.Drawing.Image)resources.GetObject("NPCInfoButton.ImageOptions.SmallImage");
             NPCInfoButton.Name = "NPCInfoButton";
             NPCInfoButton.LinkClicked += NPCInfoButton_LinkClicked;
             // 
             // NPCPageButton
             // 
-            NPCPageButton.Caption = "NPC Page";
+            NPCPageButton.Caption = "NPC 页面";
             NPCPageButton.ImageOptions.SmallImage = (System.Drawing.Image)resources.GetObject("NPCPageButton.ImageOptions.SmallImage");
             NPCPageButton.Name = "NPCPageButton";
             NPCPageButton.LinkClicked += NPCPageButton_LinkClicked;
             // 
             // QuestInfoButton
             // 
-            QuestInfoButton.Caption = "Quest Info";
+            QuestInfoButton.Caption = "任务信息";
             QuestInfoButton.ImageOptions.SmallImage = (System.Drawing.Image)resources.GetObject("QuestInfoButton.ImageOptions.SmallImage");
             QuestInfoButton.Name = "QuestInfoButton";
             QuestInfoButton.LinkClicked += QuestInfoButton_LinkClicked;
             // 
             // MilestoneInfoButton
             // 
-            MilestoneInfoButton.Caption = "Milestone Info";
+            MilestoneInfoButton.Caption = "里程碑信息";
             MilestoneInfoButton.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("MilestoneInfoButton.ImageOptions.LargeImage");
             MilestoneInfoButton.ImageOptions.SmallImage = (System.Drawing.Image)resources.GetObject("MilestoneInfoButton.ImageOptions.SmallImage");
             MilestoneInfoButton.Name = "MilestoneInfoButton";
@@ -411,14 +411,14 @@
             // 
             // StoreInfoButton
             // 
-            StoreInfoButton.Caption = "Store Info";
+            StoreInfoButton.Caption = "商店信息";
             StoreInfoButton.ImageOptions.SmallImage = (System.Drawing.Image)resources.GetObject("StoreInfoButton.ImageOptions.SmallImage");
             StoreInfoButton.Name = "StoreInfoButton";
             StoreInfoButton.LinkClicked += StoreInfoButton_LinkClicked;
             // 
             // navBarGroup7
             // 
-            navBarGroup7.Caption = "Item";
+            navBarGroup7.Caption = "物品";
             navBarGroup7.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("navBarGroup7.ImageOptions.LargeImage");
             navBarGroup7.ImageOptions.SmallImage = (System.Drawing.Image)resources.GetObject("navBarGroup7.ImageOptions.SmallImage");
             navBarGroup7.ItemLinks.AddRange(new DevExpress.XtraNavBar.NavBarItemLink[] { new DevExpress.XtraNavBar.NavBarItemLink(ItemInfoButton), new DevExpress.XtraNavBar.NavBarItemLink(ItemInfoStatButton), new DevExpress.XtraNavBar.NavBarItemLink(SetInfoButton), new DevExpress.XtraNavBar.NavBarItemLink(WeaponCraftInfoButton), new DevExpress.XtraNavBar.NavBarItemLink(BundleInfoButton), new DevExpress.XtraNavBar.NavBarItemLink(LootBoxInfoButton) });
@@ -426,35 +426,35 @@
             // 
             // ItemInfoButton
             // 
-            ItemInfoButton.Caption = "Item Info";
+            ItemInfoButton.Caption = "物品信息";
             ItemInfoButton.ImageOptions.SmallImage = (System.Drawing.Image)resources.GetObject("ItemInfoButton.ImageOptions.SmallImage");
             ItemInfoButton.Name = "ItemInfoButton";
             ItemInfoButton.LinkClicked += ItemInfoButton_LinkClicked;
             // 
             // ItemInfoStatButton
             // 
-            ItemInfoStatButton.Caption = "Item Info Stat";
+            ItemInfoStatButton.Caption = "物品属性信息";
             ItemInfoStatButton.ImageOptions.SmallImage = (System.Drawing.Image)resources.GetObject("ItemInfoStatButton.ImageOptions.SmallImage");
             ItemInfoStatButton.Name = "ItemInfoStatButton";
             ItemInfoStatButton.LinkClicked += ItemInfoStatButton_LinkClicked;
             // 
             // SetInfoButton
             // 
-            SetInfoButton.Caption = "Set Info";
+            SetInfoButton.Caption = "套装信息";
             SetInfoButton.ImageOptions.SmallImage = (System.Drawing.Image)resources.GetObject("SetInfoButton.ImageOptions.SmallImage");
             SetInfoButton.Name = "SetInfoButton";
             SetInfoButton.LinkClicked += SetInfoButton_LinkClicked;
             // 
             // WeaponCraftInfoButton
             // 
-            WeaponCraftInfoButton.Caption = "Weapon Craft Info";
+            WeaponCraftInfoButton.Caption = "武器制作信息";
             WeaponCraftInfoButton.ImageOptions.SmallImage = (System.Drawing.Image)resources.GetObject("WeaponCraftInfoButton.ImageOptions.SmallImage");
             WeaponCraftInfoButton.Name = "WeaponCraftInfoButton";
             WeaponCraftInfoButton.LinkClicked += WeaponCraftInfoButton_LinkClicked;
             // 
             // BundleInfoButton
             // 
-            BundleInfoButton.Caption = "Bundle Info";
+            BundleInfoButton.Caption = "礼包信息";
             BundleInfoButton.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("BundleInfoButton.ImageOptions.LargeImage");
             BundleInfoButton.ImageOptions.SmallImage = (System.Drawing.Image)resources.GetObject("BundleInfoButton.ImageOptions.SmallImage");
             BundleInfoButton.Name = "BundleInfoButton";
@@ -462,7 +462,7 @@
             // 
             // LootBoxInfoButton
             // 
-            LootBoxInfoButton.Caption = "Loot Box Info";
+            LootBoxInfoButton.Caption = "宝箱信息";
             LootBoxInfoButton.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("LootBoxInfoButton.ImageOptions.LargeImage");
             LootBoxInfoButton.ImageOptions.SmallImage = (System.Drawing.Image)resources.GetObject("LootBoxInfoButton.ImageOptions.SmallImage");
             LootBoxInfoButton.Name = "LootBoxInfoButton";
@@ -470,7 +470,7 @@
             // 
             // navBarGroup6
             // 
-            navBarGroup6.Caption = "Monster";
+            navBarGroup6.Caption = "怪物";
             navBarGroup6.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("navBarGroup6.ImageOptions.LargeImage");
             navBarGroup6.ImageOptions.SmallImage = (System.Drawing.Image)resources.GetObject("navBarGroup6.ImageOptions.SmallImage");
             navBarGroup6.ItemLinks.AddRange(new DevExpress.XtraNavBar.NavBarItemLink[] { new DevExpress.XtraNavBar.NavBarItemLink(MonsterInfoButton), new DevExpress.XtraNavBar.NavBarItemLink(MonsterInfoStatButton), new DevExpress.XtraNavBar.NavBarItemLink(DropInfoButton), new DevExpress.XtraNavBar.NavBarItemLink(RespawnInfoButton) });
@@ -478,35 +478,35 @@
             // 
             // MonsterInfoButton
             // 
-            MonsterInfoButton.Caption = "Monster Info ";
+            MonsterInfoButton.Caption = "怪物信息";
             MonsterInfoButton.ImageOptions.SmallImage = (System.Drawing.Image)resources.GetObject("MonsterInfoButton.ImageOptions.SmallImage");
             MonsterInfoButton.Name = "MonsterInfoButton";
             MonsterInfoButton.LinkClicked += MonsterInfoButton_LinkClicked;
             // 
             // MonsterInfoStatButton
             // 
-            MonsterInfoStatButton.Caption = "Monster Info Stat";
+            MonsterInfoStatButton.Caption = "怪物属性信息";
             MonsterInfoStatButton.ImageOptions.SmallImage = (System.Drawing.Image)resources.GetObject("MonsterInfoStatButton.ImageOptions.SmallImage");
             MonsterInfoStatButton.Name = "MonsterInfoStatButton";
             MonsterInfoStatButton.LinkClicked += MonsterInfoStatButton_LinkClicked;
             // 
             // DropInfoButton
             // 
-            DropInfoButton.Caption = "Drop Info";
+            DropInfoButton.Caption = "掉落信息";
             DropInfoButton.ImageOptions.SmallImage = (System.Drawing.Image)resources.GetObject("DropInfoButton.ImageOptions.SmallImage");
             DropInfoButton.Name = "DropInfoButton";
             DropInfoButton.LinkClicked += DropInfoButton_LinkClicked;
             // 
             // RespawnInfoButton
             // 
-            RespawnInfoButton.Caption = "Respawn Info";
+            RespawnInfoButton.Caption = "刷新信息";
             RespawnInfoButton.ImageOptions.SmallImage = (System.Drawing.Image)resources.GetObject("RespawnInfoButton.ImageOptions.SmallImage");
             RespawnInfoButton.Name = "RespawnInfoButton";
             RespawnInfoButton.LinkClicked += RespawnInfoButton_LinkClicked;
             // 
             // navBarGroup3
             // 
-            navBarGroup3.Caption = "Management";
+            navBarGroup3.Caption = "管理";
             navBarGroup3.Expanded = true;
             navBarGroup3.ImageOptions.SmallImage = (System.Drawing.Image)resources.GetObject("navBarGroup3.ImageOptions.SmallImage");
             navBarGroup3.ItemLinks.AddRange(new DevExpress.XtraNavBar.NavBarItemLink[] { new DevExpress.XtraNavBar.NavBarItemLink(AccountInfoButton), new DevExpress.XtraNavBar.NavBarItemLink(CharacterInfoButton), new DevExpress.XtraNavBar.NavBarItemLink(UserDropButton), new DevExpress.XtraNavBar.NavBarItemLink(PaymentButton), new DevExpress.XtraNavBar.NavBarItemLink(StoreSalesButton), new DevExpress.XtraNavBar.NavBarItemLink(DiagnosticButton), new DevExpress.XtraNavBar.NavBarItemLink(OrphanDiagnosticsButton), new DevExpress.XtraNavBar.NavBarItemLink(ConquestStatsButton), new DevExpress.XtraNavBar.NavBarItemLink(UserMailButton), new DevExpress.XtraNavBar.NavBarItemLink(NPCDataButton) });
@@ -514,49 +514,49 @@
             // 
             // AccountInfoButton
             // 
-            AccountInfoButton.Caption = "Account";
+            AccountInfoButton.Caption = "账号";
             AccountInfoButton.ImageOptions.SmallImage = (System.Drawing.Image)resources.GetObject("AccountInfoButton.ImageOptions.SmallImage");
             AccountInfoButton.Name = "AccountInfoButton";
             AccountInfoButton.LinkClicked += AccountInfoButton_LinkClicked;
             // 
             // CharacterInfoButton
             // 
-            CharacterInfoButton.Caption = "Character Info";
+            CharacterInfoButton.Caption = "角色信息";
             CharacterInfoButton.ImageOptions.SmallImage = (System.Drawing.Image)resources.GetObject("CharacterInfoButton.ImageOptions.SmallImage");
             CharacterInfoButton.Name = "CharacterInfoButton";
             CharacterInfoButton.LinkClicked += CharacterInfoButton_LinkClicked;
             // 
             // UserDropButton
             // 
-            UserDropButton.Caption = "User Drop";
+            UserDropButton.Caption = "用户掉落";
             UserDropButton.ImageOptions.SmallImage = (System.Drawing.Image)resources.GetObject("UserDropButton.ImageOptions.SmallImage");
             UserDropButton.Name = "UserDropButton";
             UserDropButton.LinkClicked += UserDropButton_LinkClicked;
             // 
             // PaymentButton
             // 
-            PaymentButton.Caption = "Payments";
+            PaymentButton.Caption = "支付";
             PaymentButton.ImageOptions.SmallImage = (System.Drawing.Image)resources.GetObject("PaymentButton.ImageOptions.SmallImage");
             PaymentButton.Name = "PaymentButton";
             PaymentButton.LinkClicked += PaymentButton_LinkClicked;
             // 
             // StoreSalesButton
             // 
-            StoreSalesButton.Caption = "Store Sales";
+            StoreSalesButton.Caption = "商店销售";
             StoreSalesButton.ImageOptions.SmallImage = (System.Drawing.Image)resources.GetObject("StoreSalesButton.ImageOptions.SmallImage");
             StoreSalesButton.Name = "StoreSalesButton";
             StoreSalesButton.LinkClicked += StoreSalesButton_LinkClicked;
             // 
             // DiagnosticButton
             // 
-            DiagnosticButton.Caption = "Diagnostics";
+            DiagnosticButton.Caption = "诊断";
             DiagnosticButton.ImageOptions.SmallImage = (System.Drawing.Image)resources.GetObject("DiagnosticButton.ImageOptions.SmallImage");
             DiagnosticButton.Name = "DiagnosticButton";
             DiagnosticButton.LinkClicked += DiagnosticButton_LinkClicked;
             // 
             // OrphanDiagnosticsButton
             // 
-            OrphanDiagnosticsButton.Caption = "Orphan Diagnostics";
+            OrphanDiagnosticsButton.Caption = "孤立数据诊断";
             OrphanDiagnosticsButton.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("OrphanDiagnosticsButton.ImageOptions.LargeImage");
             OrphanDiagnosticsButton.ImageOptions.SmallImage = (System.Drawing.Image)resources.GetObject("OrphanDiagnosticsButton.ImageOptions.SmallImage");
             OrphanDiagnosticsButton.Name = "OrphanDiagnosticsButton";
@@ -564,7 +564,7 @@
             // 
             // ConquestStatsButton
             // 
-            ConquestStatsButton.Caption = "Conquest Stats";
+            ConquestStatsButton.Caption = "争夺战统计";
             ConquestStatsButton.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("ConquestStatsButton.ImageOptions.LargeImage");
             ConquestStatsButton.ImageOptions.SmallImage = (System.Drawing.Image)resources.GetObject("ConquestStatsButton.ImageOptions.SmallImage");
             ConquestStatsButton.Name = "ConquestStatsButton";
@@ -572,7 +572,7 @@
             // 
             // UserMailButton
             // 
-            UserMailButton.Caption = "User Mail";
+            UserMailButton.Caption = "用户邮件";
             UserMailButton.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("UserMailButton.ImageOptions.LargeImage");
             UserMailButton.ImageOptions.SmallImage = (System.Drawing.Image)resources.GetObject("UserMailButton.ImageOptions.SmallImage");
             UserMailButton.Name = "UserMailButton";
@@ -580,7 +580,7 @@
             // 
             // NPCDataButton
             // 
-            NPCDataButton.Caption = "NPC Data";
+            NPCDataButton.Caption = "NPC 数据";
             NPCDataButton.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("NPCDataButton.ImageOptions.LargeImage");
             NPCDataButton.ImageOptions.SmallImage = (System.Drawing.Image)resources.GetObject("NPCDataButton.ImageOptions.SmallImage");
             NPCDataButton.Name = "NPCDataButton";
@@ -616,71 +616,71 @@
             bar3.OptionsBar.AllowQuickCustomization = false;
             bar3.OptionsBar.DrawDragBorder = false;
             bar3.OptionsBar.UseWholeRow = true;
-            bar3.Text = "Status bar";
+            bar3.Text = "状态栏";
             // 
             // ConnectionLabel
             // 
-            ConnectionLabel.Caption = "Connections: 0";
+            ConnectionLabel.Caption = "连接数：0";
             ConnectionLabel.Id = 1;
             ConnectionLabel.Name = "ConnectionLabel";
             // 
             // ObjectLabel
             // 
-            ObjectLabel.Caption = "Object: 0";
+            ObjectLabel.Caption = "对象：0";
             ObjectLabel.Id = 2;
             ObjectLabel.Name = "ObjectLabel";
             // 
             // ProcessLabel
             // 
-            ProcessLabel.Caption = "Process Count: 0";
+            ProcessLabel.Caption = "处理数：0";
             ProcessLabel.Id = 3;
             ProcessLabel.Name = "ProcessLabel";
             // 
             // LoopLabel
             // 
-            LoopLabel.Caption = "Loop Count: 0";
+            LoopLabel.Caption = "循环次数：0";
             LoopLabel.Id = 4;
             LoopLabel.Name = "LoopLabel";
             // 
             // ConDelay
             // 
-            ConDelay.Caption = "Con Delay: 0";
+            ConDelay.Caption = "连接延迟：0";
             ConDelay.Id = 10;
             ConDelay.Name = "ConDelay";
             // 
             // TotalDownloadLabel
             // 
-            TotalDownloadLabel.Caption = "Downloaded: 0B";
+            TotalDownloadLabel.Caption = "已下载：0B";
             TotalDownloadLabel.Id = 5;
             TotalDownloadLabel.Name = "TotalDownloadLabel";
             // 
             // TotalUploadLabel
             // 
-            TotalUploadLabel.Caption = "Uploaded: 0B";
+            TotalUploadLabel.Caption = "已上传：0B";
             TotalUploadLabel.Id = 6;
             TotalUploadLabel.Name = "TotalUploadLabel";
             // 
             // DownloadSpeedLabel
             // 
-            DownloadSpeedLabel.Caption = "D/L Speed: 0Bps";
+            DownloadSpeedLabel.Caption = "下载速度：0Bps";
             DownloadSpeedLabel.Id = 7;
             DownloadSpeedLabel.Name = "DownloadSpeedLabel";
             // 
             // UploadSpeedLabel
             // 
-            UploadSpeedLabel.Caption = "U/L Speed: 0Bps";
+            UploadSpeedLabel.Caption = "上传速度：0Bps";
             UploadSpeedLabel.Id = 8;
             UploadSpeedLabel.Name = "UploadSpeedLabel";
             // 
             // EMailsSentLabel
             // 
-            EMailsSentLabel.Caption = "E-Mails Sent: 0";
+            EMailsSentLabel.Caption = "已发送邮件：0";
             EMailsSentLabel.Id = 9;
             EMailsSentLabel.Name = "EMailsSentLabel";
             // 
             // SaveDelay
             // 
-            SaveDelay.Caption = "Save Delay: 0";
+            SaveDelay.Caption = "保存延迟：0";
             SaveDelay.Id = 11;
             SaveDelay.Name = "SaveDelay";
             // 
@@ -736,7 +736,7 @@
             Name = "SMain";
             Ribbon = ribbonControl1;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            Text = "Zircon Server";
+            Text = "Zircon 服务器";
             Load += SMain_Load;
             ((System.ComponentModel.ISupportInitialize)ribbonControl1).EndInit();
             ((System.ComponentModel.ISupportInitialize)navBarControl1).EndInit();
@@ -833,4 +833,3 @@
         private DevExpress.XtraNavBar.NavBarItem LootBoxInfoButton;
     }
 }
-

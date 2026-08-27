@@ -60,13 +60,13 @@ namespace LibraryEditor
         {
             ToolStripMenuItem validateAtlasMenuItem = new ToolStripMenuItem("Validate ZL Atlas Metadata")
             {
-                ToolTipText = "Check that generated atlas page/source metadata is internally consistent."
+                ToolTipText = "检查生成的图集页面与源元数据是否内部一致。"
             };
             validateAtlasMenuItem.Click += validateAtlasToolStripMenuItem_Click;
 
             ToolStripMenuItem exportAtlasMenuItem = new ToolStripMenuItem("Export ZL Atlas Debug Pages")
             {
-                ToolTipText = "Export atlas page PNGs and rectangle overlays for visual validation."
+                ToolTipText = "导出图集页面 PNG 和矩形叠加图，以便进行可视化校验。"
             };
             exportAtlasMenuItem.Click += exportAtlasToolStripMenuItem_Click;
 
@@ -1550,8 +1550,8 @@ namespace LibraryEditor
             label.Text = promptText;
             textBox.Text = value;
 
-            buttonOk.Text = "OK";
-            buttonCancel.Text = "Cancel";
+            buttonOk.Text = "确定";
+            buttonCancel.Text = "取消";
             buttonOk.DialogResult = DialogResult.OK;
             buttonCancel.DialogResult = DialogResult.Cancel;
 

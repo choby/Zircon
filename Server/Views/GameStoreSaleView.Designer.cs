@@ -128,7 +128,7 @@
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("StackSize", "Stack Szie")});
             this.ItemLookUpEdit.DisplayMember = "ItemName";
             this.ItemLookUpEdit.Name = "ItemLookUpEdit";
-            this.ItemLookUpEdit.NullText = "[Item is null]";
+            this.ItemLookUpEdit.NullText = "[物品为空]";
             // 
             // gridColumn3
             // 
@@ -167,7 +167,7 @@
             this.ClientSize = new System.Drawing.Size(937, 373);
             this.Controls.Add(this.GameStoreSaleGridControl);
             this.Name = "GameStoreSaleView";
-            this.Text = "Store Sales";
+            this.Text = "商店销售";
             ((System.ComponentModel.ISupportInitialize)(this.GameStoreSaleGridControl)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.GameStoreSaleGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.AccountLookUpEdit)).EndInit();

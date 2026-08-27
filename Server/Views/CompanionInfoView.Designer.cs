@@ -106,7 +106,7 @@
             // 
             // gridColumn14
             // 
-            gridColumn14.Caption = "Speech";
+            gridColumn14.Caption = "对话";
             gridColumn14.FieldName = "Speech";
             gridColumn14.Name = "gridColumn14";
             gridColumn14.Visible = true;
@@ -170,7 +170,7 @@
             MonsterInfoLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "Index"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("MonsterName", "Monster Name"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("AI", "AI"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Level", "Level"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Experience", "Experience"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("IsBoss", "Is Boss") });
             MonsterInfoLookUpEdit.DisplayMember = "MonsterName";
             MonsterInfoLookUpEdit.Name = "MonsterInfoLookUpEdit";
-            MonsterInfoLookUpEdit.NullText = "[Monster is null]";
+            MonsterInfoLookUpEdit.NullText = "[怪物为空]";
             // 
             // gridColumn3
             // 
@@ -201,7 +201,7 @@
             ItemInfoLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ItemName", "ItemName"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ItemType", "ItemType") });
             ItemInfoLookUpEdit.DisplayMember = "ItemName";
             ItemInfoLookUpEdit.Name = "ItemInfoLookUpEdit";
-            ItemInfoLookUpEdit.NullText = "[Item is null]";
+            ItemInfoLookUpEdit.NullText = "[物品为空]";
             // 
             // gridColumn17
             // 
@@ -218,7 +218,7 @@
             CurrencyInfoLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "Name"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Type", "Type") });
             CurrencyInfoLookUpEdit.DisplayMember = "Name";
             CurrencyInfoLookUpEdit.Name = "CurrencyInfoLookUpEdit";
-            CurrencyInfoLookUpEdit.NullText = "[Currency is null]";
+            CurrencyInfoLookUpEdit.NullText = "[货币为空]";
             // 
             // gridColumn18
             // 
@@ -239,7 +239,7 @@
             // 
             // SaveButton
             // 
-            SaveButton.Caption = "Save Database";
+            SaveButton.Caption = "保存数据库";
             SaveButton.Id = 1;
             SaveButton.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("SaveButton.ImageOptions.Image");
             SaveButton.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("SaveButton.ImageOptions.LargeImage");
@@ -249,7 +249,7 @@
             // 
             // ImportButton
             // 
-            ImportButton.Caption = "Import";
+            ImportButton.Caption = "导入";
             ImportButton.Id = 2;
             ImportButton.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("ImportButton.ImageOptions.Image");
             ImportButton.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("ImportButton.ImageOptions.LargeImage");
@@ -258,7 +258,7 @@
             // 
             // ExportButton
             // 
-            ExportButton.Caption = "Export";
+            ExportButton.Caption = "导出";
             ExportButton.Id = 3;
             ExportButton.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("ExportButton.ImageOptions.Image");
             ExportButton.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("ExportButton.ImageOptions.LargeImage");
@@ -269,7 +269,7 @@
             // 
             ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] { ribbonPageGroup1, JsonImportExport });
             ribbonPage1.Name = "ribbonPage1";
-            ribbonPage1.Text = "Home";
+            ribbonPage1.Text = "主页";
             // 
             // ribbonPageGroup1
             // 
@@ -277,14 +277,14 @@
             ribbonPageGroup1.CaptionButtonVisible = DevExpress.Utils.DefaultBoolean.False;
             ribbonPageGroup1.ItemLinks.Add(SaveButton);
             ribbonPageGroup1.Name = "ribbonPageGroup1";
-            ribbonPageGroup1.Text = "Saving";
+            ribbonPageGroup1.Text = "保存";
             // 
             // JsonImportExport
             // 
             JsonImportExport.ItemLinks.Add(ImportButton);
             JsonImportExport.ItemLinks.Add(ExportButton);
             JsonImportExport.Name = "JsonImportExport";
-            JsonImportExport.Text = "Json";
+            JsonImportExport.Text = "JSON";
             // 
             // tabPane1
             // 
@@ -302,14 +302,14 @@
             // 
             // tabNavigationPage1
             // 
-            tabNavigationPage1.Caption = "Companion Info";
+            tabNavigationPage1.Caption = "宠物信息";
             tabNavigationPage1.Controls.Add(CompanionInfoGridControl);
             tabNavigationPage1.Name = "tabNavigationPage1";
             tabNavigationPage1.Size = new System.Drawing.Size(902, 336);
             // 
             // tabNavigationPage2
             // 
-            tabNavigationPage2.Caption = "Companion Level Info";
+            tabNavigationPage2.Caption = "宠物等级信息";
             tabNavigationPage2.Controls.Add(CompanionLevelInfoGridControl);
             tabNavigationPage2.Name = "tabNavigationPage2";
             tabNavigationPage2.Size = new System.Drawing.Size(972, 371);
@@ -380,11 +380,11 @@
             repositoryItemLookUpEdit1.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "Index"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("MonsterName", "Monster Name"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("AI", "AI"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Level", "Level"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Experience", "Experience"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("IsBoss", "Is Boss") });
             repositoryItemLookUpEdit1.DisplayMember = "MonsterName";
             repositoryItemLookUpEdit1.Name = "repositoryItemLookUpEdit1";
-            repositoryItemLookUpEdit1.NullText = "[Monster is null]";
+            repositoryItemLookUpEdit1.NullText = "[怪物为空]";
             // 
             // tabNavigationPage3
             // 
-            tabNavigationPage3.Caption = "Companion Skill Info";
+            tabNavigationPage3.Caption = "宠物技能信息";
             tabNavigationPage3.Controls.Add(CompanionSkillInfoGridControl);
             tabNavigationPage3.Name = "tabNavigationPage3";
             tabNavigationPage3.Size = new System.Drawing.Size(972, 371);
@@ -455,7 +455,7 @@
             repositoryItemLookUpEdit2.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "Index"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("MonsterName", "Monster Name"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("AI", "AI"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Level", "Level"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Experience", "Experience"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("IsBoss", "Is Boss") });
             repositoryItemLookUpEdit2.DisplayMember = "MonsterName";
             repositoryItemLookUpEdit2.Name = "repositoryItemLookUpEdit2";
-            repositoryItemLookUpEdit2.NullText = "[Monster is null]";
+            repositoryItemLookUpEdit2.NullText = "[怪物为空]";
             // 
             // CompanionInfoView
             // 
@@ -466,7 +466,7 @@
             Controls.Add(ribbon);
             Name = "CompanionInfoView";
             Ribbon = ribbon;
-            Text = "Companion Info";
+            Text = "宠物信息";
             ((System.ComponentModel.ISupportInitialize)CompanionSpeechGridView).EndInit();
             ((System.ComponentModel.ISupportInitialize)CompanionActionImageComboBox).EndInit();
             ((System.ComponentModel.ISupportInitialize)CompanionInfoGridControl).EndInit();

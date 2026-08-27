@@ -58,7 +58,7 @@
             this.StartGameButton.Name = "StartGameButton";
             this.StartGameButton.Size = new System.Drawing.Size(100, 46);
             this.StartGameButton.TabIndex = 0;
-            this.StartGameButton.Text = "Start Game";
+            this.StartGameButton.Text = "开始游戏";
             this.StartGameButton.Click += new System.EventHandler(this.StartGameButton_Click);
             // 
             // TotalProgressBar
@@ -147,7 +147,7 @@
             this.PatchNotesHyperlinkControl.Name = "PatchNotesHyperlinkControl";
             this.PatchNotesHyperlinkControl.Size = new System.Drawing.Size(90, 13);
             this.PatchNotesHyperlinkControl.TabIndex = 9;
-            this.PatchNotesHyperlinkControl.Text = "<href=https://www.zirconserver.com>Latest patch notes</href>";
+            this.PatchNotesHyperlinkControl.Text = "<href=https://www.zirconserver.com>最新补丁说明</href>";
             this.PatchNotesHyperlinkControl.HyperlinkClick += new DevExpress.Utils.HyperlinkClickEventHandler(this.PatchNotesHyperlinkControl_HyperlinkClick);
             // 
             // RepairButton
@@ -158,7 +158,7 @@
             this.RepairButton.Name = "RepairButton";
             this.RepairButton.Size = new System.Drawing.Size(100, 23);
             this.RepairButton.TabIndex = 15;
-            this.RepairButton.Text = "Repair";
+            this.RepairButton.Text = "修复";
             this.RepairButton.Click += new System.EventHandler(this.RepairButton_Click);
             // 
             // LMain
@@ -180,7 +180,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "LMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Zircon Server Launcher";
+            this.Text = "Zircon 服务器启动器";
             this.Load += new System.EventHandler(this.LMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.TotalProgressBar.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

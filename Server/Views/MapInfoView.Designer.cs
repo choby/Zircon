@@ -148,7 +148,7 @@ namespace Server.Views
             // 
             // gridColumn20
             // 
-            gridColumn20.Caption = "Edit";
+            gridColumn20.Caption = "编辑";
             gridColumn20.ColumnEdit = EditButtonEdit;
             gridColumn20.Name = "gridColumn20";
             gridColumn20.Visible = true;
@@ -212,7 +212,7 @@ namespace Server.Views
             MonsterLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "Index"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("MonsterName", "Monster Name"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("AI", "AI"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Level", "Level"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Experience", "Experience"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("IsBoss", "Is Boss") });
             MonsterLookUpEdit.DisplayMember = "MonsterName";
             MonsterLookUpEdit.Name = "MonsterLookUpEdit";
-            MonsterLookUpEdit.NullText = "[Monster is null]";
+            MonsterLookUpEdit.NullText = "[怪物为空]";
             // 
             // gridColumn2
             // 
@@ -269,7 +269,7 @@ namespace Server.Views
             ItemLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "Index"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ItemName", "Item Name"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ItemType", "Item Type"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Price", "Price"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("StackSize", "Stack Size") });
             ItemLookUpEdit.DisplayMember = "ItemName";
             ItemLookUpEdit.Name = "ItemLookUpEdit";
-            ItemLookUpEdit.NullText = "[Item is null]";
+            ItemLookUpEdit.NullText = "[物品为空]";
             // 
             // gridColumn8
             // 
@@ -293,7 +293,7 @@ namespace Server.Views
             RegionLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "Index"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Description", "Description"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Size", "Size") });
             RegionLookUpEdit.DisplayMember = "Description";
             RegionLookUpEdit.Name = "RegionLookUpEdit";
-            RegionLookUpEdit.NullText = "[Region is null]";
+            RegionLookUpEdit.NullText = "[区域为空]";
             // 
             // gridColumn22
             // 
@@ -304,7 +304,7 @@ namespace Server.Views
             // 
             // gridColumn23
             // 
-            gridColumn23.Caption = "Restock Time (In Minutes)";
+            gridColumn23.Caption = "补货时间（分钟）";
             gridColumn23.FieldName = "RestockTimeInMinutes";
             gridColumn23.Name = "gridColumn23";
             gridColumn23.Visible = true;
@@ -395,7 +395,7 @@ namespace Server.Views
             // 
             // gridColumn12
             // 
-            gridColumn12.Caption = "Fight";
+            gridColumn12.Caption = "战斗";
             gridColumn12.FieldName = "Fight";
             gridColumn12.Name = "gridColumn12";
             gridColumn12.Visible = true;
@@ -404,7 +404,7 @@ namespace Server.Views
             // 
             // colRequiredClass
             // 
-            colRequiredClass.Caption = "Required Class";
+            colRequiredClass.Caption = "所需职业";
             colRequiredClass.FieldName = "RequiredClass";
             colRequiredClass.Name = "colRequiredClass";
             colRequiredClass.Visible = true;
@@ -460,7 +460,7 @@ namespace Server.Views
             MapInfoLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "Index"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("FileName", "File Name"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Description", "Description") });
             MapInfoLookUpEdit.DisplayMember = "Description";
             MapInfoLookUpEdit.Name = "MapInfoLookUpEdit";
-            MapInfoLookUpEdit.NullText = "[Map is null]";
+            MapInfoLookUpEdit.NullText = "[地图为空]";
             // 
             // gridColumn5
             // 
@@ -512,7 +512,7 @@ namespace Server.Views
             // 
             // colWeather
             // 
-            colWeather.Caption = "Weather";
+            colWeather.Caption = "天气";
             colWeather.ColumnEdit = WeatherComboBox;
             colWeather.FieldName = "Weather";
             colWeather.Name = "colWeather";
@@ -546,7 +546,7 @@ namespace Server.Views
             // 
             // SaveButton
             // 
-            SaveButton.Caption = "Save Database";
+            SaveButton.Caption = "保存数据库";
             SaveButton.Id = 1;
             SaveButton.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("SaveButton.ImageOptions.Image");
             SaveButton.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("SaveButton.ImageOptions.LargeImage");
@@ -556,7 +556,7 @@ namespace Server.Views
             // 
             // ImportButton
             // 
-            ImportButton.Caption = "Import";
+            ImportButton.Caption = "导入";
             ImportButton.Id = 4;
             ImportButton.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("ImportButton.ImageOptions.Image");
             ImportButton.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("ImportButton.ImageOptions.LargeImage");
@@ -565,7 +565,7 @@ namespace Server.Views
             // 
             // ExportButton
             // 
-            ExportButton.Caption = "Export";
+            ExportButton.Caption = "导出";
             ExportButton.Id = 5;
             ExportButton.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("ExportButton.ImageOptions.Image");
             ExportButton.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("ExportButton.ImageOptions.LargeImage");
@@ -574,7 +574,7 @@ namespace Server.Views
             // 
             // InsertRowButton
             // 
-            InsertRowButton.Caption = "Insert Row";
+            InsertRowButton.Caption = "插入行";
             InsertRowButton.Id = 6;
             InsertRowButton.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("InsertRowButton.ImageOptions.Image");
             InsertRowButton.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("InsertRowButton.ImageOptions.LargeImage");
@@ -585,7 +585,7 @@ namespace Server.Views
             // 
             ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] { ribbonPageGroup1, JsonImportExport, EditGroup });
             ribbonPage1.Name = "ribbonPage1";
-            ribbonPage1.Text = "Home";
+            ribbonPage1.Text = "主页";
             // 
             // ribbonPageGroup1
             // 
@@ -593,20 +593,20 @@ namespace Server.Views
             ribbonPageGroup1.CaptionButtonVisible = DevExpress.Utils.DefaultBoolean.False;
             ribbonPageGroup1.ItemLinks.Add(SaveButton);
             ribbonPageGroup1.Name = "ribbonPageGroup1";
-            ribbonPageGroup1.Text = "Saving";
+            ribbonPageGroup1.Text = "保存";
             // 
             // JsonImportExport
             // 
             JsonImportExport.ItemLinks.Add(ImportButton);
             JsonImportExport.ItemLinks.Add(ExportButton);
             JsonImportExport.Name = "JsonImportExport";
-            JsonImportExport.Text = "Json";
+            JsonImportExport.Text = "JSON";
             // 
             // EditGroup
             // 
             EditGroup.ItemLinks.Add(InsertRowButton);
             EditGroup.Name = "EditGroup";
-            EditGroup.Text = "Edit";
+            EditGroup.Text = "编辑";
             // 
             // MapIconImageComboBox
             // 
@@ -639,7 +639,7 @@ namespace Server.Views
             Controls.Add(ribbon);
             Name = "MapInfoView";
             Ribbon = ribbon;
-            Text = "Map Info";
+            Text = "地图信息";
             ((System.ComponentModel.ISupportInitialize)RegionGridView).EndInit();
             ((System.ComponentModel.ISupportInitialize)EditButtonEdit).EndInit();
             ((System.ComponentModel.ISupportInitialize)MapInfoGridControl).EndInit();

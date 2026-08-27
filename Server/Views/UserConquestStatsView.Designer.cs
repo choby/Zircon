@@ -171,7 +171,7 @@
             // 
             // gridColumn11
             // 
-            this.gridColumn11.Caption = "PvP Damage Taken";
+            this.gridColumn11.Caption = "玩家对战承受伤害";
             this.gridColumn11.DisplayFormat.FormatString = "#,##0";
             this.gridColumn11.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.gridColumn11.FieldName = "PvPDamageTaken";
@@ -181,7 +181,7 @@
             // 
             // gridColumn12
             // 
-            this.gridColumn12.Caption = "PvP Damage Dealt";
+            this.gridColumn12.Caption = "玩家对战造成伤害";
             this.gridColumn12.DisplayFormat.FormatString = "#,##0";
             this.gridColumn12.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.gridColumn12.FieldName = "PvPDamageDealt";
@@ -191,7 +191,7 @@
             // 
             // gridColumn13
             // 
-            this.gridColumn13.Caption = "PvP Death Count";
+            this.gridColumn13.Caption = "玩家对战死亡次数";
             this.gridColumn13.DisplayFormat.FormatString = "#,##0";
             this.gridColumn13.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.gridColumn13.FieldName = "PvPDeathCount";
@@ -201,7 +201,7 @@
             // 
             // gridColumn14
             // 
-            this.gridColumn14.Caption = "PvP Kill Count";
+            this.gridColumn14.Caption = "玩家对战击杀次数";
             this.gridColumn14.DisplayFormat.FormatString = "#,##0";
             this.gridColumn14.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.gridColumn14.FieldName = "PvPKillCount";
@@ -219,7 +219,7 @@
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("EMailAddress", "EMail")});
             this.AccountLookUpEdit.DisplayMember = "EMailAddress";
             this.AccountLookUpEdit.Name = "AccountLookUpEdit";
-            this.AccountLookUpEdit.NullText = "[Account is null]";
+            this.AccountLookUpEdit.NullText = "[账号为空]";
             // 
             // ItemLookUpEdit
             // 
@@ -243,7 +243,7 @@
             this.ClientSize = new System.Drawing.Size(693, 408);
             this.Controls.Add(this.UserDropGridControl);
             this.Name = "UserConquestStatsView";
-            this.Text = "Conquest Stats";
+            this.Text = "争夺战统计";
             ((System.ComponentModel.ISupportInitialize)(this.UserDropGridControl)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.UserDropGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.AccountLookUpEdit)).EndInit();

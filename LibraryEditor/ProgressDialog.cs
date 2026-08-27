@@ -33,7 +33,7 @@ namespace LibraryEditor
 
             _cancelRequested = true;
             _cancelButton.Enabled = false;
-            _cancelButton.Text = "Cancelling";
+            _cancelButton.Text = "正在取消";
             _messageLabel.Text = "正在取消...";
             CancelRequested?.Invoke(this, EventArgs.Empty);
         }

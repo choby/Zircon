@@ -111,7 +111,7 @@
             MapInfoLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "Index"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("FileName", "File Name"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ServerDescription", "Description") });
             MapInfoLookUpEdit.DisplayMember = "ServerDescription";
             MapInfoLookUpEdit.Name = "MapInfoLookUpEdit";
-            MapInfoLookUpEdit.NullText = "[Map is null]";
+            MapInfoLookUpEdit.NullText = "[地图为空]";
             // 
             // gridColumn19
             // 
@@ -184,7 +184,7 @@
             // 
             // gridColumn1
             // 
-            gridColumn1.Caption = "Name";
+            gridColumn1.Caption = "名称";
             gridColumn1.FieldName = "Name";
             gridColumn1.Name = "gridColumn1";
             gridColumn1.Visible = true;
@@ -192,7 +192,7 @@
             // 
             // gridColumn6
             // 
-            gridColumn6.Caption = "Max Instances";
+            gridColumn6.Caption = "最大副本数";
             gridColumn6.FieldName = "MaxInstances";
             gridColumn6.Name = "gridColumn6";
             gridColumn6.Visible = true;
@@ -200,7 +200,7 @@
             // 
             // gridColumn5
             // 
-            gridColumn5.Caption = "Show On Dungeon Finder";
+            gridColumn5.Caption = "在副本查找器中显示";
             gridColumn5.FieldName = "ShowOnDungeonFinder";
             gridColumn5.Name = "gridColumn5";
             gridColumn5.Visible = true;
@@ -208,7 +208,7 @@
             // 
             // gridColumn17
             // 
-            gridColumn17.Caption = "Allow Rejoin";
+            gridColumn17.Caption = "允许重新加入";
             gridColumn17.FieldName = "AllowRejoin";
             gridColumn17.Name = "gridColumn17";
             gridColumn17.Visible = true;
@@ -216,7 +216,7 @@
             // 
             // gridColumn18
             // 
-            gridColumn18.Caption = "Save Place";
+            gridColumn18.Caption = "保存位置";
             gridColumn18.FieldName = "SavePlace";
             gridColumn18.Name = "gridColumn18";
             gridColumn18.Visible = true;
@@ -224,7 +224,7 @@
             // 
             // gridColumn3
             // 
-            gridColumn3.Caption = "Min Level";
+            gridColumn3.Caption = "最低等级";
             gridColumn3.FieldName = "MinPlayerLevel";
             gridColumn3.Name = "gridColumn3";
             gridColumn3.Visible = true;
@@ -232,7 +232,7 @@
             // 
             // gridColumn4
             // 
-            gridColumn4.Caption = "Max Level";
+            gridColumn4.Caption = "最高等级";
             gridColumn4.FieldName = "MaxPlayerLevel";
             gridColumn4.Name = "gridColumn4";
             gridColumn4.Visible = true;
@@ -240,7 +240,7 @@
             // 
             // gridColumn7
             // 
-            gridColumn7.Caption = "Min Player";
+            gridColumn7.Caption = "最少玩家";
             gridColumn7.FieldName = "MinPlayerCount";
             gridColumn7.Name = "gridColumn7";
             gridColumn7.Visible = true;
@@ -248,7 +248,7 @@
             // 
             // gridColumn8
             // 
-            gridColumn8.Caption = "Max Player";
+            gridColumn8.Caption = "最多玩家";
             gridColumn8.FieldName = "MaxPlayerCount";
             gridColumn8.Name = "gridColumn8";
             gridColumn8.Visible = true;
@@ -256,7 +256,7 @@
             // 
             // gridColumn10
             // 
-            gridColumn10.Caption = "Connect Region";
+            gridColumn10.Caption = "连接区域";
             gridColumn10.ColumnEdit = RegionLookUpEdit;
             gridColumn10.FieldName = "ConnectRegion";
             gridColumn10.Name = "gridColumn10";
@@ -271,11 +271,11 @@
             RegionLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "Index"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ServerDescription", "Server Description"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Size", "Size") });
             RegionLookUpEdit.DisplayMember = "ServerDescription";
             RegionLookUpEdit.Name = "RegionLookUpEdit";
-            RegionLookUpEdit.NullText = "[Region is null]";
+            RegionLookUpEdit.NullText = "[区域为空]";
             // 
             // gridColumn9
             // 
-            gridColumn9.Caption = "Reconnect Region";
+            gridColumn9.Caption = "重连区域";
             gridColumn9.ColumnEdit = RegionLookUpEdit;
             gridColumn9.FieldName = "ReconnectRegion";
             gridColumn9.Name = "gridColumn9";
@@ -284,7 +284,7 @@
             // 
             // gridColumn11
             // 
-            gridColumn11.Caption = "Type";
+            gridColumn11.Caption = "类型";
             gridColumn11.ColumnEdit = InstanceTypeImageComboBox;
             gridColumn11.FieldName = "Type";
             gridColumn11.Name = "gridColumn11";
@@ -299,7 +299,7 @@
             // 
             // gridColumn12
             // 
-            gridColumn12.Caption = "Cooldown (In Minutes)";
+            gridColumn12.Caption = "冷却时间（分钟）";
             gridColumn12.FieldName = "CooldownTimeInMinutes";
             gridColumn12.Name = "gridColumn12";
             gridColumn12.Visible = true;
@@ -307,7 +307,7 @@
             // 
             // gridColumn13
             // 
-            gridColumn13.Caption = "Join In SafeZone Only";
+            gridColumn13.Caption = "仅可在安全区加入";
             gridColumn13.FieldName = "SafeZoneOnly";
             gridColumn13.Name = "gridColumn13";
             gridColumn13.Visible = true;
@@ -315,7 +315,7 @@
             // 
             // gridColumn14
             // 
-            gridColumn14.Caption = "Required Item";
+            gridColumn14.Caption = "所需物品";
             gridColumn14.ColumnEdit = ItemLookUpEdit;
             gridColumn14.FieldName = "RequiredItem";
             gridColumn14.Name = "gridColumn14";
@@ -329,11 +329,11 @@
             ItemLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "Index"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ItemName", "Item Name"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ItemType", "ItemType") });
             ItemLookUpEdit.DisplayMember = "ItemName";
             ItemLookUpEdit.Name = "ItemLookUpEdit";
-            ItemLookUpEdit.NullText = "[Item is Null]";
+            ItemLookUpEdit.NullText = "[物品为空]";
             // 
             // gridColumn15
             // 
-            gridColumn15.Caption = "Single Use Item";
+            gridColumn15.Caption = "一次性物品";
             gridColumn15.FieldName = "RequiredItemSingleUse";
             gridColumn15.Name = "gridColumn15";
             gridColumn15.Visible = true;
@@ -341,7 +341,7 @@
             // 
             // gridColumn16
             // 
-            gridColumn16.Caption = "Time Limit (In Minutes)";
+            gridColumn16.Caption = "时间限制（分钟）";
             gridColumn16.FieldName = "TimeLimitInMinutes";
             gridColumn16.Name = "gridColumn16";
             gridColumn16.Visible = true;
@@ -349,7 +349,7 @@
             // 
             // gridColumn20
             // 
-            gridColumn20.Caption = "Allow Teleport";
+            gridColumn20.Caption = "允许传送";
             gridColumn20.FieldName = "AllowTeleport";
             gridColumn20.Name = "gridColumn20";
             gridColumn20.Visible = true;
@@ -367,7 +367,7 @@
             // 
             // SaveDatabaseButton
             // 
-            SaveDatabaseButton.Caption = "Save Database";
+            SaveDatabaseButton.Caption = "保存数据库";
             SaveDatabaseButton.Id = 1;
             SaveDatabaseButton.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("SaveDatabaseButton.ImageOptions.Image");
             SaveDatabaseButton.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("SaveDatabaseButton.ImageOptions.LargeImage");
@@ -377,7 +377,7 @@
             // 
             // ImportButton
             // 
-            ImportButton.Caption = "Import";
+            ImportButton.Caption = "导入";
             ImportButton.Id = 2;
             ImportButton.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("ImportButton.ImageOptions.Image");
             ImportButton.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("ImportButton.ImageOptions.LargeImage");
@@ -386,7 +386,7 @@
             // 
             // ExportButton
             // 
-            ExportButton.Caption = "Export";
+            ExportButton.Caption = "导出";
             ExportButton.Id = 3;
             ExportButton.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("ExportButton.ImageOptions.Image");
             ExportButton.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("ExportButton.ImageOptions.LargeImage");
@@ -397,7 +397,7 @@
             // 
             ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] { ribbonPageGroup1, JsonImportExport });
             ribbonPage1.Name = "ribbonPage1";
-            ribbonPage1.Text = "Home";
+            ribbonPage1.Text = "主页";
             // 
             // ribbonPageGroup1
             // 
@@ -405,14 +405,14 @@
             ribbonPageGroup1.CaptionButtonVisible = DevExpress.Utils.DefaultBoolean.False;
             ribbonPageGroup1.ItemLinks.Add(SaveDatabaseButton);
             ribbonPageGroup1.Name = "ribbonPageGroup1";
-            ribbonPageGroup1.Text = "Saving";
+            ribbonPageGroup1.Text = "保存";
             // 
             // JsonImportExport
             // 
             JsonImportExport.ItemLinks.Add(ImportButton);
             JsonImportExport.ItemLinks.Add(ExportButton);
             JsonImportExport.Name = "JsonImportExport";
-            JsonImportExport.Text = "Json";
+            JsonImportExport.Text = "JSON";
             // 
             // gridColumn21
             // 
@@ -430,7 +430,7 @@
             Controls.Add(ribbon);
             Name = "InstanceInfoView";
             Ribbon = ribbon;
-            Text = "Instance Info";
+            Text = "副本信息";
             ((System.ComponentModel.ISupportInitialize)InstanceMapGridView).EndInit();
             ((System.ComponentModel.ISupportInitialize)MapInfoLookUpEdit).EndInit();
             ((System.ComponentModel.ISupportInitialize)InstanceInfoGridControl).EndInit();

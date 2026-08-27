@@ -74,7 +74,7 @@
             // 
             // ColItem
             // 
-            this.ColItem.Caption = "Item";
+            this.ColItem.Caption = "物品";
             this.ColItem.ColumnEdit = this.ItemLookUpEdit;
             this.ColItem.FieldName = "Item";
             this.ColItem.Name = "ColItem";
@@ -94,11 +94,11 @@
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("StackSize", "Stack Size")});
             this.ItemLookUpEdit.DisplayMember = "ItemName";
             this.ItemLookUpEdit.Name = "ItemLookUpEdit";
-            this.ItemLookUpEdit.NullText = "[Item is null]";
+            this.ItemLookUpEdit.NullText = "[物品为空]";
             // 
             // ColChance
             // 
-            this.ColChance.Caption = "Chance";
+            this.ColChance.Caption = "概率";
             this.ColChance.FieldName = "Chance";
             this.ColChance.Name = "ColChance";
             this.ColChance.Visible = true;
@@ -106,7 +106,7 @@
             // 
             // gridColumn3
             // 
-            this.gridColumn3.Caption = "Perfect Catch";
+            this.gridColumn3.Caption = "完美捕获";
             this.gridColumn3.FieldName = "PerfectCatch";
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
@@ -114,7 +114,7 @@
             // 
             // gridColumn4
             // 
-            this.gridColumn4.Caption = "Throw Quality";
+            this.gridColumn4.Caption = "投掷品质";
             this.gridColumn4.FieldName = "ThrowQuality";
             this.gridColumn4.Name = "gridColumn4";
             this.gridColumn4.Visible = true;
@@ -157,7 +157,7 @@
             // 
             // gridColumn1
             // 
-            this.gridColumn1.Caption = "Name";
+            this.gridColumn1.Caption = "名称";
             this.gridColumn1.FieldName = "Name";
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.Visible = true;
@@ -165,7 +165,7 @@
             // 
             // gridColumn2
             // 
-            this.gridColumn2.Caption = "Region";
+            this.gridColumn2.Caption = "区域";
             this.gridColumn2.ColumnEdit = this.RegionLookUpEdit;
             this.gridColumn2.FieldName = "Region";
             this.gridColumn2.Name = "gridColumn2";
@@ -184,7 +184,7 @@
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Size", "Size")});
             this.RegionLookUpEdit.DisplayMember = "ServerDescription";
             this.RegionLookUpEdit.Name = "RegionLookUpEdit";
-            this.RegionLookUpEdit.NullText = "[Region is null]";
+            this.RegionLookUpEdit.NullText = "[区域为空]";
             // 
             // ribbon
             // 
@@ -204,7 +204,7 @@
             // 
             // SaveDatabaseButton
             // 
-            this.SaveDatabaseButton.Caption = "Save Database";
+            this.SaveDatabaseButton.Caption = "保存数据库";
             this.SaveDatabaseButton.Id = 1;
             this.SaveDatabaseButton.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("SaveDatabaseButton.ImageOptions.Image")));
             this.SaveDatabaseButton.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("SaveDatabaseButton.ImageOptions.LargeImage")));
@@ -218,7 +218,7 @@
             this.ribbonPageGroup1,
             this.JsonImportExport});
             this.ribbonPage1.Name = "ribbonPage1";
-            this.ribbonPage1.Text = "Home";
+            this.ribbonPage1.Text = "主页";
             // 
             // ribbonPageGroup1
             // 
@@ -226,18 +226,18 @@
             this.ribbonPageGroup1.CaptionButtonVisible = DevExpress.Utils.DefaultBoolean.False;
             this.ribbonPageGroup1.ItemLinks.Add(this.SaveDatabaseButton);
             this.ribbonPageGroup1.Name = "ribbonPageGroup1";
-            this.ribbonPageGroup1.Text = "Saving";
+            this.ribbonPageGroup1.Text = "保存";
             // 
             // JsonImportExport
             // 
             this.JsonImportExport.ItemLinks.Add(this.ImportButton);
             this.JsonImportExport.ItemLinks.Add(this.ExportButton);
             this.JsonImportExport.Name = "JsonImportExport";
-            this.JsonImportExport.Text = "Json";
+            this.JsonImportExport.Text = "JSON";
             // 
             // ImportButton
             // 
-            this.ImportButton.Caption = "Import";
+            this.ImportButton.Caption = "导入";
             this.ImportButton.Id = 2;
             this.ImportButton.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("ImportButton.ImageOptions.Image")));
             this.ImportButton.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("ImportButton.ImageOptions.LargeImage")));
@@ -246,7 +246,7 @@
             // 
             // ExportButton
             // 
-            this.ExportButton.Caption = "Export";
+            this.ExportButton.Caption = "导出";
             this.ExportButton.Id = 3;
             this.ExportButton.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("ExportButton.ImageOptions.Image")));
             this.ExportButton.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("ExportButton.ImageOptions.LargeImage")));
@@ -262,7 +262,7 @@
             this.Controls.Add(this.ribbon);
             this.Name = "FishingInfoView";
             this.Ribbon = this.ribbon;
-            this.Text = "Fishing Info";
+            this.Text = "钓鱼信息";
             ((System.ComponentModel.ISupportInitialize)(this.FishingDropInfoGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemLookUpEdit)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.FishingInfoGridControl)).EndInit();

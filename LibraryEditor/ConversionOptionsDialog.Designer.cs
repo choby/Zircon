@@ -76,7 +76,7 @@ namespace LibraryEditor
             _buildAtlasCheckBox.Name = "_buildAtlasCheckBox";
             _buildAtlasCheckBox.Size = new Size(160, 22);
             _buildAtlasCheckBox.TabIndex = 3;
-            _buildAtlasCheckBox.Text = "Build atlas pages";
+            _buildAtlasCheckBox.Text = "生成图集页面";
             _buildAtlasCheckBox.CheckedChanged += BuildAtlasCheckBox_CheckedChanged;
             // 
             // _buildShadowAtlasCheckBox
@@ -85,7 +85,7 @@ namespace LibraryEditor
             _buildShadowAtlasCheckBox.Name = "_buildShadowAtlasCheckBox";
             _buildShadowAtlasCheckBox.Size = new Size(250, 22);
             _buildShadowAtlasCheckBox.TabIndex = 4;
-            _buildShadowAtlasCheckBox.Text = "Build shadow atlas pages";
+            _buildShadowAtlasCheckBox.Text = "生成阴影图集页面";
             _buildShadowAtlasCheckBox.CheckedChanged += SummaryControl_Changed;
             // 
             // _buildOverlayAtlasCheckBox
@@ -94,7 +94,7 @@ namespace LibraryEditor
             _buildOverlayAtlasCheckBox.Name = "_buildOverlayAtlasCheckBox";
             _buildOverlayAtlasCheckBox.Size = new Size(250, 22);
             _buildOverlayAtlasCheckBox.TabIndex = 5;
-            _buildOverlayAtlasCheckBox.Text = "Build overlay atlas pages";
+            _buildOverlayAtlasCheckBox.Text = "生成叠加图集页面";
             _buildOverlayAtlasCheckBox.CheckedChanged += SummaryControl_Changed;
             // 
             // _atlasGroupNumeric
@@ -123,7 +123,7 @@ namespace LibraryEditor
             // _individualRuntimeComboBox
             // 
             _individualRuntimeComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
-            _individualRuntimeComboBox.Items.AddRange(new object[] { "Source", "DXT1", "BC7" });
+            _individualRuntimeComboBox.Items.AddRange(new object[] { "源格式", "DXT1", "BC7" });
             _individualRuntimeComboBox.Location = new Point(156, 254);
             _individualRuntimeComboBox.Name = "_individualRuntimeComboBox";
             _individualRuntimeComboBox.Size = new Size(180, 23);
@@ -133,7 +133,7 @@ namespace LibraryEditor
             // _runtimeComboBox
             // 
             _runtimeComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
-            _runtimeComboBox.Items.AddRange(new object[] { "BC7 only", "BGRA32" });
+            _runtimeComboBox.Items.AddRange(new object[] { "仅 BC7", "BGRA32" });
             _runtimeComboBox.Location = new Point(156, 288);
             _runtimeComboBox.Name = "_runtimeComboBox";
             _runtimeComboBox.Size = new Size(180, 23);
@@ -143,7 +143,7 @@ namespace LibraryEditor
             // _compressionComboBox
             // 
             _compressionComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
-            _compressionComboBox.Items.AddRange(new object[] { "Deflate best", "Deflate fast", "None" });
+            _compressionComboBox.Items.AddRange(new object[] { "Deflate 最佳压缩", "Deflate 快速压缩", "不压缩" });
             _compressionComboBox.Location = new Point(156, 322);
             _compressionComboBox.Name = "_compressionComboBox";
             _compressionComboBox.Size = new Size(180, 23);
@@ -168,7 +168,7 @@ namespace LibraryEditor
             _addButton.Name = "_addButton";
             _addButton.Size = new Size(90, 26);
             _addButton.TabIndex = 0;
-            _addButton.Text = "Add Files";
+            _addButton.Text = "添加文件";
             _addButton.Click += AddButton_Click;
             // 
             // _removeButton
@@ -177,7 +177,7 @@ namespace LibraryEditor
             _removeButton.Name = "_removeButton";
             _removeButton.Size = new Size(90, 26);
             _removeButton.TabIndex = 1;
-            _removeButton.Text = "Remove";
+            _removeButton.Text = "移除";
             _removeButton.Click += RemoveButton_Click;
             // 
             // _individualRuntimeLabel
@@ -243,7 +243,7 @@ namespace LibraryEditor
             _okButton.Name = "_okButton";
             _okButton.Size = new Size(90, 28);
             _okButton.TabIndex = 19;
-            _okButton.Text = "Convert";
+            _okButton.Text = "转换";
             _okButton.Click += OkButton_Click;
             // 
             // _cancelButton
@@ -253,7 +253,7 @@ namespace LibraryEditor
             _cancelButton.Name = "_cancelButton";
             _cancelButton.Size = new Size(90, 28);
             _cancelButton.TabIndex = 20;
-            _cancelButton.Text = "Cancel";
+            _cancelButton.Text = "取消";
             // 
             // ConversionOptionsDialog
             // 
@@ -288,7 +288,7 @@ namespace LibraryEditor
             MinimizeBox = false;
             Name = "ConversionOptionsDialog";
             StartPosition = FormStartPosition.CenterParent;
-            Text = "Convert Libraries";
+            Text = "转换资源库";
             ((ISupportInitialize)_atlasGroupNumeric).EndInit();
             ((ISupportInitialize)_atlasPageSizeNumeric).EndInit();
             ResumeLayout(false);

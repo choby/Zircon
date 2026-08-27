@@ -73,7 +73,7 @@
             // 
             // SaveButton
             // 
-            SaveButton.Caption = "Save Database";
+            SaveButton.Caption = "保存数据库";
             SaveButton.Id = 1;
             SaveButton.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("SaveButton.ImageOptions.Image");
             SaveButton.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("SaveButton.ImageOptions.LargeImage");
@@ -83,7 +83,7 @@
             // 
             // ImportButton
             // 
-            ImportButton.Caption = "Import";
+            ImportButton.Caption = "导入";
             ImportButton.Id = 2;
             ImportButton.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("ImportButton.ImageOptions.Image");
             ImportButton.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("ImportButton.ImageOptions.LargeImage");
@@ -92,7 +92,7 @@
             // 
             // ExportButton
             // 
-            ExportButton.Caption = "Export";
+            ExportButton.Caption = "导出";
             ExportButton.Id = 3;
             ExportButton.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("ExportButton.ImageOptions.Image");
             ExportButton.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("ExportButton.ImageOptions.LargeImage");
@@ -103,7 +103,7 @@
             // 
             ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] { ribbonPageGroup1, JsonImportExport, ribbonPageGroup2 });
             ribbonPage1.Name = "ribbonPage1";
-            ribbonPage1.Text = "Home";
+            ribbonPage1.Text = "主页";
             // 
             // ribbonPageGroup1
             // 
@@ -111,14 +111,14 @@
             ribbonPageGroup1.CaptionButtonVisible = DevExpress.Utils.DefaultBoolean.False;
             ribbonPageGroup1.ItemLinks.Add(SaveButton);
             ribbonPageGroup1.Name = "ribbonPageGroup1";
-            ribbonPageGroup1.Text = "Saving";
+            ribbonPageGroup1.Text = "保存";
             // 
             // JsonImportExport
             // 
             JsonImportExport.ItemLinks.Add(ImportButton);
             JsonImportExport.ItemLinks.Add(ExportButton);
             JsonImportExport.Name = "JsonImportExport";
-            JsonImportExport.Text = "Json";
+            JsonImportExport.Text = "JSON";
             // 
             // MapRegionGridControl
             // 
@@ -159,7 +159,7 @@
             MapLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "Index"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("FileName", "File Name"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Description", "Description") });
             MapLookUpEdit.DisplayMember = "Description";
             MapLookUpEdit.Name = "MapLookUpEdit";
-            MapLookUpEdit.NullText = "[Map is null]";
+            MapLookUpEdit.NullText = "[地图为空]";
             // 
             // gridColumn2
             // 
@@ -170,7 +170,7 @@
             // 
             // gridColumn3
             // 
-            gridColumn3.Caption = "Size";
+            gridColumn3.Caption = "大小";
             gridColumn3.FieldName = "Size";
             gridColumn3.Name = "gridColumn3";
             gridColumn3.OptionsColumn.AllowEdit = false;
@@ -180,7 +180,7 @@
             // 
             // gridColumn4
             // 
-            gridColumn4.Caption = "Edit";
+            gridColumn4.Caption = "编辑";
             gridColumn4.ColumnEdit = EditButtonEdit;
             gridColumn4.Name = "gridColumn4";
             gridColumn4.Visible = true;
@@ -213,11 +213,11 @@
             // 
             ribbonPageGroup2.ItemLinks.Add(InsertRowButton);
             ribbonPageGroup2.Name = "ribbonPageGroup2";
-            ribbonPageGroup2.Text = "Edit";
+            ribbonPageGroup2.Text = "编辑";
             // 
             // InsertRowButton
             // 
-            InsertRowButton.Caption = "Insert Row";
+            InsertRowButton.Caption = "插入行";
             InsertRowButton.Id = 4;
             InsertRowButton.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("InsertRowButton.ImageOptions.Image");
             InsertRowButton.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("InsertRowButton.ImageOptions.LargeImage");
@@ -234,7 +234,7 @@
             Controls.Add(ribbon);
             Name = "MapRegionView";
             Ribbon = ribbon;
-            Text = "Map Region";
+            Text = "地图区域";
             ((System.ComponentModel.ISupportInitialize)ribbon).EndInit();
             ((System.ComponentModel.ISupportInitialize)MapRegionGridControl).EndInit();
             ((System.ComponentModel.ISupportInitialize)MapRegionGridView).EndInit();

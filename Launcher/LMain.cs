@@ -176,11 +176,11 @@ namespace Launcher
                         while (reader.BaseStream.Position < reader.BaseStream.Length)
                             list.Add(new PatchInformation(reader));
 
-                    progress.Report("Calculating Patch.");
+                    progress.Report("正在计算补丁。");
                     return list;
                 }
 
-                progress.Report("Version Info is missing, Running Repairing");
+                progress.Report("缺少版本信息，正在执行修复");
             }
             catch (Exception ex)
             {
@@ -193,7 +193,7 @@ namespace Launcher
         {
             try
             {
-                progress.Report("Downloading Patch Information");
+                progress.Report("正在下载补丁信息");
 
                 // Create a handler with explicit TLS settings
                 var handler = new HttpClientHandler
@@ -243,7 +243,7 @@ namespace Launcher
 
             for (int i = 0; i < list.Count; i++)
             {
-                progress.Report($"Files Checked: {i + 1} of {list.Count}");
+                progress.Report($"已检查文件：{i + 1}/{list.Count}");
 
                 PatchInformation file = list[i];
                 if (current != null && current.Any(x => x.FileName == file.FileName && IsMatch(x.CheckSum, file.CheckSum))) continue;
@@ -303,7 +303,7 @@ namespace Launcher
 
             if (tasks.Count == 0) return;
 
-            progress.Report("Downloaded, Extracting.");
+            progress.Report("下载完成，正在解压。");
 
             await Task.WhenAll(tasks);
         }

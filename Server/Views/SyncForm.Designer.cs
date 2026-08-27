@@ -57,7 +57,7 @@
             this.btnSync.Name = "btnSync";
             this.btnSync.Size = new System.Drawing.Size(282, 23);
             this.btnSync.TabIndex = 2;
-            this.btnSync.Text = "Sync";
+            this.btnSync.Text = "同步";
             this.btnSync.UseVisualStyleBackColor = true;
             this.btnSync.Click += new System.EventHandler(this.btnSync_Click);
             // 
@@ -89,7 +89,7 @@
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "SyncForm";
-            this.Text = "Syncronization Remote DB";
+            this.Text = "远程数据库同步";
             this.ResumeLayout(false);
             this.PerformLayout();
 

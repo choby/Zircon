@@ -68,7 +68,7 @@
             // 
             // SaveButton
             // 
-            this.SaveButton.Caption = "Save Database";
+            this.SaveButton.Caption = "保存数据库";
             this.SaveButton.Id = 1;
             this.SaveButton.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("SaveButton.ImageOptions.Image")));
             this.SaveButton.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("SaveButton.ImageOptions.LargeImage")));
@@ -82,7 +82,7 @@
             this.ribbonPageGroup1,
             this.JsonImportExport});
             this.ribbonPage1.Name = "ribbonPage1";
-            this.ribbonPage1.Text = "Home";
+            this.ribbonPage1.Text = "主页";
             // 
             // ribbonPageGroup1
             // 
@@ -90,7 +90,7 @@
             this.ribbonPageGroup1.CaptionButtonVisible = DevExpress.Utils.DefaultBoolean.False;
             this.ribbonPageGroup1.ItemLinks.Add(this.SaveButton);
             this.ribbonPageGroup1.Name = "ribbonPageGroup1";
-            this.ribbonPageGroup1.Text = "Saving";
+            this.ribbonPageGroup1.Text = "保存";
             // 
             // ItemInfoStatGridControl
             // 
@@ -145,7 +145,7 @@
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("StackSize", "Stack Size")});
             this.ItemLookUpEdit.DisplayMember = "ItemName";
             this.ItemLookUpEdit.Name = "ItemLookUpEdit";
-            this.ItemLookUpEdit.NullText = "[Item is null]";
+            this.ItemLookUpEdit.NullText = "[物品为空]";
             // 
             // gridColumn2
             // 
@@ -174,11 +174,11 @@
             this.JsonImportExport.ItemLinks.Add(this.ImportButton);
             this.JsonImportExport.ItemLinks.Add(this.ExportButton);
             this.JsonImportExport.Name = "JsonImportExport";
-            this.JsonImportExport.Text = "Json";
+            this.JsonImportExport.Text = "JSON";
             // 
             // ImportButton
             // 
-            this.ImportButton.Caption = "Import";
+            this.ImportButton.Caption = "导入";
             this.ImportButton.Id = 2;
             this.ImportButton.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("ImportButton.ImageOptions.Image")));
             this.ImportButton.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("ImportButton.ImageOptions.LargeImage")));
@@ -187,7 +187,7 @@
             // 
             // ExportButton
             // 
-            this.ExportButton.Caption = "Export";
+            this.ExportButton.Caption = "导出";
             this.ExportButton.Id = 3;
             this.ExportButton.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("ExportButton.ImageOptions.Image")));
             this.ExportButton.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("ExportButton.ImageOptions.LargeImage")));
@@ -203,7 +203,7 @@
             this.Controls.Add(this.ribbon);
             this.Name = "ItemInfoStatView";
             this.Ribbon = this.ribbon;
-            this.Text = "Item Info Stat";
+            this.Text = "物品属性信息";
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemInfoStatGridControl)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemInfoStatGridView)).EndInit();

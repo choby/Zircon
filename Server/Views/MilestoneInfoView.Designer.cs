@@ -126,7 +126,7 @@ namespace Server.Views
             ItemInfoLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "Index"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ItemName", "Item Name"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ItemType", "Item Type"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Price", "Price"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("StackSize", "Stack Size") });
             ItemInfoLookUpEdit.DisplayMember = "ItemName";
             ItemInfoLookUpEdit.Name = "ItemInfoLookUpEdit";
-            ItemInfoLookUpEdit.NullText = "[Item is null]";
+            ItemInfoLookUpEdit.NullText = "[物品为空]";
             // 
             // gridColumn18
             // 
@@ -144,7 +144,7 @@ namespace Server.Views
             MonsterInfoLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "Index"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("MonsterName", "Monster Name"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("AI", "AI"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Level", "Level"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Experience", "Experience"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("IsBoss", "IsBoss") });
             MonsterInfoLookUpEdit.DisplayMember = "MonsterName";
             MonsterInfoLookUpEdit.Name = "MonsterInfoLookUpEdit";
-            MonsterInfoLookUpEdit.NullText = "[Monster is null]";
+            MonsterInfoLookUpEdit.NullText = "[怪物为空]";
             // 
             // gridColumn19
             // 
@@ -161,7 +161,7 @@ namespace Server.Views
             RegionLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "Index"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ServerDescription", "Server Description"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Size", "Size") });
             RegionLookUpEdit.DisplayMember = "ServerDescription";
             RegionLookUpEdit.Name = "RegionLookUpEdit";
-            RegionLookUpEdit.NullText = "[Region is null]";
+            RegionLookUpEdit.NullText = "[区域为空]";
             // 
             // gridColumn20
             // 
@@ -178,7 +178,7 @@ namespace Server.Views
             CurrencyInfoLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "Name"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Abbreviation", "Abbreviation") });
             CurrencyInfoLookUpEdit.DisplayMember = "Name";
             CurrencyInfoLookUpEdit.Name = "CurrencyInfoLookUpEdit";
-            CurrencyInfoLookUpEdit.NullText = "[Currency is null]";
+            CurrencyInfoLookUpEdit.NullText = "[货币为空]";
             // 
             // gridColumn21
             // 
@@ -195,7 +195,7 @@ namespace Server.Views
             InstanceInfoLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "Name"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Type", "Type") });
             InstanceInfoLookUpEdit.DisplayMember = "Name";
             InstanceInfoLookUpEdit.Name = "InstanceInfoLookUpEdit";
-            InstanceInfoLookUpEdit.NullText = "[Instance is null]";
+            InstanceInfoLookUpEdit.NullText = "[副本为空]";
             // 
             // gridColumn22
             // 
@@ -225,7 +225,7 @@ namespace Server.Views
             QuestInfoLookUpEdit.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             QuestInfoLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("QuestName", "Quest Name"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("QuestType", "Quest Type") });
             QuestInfoLookUpEdit.Name = "QuestInfoLookUpEdit";
-            QuestInfoLookUpEdit.NullText = "[Quest is null]";
+            QuestInfoLookUpEdit.NullText = "[任务为空]";
             // 
             // MilestoneInfoGridControl
             // 
@@ -342,7 +342,7 @@ namespace Server.Views
             // 
             // SaveButton
             // 
-            SaveButton.Caption = "Save Database";
+            SaveButton.Caption = "保存数据库";
             SaveButton.Id = 1;
             SaveButton.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("SaveButton.ImageOptions.Image");
             SaveButton.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("SaveButton.ImageOptions.LargeImage");
@@ -352,7 +352,7 @@ namespace Server.Views
             // 
             // ImportButton
             // 
-            ImportButton.Caption = "Import";
+            ImportButton.Caption = "导入";
             ImportButton.Id = 2;
             ImportButton.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("ImportButton.ImageOptions.Image");
             ImportButton.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("ImportButton.ImageOptions.LargeImage");
@@ -361,7 +361,7 @@ namespace Server.Views
             // 
             // ExportButton
             // 
-            ExportButton.Caption = "Export";
+            ExportButton.Caption = "导出";
             ExportButton.Id = 3;
             ExportButton.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("ExportButton.ImageOptions.Image");
             ExportButton.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("ExportButton.ImageOptions.LargeImage");
@@ -372,7 +372,7 @@ namespace Server.Views
             // 
             ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] { ribbonPageGroup1, JsonImportExport });
             ribbonPage1.Name = "ribbonPage1";
-            ribbonPage1.Text = "Home";
+            ribbonPage1.Text = "主页";
             // 
             // ribbonPageGroup1
             // 
@@ -380,14 +380,14 @@ namespace Server.Views
             ribbonPageGroup1.CaptionButtonVisible = DevExpress.Utils.DefaultBoolean.False;
             ribbonPageGroup1.ItemLinks.Add(SaveButton);
             ribbonPageGroup1.Name = "ribbonPageGroup1";
-            ribbonPageGroup1.Text = "Saving";
+            ribbonPageGroup1.Text = "保存";
             // 
             // JsonImportExport
             // 
             JsonImportExport.ItemLinks.Add(ImportButton);
             JsonImportExport.ItemLinks.Add(ExportButton);
             JsonImportExport.Name = "JsonImportExport";
-            JsonImportExport.Text = "Json";
+            JsonImportExport.Text = "JSON";
             // 
             // TypeImageComboBox
             // 
@@ -409,7 +409,7 @@ namespace Server.Views
             MagicInfoLookUpEdit.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             MagicInfoLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "Name") });
             MagicInfoLookUpEdit.Name = "MagicInfoLookUpEdit";
-            MagicInfoLookUpEdit.NullText = "[Magic is null]";
+            MagicInfoLookUpEdit.NullText = "[技能为空]";
             // 
             // MilestoneInfoView
             // 
@@ -420,7 +420,7 @@ namespace Server.Views
             Controls.Add(ribbon);
             Name = "MilestoneInfoView";
             Ribbon = ribbon;
-            Text = "Milestone Info";
+            Text = "里程碑信息";
             ((System.ComponentModel.ISupportInitialize)MilestoneInfoTaskGridView).EndInit();
             ((System.ComponentModel.ISupportInitialize)RequiredClassImageComboBox).EndInit();
             ((System.ComponentModel.ISupportInitialize)ItemInfoLookUpEdit).EndInit();

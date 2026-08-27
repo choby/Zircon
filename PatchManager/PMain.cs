@@ -220,7 +220,7 @@ namespace PatchManager
                 Parallel.For(0, files.Length, po, i =>
                 {
                     list[i] = new PatchInformation(files[i]);
-                    progress.Report($"Version Created: File {Interlocked.Increment(ref count)} of {files.Length}");
+                    progress.Report($"正在创建版本：文件 {Interlocked.Increment(ref count)}/{files.Length}");
                 });
 
                 return list.ToList();
@@ -239,7 +239,7 @@ namespace PatchManager
 
             try
             {
-                progress.Report("Downloading Patch Information");
+                progress.Report("正在下载补丁信息");
 
                 if (!Directory.Exists(TempDownloadDirectory))
                     Directory.CreateDirectory(TempDownloadDirectory);
@@ -254,7 +254,7 @@ namespace PatchManager
 
                 if (!session.FileExists(Path.Combine(rootPath, PListFileName)))
                 {
-                    progress.Report("Patch Information Not Found");
+                    progress.Report("未找到补丁信息");
 
                     return null;
                 }
@@ -311,7 +311,7 @@ namespace PatchManager
                 lock (patch)
                     patch.Add(file);
 
-                progress.Report($"File Created: {Interlocked.Increment(ref count)} of {current.Count}");
+                progress.Report($"已创建文件：{Interlocked.Increment(ref count)}/{current.Count}");
 
             });
 
@@ -336,7 +336,7 @@ namespace PatchManager
 
             session.FileTransferred += (o, e) =>
             {
-                progress.Report($"Files Uploaded: {Interlocked.Increment(ref current)} of {patch.Count}");
+                progress.Report($"已上传文件：{Interlocked.Increment(ref current)}/{patch.Count}");
             };
 
             OpenSession(session);

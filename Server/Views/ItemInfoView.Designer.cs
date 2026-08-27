@@ -180,7 +180,7 @@ namespace Server.Views
             MonsterLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "Index"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("MonsterName", "Monster Name"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("AI", "AI"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Level", "Level"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Experience", "Experience"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("IsBoss", "Is Boss") });
             MonsterLookUpEdit.DisplayMember = "MonsterName";
             MonsterLookUpEdit.Name = "MonsterLookUpEdit";
-            MonsterLookUpEdit.NullText = "[Monster is null]";
+            MonsterLookUpEdit.NullText = "[怪物为空]";
             // 
             // colChance
             // 
@@ -477,7 +477,7 @@ namespace Server.Views
             // 
             // gridColumn6
             // 
-            gridColumn6.Caption = "Buff Icon";
+            gridColumn6.Caption = "增益图标";
             gridColumn6.FieldName = "BuffIcon";
             gridColumn6.Name = "gridColumn6";
             gridColumn6.Visible = true;
@@ -504,7 +504,7 @@ namespace Server.Views
             // 
             // SaveButton
             // 
-            SaveButton.Caption = "Save Database";
+            SaveButton.Caption = "保存数据库";
             SaveButton.Id = 1;
             SaveButton.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("SaveButton.ImageOptions.Image");
             SaveButton.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("SaveButton.ImageOptions.LargeImage");
@@ -514,7 +514,7 @@ namespace Server.Views
             // 
             // ExportButton
             // 
-            ExportButton.Caption = "Export";
+            ExportButton.Caption = "导出";
             ExportButton.Id = 3;
             ExportButton.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("ExportButton.ImageOptions.Image");
             ExportButton.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("ExportButton.ImageOptions.LargeImage");
@@ -523,7 +523,7 @@ namespace Server.Views
             // 
             // ImportButton
             // 
-            ImportButton.Caption = "Import";
+            ImportButton.Caption = "导入";
             ImportButton.Id = 4;
             ImportButton.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("ImportButton.ImageOptions.Image");
             ImportButton.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("ImportButton.ImageOptions.LargeImage");
@@ -532,7 +532,7 @@ namespace Server.Views
             // 
             // InsertRowButton
             // 
-            InsertRowButton.Caption = "Insert Row";
+            InsertRowButton.Caption = "插入行";
             InsertRowButton.Id = 5;
             InsertRowButton.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("InsertRowButton.ImageOptions.Image");
             InsertRowButton.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("InsertRowButton.ImageOptions.LargeImage");
@@ -543,7 +543,7 @@ namespace Server.Views
             // 
             ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] { ribbonPageGroup1, JsonImportExport, EditGroup });
             ribbonPage1.Name = "ribbonPage1";
-            ribbonPage1.Text = "Home";
+            ribbonPage1.Text = "主页";
             // 
             // ribbonPageGroup1
             // 
@@ -551,7 +551,7 @@ namespace Server.Views
             ribbonPageGroup1.CaptionButtonVisible = DevExpress.Utils.DefaultBoolean.False;
             ribbonPageGroup1.ItemLinks.Add(SaveButton);
             ribbonPageGroup1.Name = "ribbonPageGroup1";
-            ribbonPageGroup1.Text = "Saving";
+            ribbonPageGroup1.Text = "保存";
             // 
             // JsonImportExport
             // 
@@ -559,13 +559,13 @@ namespace Server.Views
             JsonImportExport.ItemLinks.Add(ImportButton);
             JsonImportExport.ItemLinks.Add(ExportButton);
             JsonImportExport.Name = "JsonImportExport";
-            JsonImportExport.Text = "Json";
+            JsonImportExport.Text = "JSON";
             // 
             // EditGroup
             // 
             EditGroup.ItemLinks.Add(InsertRowButton);
             EditGroup.Name = "EditGroup";
-            EditGroup.Text = "Edit";
+            EditGroup.Text = "编辑";
             // 
             // ItemInfoView
             // 
@@ -576,7 +576,7 @@ namespace Server.Views
             Controls.Add(ribbon);
             Name = "ItemInfoView";
             Ribbon = ribbon;
-            Text = "Item Info";
+            Text = "物品信息";
             ((System.ComponentModel.ISupportInitialize)ItemStatsGridView).EndInit();
             ((System.ComponentModel.ISupportInitialize)StatImageComboBox).EndInit();
             ((System.ComponentModel.ISupportInitialize)ItemInfoGridControl).EndInit();

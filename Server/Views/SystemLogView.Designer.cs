@@ -53,7 +53,7 @@
             // 
             // ClearLogsButton
             // 
-            ClearLogsButton.Caption = "Clear Logs";
+            ClearLogsButton.Caption = "清除日志";
             ClearLogsButton.Id = 1;
             ClearLogsButton.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("ClearLogsButton.ImageOptions.Image");
             ClearLogsButton.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("ClearLogsButton.ImageOptions.LargeImage");
@@ -64,7 +64,7 @@
             // 
             ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] { ribbonPageGroup1 });
             ribbonPage1.Name = "ribbonPage1";
-            ribbonPage1.Text = "Home";
+            ribbonPage1.Text = "主页";
             // 
             // ribbonPageGroup1
             // 
@@ -72,7 +72,7 @@
             ribbonPageGroup1.CaptionButtonVisible = DevExpress.Utils.DefaultBoolean.False;
             ribbonPageGroup1.ItemLinks.Add(ClearLogsButton);
             ribbonPageGroup1.Name = "ribbonPageGroup1";
-            ribbonPageGroup1.Text = "Actions";
+            ribbonPageGroup1.Text = "操作";
             // 
             // LogListBoxControl
             // 
@@ -98,7 +98,7 @@
             Controls.Add(ribbon);
             Name = "SystemLogView";
             Ribbon = ribbon;
-            Text = "System Logs";
+            Text = "系统日志";
             ((System.ComponentModel.ISupportInitialize)ribbon).EndInit();
             ((System.ComponentModel.ISupportInitialize)LogListBoxControl).EndInit();
             ResumeLayout(false);

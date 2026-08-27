@@ -193,7 +193,7 @@ namespace Client.Scenes.Views
             };
 
 
-            panel.Text = $"Window {ListBox.Controls.Count - 1}";
+            panel.Text = $"窗口 {ListBox.Controls.Count - 1}";
 
             panel.RemoveButton.MouseClick += (o1, e1) =>
             {
@@ -251,7 +251,7 @@ namespace Client.Scenes.Views
             chatTab.Panel.HideTabCheckBox.Checked = true;
             chatTab.Panel.FadeOutCheckBox.Checked = true;
 
-            chatTab.Panel.Text = $"Chat {ListBox.Controls.Count - 1}";
+            chatTab.Panel.Text = $"聊天 {ListBox.Controls.Count - 1}";
 
             ChatTab systemTab = AddNewTab(null);
 
@@ -273,7 +273,7 @@ namespace Client.Scenes.Views
             systemTab.Panel.HideTabCheckBox.Checked = true;
             systemTab.Panel.FadeOutCheckBox.Checked = true;
 
-            systemTab.Panel.Text = $"System";
+            systemTab.Panel.Text = $"系统";
         }
         #endregion
 

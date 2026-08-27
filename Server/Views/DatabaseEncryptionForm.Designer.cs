@@ -56,7 +56,7 @@
             this.chkEnabled.Name = "chkEnabled";
             this.chkEnabled.Size = new System.Drawing.Size(359, 20);
             this.chkEnabled.TabIndex = 0;
-            this.chkEnabled.Text = "Enabled";
+            this.chkEnabled.Text = "启用";
             this.chkEnabled.UseVisualStyleBackColor = true;
             // 
             // txtEncryptionKey
@@ -80,7 +80,7 @@
             this.layoutControl1.Root = this.Root;
             this.layoutControl1.Size = new System.Drawing.Size(383, 163);
             this.layoutControl1.TabIndex = 5;
-            this.layoutControl1.Text = "layoutControl1";
+            this.layoutControl1.Text = "布局";
             // 
             // btnSave
             // 
@@ -89,7 +89,7 @@
             this.btnSave.Size = new System.Drawing.Size(359, 22);
             this.btnSave.StyleController = this.layoutControl1;
             this.btnSave.TabIndex = 5;
-            this.btnSave.Text = "Save";
+            this.btnSave.Text = "保存";
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnGenerateRandomKey
@@ -99,7 +99,7 @@
             this.btnGenerateRandomKey.Size = new System.Drawing.Size(359, 22);
             this.btnGenerateRandomKey.StyleController = this.layoutControl1;
             this.btnGenerateRandomKey.TabIndex = 4;
-            this.btnGenerateRandomKey.Text = "Generate Key";
+            this.btnGenerateRandomKey.Text = "生成密钥";
             this.btnGenerateRandomKey.Click += new System.EventHandler(this.btnGenerateRandomKey_Click);
             // 
             // Root
@@ -130,7 +130,7 @@
             this.layoutControlItem2.Location = new System.Drawing.Point(0, 24);
             this.layoutControlItem2.Name = "layoutControlItem2";
             this.layoutControlItem2.Size = new System.Drawing.Size(363, 67);
-            this.layoutControlItem2.Text = "Encryption Key (32 bytes) Encoded into base64";
+            this.layoutControlItem2.Text = "加密密钥（32 字节，Base64 编码）";
             this.layoutControlItem2.TextLocation = DevExpress.Utils.Locations.Top;
             this.layoutControlItem2.TextSize = new System.Drawing.Size(228, 13);
             // 
@@ -165,7 +165,7 @@
             this.Name = "DatabaseEncryptionForm";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Database Encryption";
+            this.Text = "数据库加密";
             this.Load += new System.EventHandler(this.DatabaseEncryptionForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);

@@ -56,7 +56,7 @@
             // 
             // ClearLogsButton
             // 
-            this.ClearLogsButton.Caption = "Clear Logs";
+            this.ClearLogsButton.Caption = "清除日志";
             this.ClearLogsButton.Glyph = ((System.Drawing.Image)(resources.GetObject("ClearLogsButton.Glyph")));
             this.ClearLogsButton.Id = 1;
             this.ClearLogsButton.LargeGlyph = ((System.Drawing.Image)(resources.GetObject("ClearLogsButton.LargeGlyph")));
@@ -69,7 +69,7 @@
             this.ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
             this.ribbonPageGroup1});
             this.ribbonPage1.Name = "ribbonPage1";
-            this.ribbonPage1.Text = "Home";
+            this.ribbonPage1.Text = "主页";
             // 
             // ribbonPageGroup1
             // 
@@ -77,7 +77,7 @@
             this.ribbonPageGroup1.ItemLinks.Add(this.ClearLogsButton);
             this.ribbonPageGroup1.Name = "ribbonPageGroup1";
             this.ribbonPageGroup1.ShowCaptionButton = false;
-            this.ribbonPageGroup1.Text = "Actions";
+            this.ribbonPageGroup1.Text = "操作";
             // 
             // LogListBoxControl
             // 
@@ -104,7 +104,7 @@
             this.Controls.Add(this.ribbon);
             this.Name = "ChatLogView";
             this.Ribbon = this.ribbon;
-            this.Text = "Chat Logs";
+            this.Text = "聊天日志";
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.LogListBoxControl)).EndInit();
             this.ResumeLayout(false);

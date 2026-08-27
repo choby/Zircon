@@ -141,35 +141,35 @@ namespace LibraryEditor
 
             string individualText = _individualRuntimeComboBox.SelectedIndex switch
             {
-                0 => "Source: preserves the source texture codec where possible; ideal for WTL-derived runtime libraries.",
-                1 => "DXT1: ideal for opaque tiles or images without alpha.",
-                2 => "BC7: best quality for standalone DX11 textures.",
-                _ => "Individual runtime: none; relies on atlas or PNG decode."
+                0 => "源格式：尽可能保留源纹理编码，适合由 WTL 转换的运行时资源库。",
+                1 => "DXT1：适合不透明图块或不含 Alpha 通道的图像。",
+                2 => "BC7：为独立 DX11 纹理提供最佳画质。",
+                _ => "独立运行时纹理：无；依赖图集或 PNG 解码。"
             };
 
             string atlasText;
             if (_buildAtlasCheckBox.Checked)
             {
                 atlasText = _runtimeComboBox.SelectedIndex == 0
-                    ? "Atlas: BC7 pages for the fastest DX11 sprite path."
-                    : "Atlas: BGRA pages; larger but simple to inspect.";
+                    ? "图集：使用 BC7 页面以获得最快的 DX11 图像渲染路径。"
+                    : "图集：使用 BGRA 页面；体积较大，但便于检查。";
 
                 if (_buildShadowAtlasCheckBox.Checked || _buildOverlayAtlasCheckBox.Checked)
-                    atlasText += " Shadow/overlay layers included.";
+                    atlasText += " 包含阴影层和叠加层。";
 
                 if (_atlasGroupNumeric.Value > 0)
-                    atlasText += $" Split every {_atlasGroupNumeric.Value:N0} images.";
+                    atlasText += $" 每 {_atlasGroupNumeric.Value:N0} 张图像拆分一次。";
             }
             else
             {
-                atlasText = "Atlas: disabled; better for map/tile libraries with poor page locality.";
+                atlasText = "图集：已禁用；更适合页面局部性较差的地图或图块资源库。";
             }
 
             string compressionText = _compressionComboBox.SelectedIndex switch
             {
-                1 => "Compression: Deflate fast; quicker conversion, slightly larger files.",
-                2 => "Compression: none; fastest load/save, largest files.",
-                _ => "Compression: Deflate best; recommended default size/speed balance."
+                1 => "压缩：Deflate 快速压缩；转换更快，文件略大。",
+                2 => "压缩：不压缩；加载和保存最快，文件最大。",
+                _ => "压缩：Deflate 最佳压缩；推荐的默认体积与速度平衡方案。"
             };
 
             _summaryLabel.Text = $"{individualText}{Environment.NewLine}{Environment.NewLine}{atlasText}{Environment.NewLine}{Environment.NewLine}{compressionText}";

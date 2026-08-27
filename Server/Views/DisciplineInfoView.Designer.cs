@@ -81,7 +81,7 @@
             // 
             // colLevel
             // 
-            this.colLevel.Caption = "Level";
+            this.colLevel.Caption = "等级";
             this.colLevel.FieldName = "Level";
             this.colLevel.Name = "colLevel";
             this.colLevel.Visible = true;
@@ -89,7 +89,7 @@
             // 
             // colRequiredLevel
             // 
-            this.colRequiredLevel.Caption = "Required Level";
+            this.colRequiredLevel.Caption = "所需等级";
             this.colRequiredLevel.FieldName = "RequiredLevel";
             this.colRequiredLevel.Name = "colRequiredLevel";
             this.colRequiredLevel.Visible = true;
@@ -97,7 +97,7 @@
             // 
             // colRequiredExperience
             // 
-            this.colRequiredExperience.Caption = "Required Experience";
+            this.colRequiredExperience.Caption = "所需经验";
             this.colRequiredExperience.FieldName = "RequiredExperience";
             this.colRequiredExperience.Name = "colRequiredExperience";
             this.colRequiredExperience.Visible = true;
@@ -105,7 +105,7 @@
             // 
             // colRequiredGold
             // 
-            this.colRequiredGold.Caption = "Required Gold";
+            this.colRequiredGold.Caption = "所需金币";
             this.colRequiredGold.FieldName = "RequiredGold";
             this.colRequiredGold.Name = "colRequiredGold";
             this.colRequiredGold.Visible = true;
@@ -113,7 +113,7 @@
             // 
             // colFocusPoints
             // 
-            this.colFocusPoints.Caption = "Focus Points";
+            this.colFocusPoints.Caption = "专注点数";
             this.colFocusPoints.FieldName = "FocusPoints";
             this.colFocusPoints.Name = "colFocusPoints";
             this.colFocusPoints.Visible = true;
@@ -137,7 +137,7 @@
             // 
             // SaveDatabaseButton
             // 
-            this.SaveDatabaseButton.Caption = "Save Database";
+            this.SaveDatabaseButton.Caption = "保存数据库";
             this.SaveDatabaseButton.Id = 1;
             this.SaveDatabaseButton.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("SaveDatabaseButton.ImageOptions.Image")));
             this.SaveDatabaseButton.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("SaveDatabaseButton.ImageOptions.LargeImage")));
@@ -151,7 +151,7 @@
             this.ribbonPageGroup1,
             this.JsonImportExport});
             this.ribbonPage1.Name = "ribbonPage1";
-            this.ribbonPage1.Text = "Home";
+            this.ribbonPage1.Text = "主页";
             // 
             // ribbonPageGroup1
             // 
@@ -159,7 +159,7 @@
             this.ribbonPageGroup1.CaptionButtonVisible = DevExpress.Utils.DefaultBoolean.False;
             this.ribbonPageGroup1.ItemLinks.Add(this.SaveDatabaseButton);
             this.ribbonPageGroup1.Name = "ribbonPageGroup1";
-            this.ribbonPageGroup1.Text = "Saving";
+            this.ribbonPageGroup1.Text = "保存";
             // 
             // gridColumn1
             // 
@@ -172,11 +172,11 @@
             this.JsonImportExport.ItemLinks.Add(this.ImportButton);
             this.JsonImportExport.ItemLinks.Add(this.ExportButton);
             this.JsonImportExport.Name = "JsonImportExport";
-            this.JsonImportExport.Text = "Json";
+            this.JsonImportExport.Text = "JSON";
             // 
             // ImportButton
             // 
-            this.ImportButton.Caption = "Import";
+            this.ImportButton.Caption = "导入";
             this.ImportButton.Id = 2;
             this.ImportButton.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("ImportButton.ImageOptions.Image")));
             this.ImportButton.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("ImportButton.ImageOptions.LargeImage")));
@@ -185,7 +185,7 @@
             // 
             // ExportButton
             // 
-            this.ExportButton.Caption = "Export";
+            this.ExportButton.Caption = "导出";
             this.ExportButton.Id = 3;
             this.ExportButton.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("ExportButton.ImageOptions.Image")));
             this.ExportButton.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("ExportButton.ImageOptions.LargeImage")));
@@ -201,7 +201,7 @@
             this.Controls.Add(this.ribbon);
             this.Name = "DisciplineInfoView";
             this.Ribbon = this.ribbon;
-            this.Text = "Discipline Info";
+            this.Text = "修炼信息";
             ((System.ComponentModel.ISupportInitialize)(this.DisciplineInfoGridControl)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DisciplineInfoGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).EndInit();

@@ -16270,7 +16270,7 @@ namespace Server.Models
                         target.GainExperience(expbonus, false, int.MaxValue, false);
                     }
 
-                    SEnvir.Broadcast(new S.Chat { Text = $"{Name} has died and lost {expbonus:##,##0} Experience, {target?.Name ?? "No one"} has won the experience.", Type = MessageType.System });
+                    SEnvir.Broadcast(new S.Chat { Text = $"{Name} 死亡并损失了 {expbonus:##,##0} 点经验，{target?.Name ?? "无人"} 获得了这些经验。", Type = MessageType.System });
                 }
 
                 // Enqueue(new S.LevelChanged { Level = Level, Experience = Experience });

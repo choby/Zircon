@@ -76,7 +76,7 @@
             // 
             // gridColumn2
             // 
-            this.gridColumn2.Caption = "Type Value";
+            this.gridColumn2.Caption = "类型值";
             this.gridColumn2.FieldName = "TypeValue";
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.Visible = true;
@@ -99,7 +99,7 @@
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("EMailAddress", "EMail")});
             this.AccountLookUpEdit.DisplayMember = "EMailAddress";
             this.AccountLookUpEdit.Name = "AccountLookUpEdit";
-            this.AccountLookUpEdit.NullText = "[Account is null]";
+            this.AccountLookUpEdit.NullText = "[账号为空]";
             // 
             // ItemLookUpEdit
             // 
@@ -123,7 +123,7 @@
             this.ClientSize = new System.Drawing.Size(693, 408);
             this.Controls.Add(this.NPCListGridControl);
             this.Name = "NPCListView";
-            this.Text = "NPC List Data";
+            this.Text = "NPC 列表数据";
             ((System.ComponentModel.ISupportInitialize)(this.NPCListGridControl)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NPCListGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.AccountLookUpEdit)).EndInit();

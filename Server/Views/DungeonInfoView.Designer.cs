@@ -62,7 +62,7 @@ namespace Server.Views
             // 
             // FloorColumn
             // 
-            FloorColumn.Caption = "Floor";
+            FloorColumn.Caption = "楼层";
             FloorColumn.FieldName = "Floor";
             FloorColumn.Name = "FloorColumn";
             FloorColumn.Visible = true;
@@ -70,7 +70,7 @@ namespace Server.Views
             // 
             // RoleColumn
             // 
-            RoleColumn.Caption = "Role";
+            RoleColumn.Caption = "角色";
             RoleColumn.ColumnEdit = RoleImageComboBox;
             RoleColumn.FieldName = "Role";
             RoleColumn.Name = "RoleColumn";
@@ -85,7 +85,7 @@ namespace Server.Views
             // 
             // MapColumn
             // 
-            MapColumn.Caption = "Map";
+            MapColumn.Caption = "地图";
             MapColumn.ColumnEdit = MapInfoLookUpEdit;
             MapColumn.FieldName = "Map";
             MapColumn.Name = "MapColumn";
@@ -101,7 +101,7 @@ namespace Server.Views
             MapInfoLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "Index"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("FileName", "File Name"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ServerDescription", "Description") });
             MapInfoLookUpEdit.DisplayMember = "ServerDescription";
             MapInfoLookUpEdit.Name = "MapInfoLookUpEdit";
-            MapInfoLookUpEdit.NullText = "[Map is null]";
+            MapInfoLookUpEdit.NullText = "[地图为空]";
             // 
             // DungeonInfoGridControl
             // 
@@ -133,7 +133,7 @@ namespace Server.Views
             // 
             // NameColumn
             // 
-            NameColumn.Caption = "Name";
+            NameColumn.Caption = "名称";
             NameColumn.FieldName = "Name";
             NameColumn.Name = "NameColumn";
             NameColumn.Visible = true;
@@ -141,7 +141,7 @@ namespace Server.Views
             // 
             // DescriptionColumn
             // 
-            DescriptionColumn.Caption = "Description";
+            DescriptionColumn.Caption = "描述";
             DescriptionColumn.FieldName = "Description";
             DescriptionColumn.Name = "DescriptionColumn";
             DescriptionColumn.Visible = true;
@@ -149,7 +149,7 @@ namespace Server.Views
             // 
             // SpawnMultiplierColumn
             // 
-            SpawnMultiplierColumn.Caption = "Spawn Multiplier";
+            SpawnMultiplierColumn.Caption = "刷新倍率";
             SpawnMultiplierColumn.ColumnEdit = SpawnMultiplierSpinEdit;
             SpawnMultiplierColumn.FieldName = "SpawnMultiplier";
             SpawnMultiplierColumn.Name = "SpawnMultiplierColumn";
@@ -158,7 +158,7 @@ namespace Server.Views
             // 
             // AverageMonsterLevelColumn
             // 
-            AverageMonsterLevelColumn.Caption = "Average Monster Level";
+            AverageMonsterLevelColumn.Caption = "怪物平均等级";
             AverageMonsterLevelColumn.FieldName = "AverageMonsterLevel";
             AverageMonsterLevelColumn.Name = "AverageMonsterLevelColumn";
             AverageMonsterLevelColumn.OptionsColumn.AllowEdit = false;
@@ -168,7 +168,7 @@ namespace Server.Views
             // 
             // AverageMonsterExperienceColumn
             // 
-            AverageMonsterExperienceColumn.Caption = "Average Monster Experience";
+            AverageMonsterExperienceColumn.Caption = "怪物平均经验";
             AverageMonsterExperienceColumn.FieldName = "AverageMonsterExperience";
             AverageMonsterExperienceColumn.Name = "AverageMonsterExperienceColumn";
             AverageMonsterExperienceColumn.OptionsColumn.AllowEdit = false;
@@ -198,7 +198,7 @@ namespace Server.Views
             // 
             // SaveDatabaseButton
             // 
-            SaveDatabaseButton.Caption = "Save Database";
+            SaveDatabaseButton.Caption = "保存数据库";
             SaveDatabaseButton.Id = 1;
             SaveDatabaseButton.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("SaveDatabaseButton.ImageOptions.Image");
             SaveDatabaseButton.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("SaveDatabaseButton.ImageOptions.LargeImage");
@@ -208,7 +208,7 @@ namespace Server.Views
             // 
             // ImportButton
             // 
-            ImportButton.Caption = "Import";
+            ImportButton.Caption = "导入";
             ImportButton.Id = 2;
             ImportButton.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("ImportButton.ImageOptions.Image");
             ImportButton.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("ImportButton.ImageOptions.LargeImage");
@@ -217,7 +217,7 @@ namespace Server.Views
             // 
             // ExportButton
             // 
-            ExportButton.Caption = "Export";
+            ExportButton.Caption = "导出";
             ExportButton.Id = 3;
             ExportButton.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("ExportButton.ImageOptions.Image");
             ExportButton.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("ExportButton.ImageOptions.LargeImage");
@@ -228,7 +228,7 @@ namespace Server.Views
             // 
             ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] { ribbonPageGroup1, JsonImportExport });
             ribbonPage1.Name = "ribbonPage1";
-            ribbonPage1.Text = "Home";
+            ribbonPage1.Text = "主页";
             // 
             // ribbonPageGroup1
             // 
@@ -236,14 +236,14 @@ namespace Server.Views
             ribbonPageGroup1.CaptionButtonVisible = DevExpress.Utils.DefaultBoolean.False;
             ribbonPageGroup1.ItemLinks.Add(SaveDatabaseButton);
             ribbonPageGroup1.Name = "ribbonPageGroup1";
-            ribbonPageGroup1.Text = "Saving";
+            ribbonPageGroup1.Text = "保存";
             // 
             // JsonImportExport
             // 
             JsonImportExport.ItemLinks.Add(ImportButton);
             JsonImportExport.ItemLinks.Add(ExportButton);
             JsonImportExport.Name = "JsonImportExport";
-            JsonImportExport.Text = "Json";
+            JsonImportExport.Text = "JSON";
             // 
             // DungeonInfoView
             // 
@@ -254,7 +254,7 @@ namespace Server.Views
             Controls.Add(ribbon);
             Name = "DungeonInfoView";
             Ribbon = ribbon;
-            Text = "Dungeon Info";
+            Text = "副本信息";
             ((System.ComponentModel.ISupportInitialize)DungeonMapGridView).EndInit();
             ((System.ComponentModel.ISupportInitialize)RoleImageComboBox).EndInit();
             ((System.ComponentModel.ISupportInitialize)MapInfoLookUpEdit).EndInit();

@@ -19,45 +19,45 @@ namespace Library
 
     public enum AttackMode : byte
     {
-        [Description("Attack: Peaceful")]
+        [Description("攻击：和平")]
         Peace = 0,
-        [Description("Attack: Group")]
+        [Description("攻击：组队")]
         Group = 1,
-        [Description("Attack: Guild")]
+        [Description("攻击：行会")]
         Guild = 2,
-        [Description("Attack: War, Red, Brown")]
+        [Description("攻击：战争、红名、褐名")]
         WarRedBrown = 3,
-        [Description("Attack: All")]
+        [Description("攻击：全体")]
         All = 4
     }
 
     public enum PetMode : byte
     {
-        [Description("Pet: Move, Attack")]
+        [Description("宠物：移动、攻击")]
         Both = 0,
-        [Description("Pet: Move")]
+        [Description("宠物：移动")]
         Move = 1,
-        [Description("Pet: Attack")]
+        [Description("宠物：攻击")]
         Attack = 2,
-        [Description("Pet: PvP")]
+        [Description("宠物：玩家对战")]
         PvP = 3,
-        [Description("Pet: None")]
+        [Description("宠物：休息")]
         None = 4,
     }
 
     public enum MirDirection : byte
     {
         Up = 0,
-        [Description("Up Right")]
+        [Description("右上")]
         UpRight = 1,
         Right = 2,
-        [Description("Down Right")]
+        [Description("右下")]
         DownRight = 3,
         Down = 4,
-        [Description("Down Left")]
+        [Description("左下")]
         DownLeft = 5,
         Left = 6,
-        [Description("Up Left")]
+        [Description("左上")]
         UpLeft = 7
     }
 
@@ -69,11 +69,11 @@ namespace Library
         Wizard = 2,
         Taoist = 4,
         Assassin = 8,
-        [Description("Warrior, Wizard, Taoist")]
+        [Description("战士、法师、道士")]
         WarWizTao = Warrior | Wizard | Taoist,
-        [Description("Wizard, Taoist")]
+        [Description("法师、道士")]
         WizTao = Wizard | Taoist,
-        [Description("Warrior, Assassin")]
+        [Description("战士、刺客")]
         AssWar = Warrior | Assassin,
         All = WarWizTao | Assassin
     }
@@ -155,13 +155,13 @@ namespace Library
         Fog = 4,
         Lightning = 8,
 
-        [Description("Snow, Fog")]
+        [Description("雪、雾")]
         SnowFog = 6,
-        [Description("Rain, Lightning")]
+        [Description("雨、雷电")]
         RainLightning = 9,
-        [Description("Fog, Lightning")]
+        [Description("雾、雷电")]
         FogLightning = 12,
-        [Description("Rain, Fog, Lightning")]
+        [Description("雨、雾、雷电")]
         RainFogLightning = 13
     }
 
@@ -426,23 +426,23 @@ namespace Library
         Ore = 13,
         Book = 14,
         Scroll = 15,
-        [Description("Dark Stone")]
+        [Description("黑暗石")]
         DarkStone = 16,
-        [Description("Refine Special")]
+        [Description("特殊精炼")]
         RefineSpecial = 17,
-        [Description("Horse Armour")]
+        [Description("马铠")]
         HorseArmour = 18,
         Flower = 19,
-        [Description("Companion Food")]
+        [Description("宠物食物")]
         CompanionFood = 20,
-        [Description("Companion Bag")]
+        [Description("宠物背包")]
         CompanionBag = 21,
-        [Description("Companion Head")]
+        [Description("宠物头饰")]
         CompanionHead = 22,
-        [Description("Companion Back")]
+        [Description("宠物背饰")]
         CompanionBack = 23,
         System = 24,
-        [Description("Item Part")]
+        [Description("物品碎片")]
         ItemPart = 25,
         Emblem = 26,
         Shield = 27,
@@ -454,9 +454,9 @@ namespace Library
         Reel = 33,
         Currency = 34,
         Bundle = 35,
-        [Description("Loot Box")]
+        [Description("战利品箱")]
         LootBox = 36,
-        [Description("Gem")]
+        [Description("宝石")]
         SocketGem = 37
     }
 
@@ -1603,18 +1603,18 @@ namespace Library
     {
         Newest,
         Oldest,
-        [Description("Highest Price")]
+        [Description("价格最高")]
         HighestPrice,
-        [Description("Lowest Price")]
+        [Description("价格最低")]
         LowestPrice,
     }
 
     public enum MarketPlaceStoreSort
     {
         Alphabetical,
-        [Description("Highest Price")]
+        [Description("价格最高")]
         HighestPrice,
-        [Description("Lowest Price")]
+        [Description("价格最低")]
         LowestPrice,
         Favourite
     }
@@ -1645,7 +1645,7 @@ namespace Library
     {
         Name,
         Level,
-        [Description("Player Count")]
+        [Description("玩家人数")]
         PlayerCount,
     }
 
@@ -1818,11 +1818,11 @@ namespace Library
 
     public enum BundleType
     {
-        [Description("Any Of")]
+        [Description("任意一项")]
         AnyOf,
-        [Description("All Of")]
+        [Description("全部满足")]
         AllOf,
-        [Description("One Of")]
+        [Description("仅一项")]
         OneOf
     }
 
@@ -2046,54 +2046,54 @@ namespace Library
     {
         None,
 
-        [Description("Key\n1")]
+        [Description("按键\n1")]
         Spell01,
-        [Description("Key\n2")]
+        [Description("按键\n2")]
         Spell02,
-        [Description("Key\n3")]
+        [Description("按键\n3")]
         Spell03,
-        [Description("Key\n4")]
+        [Description("按键\n4")]
         Spell04,
-        [Description("Key\n5")]
+        [Description("按键\n5")]
         Spell05,
-        [Description("Key\n6")]
+        [Description("按键\n6")]
         Spell06,
-        [Description("Key\n7")]
+        [Description("按键\n7")]
         Spell07,
-        [Description("Key\n8")]
+        [Description("按键\n8")]
         Spell08,
-        [Description("Key\n9")]
+        [Description("按键\n9")]
         Spell09,
-        [Description("Key\n10")]
+        [Description("按键\n10")]
         Spell10,
-        [Description("Key\n11")]
+        [Description("按键\n11")]
         Spell11,
-        [Description("Key\n12")]
+        [Description("按键\n12")]
         Spell12,
 
-        [Description("Key\n13")]
+        [Description("按键\n13")]
         Spell13,
-        [Description("Key\n14")]
+        [Description("按键\n14")]
         Spell14,
-        [Description("Key\n15")]
+        [Description("按键\n15")]
         Spell15,
-        [Description("Key\n16")]
+        [Description("按键\n16")]
         Spell16,
-        [Description("Key\n17")]
+        [Description("按键\n17")]
         Spell17,
-        [Description("Key\n18")]
+        [Description("按键\n18")]
         Spell18,
-        [Description("Key\n19")]
+        [Description("按键\n19")]
         Spell19,
-        [Description("Key\n20")]
+        [Description("按键\n20")]
         Spell20,
-        [Description("Key\n21")]
+        [Description("按键\n21")]
         Spell21,
-        [Description("Key\n22")]
+        [Description("按键\n22")]
         Spell22,
-        [Description("Key\n23")]
+        [Description("按键\n23")]
         Spell23,
-        [Description("Key\n24")]
+        [Description("按键\n24")]
         Spell24,
     }
 

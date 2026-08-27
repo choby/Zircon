@@ -80,7 +80,7 @@
             // 
             // gridColumn6
             // 
-            gridColumn6.Caption = "Title";
+            gridColumn6.Caption = "标题";
             gridColumn6.FieldName = "Title";
             gridColumn6.MinWidth = 17;
             gridColumn6.Name = "gridColumn6";
@@ -90,7 +90,7 @@
             // 
             // gridColumn7
             // 
-            gridColumn7.Caption = "Order";
+            gridColumn7.Caption = "顺序";
             gridColumn7.FieldName = "Order";
             gridColumn7.MinWidth = 17;
             gridColumn7.Name = "gridColumn7";
@@ -100,7 +100,7 @@
             // 
             // gridColumn9
             // 
-            gridColumn9.Caption = "Items";
+            gridColumn9.Caption = "物品";
             gridColumn9.FieldName = "Items";
             gridColumn9.MinWidth = 17;
             gridColumn9.Name = "gridColumn9";
@@ -140,7 +140,7 @@
             // 
             // colTitle
             // 
-            colTitle.Caption = "Title";
+            colTitle.Caption = "标题";
             colTitle.FieldName = "Title";
             colTitle.MinWidth = 17;
             colTitle.Name = "colTitle";
@@ -150,7 +150,7 @@
             // 
             // colOrder
             // 
-            colOrder.Caption = "Order";
+            colOrder.Caption = "顺序";
             colOrder.FieldName = "Order";
             colOrder.MinWidth = 17;
             colOrder.Name = "colOrder";
@@ -160,7 +160,7 @@
             // 
             // colDescription
             // 
-            colDescription.Caption = "Description";
+            colDescription.Caption = "描述";
             colDescription.FieldName = "Description";
             colDescription.MinWidth = 17;
             colDescription.Name = "colDescription";
@@ -182,7 +182,7 @@
             // 
             // SaveButton
             // 
-            SaveButton.Caption = "Save Database";
+            SaveButton.Caption = "保存数据库";
             SaveButton.Id = 1;
             SaveButton.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("SaveButton.ImageOptions.Image");
             SaveButton.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("SaveButton.ImageOptions.LargeImage");
@@ -192,7 +192,7 @@
             // 
             // ImportButton
             // 
-            ImportButton.Caption = "Import";
+            ImportButton.Caption = "导入";
             ImportButton.Id = 2;
             ImportButton.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("ImportButton.ImageOptions.Image");
             ImportButton.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("ImportButton.ImageOptions.LargeImage");
@@ -201,7 +201,7 @@
             // 
             // ExportButton
             // 
-            ExportButton.Caption = "Export";
+            ExportButton.Caption = "导出";
             ExportButton.Id = 3;
             ExportButton.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("ExportButton.ImageOptions.Image");
             ExportButton.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("ExportButton.ImageOptions.LargeImage");
@@ -212,20 +212,20 @@
             // 
             ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] { ribbonPageGroup1, JsonGroup });
             ribbonPage1.Name = "ribbonPage1";
-            ribbonPage1.Text = "Home";
+            ribbonPage1.Text = "主页";
             // 
             // ribbonPageGroup1
             // 
             ribbonPageGroup1.ItemLinks.Add(SaveButton);
             ribbonPageGroup1.Name = "ribbonPageGroup1";
-            ribbonPageGroup1.Text = "Saving";
+            ribbonPageGroup1.Text = "保存";
             // 
             // JsonGroup
             // 
             JsonGroup.ItemLinks.Add(ImportButton);
             JsonGroup.ItemLinks.Add(ExportButton);
             JsonGroup.Name = "JsonGroup";
-            JsonGroup.Text = "Json";
+            JsonGroup.Text = "JSON";
             // 
             // HelpMemoEdit
             // 
@@ -262,7 +262,7 @@
             // 
             // gridColumn10
             // 
-            gridColumn10.Caption = "Title";
+            gridColumn10.Caption = "标题";
             gridColumn10.FieldName = "Title";
             gridColumn10.MinWidth = 17;
             gridColumn10.Name = "gridColumn10";
@@ -272,7 +272,7 @@
             // 
             // gridColumn11
             // 
-            gridColumn11.Caption = "Order";
+            gridColumn11.Caption = "顺序";
             gridColumn11.FieldName = "Order";
             gridColumn11.MinWidth = 17;
             gridColumn11.Name = "gridColumn11";
@@ -282,7 +282,7 @@
             // 
             // gridColumn13
             // 
-            gridColumn13.Caption = "Content";
+            gridColumn13.Caption = "内容";
             gridColumn13.ColumnEdit = ItemMemoEdit;
             gridColumn13.FieldName = "Content";
             gridColumn13.MinWidth = 17;
@@ -300,7 +300,7 @@
             Controls.Add(ribbon);
             Name = "HelpInfoView";
             Ribbon = ribbon;
-            Text = "Help";
+            Text = "帮助";
             ((System.ComponentModel.ISupportInitialize)PageGridView).EndInit();
             ((System.ComponentModel.ISupportInitialize)HelpGridControl).EndInit();
             ((System.ComponentModel.ISupportInitialize)HelpGridView).EndInit();

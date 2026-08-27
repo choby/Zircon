@@ -53,7 +53,7 @@ namespace Server.Views
             {
                 DataSource = dataSource,
                 DisplayMember = nameof(MapInfo.ServerDescription),
-                NullText = "[Map is null]",
+                NullText = "[地图为空]",
                 BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup
             };
 

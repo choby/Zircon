@@ -75,7 +75,7 @@
             // 
             // gridColumn6
             // 
-            gridColumn6.Caption = "Stat";
+            gridColumn6.Caption = "属性";
             gridColumn6.ColumnEdit = StatComboBox;
             gridColumn6.FieldName = "Stat";
             gridColumn6.Name = "gridColumn6";
@@ -90,7 +90,7 @@
             // 
             // gridColumn7
             // 
-            gridColumn7.Caption = "Amount";
+            gridColumn7.Caption = "数量";
             gridColumn7.FieldName = "Amount";
             gridColumn7.Name = "gridColumn7";
             gridColumn7.Visible = true;
@@ -126,7 +126,7 @@
             // 
             // gridColumn8
             // 
-            gridColumn8.Caption = "Amount";
+            gridColumn8.Caption = "数量";
             gridColumn8.FieldName = "Amount";
             gridColumn8.Name = "gridColumn8";
             gridColumn8.Visible = true;
@@ -134,7 +134,7 @@
             // 
             // gridColumn9
             // 
-            gridColumn9.Caption = "Item";
+            gridColumn9.Caption = "物品";
             gridColumn9.ColumnEdit = ItemLookUpEdit;
             gridColumn9.FieldName = "Item";
             gridColumn9.Name = "gridColumn9";
@@ -150,7 +150,7 @@
             ItemLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "Index"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ItemName", "Item Name"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ItemType", "Item Type"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Price", "Price"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("StackSize", "Stack Size") });
             ItemLookUpEdit.DisplayMember = "ItemName";
             ItemLookUpEdit.Name = "ItemLookUpEdit";
-            ItemLookUpEdit.NullText = "[Item is null]";
+            ItemLookUpEdit.NullText = "[物品为空]";
             ItemLookUpEdit.UseCtrlScroll = false;
             // 
             // FameInfoGridView
@@ -165,7 +165,7 @@
             // 
             // gridColumn1
             // 
-            gridColumn1.Caption = "Name";
+            gridColumn1.Caption = "名称";
             gridColumn1.FieldName = "Name";
             gridColumn1.Name = "gridColumn1";
             gridColumn1.Visible = true;
@@ -173,7 +173,7 @@
             // 
             // gridColumn2
             // 
-            gridColumn2.Caption = "Shape";
+            gridColumn2.Caption = "外形";
             gridColumn2.FieldName = "Shape";
             gridColumn2.Name = "gridColumn2";
             gridColumn2.Visible = true;
@@ -181,7 +181,7 @@
             // 
             // gridColumn3
             // 
-            gridColumn3.Caption = "Description";
+            gridColumn3.Caption = "描述";
             gridColumn3.FieldName = "Description";
             gridColumn3.Name = "gridColumn3";
             gridColumn3.Visible = true;
@@ -189,7 +189,7 @@
             // 
             // gridColumn4
             // 
-            gridColumn4.Caption = "Cost";
+            gridColumn4.Caption = "费用";
             gridColumn4.FieldName = "Cost";
             gridColumn4.Name = "gridColumn4";
             gridColumn4.Visible = true;
@@ -197,7 +197,7 @@
             // 
             // gridColumn5
             // 
-            gridColumn5.Caption = "Order";
+            gridColumn5.Caption = "顺序";
             gridColumn5.FieldName = "Order";
             gridColumn5.Name = "gridColumn5";
             gridColumn5.Visible = true;
@@ -215,7 +215,7 @@
             // 
             // SaveDatabaseButton
             // 
-            SaveDatabaseButton.Caption = "Save Database";
+            SaveDatabaseButton.Caption = "保存数据库";
             SaveDatabaseButton.Id = 1;
             SaveDatabaseButton.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("SaveDatabaseButton.ImageOptions.Image");
             SaveDatabaseButton.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("SaveDatabaseButton.ImageOptions.LargeImage");
@@ -225,7 +225,7 @@
             // 
             // ImportButton
             // 
-            ImportButton.Caption = "Import";
+            ImportButton.Caption = "导入";
             ImportButton.Id = 2;
             ImportButton.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("ImportButton.ImageOptions.Image");
             ImportButton.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("ImportButton.ImageOptions.LargeImage");
@@ -234,7 +234,7 @@
             // 
             // ExportButton
             // 
-            ExportButton.Caption = "Export";
+            ExportButton.Caption = "导出";
             ExportButton.Id = 3;
             ExportButton.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("ExportButton.ImageOptions.Image");
             ExportButton.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("ExportButton.ImageOptions.LargeImage");
@@ -245,7 +245,7 @@
             // 
             ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] { ribbonPageGroup1, JsonImportExport });
             ribbonPage1.Name = "ribbonPage1";
-            ribbonPage1.Text = "Home";
+            ribbonPage1.Text = "主页";
             // 
             // ribbonPageGroup1
             // 
@@ -253,14 +253,14 @@
             ribbonPageGroup1.CaptionButtonVisible = DevExpress.Utils.DefaultBoolean.False;
             ribbonPageGroup1.ItemLinks.Add(SaveDatabaseButton);
             ribbonPageGroup1.Name = "ribbonPageGroup1";
-            ribbonPageGroup1.Text = "Saving";
+            ribbonPageGroup1.Text = "保存";
             // 
             // JsonImportExport
             // 
             JsonImportExport.ItemLinks.Add(ImportButton);
             JsonImportExport.ItemLinks.Add(ExportButton);
             JsonImportExport.Name = "JsonImportExport";
-            JsonImportExport.Text = "Json";
+            JsonImportExport.Text = "JSON";
             // 
             // FameInfoView
             // 
@@ -271,7 +271,7 @@
             Controls.Add(ribbon);
             Name = "FameInfoView";
             Ribbon = ribbon;
-            Text = "Fame Info";
+            Text = "声望信息";
             ((System.ComponentModel.ISupportInitialize)FameInfoStatGridView).EndInit();
             ((System.ComponentModel.ISupportInitialize)StatComboBox).EndInit();
             ((System.ComponentModel.ISupportInitialize)FameInfoGridControl).EndInit();

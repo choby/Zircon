@@ -318,7 +318,7 @@ namespace Client.Scenes.Views
 
                 Cooldowns[pair.Key].Visible = true;
                 TimeSpan remaining = maxTime - CEnvir.Now;
-                Cooldowns[pair.Key].Text = $"{Math.Ceiling(remaining.TotalSeconds)}s";
+                Cooldowns[pair.Key].Text = $"{Math.Ceiling(remaining.TotalSeconds)}秒";
 
                 if (remaining.TotalSeconds > 5)
                     Cooldowns[pair.Key].ForeColour = Color.Gold;

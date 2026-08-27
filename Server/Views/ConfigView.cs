@@ -332,7 +332,7 @@ namespace Server.Views
 
             if (Functions.IsMatch(old, Config.ClientHash) || !SEnvir.Started) return;
 
-            SEnvir.Broadcast(new S.Chat { Text = "A new version has been made available, please update when possible.", Type = MessageType.Announcement });
+            SEnvir.Broadcast(new S.Chat { Text = "已有新版本可用，请尽快更新。", Type = MessageType.Announcement });
         }
         private void VersionPathEdit_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {

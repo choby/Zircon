@@ -113,7 +113,7 @@
             // 
             // gridColumn12
             // 
-            gridColumn12.Caption = "Monster";
+            gridColumn12.Caption = "怪物";
             gridColumn12.ColumnEdit = MonsterLookUpEdit;
             gridColumn12.FieldName = "Monster";
             gridColumn12.Name = "gridColumn12";
@@ -128,7 +128,7 @@
             MonsterLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "Index"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("MonsterName", "Monster Name"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("AI", "AI"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Level", "Level"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Experience", "Experience"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("IsBoss", "IsBoss") });
             MonsterLookUpEdit.DisplayMember = "MonsterName";
             MonsterLookUpEdit.Name = "MonsterLookUpEdit";
-            MonsterLookUpEdit.NullText = "[Monster is Null]";
+            MonsterLookUpEdit.NullText = "[怪物为空]";
             // 
             // CastleInfoGridControl
             // 
@@ -272,7 +272,7 @@
             MapLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "Index"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("FileName", "File Name"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Description", "Description") });
             MapLookUpEdit.DisplayMember = "Description";
             MapLookUpEdit.Name = "MapLookUpEdit";
-            MapLookUpEdit.NullText = "[Map is null]";
+            MapLookUpEdit.NullText = "[地图为空]";
             // 
             // gridColumn3
             // 
@@ -304,7 +304,7 @@
             RegionLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ServerDescription", "Description") });
             RegionLookUpEdit.DisplayMember = "ServerDescription";
             RegionLookUpEdit.Name = "RegionLookUpEdit";
-            RegionLookUpEdit.NullText = "[Region is null]";
+            RegionLookUpEdit.NullText = "[区域为空]";
             // 
             // gridColumn6
             // 
@@ -330,7 +330,7 @@
             ItemLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "Index"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ItemName", "Item Name"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ItemType", "Item Type"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Price", "Price"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("StackSize", "Stack Size") });
             ItemLookUpEdit.DisplayMember = "ItemName";
             ItemLookUpEdit.Name = "ItemLookUpEdit";
-            ItemLookUpEdit.NullText = "[Item is null]";
+            ItemLookUpEdit.NullText = "[物品为空]";
             // 
             // gridColumn7
             // 
@@ -359,7 +359,7 @@
             // 
             // SaveButton
             // 
-            SaveButton.Caption = "Save Database";
+            SaveButton.Caption = "保存数据库";
             SaveButton.Id = 1;
             SaveButton.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("SaveButton.ImageOptions.Image");
             SaveButton.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("SaveButton.ImageOptions.LargeImage");
@@ -369,7 +369,7 @@
             // 
             // ImportButton
             // 
-            ImportButton.Caption = "Import";
+            ImportButton.Caption = "导入";
             ImportButton.Id = 2;
             ImportButton.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("ImportButton.ImageOptions.Image");
             ImportButton.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("ImportButton.ImageOptions.LargeImage");
@@ -378,7 +378,7 @@
             // 
             // ExportButton
             // 
-            ExportButton.Caption = "Export";
+            ExportButton.Caption = "导出";
             ExportButton.Id = 3;
             ExportButton.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("ExportButton.ImageOptions.Image");
             ExportButton.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("ExportButton.ImageOptions.LargeImage");
@@ -389,7 +389,7 @@
             // 
             ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] { ribbonPageGroup1, JsonImportExport });
             ribbonPage1.Name = "ribbonPage1";
-            ribbonPage1.Text = "Home";
+            ribbonPage1.Text = "主页";
             // 
             // ribbonPageGroup1
             // 
@@ -397,14 +397,14 @@
             ribbonPageGroup1.CaptionButtonVisible = DevExpress.Utils.DefaultBoolean.False;
             ribbonPageGroup1.ItemLinks.Add(SaveButton);
             ribbonPageGroup1.Name = "ribbonPageGroup1";
-            ribbonPageGroup1.Text = "Saving";
+            ribbonPageGroup1.Text = "保存";
             // 
             // JsonImportExport
             // 
             JsonImportExport.ItemLinks.Add(ImportButton);
             JsonImportExport.ItemLinks.Add(ExportButton);
             JsonImportExport.Name = "JsonImportExport";
-            JsonImportExport.Text = "Json";
+            JsonImportExport.Text = "JSON";
             // 
             // repositoryItemTextEdit1
             // 
@@ -428,7 +428,7 @@
             Controls.Add(ribbon);
             Name = "CastleInfoView";
             Ribbon = ribbon;
-            Text = "Castle Info";
+            Text = "城堡信息";
             ((System.ComponentModel.ISupportInitialize)FlagGridView).EndInit();
             ((System.ComponentModel.ISupportInitialize)MonsterLookUpEdit).EndInit();
             ((System.ComponentModel.ISupportInitialize)CastleInfoGridControl).EndInit();

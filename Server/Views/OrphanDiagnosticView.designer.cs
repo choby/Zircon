@@ -62,7 +62,7 @@ namespace Server.Views
             // 
             // ScanOrphansButton
             // 
-            ScanOrphansButton.Caption = "Scan";
+            ScanOrphansButton.Caption = "扫描";
             ScanOrphansButton.Id = 6;
             ScanOrphansButton.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("ScanOrphansButton.ImageOptions.Image");
             ScanOrphansButton.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("ScanOrphansButton.ImageOptions.LargeImage");
@@ -72,7 +72,7 @@ namespace Server.Views
             // 
             // CleanOrphansButton
             // 
-            CleanOrphansButton.Caption = "Clean";
+            CleanOrphansButton.Caption = "清理";
             CleanOrphansButton.Id = 7;
             CleanOrphansButton.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("CleanOrphansButton.ImageOptions.Image");
             CleanOrphansButton.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("CleanOrphansButton.ImageOptions.LargeImage");
@@ -84,7 +84,7 @@ namespace Server.Views
             // 
             ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] { ribbonPageGroup1 });
             ribbonPage1.Name = "ribbonPage1";
-            ribbonPage1.Text = "Home";
+            ribbonPage1.Text = "主页";
             // 
             // ribbonPageGroup1
             // 
@@ -93,7 +93,7 @@ namespace Server.Views
             ribbonPageGroup1.ItemLinks.Add(ScanOrphansButton);
             ribbonPageGroup1.ItemLinks.Add(CleanOrphansButton);
             ribbonPageGroup1.Name = "ribbonPageGroup1";
-            ribbonPageGroup1.Text = "Diagnostics";
+            ribbonPageGroup1.Text = "诊断";
             // 
             // repositoryItemToggleSwitch1
             // 
@@ -247,7 +247,7 @@ namespace Server.Views
             Controls.Add(ribbon);
             Name = "OrphanDiagnosticView";
             Ribbon = ribbon;
-            Text = "Orphan Diagnostics";
+            Text = "孤立数据诊断";
             ((System.ComponentModel.ISupportInitialize)ribbon).EndInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemToggleSwitch1).EndInit();
             ((System.ComponentModel.ISupportInitialize)DiagnosticGridControl).EndInit();

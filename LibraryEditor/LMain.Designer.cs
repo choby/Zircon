@@ -121,7 +121,7 @@ namespace LibraryEditor
             MainMenu.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
             MainMenu.Size = new System.Drawing.Size(1256, 24);
             MainMenu.TabIndex = 0;
-            MainMenu.Text = "menuStrip1";
+            MainMenu.Text = "菜单栏";
             // 
             // fileToolStripMenuItem
             // 
@@ -129,15 +129,15 @@ namespace LibraryEditor
             fileToolStripMenuItem.Image = (System.Drawing.Image)resources.GetObject("fileToolStripMenuItem.Image");
             fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             fileToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
-            fileToolStripMenuItem.Text = "File";
+            fileToolStripMenuItem.Text = "文件";
             // 
             // newToolStripMenuItem
             // 
             newToolStripMenuItem.Image = (System.Drawing.Image)resources.GetObject("newToolStripMenuItem.Image");
             newToolStripMenuItem.Name = "newToolStripMenuItem";
             newToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
-            newToolStripMenuItem.Text = "New";
-            newToolStripMenuItem.ToolTipText = "New .Lib";
+            newToolStripMenuItem.Text = "新建";
+            newToolStripMenuItem.ToolTipText = "新建 .Lib";
             newToolStripMenuItem.Click += newToolStripMenuItem_Click;
             // 
             // openToolStripMenuItem
@@ -145,8 +145,8 @@ namespace LibraryEditor
             openToolStripMenuItem.Image = (System.Drawing.Image)resources.GetObject("openToolStripMenuItem.Image");
             openToolStripMenuItem.Name = "openToolStripMenuItem";
             openToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
-            openToolStripMenuItem.Text = "Open";
-            openToolStripMenuItem.ToolTipText = "Open Shanda or Wemade files.";
+            openToolStripMenuItem.Text = "打开";
+            openToolStripMenuItem.ToolTipText = "打开盛大或 Wemade 格式文件。";
             openToolStripMenuItem.Click += openToolStripMenuItem_Click;
             // 
             // toolStripMenuItem1
@@ -159,8 +159,8 @@ namespace LibraryEditor
             saveToolStripMenuItem.Image = (System.Drawing.Image)resources.GetObject("saveToolStripMenuItem.Image");
             saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             saveToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
-            saveToolStripMenuItem.Text = "Save";
-            saveToolStripMenuItem.ToolTipText = "Save the current library as a ZL v2 container.";
+            saveToolStripMenuItem.Text = "保存";
+            saveToolStripMenuItem.ToolTipText = "将当前资源库保存为 ZL v2 容器。";
             saveToolStripMenuItem.Click += saveToolStripMenuItem_Click;
             // 
             // saveAsToolStripMenuItem
@@ -168,8 +168,8 @@ namespace LibraryEditor
             saveAsToolStripMenuItem.Image = (System.Drawing.Image)resources.GetObject("saveAsToolStripMenuItem.Image");
             saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
             saveAsToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
-            saveAsToolStripMenuItem.Text = "Save As";
-            saveAsToolStripMenuItem.ToolTipText = "Save the current library as a new ZL v2 container.";
+            saveAsToolStripMenuItem.Text = "另存为";
+            saveAsToolStripMenuItem.ToolTipText = "将当前资源库另存为新的 ZL v2 容器。";
             saveAsToolStripMenuItem.Click += saveAsToolStripMenuItem_Click;
             // 
             // toolStripMenuItem2
@@ -182,8 +182,8 @@ namespace LibraryEditor
             closeToolStripMenuItem.Image = (System.Drawing.Image)resources.GetObject("closeToolStripMenuItem.Image");
             closeToolStripMenuItem.Name = "closeToolStripMenuItem";
             closeToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
-            closeToolStripMenuItem.Text = "Close";
-            closeToolStripMenuItem.ToolTipText = "Exit Application.";
+            closeToolStripMenuItem.Text = "关闭";
+            closeToolStripMenuItem.ToolTipText = "退出应用程序。";
             closeToolStripMenuItem.Click += closeToolStripMenuItem_Click;
             // 
             // functionsToolStripMenuItem
@@ -192,15 +192,15 @@ namespace LibraryEditor
             functionsToolStripMenuItem.Image = (System.Drawing.Image)resources.GetObject("functionsToolStripMenuItem.Image");
             functionsToolStripMenuItem.Name = "functionsToolStripMenuItem";
             functionsToolStripMenuItem.Size = new System.Drawing.Size(87, 20);
-            functionsToolStripMenuItem.Text = "Functions";
+            functionsToolStripMenuItem.Text = "功能";
             // 
             // copyToToolStripMenuItem
             // 
             copyToToolStripMenuItem.Image = (System.Drawing.Image)resources.GetObject("copyToToolStripMenuItem.Image");
             copyToToolStripMenuItem.Name = "copyToToolStripMenuItem";
             copyToToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            copyToToolStripMenuItem.Text = "Copy To..";
-            copyToToolStripMenuItem.ToolTipText = "Copy to a new .Lib or to the end of an exsisting one.";
+            copyToToolStripMenuItem.Text = "复制到...";
+            copyToToolStripMenuItem.ToolTipText = "复制到新的 .Lib，或追加到现有资源库末尾。";
             copyToToolStripMenuItem.Visible = false;
             copyToToolStripMenuItem.Click += copyToToolStripMenuItem_Click;
             // 
@@ -209,8 +209,8 @@ namespace LibraryEditor
             countBlanksToolStripMenuItem.Image = (System.Drawing.Image)resources.GetObject("countBlanksToolStripMenuItem.Image");
             countBlanksToolStripMenuItem.Name = "countBlanksToolStripMenuItem";
             countBlanksToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            countBlanksToolStripMenuItem.Text = "Count Blanks";
-            countBlanksToolStripMenuItem.ToolTipText = "Counts the blank images in the .Lib";
+            countBlanksToolStripMenuItem.Text = "统计空白图像";
+            countBlanksToolStripMenuItem.ToolTipText = "统计 .Lib 中的空白图像。";
             countBlanksToolStripMenuItem.Visible = false;
             countBlanksToolStripMenuItem.Click += countBlanksToolStripMenuItem_Click;
             // 
@@ -220,8 +220,8 @@ namespace LibraryEditor
             removeBlanksToolStripMenuItem.Image = (System.Drawing.Image)resources.GetObject("removeBlanksToolStripMenuItem.Image");
             removeBlanksToolStripMenuItem.Name = "removeBlanksToolStripMenuItem";
             removeBlanksToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            removeBlanksToolStripMenuItem.Text = "Remove Blanks";
-            removeBlanksToolStripMenuItem.ToolTipText = "Quick removal of blanks.";
+            removeBlanksToolStripMenuItem.Text = "移除空白图像";
+            removeBlanksToolStripMenuItem.ToolTipText = "快速移除空白图像。";
             removeBlanksToolStripMenuItem.Click += removeBlanksToolStripMenuItem_Click;
             // 
             // safeToolStripMenuItem
@@ -229,8 +229,8 @@ namespace LibraryEditor
             safeToolStripMenuItem.Image = (System.Drawing.Image)resources.GetObject("safeToolStripMenuItem.Image");
             safeToolStripMenuItem.Name = "safeToolStripMenuItem";
             safeToolStripMenuItem.Size = new System.Drawing.Size(96, 22);
-            safeToolStripMenuItem.Text = "Safe";
-            safeToolStripMenuItem.ToolTipText = "Use the safe method of removing blanks.";
+            safeToolStripMenuItem.Text = "安全模式";
+            safeToolStripMenuItem.ToolTipText = "使用安全方式移除空白图像。";
             safeToolStripMenuItem.Click += safeToolStripMenuItem_Click;
             // 
             // convertToolStripMenuItem
@@ -238,8 +238,8 @@ namespace LibraryEditor
             convertToolStripMenuItem.Image = (System.Drawing.Image)resources.GetObject("convertToolStripMenuItem.Image");
             convertToolStripMenuItem.Name = "convertToolStripMenuItem";
             convertToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            convertToolStripMenuItem.Text = "Converter";
-            convertToolStripMenuItem.ToolTipText = "Convert Wtl/Wil/Wzl/Miz to .Lib";
+            convertToolStripMenuItem.Text = "转换器";
+            convertToolStripMenuItem.ToolTipText = "将 Wtl/Wil/Wzl/Miz 转换为 .Lib";
             convertToolStripMenuItem.Click += convertToolStripMenuItem_Click;
             // 
             // skinToolStripMenuItem
@@ -248,7 +248,7 @@ namespace LibraryEditor
             skinToolStripMenuItem.Image = (System.Drawing.Image)resources.GetObject("skinToolStripMenuItem.Image");
             skinToolStripMenuItem.Name = "skinToolStripMenuItem";
             skinToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
-            skinToolStripMenuItem.Text = "Skin";
+            skinToolStripMenuItem.Text = "皮肤";
             skinToolStripMenuItem.Visible = false;
             // 
             // splitContainer1
@@ -402,7 +402,7 @@ namespace LibraryEditor
             InsertBlankButton.Size = new System.Drawing.Size(122, 30);
             InsertBlankButton.TabIndex = 24;
             InsertBlankButton.Tag = "";
-            InsertBlankButton.Text = "Insert Blanks";
+            InsertBlankButton.Text = "插入空白图像";
             InsertBlankButton.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             InsertBlankButton.UseVisualStyleBackColor = true;
             InsertBlankButton.Click += InsertBlanksButton_Click;
@@ -418,7 +418,7 @@ namespace LibraryEditor
             AddBlankButton.Size = new System.Drawing.Size(122, 30);
             AddBlankButton.TabIndex = 23;
             AddBlankButton.Tag = "";
-            AddBlankButton.Text = "Add Blanks";
+            AddBlankButton.Text = "添加空白图像";
             AddBlankButton.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             AddBlankButton.UseVisualStyleBackColor = true;
             AddBlankButton.Click += AddBlanksButton_Click;
@@ -442,7 +442,7 @@ namespace LibraryEditor
             checkBoxPreventAntiAliasing.Name = "checkBoxPreventAntiAliasing";
             checkBoxPreventAntiAliasing.Size = new System.Drawing.Size(112, 19);
             checkBoxPreventAntiAliasing.TabIndex = 20;
-            checkBoxPreventAntiAliasing.Text = "No Anti-aliasing";
+            checkBoxPreventAntiAliasing.Text = "禁用抗锯齿";
             checkBoxPreventAntiAliasing.UseVisualStyleBackColor = true;
             checkBoxPreventAntiAliasing.CheckedChanged += checkBoxPreventAntiAliasing_CheckedChanged;
             // 
@@ -454,7 +454,7 @@ namespace LibraryEditor
             checkBoxQuality.Name = "checkBoxQuality";
             checkBoxQuality.Size = new System.Drawing.Size(87, 19);
             checkBoxQuality.TabIndex = 19;
-            checkBoxQuality.Text = "No Blurring";
+            checkBoxQuality.Text = "禁用模糊";
             checkBoxQuality.UseVisualStyleBackColor = true;
             checkBoxQuality.CheckedChanged += checkBoxQuality_CheckedChanged;
             // 
@@ -497,7 +497,7 @@ namespace LibraryEditor
             buttonReplace.Size = new System.Drawing.Size(122, 30);
             buttonReplace.TabIndex = 15;
             buttonReplace.Tag = "";
-            buttonReplace.Text = "Replace Image";
+            buttonReplace.Text = "替换图像";
             buttonReplace.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             buttonReplace.UseVisualStyleBackColor = true;
             buttonReplace.Click += buttonReplace_Click;
@@ -539,7 +539,7 @@ namespace LibraryEditor
             ExportButton.Size = new System.Drawing.Size(122, 30);
             ExportButton.TabIndex = 3;
             ExportButton.Tag = "";
-            ExportButton.Text = "Export Images";
+            ExportButton.Text = "导出图像";
             ExportButton.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             ExportButton.UseVisualStyleBackColor = true;
             ExportButton.Click += ExportButton_Click;
@@ -555,7 +555,7 @@ namespace LibraryEditor
             mergeBtn.Size = new System.Drawing.Size(122, 30);
             mergeBtn.TabIndex = 22;
             mergeBtn.Tag = "";
-            mergeBtn.Text = "Merge Libraries";
+            mergeBtn.Text = "合并资源库";
             mergeBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             mergeBtn.UseVisualStyleBackColor = true;
             mergeBtn.Click += MergeButton_Click;
@@ -571,7 +571,7 @@ namespace LibraryEditor
             InsertImageButton.Size = new System.Drawing.Size(122, 30);
             InsertImageButton.TabIndex = 1;
             InsertImageButton.Tag = "";
-            InsertImageButton.Text = "Insert Images";
+            InsertImageButton.Text = "插入图像";
             InsertImageButton.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             InsertImageButton.UseVisualStyleBackColor = true;
             InsertImageButton.Click += InsertImageButton_Click;
@@ -605,7 +605,7 @@ namespace LibraryEditor
             DeleteButton.Size = new System.Drawing.Size(122, 30);
             DeleteButton.TabIndex = 2;
             DeleteButton.Tag = "";
-            DeleteButton.Text = "Delete Images";
+            DeleteButton.Text = "删除图像";
             DeleteButton.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             DeleteButton.UseVisualStyleBackColor = true;
             DeleteButton.Click += DeleteButton_Click;
@@ -621,7 +621,7 @@ namespace LibraryEditor
             AddButton.Size = new System.Drawing.Size(122, 30);
             AddButton.TabIndex = 0;
             AddButton.Tag = "";
-            AddButton.Text = "Add Images";
+            AddButton.Text = "添加图像";
             AddButton.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             AddButton.UseVisualStyleBackColor = true;
             AddButton.Click += AddButton_Click;
@@ -773,7 +773,7 @@ namespace LibraryEditor
             statusStrip.Padding = new System.Windows.Forms.Padding(1, 0, 16, 0);
             statusStrip.Size = new System.Drawing.Size(1256, 24);
             statusStrip.TabIndex = 2;
-            statusStrip.Text = "statusStrip";
+            statusStrip.Text = "状态栏";
             // 
             // toolStripStatusLabel
             // 
@@ -810,7 +810,7 @@ namespace LibraryEditor
             radioButtonOverlay.Name = "radioButtonOverlay";
             radioButtonOverlay.Size = new System.Drawing.Size(65, 19);
             radioButtonOverlay.TabIndex = 2;
-            radioButtonOverlay.Text = "Overlay";
+            radioButtonOverlay.Text = "叠加图";
             radioButtonOverlay.UseVisualStyleBackColor = true;
             radioButtonOverlay.CheckedChanged += radioButtonOverlay_CheckedChanged;
             // 
@@ -823,7 +823,7 @@ namespace LibraryEditor
             radioButtonShadow.Name = "radioButtonShadow";
             radioButtonShadow.Size = new System.Drawing.Size(67, 19);
             radioButtonShadow.TabIndex = 1;
-            radioButtonShadow.Text = "Shadow";
+            radioButtonShadow.Text = "阴影";
             radioButtonShadow.UseVisualStyleBackColor = true;
             radioButtonShadow.CheckedChanged += radioButtonShadow_CheckedChanged;
             // 
@@ -838,7 +838,7 @@ namespace LibraryEditor
             radioButtonImage.Size = new System.Drawing.Size(58, 19);
             radioButtonImage.TabIndex = 0;
             radioButtonImage.TabStop = true;
-            radioButtonImage.Text = "Image";
+            radioButtonImage.Text = "图像";
             radioButtonImage.UseVisualStyleBackColor = true;
             radioButtonImage.CheckedChanged += radioButtonImage_CheckedChanged;
             // 
@@ -858,7 +858,7 @@ namespace LibraryEditor
             MinimumSize = new System.Drawing.Size(756, 513);
             Name = "LMain";
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            Text = "Zircon Library Editor";
+            Text = "Zircon 资源库编辑器";
             Resize += LMain_Resize;
             MainMenu.ResumeLayout(false);
             MainMenu.PerformLayout();

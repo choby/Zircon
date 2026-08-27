@@ -135,7 +135,7 @@
             // 
             // gridColumn6
             // 
-            this.gridColumn6.Caption = "Int Parameter 1";
+            this.gridColumn6.Caption = "整数参数 1";
             this.gridColumn6.FieldName = "IntParameter1";
             this.gridColumn6.Name = "gridColumn6";
             this.gridColumn6.Visible = true;
@@ -160,7 +160,7 @@
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("QuestName", "Quest Name")});
             this.QuestInfoLookUpEdit.DisplayMember = "QuestName";
             this.QuestInfoLookUpEdit.Name = "QuestInfoLookUpEdit";
-            this.QuestInfoLookUpEdit.NullText = "[Quest is null]";
+            this.QuestInfoLookUpEdit.NullText = "[任务为空]";
             // 
             // gridColumn24
             // 
@@ -272,7 +272,7 @@
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("StackSize", "Stack Size")});
             this.ItemInfoLookUpEdit.DisplayMember = "ItemName";
             this.ItemInfoLookUpEdit.Name = "ItemInfoLookUpEdit";
-            this.ItemInfoLookUpEdit.NullText = "[Item is null]";
+            this.ItemInfoLookUpEdit.NullText = "[物品为空]";
             // 
             // gridColumn10
             // 
@@ -283,7 +283,7 @@
             // 
             // gridColumn28
             // 
-            this.gridColumn28.Caption = "Region Parameter";
+            this.gridColumn28.Caption = "区域参数";
             this.gridColumn28.ColumnEdit = this.RegionLookUpEdit;
             this.gridColumn28.FieldName = "RegionParameter";
             this.gridColumn28.Name = "gridColumn28";
@@ -301,7 +301,7 @@
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Size", "Size")});
             this.RegionLookUpEdit.DisplayMember = "ServerDescription";
             this.RegionLookUpEdit.Name = "RegionLookUpEdit";
-            this.RegionLookUpEdit.NullText = "[Region is null]";
+            this.RegionLookUpEdit.NullText = "[区域为空]";
             // 
             // gridColumn18
             // 
@@ -349,7 +349,7 @@
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("IsBoss", "IsBoss")});
             this.MonsterInfoLookUpEdit.DisplayMember = "MonsterName";
             this.MonsterInfoLookUpEdit.Name = "MonsterInfoLookUpEdit";
-            this.MonsterInfoLookUpEdit.NullText = "[Monster is null]";
+            this.MonsterInfoLookUpEdit.NullText = "[怪物为空]";
             // 
             // gridColumn12
             // 
@@ -371,7 +371,7 @@
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Description", "Description")});
             this.MapInfoLookUpEdit.DisplayMember = "Description";
             this.MapInfoLookUpEdit.Name = "MapInfoLookUpEdit";
-            this.MapInfoLookUpEdit.NullText = "[Map is null]";
+            this.MapInfoLookUpEdit.NullText = "[地图为空]";
             // 
             // gridColumn13
             // 
@@ -486,7 +486,7 @@
             // 
             // gridColumn27
             // 
-            this.gridColumn27.Caption = "Quest Type";
+            this.gridColumn27.Caption = "任务类型";
             this.gridColumn27.ColumnEdit = this.TypeImageComboBox;
             this.gridColumn27.FieldName = "QuestType";
             this.gridColumn27.MinWidth = 80;
@@ -556,7 +556,7 @@
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("RegionName", "Region Name")});
             this.NPCLookUpEdit.DisplayMember = "RegionName";
             this.NPCLookUpEdit.Name = "NPCLookUpEdit";
-            this.NPCLookUpEdit.NullText = "[NPC is null]";
+            this.NPCLookUpEdit.NullText = "[NPC 为空]";
             // 
             // gridColumn17
             // 
@@ -586,7 +586,7 @@
             // 
             // SaveButton
             // 
-            this.SaveButton.Caption = "Save Database";
+            this.SaveButton.Caption = "保存数据库";
             this.SaveButton.Id = 1;
             this.SaveButton.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("SaveButton.ImageOptions.Image")));
             this.SaveButton.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("SaveButton.ImageOptions.LargeImage")));
@@ -596,7 +596,7 @@
             // 
             // ImportButton
             // 
-            this.ImportButton.Caption = "Import";
+            this.ImportButton.Caption = "导入";
             this.ImportButton.Id = 2;
             this.ImportButton.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("ImportButton.ImageOptions.Image")));
             this.ImportButton.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("ImportButton.ImageOptions.LargeImage")));
@@ -605,7 +605,7 @@
             // 
             // ExportButton
             // 
-            this.ExportButton.Caption = "Export";
+            this.ExportButton.Caption = "导出";
             this.ExportButton.Id = 3;
             this.ExportButton.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("ExportButton.ImageOptions.Image")));
             this.ExportButton.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("ExportButton.ImageOptions.LargeImage")));
@@ -618,7 +618,7 @@
             this.ribbonPageGroup1,
             this.JsonImportExport});
             this.ribbonPage1.Name = "ribbonPage1";
-            this.ribbonPage1.Text = "Home";
+            this.ribbonPage1.Text = "主页";
             // 
             // ribbonPageGroup1
             // 
@@ -626,14 +626,14 @@
             this.ribbonPageGroup1.CaptionButtonVisible = DevExpress.Utils.DefaultBoolean.False;
             this.ribbonPageGroup1.ItemLinks.Add(this.SaveButton);
             this.ribbonPageGroup1.Name = "ribbonPageGroup1";
-            this.ribbonPageGroup1.Text = "Saving";
+            this.ribbonPageGroup1.Text = "保存";
             // 
             // JsonImportExport
             // 
             this.JsonImportExport.ItemLinks.Add(this.ImportButton);
             this.JsonImportExport.ItemLinks.Add(this.ExportButton);
             this.JsonImportExport.Name = "JsonImportExport";
-            this.JsonImportExport.Text = "Json";
+            this.JsonImportExport.Text = "JSON";
             // 
             // QuestInfoView
             // 
@@ -644,7 +644,7 @@
             this.Controls.Add(this.ribbon);
             this.Name = "QuestInfoView";
             this.Ribbon = this.ribbon;
-            this.Text = "Quest Info";
+            this.Text = "任务信息";
             ((System.ComponentModel.ISupportInitialize)(this.RequirementsGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.RequirementImageComboBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.QuestInfoLookUpEdit)).EndInit();

@@ -48,7 +48,7 @@
             // ribbonPageGroup1
             // 
             this.ribbonPageGroup1.Name = "ribbonPageGroup1";
-            this.ribbonPageGroup1.Text = "ribbonPageGroup1";
+            this.ribbonPageGroup1.Text = "功能组";
             // 
             // SelectedFolderButtonEdit
             // 
@@ -91,7 +91,7 @@
             this.ConvertButton.Name = "ConvertButton";
             this.ConvertButton.Size = new System.Drawing.Size(184, 23);
             this.ConvertButton.TabIndex = 5;
-            this.ConvertButton.Text = "Convert Libraries";
+            this.ConvertButton.Text = "转换资源库";
             this.ConvertButton.Click += new System.EventHandler(this.ConvertLibrariesButton_Click);
             // 
             // progressBarControl1
@@ -123,7 +123,7 @@
             this.CreaetLibrariesButton.Name = "CreaetLibrariesButton";
             this.CreaetLibrariesButton.Size = new System.Drawing.Size(184, 23);
             this.CreaetLibrariesButton.TabIndex = 0;
-            this.CreaetLibrariesButton.Text = "Create Libraries";
+            this.CreaetLibrariesButton.Text = "创建资源库";
             this.CreaetLibrariesButton.Click += new System.EventHandler(this.CreaetLibrariesButton_Click);
             // 
             // FolderDialog
@@ -136,7 +136,7 @@
             this.simpleButton1.Name = "simpleButton1";
             this.simpleButton1.Size = new System.Drawing.Size(75, 23);
             this.simpleButton1.TabIndex = 9;
-            this.simpleButton1.Text = "simpleButton1";
+            this.simpleButton1.Text = "按钮";
             this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
             // 
             // IMain
@@ -155,7 +155,7 @@
             this.Controls.Add(this.SelectedFolderButtonEdit);
             this.Controls.Add(this.CreaetLibrariesButton);
             this.Name = "IMain";
-            this.Text = "Image Manager";
+            this.Text = "图像管理器";
             this.Load += new System.EventHandler(this.IMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.SelectedFolderButtonEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.SubFoldersCheckEdit.Properties)).EndInit();

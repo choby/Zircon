@@ -154,7 +154,7 @@
             this.UploadPatchButton.Name = "UploadPatchButton";
             this.UploadPatchButton.Size = new System.Drawing.Size(233, 23);
             this.UploadPatchButton.TabIndex = 10;
-            this.UploadPatchButton.Text = "Upload Patch";
+            this.UploadPatchButton.Text = "上传补丁";
             this.UploadPatchButton.Click += new System.EventHandler(this.UploadPatchButton_Click);
             // 
             // labelControl6
@@ -262,7 +262,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "PMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Patch Manager";
+            this.Text = "补丁管理器";
             this.TopMost = true;
             this.Load += new System.EventHandler(this.PMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.CleanClientButtonEdit.Properties)).EndInit();

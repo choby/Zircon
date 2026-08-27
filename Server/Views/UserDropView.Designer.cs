@@ -89,7 +89,7 @@
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("EMailAddress", "EMail")});
             this.AccountLookUpEdit.DisplayMember = "EMailAddress";
             this.AccountLookUpEdit.Name = "AccountLookUpEdit";
-            this.AccountLookUpEdit.NullText = "[Account is null]";
+            this.AccountLookUpEdit.NullText = "[账号为空]";
             // 
             // gridColumn2
             // 
@@ -140,7 +140,7 @@
             this.ClientSize = new System.Drawing.Size(693, 408);
             this.Controls.Add(this.UserDropGridControl);
             this.Name = "UserDropView";
-            this.Text = "User Drop";
+            this.Text = "用户掉落";
             ((System.ComponentModel.ISupportInitialize)(this.UserDropGridControl)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.UserDropGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.AccountLookUpEdit)).EndInit();

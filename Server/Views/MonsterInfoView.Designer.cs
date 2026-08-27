@@ -168,7 +168,7 @@
             RegionLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "Index"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("FileName", "File Name"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Description", "Description") });
             RegionLookUpEdit.DisplayMember = "ServerDescription";
             RegionLookUpEdit.Name = "RegionLookUpEdit";
-            RegionLookUpEdit.NullText = "[Region is null]";
+            RegionLookUpEdit.NullText = "[区域为空]";
             // 
             // colDelay
             // 
@@ -213,7 +213,7 @@
             ItemLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "Index"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ItemName", "Item Name"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ItemType", "Item Type"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Price", "Price"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("StackSize", "Stack Size"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("PartCount", "Part Count") });
             ItemLookUpEdit.DisplayMember = "ItemName";
             ItemLookUpEdit.Name = "ItemLookUpEdit";
-            ItemLookUpEdit.NullText = "[Item is null]";
+            ItemLookUpEdit.NullText = "[物品为空]";
             // 
             // colChance
             // 
@@ -369,7 +369,7 @@
             // 
             // colFaceImage
             // 
-            colFaceImage.Caption = "Face Image";
+            colFaceImage.Caption = "头像";
             colFaceImage.FieldName = "FaceImage";
             colFaceImage.Name = "colFaceImage";
             colFaceImage.Visible = true;
@@ -387,7 +387,7 @@
             // 
             // SaveButton
             // 
-            SaveButton.Caption = "Save Database";
+            SaveButton.Caption = "保存数据库";
             SaveButton.Id = 1;
             SaveButton.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("SaveButton.ImageOptions.Image");
             SaveButton.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("SaveButton.ImageOptions.LargeImage");
@@ -397,7 +397,7 @@
             // 
             // ImportButton
             // 
-            ImportButton.Caption = "Import";
+            ImportButton.Caption = "导入";
             ImportButton.Id = 2;
             ImportButton.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("ImportButton.ImageOptions.Image");
             ImportButton.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("ImportButton.ImageOptions.LargeImage");
@@ -406,7 +406,7 @@
             // 
             // ExportButton
             // 
-            ExportButton.Caption = "Export";
+            ExportButton.Caption = "导出";
             ExportButton.Id = 3;
             ExportButton.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("ExportButton.ImageOptions.Image");
             ExportButton.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("ExportButton.ImageOptions.LargeImage");
@@ -415,7 +415,7 @@
             // 
             // InsertRowButton
             // 
-            InsertRowButton.Caption = "Insert Row";
+            InsertRowButton.Caption = "插入行";
             InsertRowButton.Id = 5;
             InsertRowButton.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("InsertRowButton.ImageOptions.Image");
             InsertRowButton.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("InsertRowButton.ImageOptions.LargeImage");
@@ -427,7 +427,7 @@
             // 
             ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] { ribbonPageGroup1, JsonImportExport, ribbonPageGroup3 });
             ribbonPage1.Name = "ribbonPage1";
-            ribbonPage1.Text = "Home";
+            ribbonPage1.Text = "主页";
             // 
             // ribbonPageGroup1
             // 
@@ -435,20 +435,20 @@
             ribbonPageGroup1.CaptionButtonVisible = DevExpress.Utils.DefaultBoolean.False;
             ribbonPageGroup1.ItemLinks.Add(SaveButton);
             ribbonPageGroup1.Name = "ribbonPageGroup1";
-            ribbonPageGroup1.Text = "Saving";
+            ribbonPageGroup1.Text = "保存";
             // 
             // JsonImportExport
             // 
             JsonImportExport.ItemLinks.Add(ImportButton);
             JsonImportExport.ItemLinks.Add(ExportButton);
             JsonImportExport.Name = "JsonImportExport";
-            JsonImportExport.Text = "Json";
+            JsonImportExport.Text = "JSON";
             // 
             // ribbonPageGroup3
             // 
             ribbonPageGroup3.ItemLinks.Add(InsertRowButton);
             ribbonPageGroup3.Name = "ribbonPageGroup3";
-            ribbonPageGroup3.Text = "Edit";
+            ribbonPageGroup3.Text = "编辑";
             // 
             // MonsterInfoView
             // 
@@ -459,7 +459,7 @@
             Controls.Add(ribbon);
             Name = "MonsterInfoView";
             Ribbon = ribbon;
-            Text = "Monster Info";
+            Text = "怪物信息";
             ((System.ComponentModel.ISupportInitialize)MonsterInfoStatsGridView).EndInit();
             ((System.ComponentModel.ISupportInitialize)StatComboBox).EndInit();
             ((System.ComponentModel.ISupportInitialize)MonsterInfoGridControl).EndInit();

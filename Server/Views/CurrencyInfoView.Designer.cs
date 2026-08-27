@@ -73,7 +73,7 @@
             // 
             // gridColumn6
             // 
-            gridColumn6.Caption = "Image";
+            gridColumn6.Caption = "图像";
             gridColumn6.FieldName = "Image";
             gridColumn6.Name = "gridColumn6";
             gridColumn6.Visible = true;
@@ -81,7 +81,7 @@
             // 
             // gridColumn7
             // 
-            gridColumn7.Caption = "Amount";
+            gridColumn7.Caption = "数量";
             gridColumn7.FieldName = "Amount";
             gridColumn7.Name = "gridColumn7";
             gridColumn7.Visible = true;
@@ -114,7 +114,7 @@
             // 
             // gridColumn1
             // 
-            gridColumn1.Caption = "Name";
+            gridColumn1.Caption = "名称";
             gridColumn1.FieldName = "Name";
             gridColumn1.Name = "gridColumn1";
             gridColumn1.Visible = true;
@@ -122,7 +122,7 @@
             // 
             // gridColumn5
             // 
-            gridColumn5.Caption = "Abbreviation";
+            gridColumn5.Caption = "缩写";
             gridColumn5.FieldName = "Abbreviation";
             gridColumn5.Name = "gridColumn5";
             gridColumn5.Visible = true;
@@ -130,7 +130,7 @@
             // 
             // gridColumn2
             // 
-            gridColumn2.Caption = "Type";
+            gridColumn2.Caption = "类型";
             gridColumn2.ColumnEdit = CurrencyTypeImageComboBox;
             gridColumn2.FieldName = "Type";
             gridColumn2.Name = "gridColumn2";
@@ -145,7 +145,7 @@
             // 
             // gridColumn3
             // 
-            gridColumn3.Caption = "Item";
+            gridColumn3.Caption = "物品";
             gridColumn3.ColumnEdit = ItemLookUpEdit;
             gridColumn3.FieldName = "DropItem";
             gridColumn3.Name = "gridColumn3";
@@ -163,12 +163,12 @@
             ItemLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "Index"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ItemName", "Item Name"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ItemType", "Item Type"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Price", "Price"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("StackSize", "Stack Size") });
             ItemLookUpEdit.DisplayMember = "ItemName";
             ItemLookUpEdit.Name = "ItemLookUpEdit";
-            ItemLookUpEdit.NullText = "[Item is null]";
+            ItemLookUpEdit.NullText = "[物品为空]";
             ItemLookUpEdit.UseCtrlScroll = false;
             // 
             // gridColumn4
             // 
-            gridColumn4.Caption = "Gold Exchange Rate";
+            gridColumn4.Caption = "金币兑换率";
             gridColumn4.FieldName = "ExchangeRate";
             gridColumn4.Name = "gridColumn4";
             gridColumn4.Visible = true;
@@ -176,7 +176,7 @@
             // 
             // Category
             // 
-            Category.Caption = "Category";
+            Category.Caption = "分类";
             Category.ColumnEdit = CurrencyCategoryImageComboBox;
             Category.Name = "Category";
             Category.FieldName = "Category";
@@ -201,7 +201,7 @@
             // 
             // SaveDatabaseButton
             // 
-            SaveDatabaseButton.Caption = "Save Database";
+            SaveDatabaseButton.Caption = "保存数据库";
             SaveDatabaseButton.Id = 1;
             SaveDatabaseButton.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("SaveDatabaseButton.ImageOptions.Image");
             SaveDatabaseButton.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("SaveDatabaseButton.ImageOptions.LargeImage");
@@ -211,7 +211,7 @@
             // 
             // ImportButton
             // 
-            ImportButton.Caption = "Import";
+            ImportButton.Caption = "导入";
             ImportButton.Id = 2;
             ImportButton.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("ImportButton.ImageOptions.Image");
             ImportButton.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("ImportButton.ImageOptions.LargeImage");
@@ -220,7 +220,7 @@
             // 
             // ExportButton
             // 
-            ExportButton.Caption = "Export";
+            ExportButton.Caption = "导出";
             ExportButton.Id = 3;
             ExportButton.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("ExportButton.ImageOptions.Image");
             ExportButton.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("ExportButton.ImageOptions.LargeImage");
@@ -231,7 +231,7 @@
             // 
             ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] { ribbonPageGroup1, JsonImportExport });
             ribbonPage1.Name = "ribbonPage1";
-            ribbonPage1.Text = "Home";
+            ribbonPage1.Text = "主页";
             // 
             // ribbonPageGroup1
             // 
@@ -239,14 +239,14 @@
             ribbonPageGroup1.CaptionButtonVisible = DevExpress.Utils.DefaultBoolean.False;
             ribbonPageGroup1.ItemLinks.Add(SaveDatabaseButton);
             ribbonPageGroup1.Name = "ribbonPageGroup1";
-            ribbonPageGroup1.Text = "Saving";
+            ribbonPageGroup1.Text = "保存";
             // 
             // JsonImportExport
             // 
             JsonImportExport.ItemLinks.Add(ImportButton);
             JsonImportExport.ItemLinks.Add(ExportButton);
             JsonImportExport.Name = "JsonImportExport";
-            JsonImportExport.Text = "Json";
+            JsonImportExport.Text = "JSON";
             // 
             // CurrencyInfoView
             // 
@@ -257,7 +257,7 @@
             Controls.Add(ribbon);
             Name = "CurrencyInfoView";
             Ribbon = ribbon;
-            Text = "Currency Info";
+            Text = "货币信息";
             ((System.ComponentModel.ISupportInitialize)CurrencyInfoImageGridView).EndInit();
             ((System.ComponentModel.ISupportInitialize)CurrencyInfoGridControl).EndInit();
             ((System.ComponentModel.ISupportInitialize)CurrencyInfoGridView).EndInit();

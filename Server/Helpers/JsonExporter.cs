@@ -90,7 +90,7 @@ namespace Server
             RowCount = rowCount;
             Date = date;
 
-            Text = "Export";
+            Text = "导出";
             FormBorderStyle = FormBorderStyle.FixedDialog;
             StartPosition = FormStartPosition.CenterParent;
             MaximizeBox = false;
@@ -132,7 +132,7 @@ namespace Server
 
             SimpleButton exportButton = new()
             {
-                Text = "Export",
+                Text = "导出",
                 DialogResult = DialogResult.OK,
                 Location = new Point(286, 126),
                 Size = new Size(75, 28)
@@ -140,7 +140,7 @@ namespace Server
 
             SimpleButton cancelButton = new()
             {
-                Text = "Cancel",
+                Text = "取消",
                 DialogResult = DialogResult.Cancel,
                 Location = new Point(367, 126),
                 Size = new Size(75, 28)

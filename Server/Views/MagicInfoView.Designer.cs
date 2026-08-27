@@ -84,7 +84,7 @@
             // 
             // SaveButton
             // 
-            SaveButton.Caption = "Save Database";
+            SaveButton.Caption = "保存数据库";
             SaveButton.Id = 1;
             SaveButton.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("SaveButton.ImageOptions.Image");
             SaveButton.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("SaveButton.ImageOptions.LargeImage");
@@ -94,7 +94,7 @@
             // 
             // ImportButton
             // 
-            ImportButton.Caption = "Import";
+            ImportButton.Caption = "导入";
             ImportButton.Id = 2;
             ImportButton.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("ImportButton.ImageOptions.Image");
             ImportButton.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("ImportButton.ImageOptions.LargeImage");
@@ -103,7 +103,7 @@
             // 
             // ExportButton
             // 
-            ExportButton.Caption = "Export";
+            ExportButton.Caption = "导出";
             ExportButton.Id = 3;
             ExportButton.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("ExportButton.ImageOptions.Image");
             ExportButton.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("ExportButton.ImageOptions.LargeImage");
@@ -114,7 +114,7 @@
             // 
             ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] { ribbonPageGroup1, JsonImportExport });
             ribbonPage1.Name = "ribbonPage1";
-            ribbonPage1.Text = "Home";
+            ribbonPage1.Text = "主页";
             // 
             // ribbonPageGroup1
             // 
@@ -122,14 +122,14 @@
             ribbonPageGroup1.CaptionButtonVisible = DevExpress.Utils.DefaultBoolean.False;
             ribbonPageGroup1.ItemLinks.Add(SaveButton);
             ribbonPageGroup1.Name = "ribbonPageGroup1";
-            ribbonPageGroup1.Text = "Saving";
+            ribbonPageGroup1.Text = "保存";
             // 
             // JsonImportExport
             // 
             JsonImportExport.ItemLinks.Add(ImportButton);
             JsonImportExport.ItemLinks.Add(ExportButton);
             JsonImportExport.Name = "JsonImportExport";
-            JsonImportExport.Text = "Json";
+            JsonImportExport.Text = "JSON";
             // 
             // MagicImageComboBox
             // 
@@ -251,7 +251,7 @@
             // 
             // gridColumn9
             // 
-            gridColumn9.Caption = "Need Level 1";
+            gridColumn9.Caption = "所需等级 1";
             gridColumn9.FieldName = "NeedLevel1";
             gridColumn9.Name = "gridColumn9";
             gridColumn9.Visible = true;
@@ -259,7 +259,7 @@
             // 
             // gridColumn10
             // 
-            gridColumn10.Caption = "Need Level 2";
+            gridColumn10.Caption = "所需等级 2";
             gridColumn10.FieldName = "NeedLevel2";
             gridColumn10.Name = "gridColumn10";
             gridColumn10.Visible = true;
@@ -267,7 +267,7 @@
             // 
             // gridColumn11
             // 
-            gridColumn11.Caption = "Need Level 3";
+            gridColumn11.Caption = "所需等级 3";
             gridColumn11.FieldName = "NeedLevel3";
             gridColumn11.Name = "gridColumn11";
             gridColumn11.Visible = true;
@@ -275,7 +275,7 @@
             // 
             // gridColumn12
             // 
-            gridColumn12.Caption = "Experience 1";
+            gridColumn12.Caption = "经验 1";
             gridColumn12.FieldName = "Experience1";
             gridColumn12.Name = "gridColumn12";
             gridColumn12.Visible = true;
@@ -283,7 +283,7 @@
             // 
             // gridColumn18
             // 
-            gridColumn18.Caption = "Experience 2";
+            gridColumn18.Caption = "经验 2";
             gridColumn18.FieldName = "Experience2";
             gridColumn18.Name = "gridColumn18";
             gridColumn18.Visible = true;
@@ -291,7 +291,7 @@
             // 
             // gridColumn19
             // 
-            gridColumn19.Caption = "Experience 3";
+            gridColumn19.Caption = "经验 3";
             gridColumn19.FieldName = "Experience3";
             gridColumn19.Name = "gridColumn19";
             gridColumn19.Visible = true;
@@ -346,7 +346,7 @@
             Controls.Add(ribbon);
             Name = "MagicInfoView";
             Ribbon = ribbon;
-            Text = "Magic Info";
+            Text = "技能信息";
             Load += MagicInfoView_Load;
             ((System.ComponentModel.ISupportInitialize)ribbon).EndInit();
             ((System.ComponentModel.ISupportInitialize)MagicImageComboBox).EndInit();

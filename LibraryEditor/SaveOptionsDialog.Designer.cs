@@ -58,7 +58,7 @@ namespace LibraryEditor
             _buildAtlasCheckBox.Name = "_buildAtlasCheckBox";
             _buildAtlasCheckBox.Size = new Size(160, 22);
             _buildAtlasCheckBox.TabIndex = 0;
-            _buildAtlasCheckBox.Text = "Build atlas pages";
+            _buildAtlasCheckBox.Text = "生成图集页面";
             _buildAtlasCheckBox.UseVisualStyleBackColor = true;
             _buildAtlasCheckBox.CheckedChanged += BuildAtlasCheckBox_CheckedChanged;
             // 
@@ -68,7 +68,7 @@ namespace LibraryEditor
             _buildShadowAtlasCheckBox.Name = "_buildShadowAtlasCheckBox";
             _buildShadowAtlasCheckBox.Size = new Size(220, 22);
             _buildShadowAtlasCheckBox.TabIndex = 1;
-            _buildShadowAtlasCheckBox.Text = "Build shadow atlas pages";
+            _buildShadowAtlasCheckBox.Text = "生成阴影图集页面";
             _buildShadowAtlasCheckBox.UseVisualStyleBackColor = true;
             // 
             // _buildOverlayAtlasCheckBox
@@ -77,7 +77,7 @@ namespace LibraryEditor
             _buildOverlayAtlasCheckBox.Name = "_buildOverlayAtlasCheckBox";
             _buildOverlayAtlasCheckBox.Size = new Size(220, 22);
             _buildOverlayAtlasCheckBox.TabIndex = 2;
-            _buildOverlayAtlasCheckBox.Text = "Build overlay atlas pages";
+            _buildOverlayAtlasCheckBox.Text = "生成叠加图集页面";
             _buildOverlayAtlasCheckBox.UseVisualStyleBackColor = true;
             // 
             // _storePngSourceCheckBox
@@ -86,7 +86,7 @@ namespace LibraryEditor
             _storePngSourceCheckBox.Name = "_storePngSourceCheckBox";
             _storePngSourceCheckBox.Size = new Size(260, 22);
             _storePngSourceCheckBox.TabIndex = 3;
-            _storePngSourceCheckBox.Text = "Keep existing PNG source images";
+            _storePngSourceCheckBox.Text = "保留现有 PNG 源图像";
             _storePngSourceCheckBox.UseVisualStyleBackColor = true;
             // 
             // _atlasGroupNumeric
@@ -112,7 +112,7 @@ namespace LibraryEditor
             // _individualRuntimeComboBox
             // 
             _individualRuntimeComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
-            _individualRuntimeComboBox.Items.AddRange(new object[] { "Source", "DXT1", "BC7" });
+            _individualRuntimeComboBox.Items.AddRange(new object[] { "源格式", "DXT1", "BC7" });
             _individualRuntimeComboBox.Location = new Point(156, 126);
             _individualRuntimeComboBox.Name = "_individualRuntimeComboBox";
             _individualRuntimeComboBox.Size = new Size(180, 23);
@@ -121,7 +121,7 @@ namespace LibraryEditor
             // _runtimeComboBox
             // 
             _runtimeComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
-            _runtimeComboBox.Items.AddRange(new object[] { "BC7 only", "BGRA32" });
+            _runtimeComboBox.Items.AddRange(new object[] { "仅 BC7", "BGRA32" });
             _runtimeComboBox.Location = new Point(156, 160);
             _runtimeComboBox.Name = "_runtimeComboBox";
             _runtimeComboBox.Size = new Size(180, 23);
@@ -130,7 +130,7 @@ namespace LibraryEditor
             // _compressionComboBox
             // 
             _compressionComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
-            _compressionComboBox.Items.AddRange(new object[] { "Deflate best", "Deflate fast", "None" });
+            _compressionComboBox.Items.AddRange(new object[] { "Deflate 最佳压缩", "Deflate 快速压缩", "不压缩" });
             _compressionComboBox.Location = new Point(156, 194);
             _compressionComboBox.Name = "_compressionComboBox";
             _compressionComboBox.Size = new Size(180, 23);
@@ -191,7 +191,7 @@ namespace LibraryEditor
             _okButton.Name = "_okButton";
             _okButton.Size = new Size(90, 28);
             _okButton.TabIndex = 14;
-            _okButton.Text = "Save";
+            _okButton.Text = "保存";
             _okButton.UseVisualStyleBackColor = true;
             _okButton.Click += OkButton_Click;
             // 
@@ -202,7 +202,7 @@ namespace LibraryEditor
             _cancelButton.Name = "_cancelButton";
             _cancelButton.Size = new Size(90, 28);
             _cancelButton.TabIndex = 15;
-            _cancelButton.Text = "Cancel";
+            _cancelButton.Text = "取消";
             _cancelButton.UseVisualStyleBackColor = true;
             // 
             // SaveOptionsDialog
@@ -234,7 +234,7 @@ namespace LibraryEditor
             MinimizeBox = false;
             Name = "SaveOptionsDialog";
             StartPosition = FormStartPosition.CenterParent;
-            Text = "Save ZL v2 Options";
+            Text = "保存 ZL v2 选项";
             ((ISupportInitialize)_atlasGroupNumeric).EndInit();
             ((ISupportInitialize)_atlasPageSizeNumeric).EndInit();
             ResumeLayout(false);

@@ -70,7 +70,7 @@
             // 
             // gridColumn8
             // 
-            gridColumn8.Caption = "Amount";
+            gridColumn8.Caption = "数量";
             gridColumn8.FieldName = "Amount";
             gridColumn8.Name = "gridColumn8";
             gridColumn8.Visible = true;
@@ -78,7 +78,7 @@
             // 
             // gridColumn9
             // 
-            gridColumn9.Caption = "Item";
+            gridColumn9.Caption = "物品";
             gridColumn9.ColumnEdit = ItemLookUpEdit;
             gridColumn9.FieldName = "Item";
             gridColumn9.Name = "gridColumn9";
@@ -92,7 +92,7 @@
             ItemLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "Index"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ItemName", "Item Name"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ItemType", "Item Type"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Price", "Price"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("StackSize", "Stack Size") });
             ItemLookUpEdit.DisplayMember = "ItemName";
             ItemLookUpEdit.Name = "ItemLookUpEdit";
-            ItemLookUpEdit.NullText = "[Item is null]";
+            ItemLookUpEdit.NullText = "[物品为空]";
             // 
             // LootBoxInfoGridControl
             // 
@@ -148,7 +148,7 @@
             CurrencyLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "Name"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Abbreviation", "Abbreviation") });
             CurrencyLookUpEdit.DisplayMember = "Name";
             CurrencyLookUpEdit.Name = "CurrencyLookUpEdit";
-            CurrencyLookUpEdit.NullText = "[Currency is null]";
+            CurrencyLookUpEdit.NullText = "[货币为空]";
             // 
             // ribbon
             // 
@@ -162,7 +162,7 @@
             // 
             // SaveDatabaseButton
             // 
-            SaveDatabaseButton.Caption = "Save Database";
+            SaveDatabaseButton.Caption = "保存数据库";
             SaveDatabaseButton.Id = 1;
             SaveDatabaseButton.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("SaveDatabaseButton.ImageOptions.Image");
             SaveDatabaseButton.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("SaveDatabaseButton.ImageOptions.LargeImage");
@@ -172,7 +172,7 @@
             // 
             // ImportButton
             // 
-            ImportButton.Caption = "Import";
+            ImportButton.Caption = "导入";
             ImportButton.Id = 2;
             ImportButton.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("ImportButton.ImageOptions.Image");
             ImportButton.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("ImportButton.ImageOptions.LargeImage");
@@ -181,7 +181,7 @@
             // 
             // ExportButton
             // 
-            ExportButton.Caption = "Export";
+            ExportButton.Caption = "导出";
             ExportButton.Id = 3;
             ExportButton.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("ExportButton.ImageOptions.Image");
             ExportButton.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("ExportButton.ImageOptions.LargeImage");
@@ -192,7 +192,7 @@
             // 
             ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] { ribbonPageGroup1, JsonImportExport });
             ribbonPage1.Name = "ribbonPage1";
-            ribbonPage1.Text = "Home";
+            ribbonPage1.Text = "主页";
             // 
             // ribbonPageGroup1
             // 
@@ -200,14 +200,14 @@
             ribbonPageGroup1.CaptionButtonVisible = DevExpress.Utils.DefaultBoolean.False;
             ribbonPageGroup1.ItemLinks.Add(SaveDatabaseButton);
             ribbonPageGroup1.Name = "ribbonPageGroup1";
-            ribbonPageGroup1.Text = "Saving";
+            ribbonPageGroup1.Text = "保存";
             // 
             // JsonImportExport
             // 
             JsonImportExport.ItemLinks.Add(ImportButton);
             JsonImportExport.ItemLinks.Add(ExportButton);
             JsonImportExport.Name = "JsonImportExport";
-            JsonImportExport.Text = "Json";
+            JsonImportExport.Text = "JSON";
             // 
             // LootBoxItemLookUpEdit
             // 
@@ -218,7 +218,7 @@
             LootBoxItemLookUpEdit.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "Index"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ItemName", "Item Name"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ItemType", "Item Type"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Price", "Price"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("StackSize", "Stack Size") });
             LootBoxItemLookUpEdit.DisplayMember = "ItemName";
             LootBoxItemLookUpEdit.Name = "LootBoxItemLookUpEdit";
-            LootBoxItemLookUpEdit.NullText = "[Item is null]";
+            LootBoxItemLookUpEdit.NullText = "[物品为空]";
             LootBoxItemLookUpEdit.UseCtrlScroll = false;
             // 
             // LootBoxInfoView
@@ -230,7 +230,7 @@
             Controls.Add(ribbon);
             Name = "LootBoxInfoView";
             Ribbon = ribbon;
-            Text = "Loot Box Info";
+            Text = "宝箱信息";
             ((System.ComponentModel.ISupportInitialize)LootBoxItemInfoGridView).EndInit();
             ((System.ComponentModel.ISupportInitialize)ItemLookUpEdit).EndInit();
             ((System.ComponentModel.ISupportInitialize)LootBoxInfoGridControl).EndInit();

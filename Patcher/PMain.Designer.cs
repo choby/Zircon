@@ -50,7 +50,7 @@
             this.progressPanel1.Name = "progressPanel1";
             this.progressPanel1.Size = new System.Drawing.Size(246, 39);
             this.progressPanel1.TabIndex = 0;
-            this.progressPanel1.Text = "progressPanel1";
+            this.progressPanel1.Text = "进度面板";
             // 
             // tableLayoutPanel1
             // 
@@ -80,7 +80,7 @@
             this.DoubleBuffered = true;
             this.Name = "PMain";
             this.ShowOnTopMode = DevExpress.XtraWaitForm.ShowFormOnTopMode.AboveAll;
-            this.Text = "Form1";
+            this.Text = "窗口";
             this.Load += new System.EventHandler(this.PMain_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);

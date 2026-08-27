@@ -377,7 +377,7 @@ namespace Server.Views
             // 
             // SaveButton
             // 
-            SaveButton.Caption = "Save";
+            SaveButton.Caption = "保存";
             SaveButton.Id = 1;
             SaveButton.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("SaveButton.ImageOptions.Image");
             SaveButton.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("SaveButton.ImageOptions.LargeImage");
@@ -386,7 +386,7 @@ namespace Server.Views
             // 
             // ReloadButton
             // 
-            ReloadButton.Caption = "Reload";
+            ReloadButton.Caption = "重新加载";
             ReloadButton.Id = 2;
             ReloadButton.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("ReloadButton.ImageOptions.Image");
             ReloadButton.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("ReloadButton.ImageOptions.LargeImage");
@@ -397,7 +397,7 @@ namespace Server.Views
             // 
             ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] { ribbonPageGroup1 });
             ribbonPage1.Name = "ribbonPage1";
-            ribbonPage1.Text = "Home";
+            ribbonPage1.Text = "主页";
             // 
             // ribbonPageGroup1
             // 
@@ -406,7 +406,7 @@ namespace Server.Views
             ribbonPageGroup1.ItemLinks.Add(SaveButton);
             ribbonPageGroup1.ItemLinks.Add(ReloadButton);
             ribbonPageGroup1.Name = "ribbonPageGroup1";
-            ribbonPageGroup1.Text = "Actions";
+            ribbonPageGroup1.Text = "操作";
             // 
             // xtraTabControl1
             // 
@@ -439,7 +439,7 @@ namespace Server.Views
             xtraTabPage1.Controls.Add(labelControl1);
             xtraTabPage1.Name = "xtraTabPage1";
             xtraTabPage1.Size = new System.Drawing.Size(749, 385);
-            xtraTabPage1.Text = "Network";
+            xtraTabPage1.Text = "网络";
             // 
             // SyncronizeLocalButton
             // 
@@ -447,7 +447,7 @@ namespace Server.Views
             SyncronizeLocalButton.Name = "SyncronizeLocalButton";
             SyncronizeLocalButton.Size = new System.Drawing.Size(200, 23);
             SyncronizeLocalButton.TabIndex = 42;
-            SyncronizeLocalButton.Text = "Syncronize Local DB";
+            SyncronizeLocalButton.Text = "同步本地数据库";
             // 
             // PacketBanTimeEdit
             // 
@@ -467,7 +467,7 @@ namespace Server.Views
             SyncronizeRemoteButton.Name = "SyncronizeRemoteButton";
             SyncronizeRemoteButton.Size = new System.Drawing.Size(200, 23);
             SyncronizeRemoteButton.TabIndex = 41;
-            SyncronizeRemoteButton.Text = "Syncronize Remote DB";
+            SyncronizeRemoteButton.Text = "同步远程数据库";
             // 
             // DatabaseEncryptionButton
             // 
@@ -475,7 +475,7 @@ namespace Server.Views
             DatabaseEncryptionButton.Name = "DatabaseEncryptionButton";
             DatabaseEncryptionButton.Size = new System.Drawing.Size(200, 23);
             DatabaseEncryptionButton.TabIndex = 41;
-            DatabaseEncryptionButton.Text = "Config Database Encryption";
+            DatabaseEncryptionButton.Text = "配置数据库加密";
             // 
             // labelControl86
             // 
@@ -646,7 +646,7 @@ namespace Server.Views
             xtraTabPage2.Controls.Add(AllowNewAccountEdit);
             xtraTabPage2.Name = "xtraTabPage2";
             xtraTabPage2.Size = new System.Drawing.Size(749, 385);
-            xtraTabPage2.Text = "Control";
+            xtraTabPage2.Text = "控制";
             // 
             // labelControl16
             // 
@@ -980,7 +980,7 @@ namespace Server.Views
             xtraTabPage3.Controls.Add(CheckVersionEdit);
             xtraTabPage3.Name = "xtraTabPage3";
             xtraTabPage3.Size = new System.Drawing.Size(749, 385);
-            xtraTabPage3.Text = "System";
+            xtraTabPage3.Text = "系统";
             // 
             // RabbitEventEndEdit
             // 
@@ -1122,7 +1122,7 @@ namespace Server.Views
             CheckVersionButton.Name = "CheckVersionButton";
             CheckVersionButton.Size = new System.Drawing.Size(86, 23);
             CheckVersionButton.TabIndex = 26;
-            CheckVersionButton.Text = "Check Version";
+            CheckVersionButton.Text = "检查版本";
             CheckVersionButton.Click += CheckVersionButton_Click;
             // 
             // VersionPathEdit
@@ -1178,7 +1178,7 @@ namespace Server.Views
             xtraTabPage4.Controls.Add(labelControl26);
             xtraTabPage4.Name = "xtraTabPage4";
             xtraTabPage4.Size = new System.Drawing.Size(749, 385);
-            xtraTabPage4.Text = "Mail";
+            xtraTabPage4.Text = "邮件";
             // 
             // MailDisplayNameEdit
             // 
@@ -1341,7 +1341,7 @@ namespace Server.Views
             xtraTabPage5.Controls.Add(labelControl42);
             xtraTabPage5.Name = "xtraTabPage5";
             xtraTabPage5.Size = new System.Drawing.Size(749, 385);
-            xtraTabPage5.Text = "Web Server";
+            xtraTabPage5.Text = "Web 服务器";
             // 
             // labelControl81
             // 
@@ -1645,7 +1645,7 @@ namespace Server.Views
             xtraTabPage6.Controls.Add(labelControl23);
             xtraTabPage6.Name = "xtraTabPage6";
             xtraTabPage6.Size = new System.Drawing.Size(749, 385);
-            xtraTabPage6.Text = "Players";
+            xtraTabPage6.Text = "玩家";
             // 
             // labelControl91
             // 
@@ -2032,7 +2032,7 @@ namespace Server.Views
             xtraTabPage7.Controls.Add(DeadDurationEdit);
             xtraTabPage7.Name = "xtraTabPage7";
             xtraTabPage7.Size = new System.Drawing.Size(749, 385);
-            xtraTabPage7.Text = "Monsters";
+            xtraTabPage7.Text = "怪物";
             // 
             // LairRegionIndexEdit
             // 
@@ -2043,7 +2043,7 @@ namespace Server.Views
             LairRegionIndexEdit.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             LairRegionIndexEdit.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "Index"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ServerDescription", "Server Description"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Size", "Size") });
             LairRegionIndexEdit.Properties.DisplayMember = "ServerDescription";
-            LairRegionIndexEdit.Properties.NullText = "[Region is null]";
+            LairRegionIndexEdit.Properties.NullText = "[区域为空]";
             LairRegionIndexEdit.Properties.ValueMember = "Index";
             LairRegionIndexEdit.Size = new System.Drawing.Size(174, 20);
             LairRegionIndexEdit.TabIndex = 125;
@@ -2065,7 +2065,7 @@ namespace Server.Views
             MysteryShipRegionIndexEdit.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             MysteryShipRegionIndexEdit.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Index", "Index"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("ServerDescription", "Server Description"), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Size", "Size") });
             MysteryShipRegionIndexEdit.Properties.DisplayMember = "ServerDescription";
-            MysteryShipRegionIndexEdit.Properties.NullText = "[Region is null]";
+            MysteryShipRegionIndexEdit.Properties.NullText = "[区域为空]";
             MysteryShipRegionIndexEdit.Properties.ValueMember = "Index";
             MysteryShipRegionIndexEdit.Size = new System.Drawing.Size(174, 20);
             MysteryShipRegionIndexEdit.TabIndex = 123;
@@ -2148,7 +2148,7 @@ namespace Server.Views
             xtraTabPage8.Controls.Add(DropDurationEdit);
             xtraTabPage8.Name = "xtraTabPage8";
             xtraTabPage8.Size = new System.Drawing.Size(749, 385);
-            xtraTabPage8.Text = "Items";
+            xtraTabPage8.Text = "物品";
             //
             // MaxGemPurityEdit
             //
@@ -2435,7 +2435,7 @@ namespace Server.Views
             xtraTabPage9.Controls.Add(labelControl55);
             xtraTabPage9.Name = "xtraTabPage9";
             xtraTabPage9.Size = new System.Drawing.Size(749, 385);
-            xtraTabPage9.Text = "Rates";
+            xtraTabPage9.Text = "倍率";
             // 
             // CompanionRateEdit
             // 
@@ -2619,7 +2619,7 @@ namespace Server.Views
             Controls.Add(ribbon);
             Name = "ConfigView";
             Ribbon = ribbon;
-            Text = "Config";
+            Text = "配置";
             ((System.ComponentModel.ISupportInitialize)ribbon).EndInit();
             ((System.ComponentModel.ISupportInitialize)xtraTabControl1).EndInit();
             xtraTabControl1.ResumeLayout(false);
