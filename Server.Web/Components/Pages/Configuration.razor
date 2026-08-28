@@ -28,12 +28,12 @@
 }
 
 <div class="config-sections">
-    @foreach (ConfigurationSectionModel section in Sections)
+    @foreach (ConfigurationSectionModel configSection in Sections)
     {
-        <details class="config-section" open="@(section.Name is "Network" or "System" or "AdminWeb")">
-            <summary><span>@section.Name</span><small>@section.Fields.Count 项</small></summary>
+        <details class="config-section" open="@(configSection.Name is "Network" or "System" or "AdminWeb")">
+            <summary><span>@configSection.Name</span><small>@configSection.Fields.Count 项</small></summary>
             <div class="config-grid">
-                @foreach (ConfigurationField field in section.Fields)
+                @foreach (ConfigurationField field in configSection.Fields)
                 {
                     <label class="config-field">
                         <span>@field.DisplayName <em>@field.ApplyMode</em></span>
