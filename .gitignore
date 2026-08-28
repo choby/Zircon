@@ -10,3 +10,5 @@ licenses.licx
 /.dotnet/.dotnet
 /.codex/skills/*
 /milestones
+**/node_modules/
+.DS_Store

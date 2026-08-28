@@ -1,0 +1,52 @@
+@page "/login"
+@attribute [AllowAnonymous]
+@layout LoginLayout
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject NavigationManager Navigation
+
+<PageTitle>管理员登录 · Zircon</PageTitle>
+
+<div class="login-page">
+    <div class="login-grid"></div>
+    <section class="login-card">
+        <div class="login-kicker">CONTROL PLANE / AUTHORIZATION</div>
+        <h1>进入服务器控制平面</h1>
+        <p>使用 Server.ini 中配置的管理员账号与 MasterPassword。</p>
+
+        @if (HasError)
+        {
+            <div class="alert danger">账号或密码不正确，或尝试次数过多。</div>
+        }
+
+        <form method="post" action="/auth/login" class="login-form">
+            <AntiforgeryToken />
+            <label>
+                <span>管理员账号</span>
+                <input name="username" autocomplete="username" required autofocus />
+            </label>
+            <label>
+                <span>MasterPassword</span>
+                <input name="password" type="password" autocomplete="current-password" required />
+            </label>
+            <button type="submit" class="primary-action">验证并进入</button>
+        </form>
+        <div class="login-meta">
+            <span><i class="status-light"></i> 本地管理端口</span>
+            <span>HTTPS 由反向代理终止</span>
+        </div>
+    </section>
+</div>
+
+@code {
+    [SupplyParameterFromQuery(Name = "error")]
+    public string? Error { get; set; }
+
+    private bool HasError => Error == "1";
+
+    protected override async Task OnInitializedAsync()
+    {
+        AuthenticationState state = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        if (state.User.Identity?.IsAuthenticated == true)
+            Navigation.NavigateTo("/");
+    }
+}

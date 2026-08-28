@@ -1,0 +1,291 @@
+@attribute [Authorize]
+@implements IAsyncDisposable
+@inject GameDataSessionService DataSession
+@inject GameDataViewCatalog ViewCatalog
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject IGameServerController GameServer
+@inject IJSRuntime JS
+
+<PageTitle>@View.Title · Zircon</PageTitle>
+
+<div class="page-heading compact game-data-heading">
+    <div>
+        <span class="eyebrow">SYSTEM.DB / @View.Category.ToUpperInvariant()</span>
+        <h1>@View.Title</h1>
+        <p>@View.Description</p>
+    </div>
+    <div class="view-origin"><span>原管理界面</span><strong>@LegacyViewName</strong></div>
+</div>
+
+@if (View.Tables.Count > 1)
+{
+    <div class="entity-switcher view-tabs" role="tablist" aria-label="数据类型">
+        @foreach (GameDataTableDefinition candidate in View.Tables)
+        {
+            <button class="@(candidate == Table ? "active" : null)" role="tab" aria-selected="@(candidate == Table)"
+                    @onclick="() => SelectTable(candidate)">@candidate.Title</button>
+        }
+    </div>
+}
+
+@if (!string.IsNullOrWhiteSpace(Message))
+{
+    <div class="alert @(HasError ? "danger" : "success")" role="status">@Message</div>
+}
+
+<section class="legacy-grid-shell">
+    <div class="legacy-grid-titlebar">
+        <div><span>DATA VIEW</span><strong>@Table.Title</strong></div>
+        <div class="legacy-grid-count">@Rows.Count 条记录</div>
+    </div>
+
+    <TelerikGrid @key="Table.Key"
+                 TItem="object"
+                 Data="@Rows"
+                 Pageable="true"
+                 PageSize="30"
+                 Sortable="true"
+                 Resizable="true"
+                 Reorderable="true"
+                 FilterMode="@GridFilterMode.FilterRow"
+                 ShowColumnMenu="true"
+                 SelectionMode="@GridSelectionMode.Multiple"
+                 @bind-SelectedItems="SelectedItems"
+                 EditMode="@GridEditMode.Inline"
+                 OnModelInit="@CreateModel"
+                 OnCreate="@CreateRow"
+                 OnUpdate="@UpdateRow"
+                 OnDelete="@DeleteRow"
+                 ConfirmDelete="true"
+                 Class="legacy-data-grid">
+        <GridToolBarTemplate>
+            <GridCommandButton Command="Add" ThemeColor="@ThemeConstants.Button.ThemeColor.Primary">新增</GridCommandButton>
+            <TelerikButton OnClick="Reload">刷新</TelerikButton>
+            <TelerikButton OnClick="SaveDatabase">保存数据库</TelerikButton>
+            <TelerikButton OnClick="InsertAfter" Enabled="@(SelectedItems.Count() == 1 && GameServer.State == GameServerState.Stopped)">在选中行后插入</TelerikButton>
+            <TelerikButton OnClick="ExportSelected" Enabled="@SelectedItems.Any()">导出选中</TelerikButton>
+            <TelerikButton OnClick="ExportAll">导出全部</TelerikButton>
+            <label class="file-action telerik-file-action">导入 JSON<InputFile OnChange="Import" accept="application/json,.json" /></label>
+            <GridSearchBox Placeholder="搜索当前表格…" DebounceDelay="250" />
+        </GridToolBarTemplate>
+        <GridColumns>
+            <GridColumn Field="@nameof(MirDB.DBObject.Index)" FieldType="@typeof(int)" Title="序号" Width="86px" Editable="false" Locked="true" />
+            @foreach (GameDataColumnDefinition column in Table.Columns)
+            {
+                Type fieldType = GetFieldType(column.Field);
+                bool isReference = typeof(MirDB.DBObject).IsAssignableFrom(fieldType);
+                bool isEnum = (Nullable.GetUnderlyingType(fieldType) ?? fieldType).IsEnum;
+                @if (isReference)
+                {
+                    <GridColumn Field="@column.Field" FieldType="@fieldType" Title="@column.Title" Width="@ColumnWidth(column, fieldType)"
+                                Editable="@(column.Editable && IsEditable(column.Field, fieldType))">
+                        <Template Context="cell">
+                            @FormatReference(cell, column.Field)
+                        </Template>
+                        <EditorTemplate Context="editItem">
+                            <GameDataReferenceEditor Item="@editItem" Field="@column.Field" ReferenceType="@fieldType" />
+                        </EditorTemplate>
+                    </GridColumn>
+                }
+                else if (isEnum)
+                {
+                    Type enumType = Nullable.GetUnderlyingType(fieldType) ?? fieldType;
+                    <GridColumn Field="@column.Field" FieldType="@fieldType" Title="@column.Title" Width="@ColumnWidth(column, fieldType)"
+                                Editable="@(column.Editable && IsEditable(column.Field, fieldType))" Filterable="false">
+                        <EditorTemplate Context="editItem">
+                            <GameDataEnumEditor Item="@editItem" Field="@column.Field" EnumType="@enumType" />
+                        </EditorTemplate>
+                    </GridColumn>
+                }
+                else
+                {
+                    <GridColumn Field="@column.Field" FieldType="@fieldType" Title="@column.Title" Width="@ColumnWidth(column, fieldType)"
+                                Editable="@(column.Editable && IsEditable(column.Field, fieldType))" />
+                }
+            }
+            <GridCommandColumn Width="224px" Locked="true">
+                <GridCommandButton Command="Edit">编辑</GridCommandButton>
+                <GridCommandButton Command="Save" ShowInEdit="true" ThemeColor="@ThemeConstants.Button.ThemeColor.Primary">保存</GridCommandButton>
+                <GridCommandButton Command="Cancel" ShowInEdit="true">取消</GridCommandButton>
+                <GridCommandButton Command="Delete" ThemeColor="@ThemeConstants.Button.ThemeColor.Error">删除</GridCommandButton>
+            </GridCommandColumn>
+        </GridColumns>
+    </TelerikGrid>
+</section>
+
+@if (SelectedParent is { } selectedParent && Table.Relations.Count > 0)
+{
+    <section class="relation-workbench migrated-relations">
+        <div class="page-heading compact relation-heading">
+            <div><span class="eyebrow">MASTER / DETAIL</span><h2>关联与子项</h2><p>选中主表的一行后，在与原 DevExpress 主从表对应的 Telerik Grid 中管理子项。</p></div>
+        </div>
+        <div class="entity-switcher view-tabs" role="tablist" aria-label="关联数据">
+            @foreach (GameDataRelationDefinition candidate in Table.Relations)
+            {
+                <button class="@(candidate == SelectedRelation ? "active" : null)" @onclick="() => SelectedRelation = candidate">@candidate.Title</button>
+            }
+        </div>
+        @if (SelectedRelation is not null)
+        {
+            <GameDataRelationGrid Table="@Table" Relation="@SelectedRelation" ParentIndex="@selectedParent.Index" />
+        }
+    </section>
+}
+
+@code {
+    [Parameter, EditorRequired] public string ViewKey { get; set; } = string.Empty;
+
+    private GameDataViewDefinition View = default!;
+    private GameDataTableDefinition Table = default!;
+    private IReadOnlyList<object> Rows = [];
+    private IEnumerable<object> SelectedItems { get; set; } = [];
+    private GameDataRelationDefinition? SelectedRelation;
+    private MirDB.DBObject? SelectedParent => SelectedItems.OfType<MirDB.DBObject>().Take(2).ToArray() is { Length: 1 } selected ? selected[0] : null;
+    private string? Message;
+    private bool HasError;
+    private IJSObjectReference? DownloadModule;
+    private string LegacyViewName => View.Description.Split("Windows 端 ", StringSplitOptions.None).ElementAtOrDefault(1)?.TrimEnd('。') ?? View.Title;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        View = ViewCatalog.Get(ViewKey);
+        Table = View.Tables[0];
+        SelectedRelation = Table.Relations.FirstOrDefault();
+        await LoadRows();
+    }
+
+    private async Task SelectTable(GameDataTableDefinition table)
+    {
+        Table = table;
+        SelectedItems = [];
+        SelectedRelation = table.Relations.FirstOrDefault();
+        await LoadRows();
+    }
+
+    private object CreateModel() => Activator.CreateInstance(Table.ModelType)!;
+
+    private async Task CreateRow(GridCommandEventArgs args) => await Run(async user =>
+    {
+        await DataSession.CreateAsync(Table, CommandItem(args), user);
+        await LoadRows();
+        Message = "已新增并保存记录。";
+    });
+
+    private async Task UpdateRow(GridCommandEventArgs args) => await Run(async user =>
+    {
+        await DataSession.UpdateAsync(Table, CommandItem(args), user);
+        await LoadRows();
+        Message = "修改已保存到 System.db。";
+    });
+
+    private async Task DeleteRow(GridCommandEventArgs args) => await Run(async user =>
+    {
+        await DataSession.DeleteAsync(Table, CommandItem(args).Index, user);
+        await LoadRows();
+        Message = "记录已删除。";
+    });
+
+    private async Task Reload()
+    {
+        await DataSession.ReloadAsync();
+        await LoadRows();
+        HasError = false;
+        Message = "已从 System.db 重新加载。";
+    }
+
+    private async Task SaveDatabase() => await Run(async _ =>
+    {
+        await DataSession.SaveAndGetPathAsync();
+        Message = "数据库已保存。";
+    });
+
+    private async Task InsertAfter()
+    {
+        MirDB.DBObject? selected = SelectedItems.OfType<MirDB.DBObject>().SingleOrDefault();
+        if (selected is null) return;
+        await Run(async user =>
+        {
+            await DataSession.InsertAfterAsync(Table, selected.Index, user);
+            await LoadRows();
+            Message = $"已在 #{selected.Index} 后插入记录。";
+        });
+    }
+
+    private Task ExportSelected() => Export(SelectedItems.OfType<MirDB.DBObject>().Select(item => item.Index).ToArray());
+    private Task ExportAll() => Export(null);
+
+    private async Task Export(IReadOnlyCollection<int>? indices)
+    {
+        await Run(async _ =>
+        {
+            string json = await DataSession.ExportJsonAsync(Table, indices);
+            DownloadModule ??= await JS.InvokeAsync<IJSObjectReference>("import", "./js/downloads.js");
+            string fileName = $"{Table.ModelType.Name} - {(indices?.Count ?? Rows.Count)} - {DateTime.UtcNow:yyyy-MM-dd HH-mm-ss}.json";
+            await DownloadModule.InvokeVoidAsync("downloadText", fileName, json);
+            Message = $"已导出 {indices?.Count ?? Rows.Count} 行数据。";
+        });
+    }
+
+    private async Task Import(InputFileChangeEventArgs args)
+    {
+        await Run(async user =>
+        {
+            await using Stream stream = args.File.OpenReadStream(32 * 1024 * 1024);
+            using StreamReader reader = new(stream);
+            string json = await reader.ReadToEndAsync();
+            (int imported, int resolved) = await DataSession.ImportJsonAsync(Table, json, user);
+            await LoadRows();
+            Message = $"已导入 {imported} 行，并解析 {resolved} 个引用。";
+        });
+    }
+
+    private async Task LoadRows()
+    {
+        Rows = await DataSession.ReadAsync(Table);
+        SelectedItems = [];
+    }
+
+    private async Task Run(Func<string, Task> operation)
+    {
+        try
+        {
+            string user = (await AuthenticationStateProvider.GetAuthenticationStateAsync()).User.Identity?.Name ?? "unknown";
+            await operation(user);
+            HasError = false;
+        }
+        catch (Exception ex)
+        {
+            HasError = true;
+            Message = ex.InnerException?.Message ?? ex.Message;
+            await LoadRows();
+        }
+    }
+
+    private Type GetFieldType(string field) => Table.ModelType.GetProperty(field)?.PropertyType ?? typeof(string);
+    private static MirDB.DBObject CommandItem(GridCommandEventArgs args)
+    {
+        MirDB.DBObject? item = args.Items.OfType<MirDB.DBObject>().SingleOrDefault();
+#pragma warning disable CS0618 // Item remains the fallback for Telerik single-row command events.
+        return item ?? (MirDB.DBObject)args.Item;
+#pragma warning restore CS0618
+    }
+    private bool IsEditable(string field, Type type) => Table.ModelType.GetProperty(field)?.SetMethod?.IsPublic == true &&
+        (typeof(MirDB.DBObject).IsAssignableFrom(type) || IsSimple(type));
+    private static bool IsSimple(Type type)
+    {
+        Type actual = Nullable.GetUnderlyingType(type) ?? type;
+        return actual.IsPrimitive || actual.IsEnum || actual == typeof(string) || actual == typeof(decimal) || actual == typeof(DateTime) || actual == typeof(TimeSpan);
+    }
+    private static string ColumnWidth(GameDataColumnDefinition column, Type type) => column.Width ??
+        ((Nullable.GetUnderlyingType(type) ?? type) == typeof(string) ? "240px" : typeof(MirDB.DBObject).IsAssignableFrom(type) ? "220px" : "150px");
+    private static string FormatReference(object item, string field)
+    {
+        MirDB.DBObject? value = item.GetType().GetProperty(field)?.GetValue(item) as MirDB.DBObject;
+        return value is null ? "—" : $"{value.Index}: {value}";
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (DownloadModule is not null) await DownloadModule.DisposeAsync();
+    }
+}

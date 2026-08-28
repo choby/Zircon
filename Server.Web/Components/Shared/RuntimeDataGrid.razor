@@ -1,0 +1,122 @@
+@attribute [Authorize]
+@inject RuntimeDataService RuntimeDataManager
+@inject IGameServerController GameServer
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
+<PageTitle>@Definition.DisplayName · Zircon</PageTitle>
+
+<div class="page-heading compact game-data-heading">
+    <div>
+        <span class="eyebrow">USERS.DB / LIVE SNAPSHOT</span>
+        <h1>@Definition.DisplayName</h1>
+        <p>通过游戏线程读取并受控修改运行时数据；敏感认证字段不会返回浏览器。</p>
+    </div>
+    <div class="view-origin"><span>原管理界面</span><strong>@Definition.LegacyView</strong></div>
+</div>
+
+@if (GameServer.State != GameServerState.Running)
+{
+    <div class="alert warning">游戏服务器未运行，运行时集合不可用。</div>
+}
+else
+{
+    @if (!string.IsNullOrWhiteSpace(Message))
+    {
+        <div class="alert @(HasError ? "danger" : "success")" role="status">@Message</div>
+    }
+
+    <div class="runtime-grid-layout">
+        <section class="legacy-grid-shell">
+            <div class="legacy-grid-titlebar"><div><span>LIVE DATA</span><strong>@Definition.DisplayName</strong></div><div class="legacy-grid-count">@Rows.Count 条记录</div></div>
+            <TelerikGrid TItem="RuntimeDataRow" Data="@Rows" Pageable="true" PageSize="40" Sortable="true"
+                         Resizable="true" Reorderable="true" SelectionMode="@GridSelectionMode.Single"
+                         SelectedItems="@SelectedItems" SelectedItemsChanged="@SelectionChanged" Class="legacy-data-grid runtime-telerik-grid">
+                <GridToolBarTemplate>
+                    <TelerikButton OnClick="Load">刷新快照</TelerikButton>
+                </GridToolBarTemplate>
+                <GridColumns>
+                    <GridColumn Field="@nameof(RuntimeDataRow.Index)" Title="序号" Width="86px" Locked="true" />
+                    @foreach (RuntimeColumnDefinition column in Definition.Columns)
+                    {
+                        <GridColumn Title="@column.Title" Width="180px">
+                            <Template Context="row">@Format((RuntimeDataRow)row, column.Field)</Template>
+                        </GridColumn>
+                    }
+                </GridColumns>
+            </TelerikGrid>
+        </section>
+
+        <aside class="editor-panel runtime-editor">
+            @if (SelectedRow is null)
+            {
+                <div class="editor-empty"><span>SELECT ROW</span><p>选择一行以查看和编辑允许的字段。</p></div>
+            }
+            else
+            {
+                <div class="editor-title"><span>#@SelectedRow.Index</span><strong>@Definition.DisplayName</strong></div>
+                <div class="editor-fields">
+                    @foreach (RuntimeColumnDefinition column in Definition.Columns)
+                    {
+                        <label>
+                            <span>@column.Title @if (!column.Editable) { <em>只读</em> }</span>
+                            <input value="@EditValues.GetValueOrDefault(column.Field)" disabled="@(!column.Editable)"
+                                   @onchange="args => EditValues[column.Field] = args.Value?.ToString()" />
+                        </label>
+                    }
+                </div>
+                <div class="editor-actions"><TelerikButton ThemeColor="@ThemeConstants.Button.ThemeColor.Primary" OnClick="Save">保存到 Users.db</TelerikButton></div>
+            }
+        </aside>
+    </div>
+}
+
+@code {
+    [Parameter, EditorRequired] public string CollectionKey { get; set; } = string.Empty;
+
+    private RuntimeCollectionDescriptor Definition = default!;
+    private IReadOnlyList<RuntimeDataRow> Rows = [];
+    private IEnumerable<RuntimeDataRow> SelectedItems { get; set; } = [];
+    private RuntimeDataRow? SelectedRow => SelectedItems.SingleOrDefault();
+    private Dictionary<string, string?> EditValues = [];
+    private string? Message;
+    private bool HasError;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        Definition = RuntimeDataManager.Get(CollectionKey);
+        await Load();
+    }
+
+    private void SelectionChanged(IEnumerable<RuntimeDataRow> selected)
+    {
+        SelectedItems = selected;
+        EditValues = SelectedRow?.Values.ToDictionary(pair => pair.Key, pair => pair.Value?.ToString()) ?? [];
+    }
+
+    private async Task Load()
+    {
+        Rows = GameServer.State == GameServerState.Running ? await RuntimeDataManager.ReadAsync(Definition) : [];
+        SelectedItems = [];
+        EditValues = [];
+    }
+
+    private async Task Save()
+    {
+        if (SelectedRow is null) return;
+        try
+        {
+            string user = (await AuthenticationStateProvider.GetAuthenticationStateAsync()).User.Identity?.Name ?? "unknown";
+            await RuntimeDataManager.UpdateAsync(Definition, SelectedRow.Index, SelectedRow.ETag, EditValues, user);
+            await Load();
+            HasError = false;
+            Message = "运行时数据已保存。";
+        }
+        catch (Exception ex)
+        {
+            HasError = true;
+            Message = ex.InnerException?.Message ?? ex.Message;
+        }
+    }
+
+    private static string Format(RuntimeDataRow row, string field) => row.Values.GetValueOrDefault(field)?.ToString() ?? "—";
+}

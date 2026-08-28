@@ -1,0 +1,17 @@
+@page "/audit"
+@attribute [Authorize]
+@inject AdminAuditService AuditService
+
+<PageTitle>审计记录 · Zircon</PageTitle>
+
+<div class="page-heading compact"><div><span class="eyebrow">SECURITY / AUDIT</span><h1>管理操作审计</h1><p>落盘保存并显示最近 2,000 条安全与写操作记录。</p></div></div>
+
+<TelerikGrid Data="@AuditService.GetEntries()" Pageable="true" PageSize="50" Sortable="true" Class="audit-grid">
+    <GridColumns>
+        <GridColumn Field="@nameof(AdminAuditEntry.Timestamp)" Title="时间" Width="190px" />
+        <GridColumn Field="@nameof(AdminAuditEntry.User)" Title="管理员" Width="130px" />
+        <GridColumn Field="@nameof(AdminAuditEntry.Action)" Title="操作" Width="220px" />
+        <GridColumn Field="@nameof(AdminAuditEntry.Detail)" Title="详情" />
+        <GridColumn Field="@nameof(AdminAuditEntry.Address)" Title="来源" Width="150px" />
+    </GridColumns>
+</TelerikGrid>

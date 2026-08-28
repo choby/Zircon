@@ -1,0 +1,11 @@
+{
+  "name": "zircon-server-web-assets",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "copy:vendor": "mkdir -p wwwroot/js/vendor && cp node_modules/pixi.js/dist/pixi.mjs wwwroot/js/vendor/pixi.mjs"
+  },
+  "dependencies": {
+    "pixi.js": "8.20.1"
+  }
+}

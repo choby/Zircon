@@ -1,0 +1,57 @@
+@page "/logs/{Kind}"
+@attribute [Authorize]
+@implements IAsyncDisposable
+@inject LogBufferService LogBuffer
+
+<PageTitle>@Title · Zircon</PageTitle>
+
+<div class="page-heading compact">
+    <div>
+        <span class="eyebrow">STREAM / @Kind.ToUpperInvariant()</span>
+        <h1>@Title</h1>
+        <p>最近的服务器输出，自动滚动缓冲但不会影响持久日志。</p>
+    </div>
+    <TelerikButton OnClick="Clear">清空显示</TelerikButton>
+</div>
+
+<div class="log-console">
+    @if (Entries.Count == 0)
+    {
+        <div class="log-empty">等待新的日志事件…</div>
+    }
+    @foreach (string line in Entries)
+    {
+        <div class="log-line"><span>›</span><code>@line</code></div>
+    }
+</div>
+
+@code {
+    [Parameter] public string Kind { get; set; } = "system";
+    private readonly CancellationTokenSource _cts = new();
+    private IReadOnlyList<string> Entries => Kind == "chat" ? LogBuffer.GetChatLogs() : LogBuffer.GetSystemLogs();
+    private string Title => Kind == "chat" ? "聊天日志" : "系统日志";
+
+    protected override void OnInitialized() => _ = RefreshLoop();
+
+    private async Task RefreshLoop()
+    {
+        try
+        {
+            using PeriodicTimer timer = new(TimeSpan.FromSeconds(1));
+            while (await timer.WaitForNextTickAsync(_cts.Token)) await InvokeAsync(StateHasChanged);
+        }
+        catch (OperationCanceledException) { }
+    }
+
+    private void Clear()
+    {
+        if (Kind == "chat") LogBuffer.ClearChat(); else LogBuffer.ClearSystem();
+    }
+
+    public ValueTask DisposeAsync()
+    {
+        _cts.Cancel();
+        _cts.Dispose();
+        return ValueTask.CompletedTask;
+    }
+}

@@ -60,13 +60,14 @@ namespace Library
         public static string AdjustPath(string originalPath, Assembly assembly)
         {
             var subFolder = GetSubFolder(assembly);
+            originalPath = PlatformPath.Normalize(originalPath);
 
             if (!string.IsNullOrEmpty(subFolder))
             {
-                return Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, subFolder, $"{originalPath}"));
+                return Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, PlatformPath.Normalize(subFolder), originalPath));
             }
 
-            return Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, $"{originalPath}"));
+            return PlatformPath.Resolve(originalPath);
         }
 
         private static string GetSubFolder(Assembly assembly)

@@ -1,0 +1,26 @@
+@inject GameDataSessionService DataSession
+
+<select class="game-data-reference" value="@SelectedIndex" @onchange="Change">
+    <option value="">— 无 —</option>
+    @foreach (GameDataReferenceOption option in Options)
+    {
+        <option value="@option.Index">@option.Label</option>
+    }
+</select>
+
+@code {
+    [Parameter, EditorRequired] public object Item { get; set; } = default!;
+    [Parameter, EditorRequired] public string Field { get; set; } = string.Empty;
+    [Parameter, EditorRequired] public Type ReferenceType { get; set; } = default!;
+
+    private System.Reflection.PropertyInfo Property => Item.GetType().GetProperty(Field)!;
+    private IReadOnlyList<GameDataReferenceOption> Options => DataSession.GetReferenceOptions(ReferenceType);
+    private int? SelectedIndex => (Property.GetValue(Item) as MirDB.DBObject)?.Index;
+
+    private void Change(ChangeEventArgs args)
+    {
+        int? index = int.TryParse(args.Value?.ToString(), out int value) ? value : null;
+        Property.SetValue(Item, DataSession.ResolveReference(ReferenceType, index));
+    }
+}
+

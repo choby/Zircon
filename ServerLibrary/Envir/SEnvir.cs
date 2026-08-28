@@ -30,6 +30,15 @@ using S = Library.Network.ServerPackets;
 
 namespace Server.Envir
 {
+    public enum ServerLifecycleState
+    {
+        Stopped,
+        Starting,
+        Running,
+        Stopping,
+        Faulted
+    }
+
     public static class SEnvir
     {
         #region Logging
@@ -58,6 +67,7 @@ namespace Server.Envir
 
         public static ConcurrentQueue<string> DisplayChatLogs = new ConcurrentQueue<string>();
         public static ConcurrentQueue<string> ChatLogs = new ConcurrentQueue<string>();
+        private static readonly ConcurrentQueue<Action> AdminActions = new ConcurrentQueue<Action>();
         public static void LogChat(string log)
         {
             log = string.Format("[{0:F}]: {1}", Time.Now, log);
@@ -67,6 +77,124 @@ namespace Server.Envir
 
             if (ChatLogs.Count < 1000)
                 ChatLogs.Enqueue(log);
+        }
+
+        public static Task<T> InvokeOnGameThreadAsync<T>(Func<T> action, CancellationToken cancellationToken = default)
+        {
+            if (action == null) throw new ArgumentNullException(nameof(action));
+            if (!Started || EnvirThread == null) throw new InvalidOperationException("游戏服务器未运行。");
+            if (Thread.CurrentThread == EnvirThread) return Task.FromResult(action());
+
+            TaskCompletionSource<T> completion = new(TaskCreationOptions.RunContinuationsAsynchronously);
+            AdminActions.Enqueue(() =>
+            {
+                if (cancellationToken.IsCancellationRequested)
+                {
+                    completion.TrySetCanceled(cancellationToken);
+                    return;
+                }
+
+                try { completion.TrySetResult(action()); }
+                catch (Exception ex) { completion.TrySetException(ex); }
+            });
+            return completion.Task;
+        }
+
+        #endregion
+
+        #region Lifecycle
+
+        private static readonly object LifecycleSync = new object();
+        private static TaskCompletionSource<bool> StartupCompletion;
+        public static ServerLifecycleState LifecycleState { get; private set; } = ServerLifecycleState.Stopped;
+        public static Exception LastStartupException { get; private set; }
+        public static event Action<ServerLifecycleState, Exception> LifecycleChanged;
+
+        private static void SetLifecycleState(ServerLifecycleState state, Exception error = null)
+        {
+            LifecycleState = state;
+            if (error != null) LastStartupException = error;
+            try { LifecycleChanged?.Invoke(state, error); }
+            catch (Exception ex) { Log(ex.ToString()); }
+        }
+
+        public static async Task StartServerAsync(CancellationToken cancellationToken = default)
+        {
+            Task startupTask;
+            lock (LifecycleSync)
+            {
+                if (LifecycleState == ServerLifecycleState.Running) return;
+                if (LifecycleState == ServerLifecycleState.Stopping)
+                    throw new InvalidOperationException("游戏服务器正在停止。");
+
+                if (LifecycleState == ServerLifecycleState.Starting && StartupCompletion != null)
+                {
+                    startupTask = StartupCompletion.Task;
+                }
+                else
+                {
+                    LastStartupException = null;
+                    StartupCompletion = new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
+                    startupTask = StartupCompletion.Task;
+                    SetLifecycleState(ServerLifecycleState.Starting);
+                    EnvirThread = new Thread(RunServerThread) { IsBackground = true, Name = "Zircon Game Server" };
+                    EnvirThread.Start();
+                }
+            }
+
+            await startupTask.WaitAsync(cancellationToken);
+        }
+
+        public static async Task StopServerAsync(CancellationToken cancellationToken = default)
+        {
+            Thread thread;
+            lock (LifecycleSync)
+            {
+                thread = EnvirThread;
+                if (thread == null)
+                {
+                    SetLifecycleState(ServerLifecycleState.Stopped);
+                    return;
+                }
+                SetLifecycleState(ServerLifecycleState.Stopping);
+                Started = false;
+            }
+
+            while (EnvirThread != null)
+                await Task.Delay(50, cancellationToken);
+        }
+
+        private static void RunServerThread()
+        {
+            Exception failure = null;
+            try
+            {
+                EnvirLoop();
+            }
+            catch (Exception ex)
+            {
+                failure = ex;
+                LastStartupException = ex;
+                Started = false;
+                NetworkStarted = false;
+                Log($"游戏服务器异常：{ex}");
+                StartupCompletion?.TrySetException(ex);
+            }
+            finally
+            {
+                if (failure != null)
+                {
+                    try { WebServer.StopWebServer(); } catch (Exception ex) { Log(ex.ToString()); }
+                    try { StopNetwork(); } catch (Exception ex) { Log(ex.ToString()); }
+                    try { StopEnvir(); } catch (Exception ex) { Log(ex.ToString()); }
+                }
+
+                Started = false;
+                NetworkStarted = false;
+                EnvirThread = null;
+                StartupCompletion?.TrySetException(failure ?? new InvalidOperationException("游戏服务器在启动完成前已停止。"));
+                SetLifecycleState(failure == null ? ServerLifecycleState.Stopped : ServerLifecycleState.Faulted, failure);
+            }
         }
 
         #endregion
@@ -387,20 +515,30 @@ namespace Server.Envir
         public static long ConDelay, SaveDelay;
         #endregion
 
+        // public static void StartServer()
+        // {
+        //     if (Started || EnvirThread != null) return;
+        //
+        //     EnvirThread = new Thread(() => EnvirLoop()) { IsBackground = true };
+        //     EnvirThread.Start();
+        // }
+        
         public static void StartServer()
         {
-            if (Started || EnvirThread != null) return;
-
-            EnvirThread = new Thread(() => EnvirLoop()) { IsBackground = true };
-            EnvirThread.Start();
+            _ = StartServerAsync().ContinueWith(
+                task => Log(task.Exception?.GetBaseException().ToString() ?? "游戏服务器启动失败。"),
+                CancellationToken.None,
+                TaskContinuationOptions.OnlyOnFaulted | TaskContinuationOptions.ExecuteSynchronously,
+                TaskScheduler.Default);
         }
 
         public static void LoadExperienceList()
         {
-            string path = @".\Config\ExperienceList.txt";
+            string path = PlatformPath.Resolve(@".\Config\ExperienceList.txt");
             if (!File.Exists(path))
             {
-                if (!Directory.Exists(@".\Config")) Directory.CreateDirectory(@".\Config");
+                string directory = Path.GetDirectoryName(path);
+                if (!Directory.Exists(directory)) Directory.CreateDirectory(directory);
                 using (StreamWriter file = new StreamWriter(path))
                 {
                     for (int i = 0; i < Globals.ExperienceList.Count; i++)
@@ -1370,7 +1508,7 @@ namespace Server.Envir
             EnvirThread = null;
         }
 
-        public static void EnvirLoop()
+        private static void EnvirLoop()
         {
             Now = Time.Now;
             DateTime DBTime = Now + Config.DBSaveDelay;
@@ -1381,6 +1519,11 @@ namespace Server.Envir
             WebServer.StartWebServer();
 
             Started = NetworkStarted;
+            if (!Started)
+                throw new InvalidOperationException("游戏网络监听启动失败，请检查监听地址、游戏端口和用户统计端口。", LastStartupException);
+
+            SetLifecycleState(ServerLifecycleState.Running);
+            StartupCompletion?.TrySetResult(true);
 
             int count = 0, loopCount = 0;
             DateTime nextCount = Now.AddSeconds(1), UserCountTime = Now.AddMinutes(5), EventTimerTime = Now.AddMinutes(1), saveTime;
@@ -1401,6 +1544,9 @@ namespace Server.Envir
 
                 try
                 {
+                    for (int adminActionCount = 0; adminActionCount < 100 && AdminActions.TryDequeue(out Action adminAction); adminActionCount++)
+                        adminAction();
+
                     SConnection connection;
                     while (!NewConnections.IsEmpty)
                     {
@@ -1473,7 +1619,7 @@ namespace Server.Envir
 
                             Log(ex.Message);
                             Log(ex.StackTrace);
-                            File.AppendAllText(@".\Errors.txt", ex.StackTrace + Environment.NewLine);
+                            File.AppendAllText(PlatformPath.Resolve(@".\Errors.txt"), ex.StackTrace + Environment.NewLine);
                         }
                     }
 
@@ -1619,7 +1765,7 @@ namespace Server.Envir
 
                     Log(ex.Message);
                     Log(ex.StackTrace);
-                    File.AppendAllText(@".\Errors.txt", ex.StackTrace + Environment.NewLine);
+                    File.AppendAllText(PlatformPath.Resolve(@".\Errors.txt"), ex.StackTrace + Environment.NewLine);
 
                     Packet p = new G.Disconnect { Reason = DisconnectReason.Crashed };
                     for (int i = Connections.Count - 1; i >= 0; i--)
@@ -1831,8 +1977,8 @@ namespace Server.Envir
         }
         private static void WriteLogs()
         {
-            var logPath = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, ".\\Logs.txt"));
-            var chatLogPath = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, ".\\Chat Logs.txt"));
+            var logPath = PlatformPath.Resolve(@".\Logs.txt");
+            var chatLogPath = PlatformPath.Resolve(@".\Chat Logs.txt");
 
             List<string> lines = new List<string>();
             while (!Logs.IsEmpty)
@@ -4084,7 +4230,7 @@ namespace Server.Envir
             {
                 if (++ErrorCount > 200 || String.Compare(ex, LastError, StringComparison.OrdinalIgnoreCase) == 0) return;
 
-                const string LogPath = @".\Errors\";
+                string LogPath = PlatformPath.Resolve(@".\Errors\");
 
                 LastError = ex;
 

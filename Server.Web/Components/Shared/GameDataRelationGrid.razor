@@ -1,0 +1,127 @@
+@inject GameDataSessionService DataSession
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
+<section class="relation-grid-shell">
+    <div class="legacy-grid-titlebar">
+        <div><span>MASTER / DETAIL</span><strong>@Relation.Title</strong></div>
+        <div class="legacy-grid-count">@Rows.Count 条子记录</div>
+    </div>
+    @if (!string.IsNullOrWhiteSpace(Message))
+    {
+        <div class="relation-message @(HasError ? "danger" : null)">@Message</div>
+    }
+    <TelerikGrid @key="Relation.Property" TItem="object" Data="@Rows" Pageable="true" PageSize="15" Sortable="true"
+                 Resizable="true" Reorderable="true" FilterMode="@GridFilterMode.FilterRow"
+                 EditMode="@GridEditMode.Inline" OnModelInit="@CreateModel" OnCreate="@CreateRow"
+                 OnUpdate="@UpdateRow" OnDelete="@DeleteRow" ConfirmDelete="true" Class="legacy-data-grid relation-telerik-grid">
+        <GridToolBarTemplate>
+            <GridCommandButton Command="Add" ThemeColor="@ThemeConstants.Button.ThemeColor.Primary">新增子项</GridCommandButton>
+            <TelerikButton OnClick="Load">刷新明细</TelerikButton>
+        </GridToolBarTemplate>
+        <GridColumns>
+            <GridColumn Field="@nameof(MirDB.DBObject.Index)" FieldType="@typeof(int)" Title="序号" Width="86px" Editable="false" Locked="true" />
+            @foreach (GameDataColumnDefinition column in Relation.Columns)
+            {
+                Type fieldType = Relation.ItemType.GetProperty(column.Field)?.PropertyType ?? typeof(string);
+                bool isReference = typeof(MirDB.DBObject).IsAssignableFrom(fieldType);
+                bool isEnum = (Nullable.GetUnderlyingType(fieldType) ?? fieldType).IsEnum;
+                @if (isReference)
+                {
+                    <GridColumn Field="@column.Field" FieldType="@fieldType" Title="@column.Title" Width="220px" Editable="@IsEditable(column.Field, fieldType)">
+                        <Template Context="cell">@FormatReference(cell, column.Field)</Template>
+                        <EditorTemplate Context="editItem"><GameDataReferenceEditor Item="@editItem" Field="@column.Field" ReferenceType="@fieldType" /></EditorTemplate>
+                    </GridColumn>
+                }
+                else if (isEnum)
+                {
+                    Type enumType = Nullable.GetUnderlyingType(fieldType) ?? fieldType;
+                    <GridColumn Field="@column.Field" FieldType="@fieldType" Title="@column.Title" Width="150px" Editable="@IsEditable(column.Field, fieldType)" Filterable="false">
+                        <EditorTemplate Context="editItem"><GameDataEnumEditor Item="@editItem" Field="@column.Field" EnumType="@enumType" /></EditorTemplate>
+                    </GridColumn>
+                }
+                else
+                {
+                    <GridColumn Field="@column.Field" FieldType="@fieldType" Title="@column.Title" Width="150px" Editable="@IsEditable(column.Field, fieldType)" />
+                }
+            }
+            <GridCommandColumn Width="216px" Locked="true">
+                <GridCommandButton Command="Edit">编辑</GridCommandButton>
+                <GridCommandButton Command="Save" ShowInEdit="true" ThemeColor="@ThemeConstants.Button.ThemeColor.Primary">保存</GridCommandButton>
+                <GridCommandButton Command="Cancel" ShowInEdit="true">取消</GridCommandButton>
+                <GridCommandButton Command="Delete" ThemeColor="@ThemeConstants.Button.ThemeColor.Error">@(Relation.Aggregate ? "删除" : "解除关联")</GridCommandButton>
+            </GridCommandColumn>
+        </GridColumns>
+    </TelerikGrid>
+</section>
+
+@code {
+    [Parameter, EditorRequired] public GameDataTableDefinition Table { get; set; } = default!;
+    [Parameter, EditorRequired] public GameDataRelationDefinition Relation { get; set; } = default!;
+    [Parameter, EditorRequired] public int ParentIndex { get; set; }
+
+    private IReadOnlyList<object> Rows = [];
+    private string? Message;
+    private bool HasError;
+
+    protected override Task OnParametersSetAsync() => Load();
+    private object CreateModel() => Activator.CreateInstance(Relation.ItemType)!;
+
+    private async Task CreateRow(GridCommandEventArgs args) => await Run(async user =>
+    {
+        await DataSession.CreateRelationAsync(Table, ParentIndex, Relation, CommandItem(args), user);
+        await Load();
+        Message = "子项已新增并保存。";
+    });
+
+    private async Task UpdateRow(GridCommandEventArgs args) => await Run(async user =>
+    {
+        await DataSession.UpdateRelationAsync(Table, ParentIndex, Relation, CommandItem(args), user);
+        await Load();
+        Message = "子项修改已保存。";
+    });
+
+    private async Task DeleteRow(GridCommandEventArgs args) => await Run(async user =>
+    {
+        await DataSession.DeleteRelationAsync(Table, ParentIndex, Relation, CommandItem(args).Index, user);
+        await Load();
+        Message = Relation.Aggregate ? "子项已删除。" : "关联已解除。";
+    });
+
+    private async Task Load() => Rows = await DataSession.ReadRelationAsync(Table, ParentIndex, Relation);
+
+    private async Task Run(Func<string, Task> operation)
+    {
+        try
+        {
+            string user = (await AuthenticationStateProvider.GetAuthenticationStateAsync()).User.Identity?.Name ?? "unknown";
+            await operation(user);
+            HasError = false;
+        }
+        catch (Exception ex)
+        {
+            HasError = true;
+            Message = ex.InnerException?.Message ?? ex.Message;
+            await Load();
+        }
+    }
+
+    private static MirDB.DBObject CommandItem(GridCommandEventArgs args)
+    {
+        MirDB.DBObject? item = args.Items.OfType<MirDB.DBObject>().SingleOrDefault();
+#pragma warning disable CS0618 // Item remains the fallback for Telerik single-row command events.
+        return item ?? (MirDB.DBObject)args.Item;
+#pragma warning restore CS0618
+    }
+    private bool IsEditable(string field, Type type) => Relation.ItemType.GetProperty(field)?.SetMethod?.IsPublic == true &&
+        (typeof(MirDB.DBObject).IsAssignableFrom(type) || IsSimple(type));
+    private static bool IsSimple(Type type)
+    {
+        Type actual = Nullable.GetUnderlyingType(type) ?? type;
+        return actual.IsPrimitive || actual.IsEnum || actual == typeof(string) || actual == typeof(decimal) || actual == typeof(DateTime) || actual == typeof(TimeSpan);
+    }
+    private static string FormatReference(object item, string field)
+    {
+        MirDB.DBObject? value = item.GetType().GetProperty(field)?.GetValue(item) as MirDB.DBObject;
+        return value is null ? "—" : $"{value.Index}: {value}";
+    }
+}

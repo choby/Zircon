@@ -1,0 +1,97 @@
+@page "/diagnostics"
+@attribute [Authorize]
+@using Library.Network
+@inject OrphanDiagnosticService Orphans
+@inject IGameServerController GameServer
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
+<PageTitle>诊断 · Zircon</PageTitle>
+
+<div class="page-heading compact">
+    <div> 
+        <span class="eyebrow">PACKET / PROFILING</span>
+        <h1>网络诊断</h1>
+        <p>采集数据包处理次数、耗时和大小。监控会增加少量运行开销。</p>
+    </div>
+    <div class="control-cluster">
+        <TelerikButton OnClick="Toggle" ThemeColor="@(BaseConnection.Monitor ? ThemeConstants.Button.ThemeColor.Warning : ThemeConstants.Button.ThemeColor.Primary)">
+            @(BaseConnection.Monitor ? "停止监控" : "开始监控")
+        </TelerikButton>
+        <TelerikButton OnClick="Reset">清零统计</TelerikButton>
+    </div>
+</div>
+
+<div class="page-heading compact diagnostic-subheading">
+    <div><span class="eyebrow">MIRDB / INTEGRITY</span><h2>孤立数据诊断</h2><p>在游戏线程扫描聚合子项；清理会将可清理孤立项标记为临时并立即保存。</p></div>
+    <div class="control-cluster">
+        <TelerikButton OnClick="ScanOrphans" Enabled="@(GameServer.State == GameServerState.Running)">扫描孤立项</TelerikButton>
+        @if (!ConfirmClean)
+        {
+            <TelerikButton OnClick="() => ConfirmClean = true" Enabled="@(GameServer.State == GameServerState.Running)">准备清理</TelerikButton>
+        }
+        else
+        {
+            <TelerikButton OnClick="CleanOrphans" ThemeColor="@ThemeConstants.Button.ThemeColor.Error">确认清理</TelerikButton>
+        }
+    </div>
+</div>
+
+@if (!string.IsNullOrEmpty(OrphanMessage)) { <div class="alert @(OrphanError ? "danger" : "success")">@OrphanMessage</div> }
+
+@if (OrphanRows.Count > 0)
+{
+    <div class="table-panel standalone"><div class="table-scroll"><table class="admin-table">
+        <thead><tr><th>类型</th><th>父关联</th><th>总行数</th><th>已关联</th><th>可清理</th><th>已有临时</th><th>本次标记</th><th>示例索引</th></tr></thead>
+        <tbody>@foreach (OrphanDiagnosticRow row in OrphanRows) { <tr><td>@row.ObjectType</td><td>@row.Association</td><td>@row.TotalRows</td><td>@row.LinkedRows</td><td>@row.CleanableOrphans</td><td>@row.ExistingTemporaryOrphans</td><td>@row.MarkedTemporary</td><td>@row.SampleIndices</td></tr> }</tbody>
+    </table></div></div>
+}
+
+<div class="table-panel standalone">
+    <div class="table-scroll">
+        <table class="admin-table">
+            <thead><tr><th>名称</th><th>数量</th><th>总耗时 ms</th><th>最长耗时 ms</th><th>总大小</th><th>最大大小</th></tr></thead>
+            <tbody>
+            @foreach (DiagnosticValue item in Values)
+            {
+                <tr><td>@item.Name</td><td>@item.Count</td><td>@item.TotalMilliseconds</td><td>@item.LargestMilliseconds</td><td>@item.TotalSize</td><td>@item.LargestSize</td></tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@code {
+    private IReadOnlyList<DiagnosticValue> Values => BaseConnection.Diagnostics.Values.OrderBy(value => value.Name).ToArray();
+    private IReadOnlyList<OrphanDiagnosticRow> OrphanRows = [];
+    private bool ConfirmClean;
+    private string? OrphanMessage;
+    private bool OrphanError;
+    private void Toggle() => BaseConnection.Monitor = !BaseConnection.Monitor;
+    private void Reset()
+    {
+        foreach (DiagnosticValue result in BaseConnection.Diagnostics.Values)
+        {
+            result.Count = 0;
+            result.TotalSize = 0;
+            result.LargestSize = 0;
+            result.TotalTime = TimeSpan.Zero;
+            result.LargestTime = TimeSpan.Zero;
+        }
+    }
+
+    private Task ScanOrphans() => RunOrphans(false);
+    private Task CleanOrphans() => RunOrphans(true);
+
+    private async Task RunOrphans(bool clean)
+    {
+        try
+        {
+            string user = (await AuthenticationStateProvider.GetAuthenticationStateAsync()).User.Identity?.Name ?? "unknown";
+            OrphanRows = await Orphans.ScanAsync(clean, user);
+            ConfirmClean = false;
+            OrphanError = false;
+            OrphanMessage = $"已扫描 {OrphanRows.Sum(row => row.TotalRows):N0} 行；可清理 {OrphanRows.Sum(row => row.CleanableOrphans):N0} 行；本次标记 {OrphanRows.Sum(row => row.MarkedTemporary):N0} 行。";
+        }
+        catch (Exception ex) { OrphanError = true; OrphanMessage = ex.Message; }
+    }
+}

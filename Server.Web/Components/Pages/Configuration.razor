@@ -1,0 +1,123 @@
+@page "/configuration"
+@attribute [Authorize]
+@inject ConfigurationService ConfigurationManager
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
+<PageTitle>服务器配置 · Zircon</PageTitle>
+
+<div class="page-heading compact">
+    <div>
+        <span class="eyebrow">SERVER.INI / CONTROL</span>
+        <h1>服务器配置</h1>
+        <p>敏感值留空表示保持原值；端口和主机修改后需重启进程。</p>
+    </div>
+    <div class="control-cluster">
+        <TelerikButton OnClick="Reload">重新载入</TelerikButton>
+        <TelerikButton OnClick="CheckVersion">检查客户端版本</TelerikButton>
+        <TelerikButton OnClick="LocalSync">本地同步</TelerikButton>
+        <TelerikButton OnClick="RemoteSync">远程同步</TelerikButton>
+        <TelerikButton OnClick="GenerateKey">生成加密密钥</TelerikButton>
+        <TelerikButton OnClick="Reencrypt">转换数据库加密</TelerikButton>
+        <TelerikButton ThemeColor="@ThemeConstants.Button.ThemeColor.Primary" OnClick="Save">保存配置</TelerikButton>
+    </div>
+</div>
+
+@if (!string.IsNullOrEmpty(Message))
+{
+    <div class="alert @(HasError ? "danger" : "success")">@Message</div>
+}
+
+<div class="config-sections">
+    @foreach (ConfigurationSectionModel section in Sections)
+    {
+        <details class="config-section" open="@(section.Name is "Network" or "System" or "AdminWeb")">
+            <summary><span>@section.Name</span><small>@section.Fields.Count 项</small></summary>
+            <div class="config-grid">
+                @foreach (ConfigurationField field in section.Fields)
+                {
+                    <label class="config-field">
+                        <span>@field.DisplayName <em>@field.ApplyMode</em></span>
+                        @if (field.ValueType == typeof(bool))
+                        {
+                            <select value="@Values[field.Name]" @onchange="e => SetValue(field.Name, e.Value?.ToString())">
+                                <option value="True">True</option>
+                                <option value="False">False</option>
+                            </select>
+                        }
+                        else
+                        {
+                            <input type="@(field.IsSecret ? "password" : "text")"
+                                   value="@Values[field.Name]"
+                                   placeholder="@(field.IsSecret ? "留空保持原值" : null)"
+                                   @onchange="e => SetValue(field.Name, e.Value?.ToString())" />
+                        }
+                    </label>
+                }
+            </div>
+        </details>
+    }
+</div>
+
+@code {
+    private IReadOnlyList<ConfigurationSectionModel> Sections = [];
+    private Dictionary<string, string?> Values = new(StringComparer.Ordinal);
+    private string? Message;
+    private bool HasError;
+
+    protected override void OnInitialized() => LoadValues();
+
+    private void LoadValues()
+    {
+        Sections = ConfigurationManager.Read();
+        Values = Sections.SelectMany(section => section.Fields).ToDictionary(field => field.Name, field => (string?)field.Value);
+    }
+
+    private void SetValue(string name, string? value) => Values[name] = value;
+
+    private async Task Save()
+    {
+        try
+        {
+            string user = (await AuthenticationStateProvider.GetAuthenticationStateAsync()).User.Identity?.Name ?? "unknown";
+            ConfigurationManager.Save(Values, user);
+            HasError = false;
+            Message = "Server.ini 已保存。带重启标记的配置将在对应服务重启后生效。";
+            LoadValues();
+        }
+        catch (Exception ex) { HasError = true; Message = ex.Message; }
+    }
+
+    private async Task Reload()
+    {
+        string user = (await AuthenticationStateProvider.GetAuthenticationStateAsync()).User.Identity?.Name ?? "unknown";
+        ConfigurationManager.Reload(user);
+        LoadValues();
+        HasError = false;
+        Message = "已从 Server.ini 重新载入。";
+    }
+
+    private async Task Run(Func<string, CancellationToken, Task> action, string success)
+    {
+        try
+        {
+            string user = (await AuthenticationStateProvider.GetAuthenticationStateAsync()).User.Identity?.Name ?? "unknown";
+            await action(user, CancellationToken.None);
+            HasError = false;
+            Message = success;
+        }
+        catch (Exception ex) { HasError = true; Message = ex.Message; }
+    }
+
+    private async Task CheckVersion()
+    {
+        string user = (await AuthenticationStateProvider.GetAuthenticationStateAsync()).User.Identity?.Name ?? "unknown";
+        bool changed = await ConfigurationManager.CheckClientVersionAsync(user);
+        HasError = false;
+        Message = changed ? "客户端版本哈希已变化，在线玩家已收到更新公告。" : "客户端版本哈希没有变化。";
+    }
+
+    private Task LocalSync() => Run(ConfigurationManager.LocalSyncAsync, "System.db 已同步到客户端 Data 目录。");
+    private Task RemoteSync() => Run(ConfigurationManager.RemoteSyncAsync, "System.db 已同步到远程服务器。");
+    private Task Reencrypt() => Run(ConfigurationManager.ReencryptDatabasesAsync, "System.db 与 Users.db 已按当前加密配置重写。");
+    private void GenerateKey() { Values[nameof(Config.EncryptionKey)] = ConfigurationManager.GenerateEncryptionKey(); Message = "已生成密钥；请先保存配置，再执行数据库加密转换。"; }
+}

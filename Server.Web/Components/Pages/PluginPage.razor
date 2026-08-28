@@ -1,0 +1,19 @@
+@page "/plugin/{PluginId}/{PageKey}"
+@attribute [Authorize]
+@inject PluginRegistry Plugins
+
+@if (Page is null)
+{
+    <div class="empty-state"><h1>插件页面不存在</h1><a href="/plugins">返回插件列表</a></div>
+}
+else
+{
+    <div class="page-heading compact"><div><span class="eyebrow">PLUGIN / @PluginId</span><h1>@Page.Title</h1></div></div>
+    <div class="plugin-surface"><DynamicComponent Type="@Page.ComponentType" /></div>
+}
+
+@code {
+    [Parameter] public string PluginId { get; set; } = string.Empty;
+    [Parameter] public string PageKey { get; set; } = string.Empty;
+    private Plugin.Abstractions.PluginNavigationItem? Page => Plugins.FindPage(PluginId, PageKey);
+}

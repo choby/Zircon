@@ -57,7 +57,7 @@ namespace Server.Models
 
         public void Load()
         {
-            var path = Path.Combine(Config.MapPath, Info.FileName + ".map");
+            var path = Path.Combine(PlatformPath.Resolve(Config.MapPath), Info.FileName + ".map");
 
             if (!File.Exists(path))
             {

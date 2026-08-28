@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>Server.Web</RootNamespace>
+    <BlazorDisableThrowNavigationException>true</BlazorDisableThrowNavigationException>
+    <DotNetWatchBuild>true</DotNetWatchBuild>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Telerik.UI.for.Blazor" Version="15.0.0" />
+    <PackageReference Include="BCnEncoder.Net" Version="2.3.0" />
+    <PackageReference Include="SkiaSharp" Version="4.151.1" />
+    <PackageReference Include="SkiaSharp.NativeAssets.Linux.NoDependencies" Version="4.151.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LibraryCore\LibraryCore.csproj" />
+    <ProjectReference Include="..\ServerLibrary\ServerLibrary.csproj" />
+    <ProjectReference Include="..\Plugin.Abstractions\Plugin.Abstractions.csproj" />
+  </ItemGroup>
+</Project>
