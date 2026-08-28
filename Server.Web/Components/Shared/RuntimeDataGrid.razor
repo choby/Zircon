@@ -27,7 +27,6 @@ else
 
     <div class="runtime-grid-layout">
         <section class="legacy-grid-shell">
-            <div class="legacy-grid-titlebar"><div><span>LIVE DATA</span><strong>@Definition.DisplayName</strong></div><div class="legacy-grid-count">@Rows.Count 条记录</div></div>
             <TelerikGrid TItem="RuntimeDataRow" Data="@Rows" Pageable="true" PageSize="40" Sortable="true"
                          Resizable="true" Reorderable="true" SelectionMode="@GridSelectionMode.Single"
                          SelectedItems="@SelectedItems" SelectedItemsChanged="@SelectionChanged" Class="legacy-data-grid runtime-telerik-grid">

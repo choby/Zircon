@@ -2,10 +2,6 @@
 @inject AuthenticationStateProvider AuthenticationStateProvider
 
 <section class="relation-grid-shell">
-    <div class="legacy-grid-titlebar">
-        <div><span>MASTER / DETAIL</span><strong>@Relation.Title</strong></div>
-        <div class="legacy-grid-count">@Rows.Count 条子记录</div>
-    </div>
     @if (!string.IsNullOrWhiteSpace(Message))
     {
         <div class="relation-message @(HasError ? "danger" : null)">@Message</div>

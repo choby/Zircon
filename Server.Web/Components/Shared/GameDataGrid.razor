@@ -34,10 +34,7 @@
 }
 
 <section class="legacy-grid-shell">
-    <div class="legacy-grid-titlebar">
-        <div><span>DATA VIEW</span><strong>@Table.Title</strong></div>
-        <div class="legacy-grid-count">@Rows.Count 条记录</div>
-    </div>
+
 
     <TelerikGrid @key="Table.Key"
                  TItem="object"
@@ -47,7 +44,7 @@
                  Sortable="true"
                  Resizable="true"
                  Reorderable="true"
-                 FilterMode="@GridFilterMode.FilterRow"
+                 
                  ShowColumnMenu="true"
                  SelectionMode="@GridSelectionMode.Multiple"
                  @bind-SelectedItems="SelectedItems"
@@ -69,7 +66,7 @@
             <GridSearchBox Placeholder="搜索当前表格…" DebounceDelay="250" />
         </GridToolBarTemplate>
         <GridColumns>
-            <GridColumn Field="@nameof(MirDB.DBObject.Index)" FieldType="@typeof(int)" Title="序号" Width="86px" Editable="false" Locked="true" />
+            <GridColumn Field="@nameof(MirDB.DBObject.Index)" FieldType="@typeof(int)" Title="序号" Width="60px" Editable="false" Locked="true" />
             @foreach (GameDataColumnDefinition column in Table.Columns)
             {
                 Type fieldType = GetFieldType(column.Field);
@@ -103,7 +100,7 @@
                                 Editable="@(column.Editable && IsEditable(column.Field, fieldType))" />
                 }
             }
-            <GridCommandColumn Width="224px" Locked="true">
+            <GridCommandColumn Width="160px" Locked="true">
                 <GridCommandButton Command="Edit">编辑</GridCommandButton>
                 <GridCommandButton Command="Save" ShowInEdit="true" ThemeColor="@ThemeConstants.Button.ThemeColor.Primary">保存</GridCommandButton>
                 <GridCommandButton Command="Cancel" ShowInEdit="true">取消</GridCommandButton>
@@ -175,7 +172,7 @@
     {
         await DataSession.UpdateAsync(Table, CommandItem(args), user);
         await LoadRows();
-        Message = "修改已保存到 System.db。";
+        Message = "修改已保存。";
     });
 
     private async Task DeleteRow(GridCommandEventArgs args) => await Run(async user =>
@@ -190,7 +187,7 @@
         await DataSession.ReloadAsync();
         await LoadRows();
         HasError = false;
-        Message = "已从 System.db 重新加载。";
+        Message = "已重新加载。";
     }
 
     private async Task SaveDatabase() => await Run(async _ =>

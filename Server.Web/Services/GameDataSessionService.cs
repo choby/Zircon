@@ -188,12 +188,96 @@ public sealed class GameDataSessionService : IDisposable
         await _gate.WaitAsync(cancellationToken);
         try
         {
+            bool shiftsExistingRows = false;
+            object collection = _session.GetCollection(table.ModelType);
+            System.Reflection.FieldInfo bindingField = collection.GetType().GetField("Binding", BindingFlags.Instance | BindingFlags.Public)!;
+            IEnumerable binding = (IEnumerable)bindingField.GetValue(collection)!;
+            foreach (DBObject ob in binding)
+            {
+                if (ob.Index > index)
+                {
+                    shiftsExistingRows = true;
+                    break;
+                }
+            }
+
             MethodInfo method = typeof(Session).GetMethod(nameof(Session.InsertObjectAfter))!.MakeGenericMethod(table.ModelType);
             method.Invoke(_session, [index]);
+            
+            if (shiftsExistingRows)
+                ShiftUserDatabaseReferencesAfterInsert(table.ModelType, index);
+
             _session.Save(true);
             _audit.Record(user, "GameData.InsertAfter", $"{table.ModelType.Name} after #{index}");
         }
         finally { _gate.Release(); }
+    }
+
+    private static HashSet<Type>? _userDatabaseReferenceTypes;
+
+    private static bool UserDatabaseReferencesType(Type type)
+    {
+        if (_userDatabaseReferenceTypes == null)
+        {
+            HashSet<Type> referenceTypes = [];
+            Assembly[] assemblies = [Assembly.GetAssembly(typeof(ItemInfo))!, Assembly.GetAssembly(typeof(AccountInfo))!];
+
+            IEnumerable<Type> userTypes = assemblies
+                .SelectMany(x => x.GetTypes())
+                .Where(x => x.IsSubclassOf(typeof(DBObject)) && x.GetCustomAttribute<UserObjectAttribute>() != null);
+
+            foreach (Type userType in userTypes)
+            {
+                PropertyInfo[] properties = userType.GetProperties(BindingFlags.FlattenHierarchy | BindingFlags.Public | BindingFlags.Instance | BindingFlags.GetProperty | BindingFlags.SetProperty);
+                foreach (PropertyInfo property in properties)
+                {
+                    if (property.GetCustomAttribute<IgnorePropertyAttribute>() != null) continue;
+                    if (!property.PropertyType.IsSubclassOf(typeof(DBObject))) continue;
+                    if (property.PropertyType.GetCustomAttribute<UserObjectAttribute>() != null) continue;
+
+                    referenceTypes.Add(property.PropertyType);
+                }
+            }
+            _userDatabaseReferenceTypes = referenceTypes;
+        }
+
+        return _userDatabaseReferenceTypes.Contains(type);
+    }
+
+    private void ShiftUserDatabaseReferencesAfterInsert(Type modelType, int insertAfterIndex)
+    {
+        if (modelType.GetCustomAttribute<UserObjectAttribute>() != null) return;
+        if (!UserDatabaseReferencesType(modelType)) return;
+
+        Session userSession = new Session(SessionMode.Users)
+        {
+            BackUpDelay = _session.BackUpDelay
+        };
+
+        userSession.Initialize(
+            Assembly.GetAssembly(typeof(ItemInfo))!,
+            Assembly.GetAssembly(typeof(AccountInfo))!
+        );
+
+        object userCollection = userSession.GetCollection(modelType);
+        System.Reflection.FieldInfo bindingField = userCollection.GetType().GetField("Binding", BindingFlags.Instance | BindingFlags.Public)!;
+        IEnumerable binding = (IEnumerable)bindingField.GetValue(userCollection)!;
+        
+        bool hasReferencesAbove = false;
+        foreach (DBObject ob in binding)
+        {
+            if (ob.Index > insertAfterIndex)
+            {
+                hasReferencesAbove = true;
+                break;
+            }
+        }
+
+        if (!hasReferencesAbove) return;
+
+        MethodInfo method = typeof(Session).GetMethod(nameof(Session.InsertObjectAfter))!.MakeGenericMethod(modelType);
+        method.Invoke(userSession, [insertAfterIndex]);
+        userSession.Save(true);
     }
 
     public async Task<string> ExportJsonAsync(GameDataTableDefinition table, IReadOnlyCollection<int>? indices = null, CancellationToken cancellationToken = default)
