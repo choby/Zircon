@@ -29,40 +29,50 @@
     </div>
 }
 
-@if (!string.IsNullOrWhiteSpace(Message))
-{
-    <div class="alert @(HasError ? "danger" : "success")" role="status">@Message</div>
-}
+
 
 <section class="legacy-grid-shell">
 
 
     <RadzenDataGrid @key="Table.Key" @ref="Grid" TItem="object" Data="@Rows" AllowPaging="true" PageSize="30"
-                    AllowSorting="true" AllowFiltering="true" FilterMode="FilterMode.Simple"
-                    AllowColumnResize="true" AllowColumnReorder="true" AllowColumnPicking="true"
+                    AllowSorting="true" AllowFiltering="true" FilterMode="FilterMode.Advanced"
+                    AllowColumnResize="true" AllowColumnReorder="true" 
                     EditMode="DataGridEditMode.Single" RowCreate="CreateRow" RowUpdate="UpdateRow"
-                    Density="Density.Compact" Class="legacy-data-grid" EmptyText="暂无数据"
-                    ShowPagingSummary="true" PagingSummaryFormat="第 {0}–{1} 条，共 {2} 条">
+                    Density="Density.Compact" EmptyText="暂无数据" SelectionMode="DataGridSelectionMode.Multiple"
+                    ShowPagingSummary="true" PagerHorizontalAlign="HorizontalAlign.Left" PagerInputSize="InputSize.Small">
         <HeaderTemplate>
             <div class="radzen-grid-toolbar">
-                <RadzenButton Text="新增" Icon="add" ButtonStyle="ButtonStyle.Primary" Click="AddRow" />
-                <RadzenButton Text="刷新" Icon="refresh" ButtonStyle="ButtonStyle.Light" Click="Reload" />
-                <RadzenButton Text="保存数据库" Icon="save" ButtonStyle="ButtonStyle.Light" Click="SaveDatabase" />
-                <RadzenButton Text="在选中行后插入" Icon="playlist_add" ButtonStyle="ButtonStyle.Light" Click="InsertAfter"
-                              Disabled="@(SelectedItems.Count != 1 || GameServer.State != GameServerState.Stopped)" />
-                <RadzenButton Text="导出选中" Icon="download" ButtonStyle="ButtonStyle.Light" Click="ExportSelected" Disabled="@(SelectedItems.Count == 0)" />
-                <RadzenButton Text="导出全部" Icon="file_download" ButtonStyle="ButtonStyle.Light" Click="ExportAll" />
-                <label class="file-action radzen-file-action"><RadzenIcon Icon="upload_file" />导入 JSON<InputFile OnChange="Import" accept="application/json,.json" /></label>
+                <RadzenButton Size="ButtonSize.Small" Text="新增" Icon="add" ButtonStyle="ButtonStyle.Primary" Click="AddRow"/>
+                <RadzenButton Size="ButtonSize.Small" Text="刷新" Icon="refresh" ButtonStyle="ButtonStyle.Light" Click="Reload"/>
+                <RadzenButton Size="ButtonSize.Small" Text="保存数据库" Icon="save" ButtonStyle="ButtonStyle.Light" Click="SaveDatabase"/>
+                <RadzenButton Size="ButtonSize.Small" Text="在选中行后插入" Icon="playlist_add" ButtonStyle="ButtonStyle.Light" Click="InsertAfter"
+                              Disabled="@(SelectedItems.Count != 1 || GameServer.State != GameServerState.Stopped)"/>
+                <RadzenButton Size="ButtonSize.Small" Text="导出选中" Icon="download" ButtonStyle="ButtonStyle.Light" Click="ExportSelected" Disabled="@(SelectedItems.Count == 0)"/>
+                <RadzenButton Size="ButtonSize.Small" Text="导出全部" Icon="file_download" ButtonStyle="ButtonStyle.Light" Click="ExportAll"/>
+                <label class="file-action radzen-file-action">
+                    <RadzenIcon Icon="upload_file"/>
+                    导入 JSON
+                    <InputFile OnChange="Import" accept="application/json,.json"/>
+                </label>
+                @if (!string.IsNullOrWhiteSpace(Message))
+                {
+                    <span class="alert @(HasError ? "danger" : "success")" role="status">@Message</span>
+                }
             </div>
         </HeaderTemplate>
         <Columns>
-            <RadzenDataGridColumn TItem="object" Width="48px" Filterable="false" Sortable="false" Frozen="true">
+            <RadzenDataGridColumn TItem="object" Width="40px" Reorderable="false" Filterable="false" Sortable="false" Frozen="true">
+                <HeaderTemplate>
+                    <RadzenCheckBox TabIndex="-1" TriState="false" TValue="bool?" InputAttributes="@(new Dictionary<string,object>(){ { "aria-label", "Select all items" }})"
+                                    Value="@(SelectedItems.Any() != true ? false : !Rows.All(i => SelectedItems.Contains(i)) ? null : Rows.Any(i => SelectedItems.Contains(i)))"
+                                    Change="@(args => SelectedItems = args == true ? Rows.ToList() : [])" />
+                </HeaderTemplate>
                 <Template Context="item">
                     <RadzenCheckBox TValue="bool" Value="@SelectedItems.Contains(item)" Change="@(_ => ToggleSelection(item))"
-                                    Class="grid-selection-checkbox" @onclick:stopPropagation="true" />
+                                    Class="grid-selection-checkbox" @onclick:stopPropagation="true"/>
                 </Template>
             </RadzenDataGridColumn>
-            <RadzenDataGridColumn TItem="object" Property="Index" Type="typeof(int)" Title="序号" Width="76px" Frozen="true" />
+            <RadzenDataGridColumn TItem="object" Property="Index" Type="typeof(int)" Title="序号" Width="50px" Reorderable="false" Filterable="false" Sortable="false" Frozen="true"/>
             @foreach (GameDataColumnDefinition column in Table.Columns)
             {
                 Type fieldType = GetFieldType(column.Field);
@@ -77,7 +87,7 @@
                         <EditTemplate Context="editItem">
                             @if (column.Editable && IsEditable(column.Field, fieldType))
                             {
-                                <GameDataReferenceEditor Item="@editItem" Field="@column.Field" ReferenceType="@fieldType" />
+                                <GameDataReferenceEditor Item="@editItem" Field="@column.Field" ReferenceType="@fieldType"/>
                             }
                             else
                             {
@@ -93,7 +103,7 @@
                         <EditTemplate Context="editItem">
                             @if (column.Editable && IsEditable(column.Field, fieldType))
                             {
-                                <GameDataEnumEditor Item="@editItem" Field="@column.Field" EnumType="@enumType" />
+                                <GameDataEnumEditor Item="@editItem" Field="@column.Field" EnumType="@enumType"/>
                             }
                             else
                             {
@@ -108,7 +118,7 @@
                         <EditTemplate Context="editItem">
                             @if (column.Editable && IsEditable(column.Field, fieldType))
                             {
-                                <GameDataValueEditor Item="@editItem" Field="@column.Field" ValueType="@fieldType" />
+                                <GameDataValueEditor Item="@editItem" Field="@column.Field" ValueType="@fieldType"/>
                             }
                             else
                             {
@@ -118,17 +128,17 @@
                     </RadzenDataGridColumn>
                 }
             }
-            <RadzenDataGridColumn TItem="object" Title="操作" Width="156px" Filterable="false" Sortable="false" Frozen="true" FrozenPosition="FrozenColumnPosition.Right">
+            <RadzenDataGridColumn TItem="object" Title="操作" Width="82px" Filterable="false" Sortable="false" Frozen="true" FrozenPosition="FrozenColumnPosition.Right">
                 <Template Context="item">
                     <div class="grid-row-actions">
-                        <RadzenButton Icon="edit" title="编辑" Variant="Variant.Flat" ButtonStyle="ButtonStyle.Light" Size="ButtonSize.Small" Click="@(() => EditRow(item))" @onclick:stopPropagation="true" />
-                        <RadzenButton Icon="delete" title="删除" Variant="Variant.Flat" ButtonStyle="ButtonStyle.Danger" Size="ButtonSize.Small" Click="@(() => DeleteRow(item))" @onclick:stopPropagation="true" />
+                        <RadzenButton Icon="edit" title="编辑" Variant="Variant.Flat" ButtonStyle="ButtonStyle.Light" Size="ButtonSize.Small" Click="@(() => EditRow(item))" @onclick:stopPropagation="true"/>
+                        <RadzenButton Icon="delete" title="删除" Variant="Variant.Flat" ButtonStyle="ButtonStyle.Danger" Size="ButtonSize.Small" Click="@(() => DeleteRow(item))" @onclick:stopPropagation="true"/>
                     </div>
                 </Template>
                 <EditTemplate Context="item">
                     <div class="grid-row-actions">
-                        <RadzenButton Icon="check" title="保存" Variant="Variant.Flat" ButtonStyle="ButtonStyle.Success" Size="ButtonSize.Small" Click="@(() => SaveRow(item))" />
-                        <RadzenButton Icon="close" title="取消" Variant="Variant.Flat" ButtonStyle="ButtonStyle.Light" Size="ButtonSize.Small" Click="@(() => CancelRow(item))" />
+                        <RadzenButton Icon="check" title="保存" Variant="Variant.Flat" ButtonStyle="ButtonStyle.Success" Size="ButtonSize.Small" Click="@(() => SaveRow(item))"/>
+                        <RadzenButton Icon="close" title="取消" Variant="Variant.Flat" ButtonStyle="ButtonStyle.Light" Size="ButtonSize.Small" Click="@(() => CancelRow(item))"/>
                     </div>
                 </EditTemplate>
             </RadzenDataGridColumn>
@@ -140,7 +150,9 @@
 {
     <section class="relation-workbench migrated-relations">
         <div class="page-heading compact relation-heading">
-            <div><span class="eyebrow">MASTER / DETAIL</span><h2>关联与子项</h2><p>选中主表的一行后，在与原 DevExpress 主从表对应的 Radzen DataGrid 中管理子项。</p></div>
+            <div><span class="eyebrow">MASTER / DETAIL</span>
+                <h2>关联与子项</h2>
+                <p>选中主表的一行后，在与原 DevExpress 主从表对应的 Radzen DataGrid 中管理子项。</p></div>
         </div>
         <div class="entity-switcher view-tabs" role="tablist" aria-label="关联数据">
             @foreach (GameDataRelationDefinition candidate in Table.Relations)
@@ -150,7 +162,7 @@
         </div>
         @if (SelectedRelation is not null)
         {
-            <GameDataRelationGrid Table="@Table" Relation="@SelectedRelation" ParentIndex="@selectedParent.Index" />
+            <GameDataRelationGrid Table="@Table" Relation="@SelectedRelation" ParentIndex="@selectedParent.Index"/>
         }
     </section>
 }
@@ -190,6 +202,7 @@
     private Task EditRow(object item) => Grid?.EditRow(item) ?? Task.CompletedTask;
     private Task SaveRow(object item) => Grid?.UpdateRow(item) ?? Task.CompletedTask;
     private void CancelRow(object item) => Grid?.CancelEditRow(item);
+
     private void ToggleSelection(object item)
     {
         List<object> selected = SelectedItems.ToList();
@@ -301,24 +314,30 @@
     }
 
     private Type GetFieldType(string field) => Table.ModelType.GetProperty(field)?.PropertyType ?? typeof(string);
+
     private bool IsEditable(string field, Type type) => Table.ModelType.GetProperty(field)?.SetMethod?.IsPublic == true &&
-        (typeof(MirDB.DBObject).IsAssignableFrom(type) || IsSimple(type));
+                                                        (typeof(MirDB.DBObject).IsAssignableFrom(type) || IsSimple(type));
+
     private static bool IsSimple(Type type)
     {
         Type actual = Nullable.GetUnderlyingType(type) ?? type;
         return actual.IsPrimitive || actual.IsEnum || actual == typeof(string) || actual == typeof(decimal) || actual == typeof(DateTime) || actual == typeof(TimeSpan);
     }
+
     private static string ColumnWidth(GameDataColumnDefinition column, Type type) => column.Width ??
-        ((Nullable.GetUnderlyingType(type) ?? type) == typeof(string) ? "240px" : typeof(MirDB.DBObject).IsAssignableFrom(type) ? "220px" : "150px");
+                                                                                     ((Nullable.GetUnderlyingType(type) ?? type) == typeof(string) ? "240px" : typeof(MirDB.DBObject).IsAssignableFrom(type) ? "220px" : "150px");
+
     private static string FormatReference(object item, string field)
     {
         MirDB.DBObject? value = item.GetType().GetProperty(field)?.GetValue(item) as MirDB.DBObject;
         return value is null ? "—" : $"{value.Index}: {value}";
     }
+
     private static string GetValue(object item, string field) => item.GetType().GetProperty(field)?.GetValue(item)?.ToString() ?? "—";
 
     public async ValueTask DisposeAsync()
     {
         if (DownloadModule is not null) await DownloadModule.DisposeAsync();
     }
+
 }

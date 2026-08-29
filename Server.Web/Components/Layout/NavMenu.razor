@@ -74,6 +74,19 @@
     <NavLink href="/diagnostics">诊断</NavLink>
     <NavLink href="/plugins">插件</NavLink>
     <NavLink href="/audit">审计记录</NavLink>
+    
 </nav>
+
+<AuthorizeView>
+    <Authorized Context="auth">
+        <div class="operator">
+            <span>@auth.User.Identity?.Name</span>
+            <form method="post" action="/auth/logout">
+                <AntiforgeryToken />
+                <button type="submit" class="text-button">退出</button>
+            </form>
+        </div>
+    </Authorized>
+</AuthorizeView>
 
 

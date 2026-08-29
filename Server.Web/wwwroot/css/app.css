@@ -65,7 +65,7 @@ a { color: inherit; }
 .topbar { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 30px; border-bottom: 1px solid var(--line); background: #0c1113b8; backdrop-filter: blur(18px); }
 .brandline { display: flex; align-items: center; gap: 10px; color: #9ba9ad; font: 11px var(--mono); letter-spacing: .08em; }
 .signal-dot, .status-light { width: 7px; height: 7px; border-radius: 50%; background: var(--green); box-shadow: 0 0 12px var(--green); }
-.operator { display: flex; align-items: center; gap: 16px; font: 12px var(--mono); color: #aeb9bd; }
+.operator { position: absolute; bottom: 10px; display: flex; align-items: center; gap: 16px; font: 12px var(--mono); color: #aeb9bd; }
 .operator form { margin: 0; }
 .text-button { border: 0; background: none; color: var(--amber); cursor: pointer; padding: 4px; }
 .page-stage { padding: 30px clamp(20px, 3vw, 48px) 10px; max-width: 1800px; margin: 0 auto; }
@@ -104,7 +104,7 @@ a { color: inherit; }
 .data-strip strong { font: 500 18px var(--mono); }
 .data-strip small { align-self: end; color: var(--cyan); font: 10px var(--mono); }
 
-.alert { margin: 0 0 18px; padding: 13px 16px; border: 1px solid; font-size: 13px; }
+.alert {  padding: 6px 16px; border: 1px solid; font-size: 13px; }
 .alert.danger { color: #ffaaa3; border-color: #7d302a; background: #5e211d3b; }
 .alert.success { color: #9bf0c7; border-color: #286148; background: #1c503837; }
 .alert.warning { color: #f3ca7d; border-color: #745a29; background: #5a441d42; }
@@ -154,26 +154,13 @@ input:focus, select:focus { border-color: var(--cyan); box-shadow: 0 0 0 2px #54
 .view-origin span, .legacy-grid-titlebar span { display: block; margin-bottom: 4px; color: #64757a; font: 9px var(--mono); letter-spacing: .12em; }
 .view-origin strong { color: var(--cyan); font: 12px var(--mono); }
 .view-tabs { margin-top: -8px; }
-.legacy-grid-shell { min-width: 0; overflow: hidden; border: 1px solid var(--line); background: var(--panel); box-shadow: 0 22px 70px #0003; }
-.legacy-grid-titlebar { min-height: 48px; display: flex; align-items: center; justify-content: space-between; padding: 8px 15px; border-bottom: 1px solid var(--line); background: linear-gradient(90deg, #121a1d, #0f1517); }
-.legacy-grid-titlebar strong { font: 600 13px var(--mono); }
-.legacy-grid-count { color: var(--muted); font: 10px var(--mono); }
+
 .runtime-grid-layout { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 14px; align-items: start; }
 .runtime-editor { max-height: calc(100vh - 170px); border: 1px solid var(--line); background: var(--panel); }
 .game-data-reference { min-width: 180px; }
 
-/* Radzen DataGrid preserves the dense desktop-style workflow of the original DevExpress views. */
-.legacy-data-grid.rz-data-grid { max-height: calc(100vh - 220px); border: 0; color: #c2cbce; background: #0d1315; font-size: 12px; }
-.legacy-data-grid .rz-grid-table { background: #0d1315; }
-.legacy-data-grid .rz-data-grid-data { min-height: 420px; max-height: calc(100vh - 310px); background: #0d1315; }
-.legacy-data-grid .rz-grid-table thead th { border-color: var(--line); color: #91a1a6; background: #0a0f11; font: 600 10px var(--mono); letter-spacing: .02em; }
-.legacy-data-grid .rz-grid-table td { border-color: #1d272a; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.legacy-data-grid .rz-grid-table tbody > tr:hover > td { color: var(--text); background: #ffffff08; }
-.legacy-data-grid .rz-grid-table tbody > tr.rz-state-highlight > td { color: #fff2d1; background: #f1b84b14; }
-.legacy-data-grid .rz-paginator { border-color: var(--line); color: var(--muted); background: #101719; }
-.legacy-data-grid .rz-column-title { font: inherit; }
-.legacy-data-grid .rz-grid-filter { color: var(--muted); }
-.radzen-grid-toolbar { display: flex; align-items: center; flex-wrap: wrap; gap: 7px; width: 100%; padding: 9px; border-bottom: 1px solid var(--line); background: #12191b; }
+.rz-data-grid{max-height: calc(100vh - 150px);}
+.radzen-grid-toolbar { display: flex; align-items: center; flex-wrap: wrap; gap: 7px; width: 100%; padding: 9px; }
 .radzen-grid-toolbar .rz-button, .control-cluster .rz-button { min-height: 34px; }
 .radzen-file-action { min-height: 34px; gap: 7px; color: #c6d0d3; background: #182124; }
 .grid-row-actions { display: flex; align-items: center; gap: 2px; }

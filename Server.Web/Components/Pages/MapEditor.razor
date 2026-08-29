@@ -33,10 +33,11 @@
     <button @onclick='() => Call("toggleAttributes")'>属性</button>
     <button @onclick='() => Call("toggleBlockedMode")'>阻挡筛选</button>
     <label>半径 <input type="range" min="0" max="12" value="0" @oninput="RadiusChanged" /></label>
+    @if (!string.IsNullOrEmpty(Message)) { <div class="alert @(HasError ? "danger" : "success")">@Message</div> }
+
     <button class="save-map" @onclick="Save" disabled="@(Editor is null)">保存区域</button>
 </div>
 
-@if (!string.IsNullOrEmpty(Message)) { <div class="alert @(HasError ? "danger" : "success")">@Message</div> }
 
 <div class="map-viewport" @ref="Viewport">
     @if (SelectedRegion is null) { <div class="map-placeholder"><span>MAP CHANNEL IDLE</span><p>选择一个地图区域以加载 WebGL 编辑器。</p></div> }

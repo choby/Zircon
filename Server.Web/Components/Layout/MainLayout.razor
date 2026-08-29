@@ -5,23 +5,6 @@
             <NavMenu />
         </aside>
         <main class="workspace">
-            <header class="topbar">
-                <div class="brandline">
-                    <span class="signal-dot"></span>
-                    <span>传奇3 · 服务器控制平面</span>
-                </div>
-                <AuthorizeView>
-                    <Authorized Context="auth">
-                        <div class="operator">
-                            <span>@auth.User.Identity?.Name</span>
-                            <form method="post" action="/auth/logout">
-                                <AntiforgeryToken />
-                                <button type="submit" class="text-button">退出</button>
-                            </form>
-                        </div>
-                    </Authorized>
-                </AuthorizeView>
-            </header>
             <section class="page-stage">
                 @Body
             </section>
