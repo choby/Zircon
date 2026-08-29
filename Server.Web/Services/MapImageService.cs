@@ -44,10 +44,10 @@ public sealed class MapImageService
         return new MapAssetStatus(available > 0, available, required.Length, version, message);
     }
 
-    public MapImageResult? GetImage(int mapFile, int imageIndex)
+    public MapImageLookup GetImage(int mapFile, int imageIndex)
     {
         if (imageIndex < 0 || !Libraries.KROrder.TryGetValue(mapFile, out LibraryFile libraryFile) ||
-            !TryResolveLibrary(libraryFile, out string path)) return null;
+            !TryResolveLibrary(libraryFile, out string path)) return new MapImageLookup(MapImageState.MissingLibrary, null);
 
         long stamp = File.GetLastWriteTimeUtc(path).Ticks;
         CachedLibrary cached = _libraries.AddOrUpdate(path,
@@ -55,8 +55,9 @@ public sealed class MapImageService
             (_, current) => current.LastWriteTicks == stamp ? current : new CachedLibrary(stamp, ZlLibraryIndex.Load(path)));
         byte[]? png = cached.Index.ReadPng(imageIndex);
         return png is null
-            ? null
-            : new MapImageResult(png, $"\"map-{DecoderVersion}-{stamp:x}-{new FileInfo(path).Length:x}-{mapFile:x2}-{imageIndex:x}\"");
+            ? new MapImageLookup(MapImageState.Empty, null)
+            : new MapImageLookup(MapImageState.Available,
+                new MapImageResult(png, $"\"map-{DecoderVersion}-{stamp:x}-{new FileInfo(path).Length:x}-{mapFile:x2}-{imageIndex:x}\""));
     }
 
     private static bool TryResolveLibrary(LibraryFile file, out string path)
@@ -285,4 +286,6 @@ public sealed class MapImageService
 }
 
 public sealed record MapImageResult(byte[] Content, string ETag);
+public sealed record MapImageLookup(MapImageState State, MapImageResult? Image);
+public enum MapImageState { Available, Empty, MissingLibrary }
 public sealed record MapAssetStatus(bool Available, int AvailableLibraries, int ExpectedLibraries, string Version, string Message);

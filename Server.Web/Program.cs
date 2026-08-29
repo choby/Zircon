@@ -174,12 +174,22 @@ app.MapGet("/api/map-assets/{mapFile:int}/{imageIndex:int}",
     {
         try
         {
-            MapImageResult? image = images.GetImage(mapFile, imageIndex);
-            if (image is null) return Results.NotFound();
+            MapImageLookup lookup = images.GetImage(mapFile, imageIndex);
+            if (lookup.State == MapImageState.Empty)
+            {
+                context.Response.Headers.CacheControl = "private,max-age=31536000,immutable";
+                context.Response.Headers["X-Map-Asset-State"] = "empty";
+                return Results.NoContent();
+            }
+            if (lookup.State == MapImageState.MissingLibrary || lookup.Image is null) return Results.NotFound();
+            MapImageResult image = lookup.Image;
+            context.Response.ContentLength = image.Content.Length;
             context.Response.Headers.ETag = image.ETag;
             context.Response.Headers.CacheControl = "private,max-age=31536000,immutable";
+            context.Response.Headers.ContentDisposition = "inline";
+            context.Response.Headers["X-Content-Type-Options"] = "nosniff";
             context.Response.Headers["X-Map-Asset-Decoder"] = MapImageService.DecoderVersion;
-            return Results.File(image.Content, "image/png");
+            return Results.Bytes(image.Content, "image/png");
         }
         catch (Exception ex)
         {

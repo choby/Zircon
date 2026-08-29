@@ -5,7 +5,10 @@ const CELL_HEIGHT = 8;
 const IMAGE_SCALE = 0.25;
 const ANIMATION_FRAME_MASK = 0x0f;
 const ANIMATION_BLEND_BIT = 0x80;
-const MAX_CONCURRENT_TEXTURE_LOADS = 8;
+const MAX_CONCURRENT_TEXTURE_LOADS =  20;
+const DEFAULT_MIN_ZOOM = 0.25;
+const ABSOLUTE_MIN_ZOOM = 0.01;
+const MAX_ZOOM = 8;
 
 export async function createMapEditor(host, mapFileName, regionIndex, initialETag, dotnet) {
     const [mapResponse, assetStatusResponse] = await Promise.all([
@@ -38,8 +41,8 @@ export async function createMapEditor(host, mapFileName, regionIndex, initialETa
     app.canvas.oncontextmenu = event => event.preventDefault();
 
     const world = new Container();
-    const backgroundLayer = new Container();
-    const objectLayer = new Container();
+    let backgroundLayer = new Container();
+    let objectLayer = new Container();
     const overlayLayer = new Graphics();
     objectLayer.sortableChildren = true;
     world.addChild(backgroundLayer, objectLayer, overlayLayer);
@@ -49,6 +52,7 @@ export async function createMapEditor(host, mapFileName, regionIndex, initialETa
     const texturePromises = new Map();
     const missingFiles = new Set();
     const textureLoadQueue = [];
+    const textureAbortController = new AbortController();
     let activeTextureLoads = 0;
     let etag = initialETag;
     let radius = 0;
@@ -65,11 +69,25 @@ export async function createMapEditor(host, mapFileName, regionIndex, initialETa
     let redrawQueued = false;
     let disposed = false;
     let hasVisibleAnimation = false;
+    let animatedSprites = [];
+    let animationUpdatePending = false;
+    let lastStatusUpdate = 0;
+    let autoFit = true;
+    let resizeFrame = 0;
+    let hasRenderedTiles = false;
+    let rebuildTilesQueued = false;
 
-    const cellAt = event => {
+    const canvasPoint = event => {
         const rect = app.canvas.getBoundingClientRect();
-        const localX = (event.clientX - rect.left - world.x) / world.scale.x;
-        const localY = (event.clientY - rect.top - world.y) / world.scale.y;
+        return {
+            x: (event.clientX - rect.left) * (rect.width > 0 ? app.screen.width / rect.width : 1),
+            y: (event.clientY - rect.top) * (rect.height > 0 ? app.screen.height / rect.height : 1)
+        };
+    };
+
+    const cellAtPoint = point => {
+        const localX = (point.x - world.x) / world.scale.x;
+        const localY = (point.y - world.y) / world.scale.y;
         return { x: Math.floor(localX / CELL_WIDTH), y: Math.floor(localY / CELL_HEIGHT) };
     };
 
@@ -96,10 +114,22 @@ export async function createMapEditor(host, mapFileName, regionIndex, initialETa
     }
 
     async function loadTexture(url) {
+        const response = await fetch(url, { signal: textureAbortController.signal });
+        // Existing ZL libraries can intentionally contain empty image slots. The
+        // server represents those as 204 so they stay transparent without being
+        // reported as a missing/corrupt library.
+        if (response.status === 204) return null;
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+        const objectUrl = URL.createObjectURL(await response.blob());
         const image = new Image();
         image.decoding = 'async';
-        image.src = url;
-        await image.decode();
+        image.src = objectUrl;
+        try {
+            await image.decode();
+        } finally {
+            URL.revokeObjectURL(objectUrl);
+        }
 
         // HTMLImageElement lets WebGL perform premultiplication exactly once during
         // upload. createImageBitmap() may already premultiply transparent pixels,
@@ -109,6 +139,13 @@ export async function createMapEditor(host, mapFileName, regionIndex, initialETa
         return texture;
     }
 
+    function updateStatus(x, y, force = false) {
+        const now = performance.now();
+        if (!force && now - lastStatusUpdate < 100) return;
+        lastStatusUpdate = now;
+        void dotnet.invokeMethodAsync('UpdateStatus', x, y, selection.size).catch(() => { });
+    }
+
     async function textureFor(file, image) {
         const key = `${file}:${image}`;
         if (texturePromises.has(key)) return texturePromises.get(key);
@@ -116,7 +153,7 @@ export async function createMapEditor(host, mapFileName, regionIndex, initialETa
             try {
                 return await loadTexture(`/api/map-assets/${file}/${image}?v=${assetVersion}`);
             } catch {
-                if (!missingFiles.has(file)) {
+                if (!disposed && !missingFiles.has(file)) {
                     missingFiles.add(file);
                     await dotnet.invokeMethodAsync('ReportMapWarning',
                         `地图贴图资源 ${file} 缺失或无法解码，请检查 ClientPath 和客户端 Data/Map Data 目录。`);
@@ -132,16 +169,8 @@ export async function createMapEditor(host, mapFileName, regionIndex, initialETa
         for (const child of container.removeChildren()) child.destroy();
     }
 
-    function visibleBounds(includeTallObjects = false) {
-        const left = Math.max(0, Math.floor((-world.x / world.scale.x) / CELL_WIDTH) - 2);
-        const top = Math.max(0, Math.floor((-world.y / world.scale.y) / CELL_HEIGHT) - 2);
-        const right = Math.min(map.width, left + Math.ceil(app.screen.width / world.scale.x / CELL_WIDTH) + 4);
-        const extraBottom = includeTallObjects ? 20 : 0;
-        const bottom = Math.min(map.height, top + Math.ceil(app.screen.height / world.scale.y / CELL_HEIGHT) + 4 + extraBottom);
-        return { left, top, right, bottom };
-    }
-
-    async function placeTile(container, file, image, x, y, generation, objectLayer = false, blend = false, order = 0) {
+    async function placeTile(container, file, image, x, y, generation, objectLayer = false, blend = false, order = 0,
+        animation = null) {
         const texture = await textureFor(file, image);
         if (disposed || generation !== renderGeneration || texture === null) return;
         const sprite = new Sprite(texture);
@@ -158,59 +187,101 @@ export async function createMapEditor(host, mapFileName, regionIndex, initialETa
         sprite.alpha = blend ? 0.5 : 1;
         sprite.zIndex = y * map.width + x + order;
         container.addChild(sprite);
+        if (animation) animation.target.push({
+            sprite,
+            file,
+            baseImage: animation.baseImage,
+            frameCount: animation.frameCount
+        });
     }
 
-    function renderTiles() {
+    async function renderTiles() {
         const generation = ++renderGeneration;
-        clearLayer(backgroundLayer);
-        clearLayer(objectLayer);
-        hasVisibleAnimation = false;
+        const progressive = !hasRenderedTiles;
+        const nextBackgroundLayer = progressive ? backgroundLayer : new Container();
+        const nextObjectLayer = progressive ? objectLayer : new Container();
+        if (progressive) hasRenderedTiles = true;
+        nextObjectLayer.sortableChildren = true;
+        const placements = [];
+        const nextAnimatedSprites = [];
+        if (progressive) animatedSprites = nextAnimatedSprites;
 
         if (visibleLayers.background) {
-            const bounds = visibleBounds();
-            const startX = bounds.left + (bounds.left & 1);
-            const startY = bounds.top + (bounds.top & 1);
-            for (let y = startY; y < bounds.bottom; y += 2) {
-                for (let x = startX; x < bounds.right; x += 2) {
+            const startX = 0;
+            const startY = 0;
+            for (let y = startY; y < map.height; y += 2) {
+                for (let x = startX; x < map.width; x += 2) {
                     const cell = map.cells[y * map.width + x];
-                    if (cell) void placeTile(backgroundLayer, cell.backFile, cell.backImage, x, y, generation);
+                    if (cell) placements.push(
+                        placeTile(nextBackgroundLayer, cell.backFile, cell.backImage, x, y, generation));
                 }
             }
         }
 
-        const bounds = visibleBounds(true);
-        for (let y = bounds.top; y < bounds.bottom; y++) {
-            for (let x = bounds.left; x < bounds.right; x++) {
+        for (let y = 0; y < map.height; y++) {
+            for (let x = 0; x < map.width; x++) {
                 const cell = map.cells[y * map.width + x];
                 if (!cell) continue;
 
                 if (visibleLayers.middle && cell.middleFile !== 0 && cell.middleImage > 0) {
                     const count = cell.middleAnimationFrame & ANIMATION_FRAME_MASK;
                     const animated = count > 1 && cell.middleAnimationFrame < 255;
-                    const image = cell.middleImage - 1 + (animated ? animationPhase % count : 0);
-                    hasVisibleAnimation ||= animated;
-                    void placeTile(objectLayer, cell.middleFile, image, x, y, generation, true,
-                        (cell.middleAnimationFrame & ANIMATION_BLEND_BIT) !== 0, 0.1);
+                    const baseImage = cell.middleImage - 1;
+                    const image = baseImage + (animated ? animationPhase % count : 0);
+                    placements.push(placeTile(nextObjectLayer, cell.middleFile, image, x, y, generation, true,
+                        (cell.middleAnimationFrame & ANIMATION_BLEND_BIT) !== 0, 0.1,
+                        animated ? { target: nextAnimatedSprites, baseImage, frameCount: count } : null));
                 }
                 if (visibleLayers.front && cell.frontFile !== 0 && cell.frontImage > 0) {
                     const count = cell.frontAnimationFrame & ANIMATION_FRAME_MASK;
                     const animated = count > 1 && cell.frontAnimationFrame < 255;
-                    const image = cell.frontImage - 1 + (animated ? animationPhase % count : 0);
-                    hasVisibleAnimation ||= animated;
-                    void placeTile(objectLayer, cell.frontFile, image, x, y, generation, true,
-                        (cell.frontAnimationFrame & ANIMATION_BLEND_BIT) !== 0, 0.2);
+                    const baseImage = cell.frontImage - 1;
+                    const image = baseImage + (animated ? animationPhase % count : 0);
+                    placements.push(placeTile(nextObjectLayer, cell.frontFile, image, x, y, generation, true,
+                        (cell.frontAnimationFrame & ANIMATION_BLEND_BIT) !== 0, 0.2,
+                        animated ? { target: nextAnimatedSprites, baseImage, frameCount: count } : null));
                 }
             }
         }
+
+        await Promise.all(placements);
+        if (progressive) {
+            if (!disposed && generation === renderGeneration)
+                hasVisibleAnimation = nextAnimatedSprites.length > 0;
+            return;
+        }
+        if (disposed || generation !== renderGeneration) {
+            clearLayer(nextBackgroundLayer);
+            clearLayer(nextObjectLayer);
+            nextBackgroundLayer.destroy();
+            nextObjectLayer.destroy();
+            return;
+        }
+
+        // Keep the previous scene visible while a layer change is being prepared.
+        // Zooming and panning only transform this complete scene and never rebuild it.
+        const previousBackgroundLayer = backgroundLayer;
+        const previousObjectLayer = objectLayer;
+        world.removeChild(previousBackgroundLayer);
+        world.removeChild(previousObjectLayer);
+        world.addChildAt(nextBackgroundLayer, 0);
+        world.addChildAt(nextObjectLayer, 1);
+        backgroundLayer = nextBackgroundLayer;
+        objectLayer = nextObjectLayer;
+        animatedSprites = nextAnimatedSprites;
+        hasVisibleAnimation = nextAnimatedSprites.length > 0;
+        clearLayer(previousBackgroundLayer);
+        clearLayer(previousObjectLayer);
+        previousBackgroundLayer.destroy();
+        previousObjectLayer.destroy();
     }
 
     function renderOverlay() {
         overlayLayer.clear();
-        const { left, top, right, bottom } = visibleBounds();
         overlayLayer.rect(0, 0, map.width * CELL_WIDTH, map.height * CELL_HEIGHT)
             .stroke({ color: 0x273238, width: 1 });
-        for (let y = top; y < bottom; y++) {
-            for (let x = left; x < right; x++) {
+        for (let y = 0; y < map.height; y++) {
+            for (let x = 0; x < map.width; x++) {
                 const key = `${x},${y}`;
                 const cell = map.cells[y * map.width + x];
                 if (visibleLayers.light && cell?.light > 0)
@@ -226,14 +297,35 @@ export async function createMapEditor(host, mapFileName, regionIndex, initialETa
         }
     }
 
-    function redraw() {
+    function redraw(rebuildTiles = false) {
+        rebuildTilesQueued ||= rebuildTiles;
         if (redrawQueued || disposed) return;
         redrawQueued = true;
         requestAnimationFrame(() => {
             redrawQueued = false;
-            renderTiles();
+            const rebuild = rebuildTilesQueued;
+            rebuildTilesQueued = false;
+            if (rebuild) void renderTiles();
             renderOverlay();
         });
+    }
+
+    async function updateAnimatedSprites() {
+        if (disposed || animationUpdatePending || animatedSprites.length === 0) return;
+        animationUpdatePending = true;
+        animationPhase++;
+        const targets = animatedSprites;
+        try {
+            await Promise.all(targets.map(async item => {
+                const texture = await textureFor(
+                    item.file,
+                    item.baseImage + animationPhase % item.frameCount);
+                if (!disposed && animatedSprites === targets && texture !== null)
+                    item.sprite.texture = texture;
+            }));
+        } finally {
+            animationUpdatePending = false;
+        }
     }
 
     function brush(point, add) {
@@ -267,9 +359,11 @@ export async function createMapEditor(host, mapFileName, regionIndex, initialETa
     app.canvas.addEventListener('pointerdown', event => {
         pointerDown = true;
         pointerButton = event.button;
-        lastPointer = { x: event.clientX, y: event.clientY };
+        const position = canvasPoint(event);
+        lastPointer = position;
         panning = event.shiftKey;
-        const point = cellAt(event);
+        if (panning) autoFit = false;
+        const point = cellAtPoint(position);
         if (!panning && event.button === 0) brush(point, true);
         if (!panning && event.button === 2) brush(point, false);
         if (!panning && event.button === 1) flood(point);
@@ -277,59 +371,86 @@ export async function createMapEditor(host, mapFileName, regionIndex, initialETa
     });
 
     app.canvas.addEventListener('pointermove', event => {
-        const point = cellAt(event);
-        dotnet.invokeMethodAsync('UpdateStatus', point.x, point.y, selection.size);
+        const position = canvasPoint(event);
+        const point = cellAtPoint(position);
+        updateStatus(point.x, point.y);
         if (!pointerDown) return;
         if (panning) {
-            world.x += event.clientX - lastPointer.x;
-            world.y += event.clientY - lastPointer.y;
-            lastPointer = { x: event.clientX, y: event.clientY };
-            redraw();
+            world.x += position.x - lastPointer.x;
+            world.y += position.y - lastPointer.y;
+            lastPointer = position;
         } else if (pointerButton === 0) brush(point, true);
         else if (pointerButton === 2) brush(point, false);
     });
     app.canvas.addEventListener('pointerup', () => { pointerDown = false; panning = false; });
     app.canvas.addEventListener('wheel', event => {
         event.preventDefault();
+        autoFit = false;
         const factor = event.deltaY < 0 ? 1.25 : 0.8;
-        setZoom(zoom * factor, event.offsetX, event.offsetY);
+        const anchor = canvasPoint(event);
+        setZoom(zoom * factor, anchor.x, anchor.y);
     }, { passive: false });
 
     function setZoom(value, anchorX = app.screen.width / 2, anchorY = app.screen.height / 2) {
-        const next = Math.max(0.25, Math.min(8, value));
+        const mapWidth = Math.max(1, map.width * CELL_WIDTH);
+        const mapHeight = Math.max(1, map.height * CELL_HEIGHT);
+        const fittedZoom = Math.min(app.screen.width / mapWidth, app.screen.height / mapHeight);
+        const minimum = Math.max(ABSOLUTE_MIN_ZOOM, Math.min(DEFAULT_MIN_ZOOM, fittedZoom));
+        const next = Math.max(minimum, Math.min(MAX_ZOOM, value));
         const worldX = (anchorX - world.x) / world.scale.x;
         const worldY = (anchorY - world.y) / world.scale.y;
         zoom = next;
         world.scale.set(next);
         world.x = anchorX - worldX * next;
         world.y = anchorY - worldY * next;
-        redraw();
     }
 
-    const resizeObserver = new ResizeObserver(redraw);
+    function fitMapToCanvas() {
+        const mapWidth = Math.max(1, map.width * CELL_WIDTH);
+        const mapHeight = Math.max(1, map.height * CELL_HEIGHT);
+        if (app.screen.width <= 0 || app.screen.height <= 0) return;
+        zoom = Math.max(ABSOLUTE_MIN_ZOOM,
+            Math.min(MAX_ZOOM, app.screen.width / mapWidth, app.screen.height / mapHeight));
+        world.scale.set(zoom);
+        world.x = (app.screen.width - mapWidth * zoom) / 2;
+        world.y = (app.screen.height - mapHeight * zoom) / 2;
+        autoFit = true;
+        if (!hasRenderedTiles) redraw(true);
+    }
+
+    const resizeObserver = new ResizeObserver(() => {
+        cancelAnimationFrame(resizeFrame);
+        resizeFrame = requestAnimationFrame(() => {
+            resizeFrame = 0;
+            const width = Math.max(1, host.clientWidth);
+            const height = Math.max(1, host.clientHeight);
+            if (app.screen.width === width && app.screen.height === height) return;
+            app.renderer.resize(width, height);
+            if (autoFit) fitMapToCanvas();
+        });
+    });
     resizeObserver.observe(host);
     let animationElapsed = 0;
     app.ticker.add(ticker => {
         animationElapsed += ticker.deltaMS;
         if (animationElapsed >= 180 && hasVisibleAnimation) {
             animationElapsed = 0;
-            animationPhase++;
-            renderTiles();
+            void updateAnimatedSprites();
         }
     });
-    redraw();
-    dotnet.invokeMethodAsync('UpdateStatus', -1, -1, selection.size);
+    fitMapToCanvas();
+    updateStatus(-1, -1, true);
 
     return {
-        zoomIn: () => setZoom(zoom * 2),
-        zoomOut: () => setZoom(zoom / 2),
-        resetView: () => { world.position.set(0, 0); setZoom(1, 0, 0); },
+        zoomIn: () => { autoFit = false; setZoom(zoom * 2); },
+        zoomOut: () => { autoFit = false; setZoom(zoom / 2); },
+        resetView: fitMapToCanvas,
         toggleAttributes: () => { showAttributes = !showAttributes; renderOverlay(); },
         toggleLayer: name => {
             if (!(name in visibleLayers)) return;
             visibleLayers[name] = !visibleLayers[name];
             backgroundLayer.visible = visibleLayers.background;
-            if (name === 'middle' || name === 'front') renderTiles();
+            if (name === 'middle' || name === 'front') redraw(true);
             else if (name === 'light') renderOverlay();
         },
         toggleBlockedMode: () => { blockedMode = !blockedMode; },
@@ -349,7 +470,9 @@ export async function createMapEditor(host, mapFileName, regionIndex, initialETa
         },
         dispose: () => {
             disposed = true;
+            textureAbortController.abort();
             for (const job of textureLoadQueue.splice(0)) job.resolve(null);
+            cancelAnimationFrame(resizeFrame);
             resizeObserver.disconnect();
             for (const texturePromise of texturePromises.values())
                 texturePromise.then(texture => texture?.destroy(true));

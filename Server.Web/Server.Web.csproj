@@ -5,10 +5,13 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>Server.Web</RootNamespace>
     <BlazorDisableThrowNavigationException>true</BlazorDisableThrowNavigationException>
-    <DotNetWatchBuild>true</DotNetWatchBuild>
+    <!-- Run Telerik's cross-platform licensing task in the current MSBuild
+         process. TaskHostFactory is unreliable on some ARM and SDK installs. -->
+    <TelerikLicensingTaskFactory>AssemblyTaskFactory</TelerikLicensingTaskFactory>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Telerik.UI.for.Blazor" Version="15.0.0" />
+    <PackageReference Include="Telerik.UI.for.Blazor" Version="15.0.1" />
+    <PackageReference Include="Telerik.Licensing" Version="1.9.1" />
     <PackageReference Include="BCnEncoder.Net" Version="2.3.0" />
     <PackageReference Include="SkiaSharp" Version="4.151.1" />
     <PackageReference Include="SkiaSharp.NativeAssets.Linux.NoDependencies" Version="4.151.1" />

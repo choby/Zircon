@@ -63,7 +63,7 @@
         {
             SelectedRegion = Regions.Single(region => region.Index == index);
             Module ??= await JS.InvokeAsync<IJSObjectReference>("import", "./js/map-editor.js");
-            if (Editor is not null) await Editor.DisposeAsync();
+            await DisposeEditorAsync();
             Callback?.Dispose();
             Callback = DotNetObjectReference.Create(this);
             HasError = false;
@@ -119,8 +119,22 @@
 
     public async ValueTask DisposeAsync()
     {
-        if (Editor is not null) await Editor.DisposeAsync();
+        await DisposeEditorAsync();
         if (Module is not null) await Module.DisposeAsync();
         Callback?.Dispose();
+    }
+
+    private async Task DisposeEditorAsync()
+    {
+        if (Editor is null) return;
+        IJSObjectReference editor = Editor;
+        Editor = null;
+        try { await editor.InvokeVoidAsync("dispose"); }
+        catch (JSDisconnectedException) { }
+        finally
+        {
+            try { await editor.DisposeAsync(); }
+            catch (JSDisconnectedException) { }
+        }
     }
 }
