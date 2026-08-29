@@ -61,7 +61,7 @@ namespace Library.SystemModels
 
         [JsonIgnore]
         [IgnoreProperty]
-        public int AverageMonsterLevel => (int)Math.Round(Maps
+        public int AverageMonsterLevel => Maps == null ? 0 : (int)Math.Round(Maps
                 .Where(dungeonMap => dungeonMap.Map != null)
                 .SelectMany(dungeonMap => dungeonMap.Map.Regions)
                 .SelectMany(region => region.Respawns)
@@ -72,7 +72,7 @@ namespace Library.SystemModels
 
         [JsonIgnore]
         [IgnoreProperty]
-        public int AverageMonsterExperience => (int)Math.Round(Maps
+        public int AverageMonsterExperience => Maps == null ? 0 : (int)Math.Round(Maps
                 .Where(dungeonMap => dungeonMap.Map != null)
                 .SelectMany(dungeonMap => dungeonMap.Map.Regions)
                 .SelectMany(region => region.Respawns)

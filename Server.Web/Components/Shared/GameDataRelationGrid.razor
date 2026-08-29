@@ -10,17 +10,38 @@
     <RadzenDataGrid @key="Relation.Property" @ref="Grid" TItem="object" Data="@Rows" AllowPaging="true" PageSize="15"
                     AllowSorting="true" AllowFiltering="true" FilterMode="FilterMode.Simple"
                     AllowColumnResize="true" AllowColumnReorder="true" EditMode="DataGridEditMode.Single"
-                    RowCreate="CreateRow" RowUpdate="UpdateRow" Density="Density.Compact"
+                    RowCreate="CreateRow" RowUpdate="UpdateRow" RowRender="RenderRow" Density="Density.Compact"
                     Class="legacy-data-grid relation-radzen-grid" EmptyText="暂无关联数据"
                     ShowPagingSummary="true" PagingSummaryFormat="第 {0}–{1} 条，共 {2} 条">
+        <Template Context="child">
+            @if (Relation.Relations.Count > 0 && child is MirDB.DBObject childObject)
+            {
+                <div class="hierarchy-detail-panel nested-hierarchy-detail">
+                    @foreach (GameDataRelationDefinition childRelation in Relation.Relations)
+                    {
+                        <section class="nested-relation-section">
+                            <div class="nested-relation-title">
+                                <RadzenIcon Icon="account_tree" />
+                                <span>@childRelation.Title</span>
+                            </div>
+                            <GameDataRelationGrid @key="(Relation.Property, childObject.Index, childRelation.Property)"
+                                                  ParentType="@Relation.ItemType" ParentIndex="@childObject.Index"
+                                                  Relation="@childRelation" />
+                        </section>
+                    }
+                </div>
+            }
+        </Template>
         <HeaderTemplate>
             <div class="radzen-grid-toolbar">
+                <span class="relation-grid-title">@Relation.Title</span>
                 <RadzenButton Text="新增子项" Icon="add" ButtonStyle="ButtonStyle.Primary" Click="AddRow" />
                 <RadzenButton Text="刷新明细" Icon="refresh" ButtonStyle="ButtonStyle.Light" Click="Load" />
             </div>
         </HeaderTemplate>
         <Columns>
-            <RadzenDataGridColumn TItem="object" Property="Index" Type="typeof(int)" Title="序号" Width="86px" Frozen="true" />
+            <RadzenDataGridColumn TItem="object" Property="Index" Type="typeof(int)" Title="序号" Width="86px"
+                                  Reorderable="false" Filterable="false" Sortable="false" Frozen="true" />
             @foreach (GameDataColumnDefinition column in Relation.Columns)
             {
                 Type fieldType = Relation.ItemType.GetProperty(column.Field)?.PropertyType ?? typeof(string);
@@ -33,7 +54,8 @@
                         <EditTemplate Context="editItem">
                             @if (column.Editable && IsEditable(column.Field, fieldType))
                             {
-                                <GameDataReferenceEditor Item="@editItem" Field="@column.Field" ReferenceType="@fieldType" />
+                                <GameDataReferenceEditor Item="@editItem" Field="@column.Field" ReferenceType="@fieldType"
+                                                         ParentType="@ParentType" ParentIndex="@ParentIndex" />
                             }
                             else
                             {
@@ -93,7 +115,7 @@
 </section>
 
 @code {
-    [Parameter, EditorRequired] public GameDataTableDefinition Table { get; set; } = default!;
+    [Parameter, EditorRequired] public Type ParentType { get; set; } = default!;
     [Parameter, EditorRequired] public GameDataRelationDefinition Relation { get; set; } = default!;
     [Parameter, EditorRequired] public int ParentIndex { get; set; }
 
@@ -103,6 +125,7 @@
     private bool HasError;
 
     protected override Task OnParametersSetAsync() => Load();
+    private void RenderRow(RowRenderEventArgs<object> args) => args.Expandable = Relation.Relations.Count > 0;
     private Task AddRow() => Grid?.InsertRow(Activator.CreateInstance(Relation.ItemType)!) ?? Task.CompletedTask;
     private Task EditRow(object item) => Grid?.EditRow(item) ?? Task.CompletedTask;
     private Task SaveRow(object item) => Grid?.UpdateRow(item) ?? Task.CompletedTask;
@@ -110,14 +133,14 @@
 
     private async Task CreateRow(object item) => await Run(async user =>
     {
-        await DataSession.CreateRelationAsync(Table, ParentIndex, Relation, (MirDB.DBObject)item, user);
+        await DataSession.CreateRelationAsync(ParentType, ParentIndex, Relation, (MirDB.DBObject)item, user);
         await Load();
         Message = "子项已新增并保存。";
     });
 
     private async Task UpdateRow(object item) => await Run(async user =>
     {
-        await DataSession.UpdateRelationAsync(Table, ParentIndex, Relation, (MirDB.DBObject)item, user);
+        await DataSession.UpdateRelationAsync(ParentType, ParentIndex, Relation, (MirDB.DBObject)item, user);
         await Load();
         Message = "子项修改已保存。";
     });
@@ -130,13 +153,13 @@
         if (confirmed != true) return;
         await Run(async user =>
         {
-            await DataSession.DeleteRelationAsync(Table, ParentIndex, Relation, ((MirDB.DBObject)item).Index, user);
+            await DataSession.DeleteRelationAsync(ParentType, ParentIndex, Relation, ((MirDB.DBObject)item).Index, user);
             await Load();
             Message = Relation.Aggregate ? "子项已删除。" : "关联已解除。";
         });
     }
 
-    private async Task Load() => Rows = await DataSession.ReadRelationAsync(Table, ParentIndex, Relation);
+    private async Task Load() => Rows = await DataSession.ReadRelationAsync(ParentType, ParentIndex, Relation);
 
     private async Task Run(Func<string, Task> operation)
     {

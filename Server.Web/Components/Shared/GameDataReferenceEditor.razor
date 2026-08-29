@@ -12,9 +12,12 @@
     [Parameter, EditorRequired] public object Item { get; set; } = default!;
     [Parameter, EditorRequired] public string Field { get; set; } = string.Empty;
     [Parameter, EditorRequired] public Type ReferenceType { get; set; } = default!;
+    [Parameter] public Type? ParentType { get; set; }
+    [Parameter] public int? ParentIndex { get; set; }
 
     private System.Reflection.PropertyInfo Property => Item.GetType().GetProperty(Field)!;
-    private IReadOnlyList<GameDataReferenceOption> Options => DataSession.GetReferenceOptions(ReferenceType);
+    private IReadOnlyList<GameDataReferenceOption> Options =>
+        DataSession.GetReferenceOptions(ReferenceType, Item, Field, ParentType, ParentIndex);
     private int? SelectedIndex => (Property.GetValue(Item) as MirDB.DBObject)?.Index;
 
     private void Change(ChangeEventArgs args)
@@ -23,4 +26,3 @@
         Property.SetValue(Item, DataSession.ResolveReference(ReferenceType, index));
     }
 }
-

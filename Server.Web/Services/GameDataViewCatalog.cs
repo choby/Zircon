@@ -93,26 +93,122 @@ public sealed class GameDataViewCatalog
 
         _byKey = Views.ToDictionary(view => view.Key, StringComparer.OrdinalIgnoreCase);
 
-        IReadOnlyDictionary<Type, string[]> relations = new Dictionary<Type, string[]>
+        IReadOnlyDictionary<Type, LegacyRelationSpec[]> relations = new Dictionary<Type, LegacyRelationSpec[]>
         {
-            [typeof(FishingInfo)] = ["Drops"], [typeof(QuestInfo)] = ["Requirements", "Tasks", "Rewards"],
-            [typeof(CastleInfo)] = ["Flags", "Gates", "Guards"], [typeof(BundleInfo)] = ["Contents"],
-            [typeof(CompanionInfo)] = ["CompanionSpeeches"], [typeof(WorldEventInfo)] = ["Triggers", "Actions"],
-            [typeof(PlayerEventInfo)] = ["Triggers", "Actions"], [typeof(MonsterEventInfo)] = ["Triggers", "Actions"],
-            [typeof(FameInfo)] = ["BuffStats", "ItemRewards"], [typeof(HelpInfo)] = ["Pages"],
-            [typeof(MilestoneInfo)] = ["Tasks"], [typeof(LootBoxInfo)] = ["Contents"],
-            [typeof(NPCInfo)] = ["Requirements"], [typeof(SetInfo)] = ["SetStats"],
-            [typeof(MapInfo)] = ["Regions", "Guards", "Mining", "BuffStats"],
-            [typeof(ItemInfo)] = ["ItemStats", "Drops"], [typeof(DungeonInfo)] = ["Maps"],
-            [typeof(MonsterInfo)] = ["MonsterInfoStats", "Respawns", "Drops"],
-            [typeof(NPCPage)] = ["Checks", "Actions", "Buttons", "Values", "Types", "Goods"],
-            [typeof(InstanceInfo)] = ["Maps", "BuffStats"], [typeof(CurrencyInfo)] = ["Images"]
+            [typeof(MapInfo)] =
+            [
+                Rel("Regions", ["Description", "Size"]),
+                Rel("Guards", ["Monster", "X", "Y", "Direction"]),
+                Rel("Mining", ["Item", "Chance", "Region", "Quantity", "RestockTimeInMinutes"]),
+                Rel("BuffStats", ["Stat", "Amount"])
+            ],
+            [typeof(WorldEventInfo)] =
+            [
+                Rel("Triggers", ["Type", "Value", "MaxTriggers"]),
+                Rel("Actions", ["Type", "TriggerValue", "StringParameter1", "MonsterParameter1", "RespawnParameter1", "MapParameter1", "RegionParameter1", "InstanceParameter1", "Restrict"],
+                    Rel("Stats", ["Stat", "Amount"]))
+            ],
+            [typeof(PlayerEventInfo)] =
+            [
+                Rel("Triggers", ["Type", "Value", "MapParameter1", "RegionParameter1", "InstanceParameter1", "MaxTriggers", "StringParameter1"]),
+                Rel("Actions", ["Type", "StringParameter1", "MonsterParameter1", "RespawnParameter1", "MapParameter1", "RegionParameter1", "InstanceParameter1", "TriggerValue", "ItemParameter1", "Restrict"],
+                    Rel("Stats", ["Stat", "Amount"]))
+            ],
+            [typeof(MonsterEventInfo)] =
+            [
+                Rel("Triggers", ["Monster", "DropSet", "Value", "MaxTriggers", "Type", "InstanceParameter1", "RegionParameter1", "MapParameter1"]),
+                Rel("Actions", ["TriggerValue", "Type", "StringParameter1", "MonsterParameter1", "RespawnParameter1", "MapParameter1", "RegionParameter1", "InstanceParameter1", "ItemParameter1", "Restrict"],
+                    Rel("Stats", ["Stat", "Amount"]))
+            ],
+            [typeof(FameInfo)] =
+            [
+                Rel("BuffStats", ["Stat", "Amount"]),
+                Rel("ItemRewards", ["Amount", "Item"])
+            ],
+            [typeof(NPCInfo)] =
+            [
+                Rel("Requirements", ["Requirement", "IntParameter1", "QuestParameter", "Class", "DaysOfWeek"])
+            ],
+            [typeof(HelpInfo)] =
+            [
+                Rel("Pages", ["Title", "Order"], Rel("Items", ["Title", "Order", "Content"]))
+            ],
+            [typeof(CurrencyInfo)] =
+            [
+                Rel("Images", ["Image", "Amount"])
+            ],
+            [typeof(BundleInfo)] =
+            [
+                Rel("Contents", ["Amount", "Item"])
+            ],
+            [typeof(QuestInfo)] =
+            [
+                Rel("Requirements", ["Requirement", "IntParameter1", "QuestParameter", "Class"]),
+                Rel("Tasks", ["Task", "ItemParameter", "Amount", "RegionParameter", "MobDescription"],
+                    Rel("MonsterDetails", ["Monster", "Map", "Chance", "Amount", "DropSet"])),
+                Rel("Rewards", ["Item", "Amount", "Bound", "Duration", "Class", "Choice"])
+            ],
+            [typeof(SetInfo)] =
+            [
+                Rel("SetStats", ["Stat", "Amount", "Class", "Level"])
+            ],
+            [typeof(ItemInfo)] =
+            [
+                Rel("ItemStats", ["Stat", "Amount"]),
+                Rel("Drops", ["Monster", "Chance", "Amount", "DropSet", "PartOnly"])
+            ],
+            [typeof(InstanceInfo)] =
+            [
+                Rel("Maps", ["Map", "RespawnIndex"]),
+                Rel("BuffStats", ["Stat", "Amount"])
+            ],
+            [typeof(CompanionInfo)] =
+            [
+                Rel("CompanionSpeeches", ["Speech", "Action"])
+            ],
+            [typeof(MonsterInfo)] =
+            [
+                Rel("MonsterInfoStats", ["Stat", "Amount"]),
+                Rel("Respawns", ["Region", "Delay", "Count"]),
+                Rel("Drops", ["Item", "Chance", "Amount", "DropSet", "PartOnly", "EasterEvent"])
+            ],
+            [typeof(FishingInfo)] =
+            [
+                Rel("Drops", ["Item", "Chance", "PerfectCatch", "ThrowQuality"])
+            ],
+            [typeof(NPCPage)] =
+            [
+                Rel("Checks", ["FailPage", "CheckType", "Operator", "StringParameter1", "IntParameter1", "IntParameter2", "ItemParameter1", "StatParameter1"]),
+                Rel("Actions", ["ActionType", "StringParameter1", "IntParameter1", "IntParameter2", "MapParameter1", "InstanceParameter1", "ItemParameter1", "StatParameter1"]),
+                Rel("Buttons", ["ButtonID", "DestinationPage"]),
+                Rel("Values", ["ValueID", "DataCategory", "FieldType", "ValueType", "DataType"]),
+                Rel("Types", ["ItemType"]),
+                Rel("Goods", ["Item", "Rate", "GoodsIndex"])
+            ],
+            [typeof(CastleInfo)] =
+            [
+                Rel("Flags", ["Y", "X", "Monster"]),
+                Rel("Gates", ["Y", "X", "Monster", "RepairCost"]),
+                Rel("Guards", ["Direction", "Y", "X", "Monster", "RepairCost"])
+            ],
+            [typeof(DungeonInfo)] =
+            [
+                Rel("Maps", ["Floor", "Role", "Map"])
+            ],
+            [typeof(LootBoxInfo)] =
+            [
+                Rel("Contents", ["Amount", "Item"])
+            ],
+            [typeof(MilestoneInfo)] =
+            [
+                Rel("Tasks", ["Class", "Item", "Monster", "Region", "Currency", "Instance", "Amount", "Type", "Quest", "Magic"])
+            ]
         };
 
         foreach (GameDataTableDefinition table in Views.SelectMany(view => view.Tables))
         {
-            if (!relations.TryGetValue(table.ModelType, out string[]? properties)) continue;
-            table.Relations = properties.Select(property => BuildRelation(table.ModelType, property)).ToArray();
+            if (!relations.TryGetValue(table.ModelType, out LegacyRelationSpec[]? definitions)) continue;
+            table.Relations = definitions.Select(definition => BuildRelation(table.ModelType, definition)).ToArray();
         }
     }
 
@@ -155,36 +251,36 @@ public sealed class GameDataViewCatalog
         _ => SplitWords(field)
     };
 
-    private static GameDataRelationDefinition BuildRelation(Type ownerType, string propertyName)
+    private static GameDataRelationDefinition BuildRelation(Type ownerType, LegacyRelationSpec definition)
     {
-        System.Reflection.PropertyInfo property = ownerType.GetProperty(propertyName) ??
-            throw new InvalidOperationException($"{ownerType.Name}.{propertyName} 不存在。");
+        System.Reflection.PropertyInfo property = ownerType.GetProperty(definition.Property) ??
+            throw new InvalidOperationException($"{ownerType.Name}.{definition.Property} 不存在。");
         Type itemType = property.PropertyType.GetGenericArguments()[0];
         bool aggregate = property.GetCustomAttributes(typeof(AssociationAttribute), true)
             .OfType<AssociationAttribute>().SingleOrDefault()?.Aggregate == true;
-        IReadOnlyList<GameDataColumnDefinition> columns = itemType
-            .GetProperties(System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public)
-            .Where(item => item.Name != nameof(DBObject.Index) && item.GetIndexParameters().Length == 0 &&
-                           (IsGridValue(item.PropertyType) || typeof(DBObject).IsAssignableFrom(item.PropertyType)))
-            .Take(24)
-            .Select(item => new GameDataColumnDefinition(item.Name, Caption(item.Name)))
+        IReadOnlyList<GameDataColumnDefinition> columns = definition.Columns
+            .Select(field => itemType.GetProperty(field) is not null
+                ? new GameDataColumnDefinition(field, Caption(field))
+                : throw new InvalidOperationException($"{itemType.Name}.{field} 不存在。"))
             .ToArray();
         return new GameDataRelationDefinition
         {
-            Property = propertyName,
-            Title = Caption(propertyName),
+            Property = definition.Property,
+            Title = Caption(definition.Property),
             ItemType = itemType,
             Aggregate = aggregate,
-            Columns = columns
+            Columns = columns,
+            Relations = definition.Relations.Select(child => BuildRelation(itemType, child)).ToArray()
         };
     }
 
-    private static bool IsGridValue(Type type)
-    {
-        Type actual = Nullable.GetUnderlyingType(type) ?? type;
-        return actual.IsPrimitive || actual.IsEnum || actual == typeof(string) || actual == typeof(decimal) ||
-               actual == typeof(DateTime) || actual == typeof(TimeSpan);
-    }
+    private static LegacyRelationSpec Rel(string property, string[] columns, params LegacyRelationSpec[] relations) =>
+        new(property, columns, relations);
+
+    private sealed record LegacyRelationSpec(
+        string Property,
+        IReadOnlyList<string> Columns,
+        IReadOnlyList<LegacyRelationSpec> Relations);
 
     private static string SplitWords(string text)
     {

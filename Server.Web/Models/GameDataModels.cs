@@ -24,6 +24,7 @@ public sealed class GameDataRelationDefinition
     public required Type ItemType { get; init; }
     public required bool Aggregate { get; init; }
     public required IReadOnlyList<GameDataColumnDefinition> Columns { get; init; }
+    public IReadOnlyList<GameDataRelationDefinition> Relations { get; init; } = [];
 }
 
 public sealed class GameDataViewDefinition

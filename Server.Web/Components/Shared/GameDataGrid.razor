@@ -38,8 +38,32 @@
                     AllowSorting="true" AllowFiltering="true" FilterMode="FilterMode.Advanced"
                     AllowColumnResize="true" AllowColumnReorder="true" 
                     EditMode="DataGridEditMode.Single" RowCreate="CreateRow" RowUpdate="UpdateRow"
+                    RowRender="RenderRow"
                     Density="Density.Compact" EmptyText="暂无数据" SelectionMode="DataGridSelectionMode.Multiple"
                     ShowPagingSummary="true" PagerHorizontalAlign="HorizontalAlign.Left" PagerInputSize="InputSize.Small">
+        <Template Context="parent">
+            @if (Table.Relations.Count > 0 && parent is MirDB.DBObject parentObject)
+            {
+                GameDataRelationDefinition selectedRelation = GetSelectedRelation(parentObject.Index);
+                <div class="hierarchy-detail-panel">
+                    @if (Table.Relations.Count > 1)
+                    {
+                        <div class="entity-switcher hierarchy-relation-tabs" role="tablist" aria-label="@($"{parentObject} 的关联数据")">
+                            @foreach (GameDataRelationDefinition candidate in Table.Relations)
+                            {
+                                <button class="@(candidate == selectedRelation ? "active" : null)" role="tab"
+                                        aria-selected="@(candidate == selectedRelation)"
+                                        @onclick="() => SelectRelation(parentObject.Index, candidate)"
+                                        @onclick:stopPropagation="true">@candidate.Title</button>
+                            }
+                        </div>
+                    }
+                    <GameDataRelationGrid @key="(Table.Key, parentObject.Index, selectedRelation.Property)"
+                                          ParentType="@Table.ModelType" ParentIndex="@parentObject.Index"
+                                          Relation="@selectedRelation" />
+                </div>
+            }
+        </Template>
         <HeaderTemplate>
             <div class="radzen-grid-toolbar">
                 <RadzenButton Size="ButtonSize.Small" Text="新增" Icon="add" ButtonStyle="ButtonStyle.Primary" Click="AddRow"/>
@@ -146,27 +170,6 @@
     </RadzenDataGrid>
 </section>
 
-@if (SelectedParent is { } selectedParent && Table.Relations.Count > 0)
-{
-    <section class="relation-workbench migrated-relations">
-        <div class="page-heading compact relation-heading">
-            <div><span class="eyebrow">MASTER / DETAIL</span>
-                <h2>关联与子项</h2>
-                <p>选中主表的一行后，在与原 DevExpress 主从表对应的 Radzen DataGrid 中管理子项。</p></div>
-        </div>
-        <div class="entity-switcher view-tabs" role="tablist" aria-label="关联数据">
-            @foreach (GameDataRelationDefinition candidate in Table.Relations)
-            {
-                <button class="@(candidate == SelectedRelation ? "active" : null)" @onclick="() => SelectedRelation = candidate">@candidate.Title</button>
-            }
-        </div>
-        @if (SelectedRelation is not null)
-        {
-            <GameDataRelationGrid Table="@Table" Relation="@SelectedRelation" ParentIndex="@selectedParent.Index"/>
-        }
-    </section>
-}
-
 @code {
     [Parameter, EditorRequired] public string ViewKey { get; set; } = string.Empty;
 
@@ -175,8 +178,7 @@
     private IReadOnlyList<object> Rows = [];
     private IList<object> SelectedItems { get; set; } = [];
     private RadzenDataGrid<object>? Grid;
-    private GameDataRelationDefinition? SelectedRelation;
-    private MirDB.DBObject? SelectedParent => SelectedItems.OfType<MirDB.DBObject>().Take(2).ToArray() is { Length: 1 } selected ? selected[0] : null;
+    private readonly Dictionary<int, string> SelectedRelations = [];
     private string? Message;
     private bool HasError;
     private IJSObjectReference? DownloadModule;
@@ -186,7 +188,6 @@
     {
         View = ViewCatalog.Get(ViewKey);
         Table = View.Tables[0];
-        SelectedRelation = Table.Relations.FirstOrDefault();
         await LoadRows();
     }
 
@@ -194,9 +195,20 @@
     {
         Table = table;
         SelectedItems = [];
-        SelectedRelation = table.Relations.FirstOrDefault();
         await LoadRows();
     }
+
+    private void RenderRow(RowRenderEventArgs<object> args) => args.Expandable = Table.Relations.Count > 0;
+
+    private GameDataRelationDefinition GetSelectedRelation(int parentIndex)
+    {
+        if (SelectedRelations.TryGetValue(parentIndex, out string? property))
+            return Table.Relations.FirstOrDefault(item => item.Property == property) ?? Table.Relations[0];
+        return Table.Relations[0];
+    }
+
+    private void SelectRelation(int parentIndex, GameDataRelationDefinition relation) =>
+        SelectedRelations[parentIndex] = relation.Property;
 
     private Task AddRow() => Grid?.InsertRow(Activator.CreateInstance(Table.ModelType)!) ?? Task.CompletedTask;
     private Task EditRow(object item) => Grid?.EditRow(item) ?? Task.CompletedTask;
@@ -295,6 +307,7 @@
     {
         Rows = await DataSession.ReadAsync(Table);
         SelectedItems = [];
+        SelectedRelations.Clear();
     }
 
     private async Task Run(Func<string, Task> operation)

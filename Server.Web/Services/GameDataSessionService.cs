@@ -100,32 +100,33 @@ public sealed class GameDataSessionService : IDisposable
     }
 
     public async Task<IReadOnlyList<object>> ReadRelationAsync(
-        GameDataTableDefinition table, int parentIndex, GameDataRelationDefinition relation,
+        Type parentType, int parentIndex, GameDataRelationDefinition relation,
         CancellationToken cancellationToken = default)
     {
         await _gate.WaitAsync(cancellationToken);
         try
         {
-            DBObject parent = GetObjects(table.ModelType).Single(item => item.Index == parentIndex);
+            DBObject parent = GetObjects(parentType).Single(item => item.Index == parentIndex);
             return GetRelation(parent, relation).Cast<object>().ToArray();
         }
         finally { _gate.Release(); }
     }
 
     public async Task CreateRelationAsync(
-        GameDataTableDefinition table, int parentIndex, GameDataRelationDefinition relation, DBObject values,
+        Type parentType, int parentIndex, GameDataRelationDefinition relation, DBObject values,
         string user, CancellationToken cancellationToken = default)
     {
         await _gate.WaitAsync(cancellationToken);
         try
         {
-            DBObject parent = GetObjects(table.ModelType).Single(item => item.Index == parentIndex);
+            DBObject parent = GetObjects(parentType).Single(item => item.Index == parentIndex);
             IBindingList list = GetRelation(parent, relation);
             DBObject target = (DBObject)(list.AddNew() ?? throw new InvalidOperationException("无法创建关联记录。"));
             CopyAllowedValues(relation.ItemType, relation.Columns, values, target);
             ValidateObject(target);
+            RefreshDerivedState(parent);
             _session.Save(true);
-            _audit.Record(user, "GameData.Relation.Create", $"{table.ModelType.Name} #{parentIndex} / {relation.Property} #{target.Index}");
+            _audit.Record(user, "GameData.Relation.Create", $"{parentType.Name} #{parentIndex} / {relation.Property} #{target.Index}");
         }
         catch
         {
@@ -136,18 +137,19 @@ public sealed class GameDataSessionService : IDisposable
     }
 
     public async Task UpdateRelationAsync(
-        GameDataTableDefinition table, int parentIndex, GameDataRelationDefinition relation, DBObject values,
+        Type parentType, int parentIndex, GameDataRelationDefinition relation, DBObject values,
         string user, CancellationToken cancellationToken = default)
     {
         await _gate.WaitAsync(cancellationToken);
         try
         {
-            DBObject parent = GetObjects(table.ModelType).Single(item => item.Index == parentIndex);
+            DBObject parent = GetObjects(parentType).Single(item => item.Index == parentIndex);
             DBObject target = GetRelation(parent, relation).Cast<DBObject>().Single(item => item.Index == values.Index);
             CopyAllowedValues(relation.ItemType, relation.Columns, values, target);
             ValidateObject(target);
+            RefreshDerivedState(parent);
             _session.Save(true);
-            _audit.Record(user, "GameData.Relation.Update", $"{table.ModelType.Name} #{parentIndex} / {relation.Property} #{target.Index}");
+            _audit.Record(user, "GameData.Relation.Update", $"{parentType.Name} #{parentIndex} / {relation.Property} #{target.Index}");
         }
         catch
         {
@@ -158,19 +160,20 @@ public sealed class GameDataSessionService : IDisposable
     }
 
     public async Task DeleteRelationAsync(
-        GameDataTableDefinition table, int parentIndex, GameDataRelationDefinition relation, int childIndex,
+        Type parentType, int parentIndex, GameDataRelationDefinition relation, int childIndex,
         string user, CancellationToken cancellationToken = default)
     {
         await _gate.WaitAsync(cancellationToken);
         try
         {
-            DBObject parent = GetObjects(table.ModelType).Single(item => item.Index == parentIndex);
+            DBObject parent = GetObjects(parentType).Single(item => item.Index == parentIndex);
             IBindingList list = GetRelation(parent, relation);
             DBObject target = list.Cast<DBObject>().Single(item => item.Index == childIndex);
             if (relation.Aggregate) target.Delete();
             else list.Remove(target);
+            RefreshDerivedState(parent);
             _session.Save(true);
-            _audit.Record(user, "GameData.Relation.Delete", $"{table.ModelType.Name} #{parentIndex} / {relation.Property} #{childIndex}");
+            _audit.Record(user, "GameData.Relation.Delete", $"{parentType.Name} #{parentIndex} / {relation.Property} #{childIndex}");
         }
         catch
         {
@@ -349,13 +352,57 @@ public sealed class GameDataSessionService : IDisposable
         finally { _gate.Release(); }
     }
 
-    public IReadOnlyList<GameDataReferenceOption> GetReferenceOptions(Type referenceType)
+    public IReadOnlyList<GameDataReferenceOption> GetReferenceOptions(
+        Type referenceType, object? editingItem = null, string? field = null,
+        Type? parentType = null, int? parentIndex = null)
     {
-        return GetObjects(referenceType)
-            .Where(item => !item.IsTemporary)
+        IEnumerable<DBObject> options = GetObjects(referenceType).Where(item => !item.IsTemporary);
+
+        if (referenceType == typeof(MapRegion))
+        {
+            IEnumerable<MapRegion> regions = options.Cast<MapRegion>();
+            options = editingItem switch
+            {
+                MineInfo mine when field == nameof(MineInfo.Region) => FilterMiningRegions(regions, mine, parentType, parentIndex),
+                NPCInfo when field == nameof(NPCInfo.Region) => regions.Where(item => item.RegionType is RegionType.None or RegionType.Npc),
+                RespawnInfo when field == nameof(RespawnInfo.Region) => regions.Where(item => item.RegionType is RegionType.None or RegionType.Spawn or RegionType.SpawnConnection),
+                FishingInfo when field == nameof(FishingInfo.Region) => regions.Where(item => item.RegionType is RegionType.None or RegionType.Spawn),
+                MilestoneInfoTask when field == nameof(MilestoneInfoTask.Region) => regions.Where(item => item.RegionType is RegionType.None or RegionType.Area),
+                BaseEventAction when field == nameof(BaseEventAction.RegionParameter1) => regions.Where(IsEventRegion),
+                PlayerEventTrigger when field == nameof(PlayerEventTrigger.RegionParameter1) => regions.Where(IsEventRegion),
+                MonsterEventTrigger when field == nameof(MonsterEventTrigger.RegionParameter1) => regions.Where(IsEventRegion),
+                _ => regions
+            };
+        }
+        else if (referenceType == typeof(MapInfo) && editingItem is DungeonMapInfo dungeonMap && field == nameof(DungeonMapInfo.Map))
+        {
+            options = options.Cast<MapInfo>().Where(item => item.DungeonMap is null || item == dungeonMap.Map);
+        }
+        else if (referenceType == typeof(ItemInfo) && editingItem is CurrencyInfo && field == nameof(CurrencyInfo.DropItem))
+        {
+            options = options.Cast<ItemInfo>().Where(item => item.ItemType == ItemType.Currency);
+        }
+        else if (referenceType == typeof(MonsterInfo) && field == "Monster" &&
+                 editingItem is CastleInfo or CastleFlagInfo or CastleGateInfo or CastleGuardInfo)
+        {
+            options = options.Cast<MonsterInfo>().Where(item => item.Flag is MonsterFlag.CastleObjective or MonsterFlag.CastleDefense);
+        }
+
+        return options
             .Select(item => new GameDataReferenceOption(item.Index, $"{item.Index}: {item}", item))
             .ToArray();
     }
+
+    private IEnumerable<MapRegion> FilterMiningRegions(
+        IEnumerable<MapRegion> regions, MineInfo mine, Type? parentType, int? parentIndex)
+    {
+        MapInfo? map = mine.Map;
+        if (map is null && parentType == typeof(MapInfo) && parentIndex is not null)
+            map = GetObjects(typeof(MapInfo)).Cast<MapInfo>().SingleOrDefault(item => item.Index == parentIndex.Value);
+        return map is null ? regions : regions.Where(item => item.Map == map);
+    }
+
+    private static bool IsEventRegion(MapRegion region) => region.RegionType is RegionType.None or RegionType.Area;
 
     public DBObject? ResolveReference(Type referenceType, int? index) => index is null
         ? null
@@ -449,6 +496,9 @@ public sealed class GameDataSessionService : IDisposable
         (IBindingList)(parent.GetType().GetProperty(relation.Property)?.GetValue(parent) ??
                        throw new InvalidOperationException($"无法读取关联 {parent.GetType().Name}.{relation.Property}。"));
 
+    private static void RefreshDerivedState(DBObject parent) =>
+        parent.GetType().GetMethod("StatsChanged", BindingFlags.Instance | BindingFlags.Public, Type.EmptyTypes)?.Invoke(parent, null);
+
     private static void CopyAllowedValues(GameDataTableDefinition table, DBObject source, DBObject target)
         => CopyAllowedValues(table.ModelType, table.Columns, source, target);
 
@@ -489,6 +539,27 @@ public sealed class GameDataSessionService : IDisposable
                 throw new InvalidDataException("钓鱼区域只能使用 None 或 Spawn 类型。");
             case MilestoneInfoTask milestone when milestone.Region is not null && milestone.Region.RegionType is not (RegionType.None or RegionType.Area):
                 throw new InvalidDataException("里程碑区域只能使用 None 或 Area 类型。");
+            case BaseEventAction action:
+                ValidateEventRegion(action.RegionParameter1);
+                break;
+            case PlayerEventTrigger trigger:
+                ValidateEventRegion(trigger.RegionParameter1);
+                break;
+            case MonsterEventTrigger trigger:
+                ValidateEventRegion(trigger.RegionParameter1);
+                break;
+            case CastleInfo castle:
+                ValidateCastleMonster(castle.Monster);
+                break;
+            case CastleFlagInfo flag:
+                ValidateCastleMonster(flag.Monster);
+                break;
+            case CastleGateInfo gate:
+                ValidateCastleMonster(gate.Monster);
+                break;
+            case CastleGuardInfo guard:
+                ValidateCastleMonster(guard.Monster);
+                break;
             case CurrencyInfo currency when currency.DropItem is not null && currency.DropItem.ItemType != ItemType.Currency:
                 throw new InvalidDataException("货币掉落物品必须是 Currency 类型。");
         }
@@ -499,6 +570,18 @@ public sealed class GameDataSessionService : IDisposable
         if (region is null) return;
         if (region.RegionType is not (RegionType.None or RegionType.Connection or RegionType.SpawnConnection))
             throw new InvalidDataException($"{field}只能使用 None、Connection 或 SpawnConnection 类型。");
+    }
+
+    private static void ValidateEventRegion(MapRegion? region)
+    {
+        if (region is not null && region.RegionType is not (RegionType.None or RegionType.Area))
+            throw new InvalidDataException("事件区域只能使用 None 或 Area 类型。");
+    }
+
+    private static void ValidateCastleMonster(MonsterInfo? monster)
+    {
+        if (monster is not null && monster.Flag is not (MonsterFlag.CastleObjective or MonsterFlag.CastleDefense))
+            throw new InvalidDataException("城堡目标只能使用 CastleObjective 或 CastleDefense 怪物。");
     }
 
     private JsonSerializerOptions CreateJsonOptions(Type modelType)
