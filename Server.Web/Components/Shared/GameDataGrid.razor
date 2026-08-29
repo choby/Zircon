@@ -5,6 +5,7 @@
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject IGameServerController GameServer
 @inject IJSRuntime JS
+@inject DialogService DialogService
 
 <PageTitle>@View.Title · Zircon</PageTitle>
 
@@ -36,37 +37,32 @@
 <section class="legacy-grid-shell">
 
 
-    <TelerikGrid @key="Table.Key"
-                 TItem="object"
-                 Data="@Rows"
-                 Pageable="true"
-                 PageSize="30"
-                 Sortable="true"
-                 Resizable="true"
-                 Reorderable="true"
-                 
-                 ShowColumnMenu="true"
-                 SelectionMode="@GridSelectionMode.Multiple"
-                 @bind-SelectedItems="SelectedItems"
-                 EditMode="@GridEditMode.Inline"
-                 OnModelInit="@CreateModel"
-                 OnCreate="@CreateRow"
-                 OnUpdate="@UpdateRow"
-                 OnDelete="@DeleteRow"
-                 ConfirmDelete="true"
-                 Class="legacy-data-grid">
-        <GridToolBarTemplate>
-            <GridCommandButton Command="Add" ThemeColor="@ThemeConstants.Button.ThemeColor.Primary">新增</GridCommandButton>
-            <TelerikButton OnClick="Reload">刷新</TelerikButton>
-            <TelerikButton OnClick="SaveDatabase">保存数据库</TelerikButton>
-            <TelerikButton OnClick="InsertAfter" Enabled="@(SelectedItems.Count() == 1 && GameServer.State == GameServerState.Stopped)">在选中行后插入</TelerikButton>
-            <TelerikButton OnClick="ExportSelected" Enabled="@SelectedItems.Any()">导出选中</TelerikButton>
-            <TelerikButton OnClick="ExportAll">导出全部</TelerikButton>
-            <label class="file-action telerik-file-action">导入 JSON<InputFile OnChange="Import" accept="application/json,.json" /></label>
-            <GridSearchBox Placeholder="搜索当前表格…" DebounceDelay="250" />
-        </GridToolBarTemplate>
-        <GridColumns>
-            <GridColumn Field="@nameof(MirDB.DBObject.Index)" FieldType="@typeof(int)" Title="序号" Width="60px" Editable="false" Locked="true" />
+    <RadzenDataGrid @key="Table.Key" @ref="Grid" TItem="object" Data="@Rows" AllowPaging="true" PageSize="30"
+                    AllowSorting="true" AllowFiltering="true" FilterMode="FilterMode.Simple"
+                    AllowColumnResize="true" AllowColumnReorder="true" AllowColumnPicking="true"
+                    EditMode="DataGridEditMode.Single" RowCreate="CreateRow" RowUpdate="UpdateRow"
+                    Density="Density.Compact" Class="legacy-data-grid" EmptyText="暂无数据"
+                    ShowPagingSummary="true" PagingSummaryFormat="第 {0}–{1} 条，共 {2} 条">
+        <HeaderTemplate>
+            <div class="radzen-grid-toolbar">
+                <RadzenButton Text="新增" Icon="add" ButtonStyle="ButtonStyle.Primary" Click="AddRow" />
+                <RadzenButton Text="刷新" Icon="refresh" ButtonStyle="ButtonStyle.Light" Click="Reload" />
+                <RadzenButton Text="保存数据库" Icon="save" ButtonStyle="ButtonStyle.Light" Click="SaveDatabase" />
+                <RadzenButton Text="在选中行后插入" Icon="playlist_add" ButtonStyle="ButtonStyle.Light" Click="InsertAfter"
+                              Disabled="@(SelectedItems.Count != 1 || GameServer.State != GameServerState.Stopped)" />
+                <RadzenButton Text="导出选中" Icon="download" ButtonStyle="ButtonStyle.Light" Click="ExportSelected" Disabled="@(SelectedItems.Count == 0)" />
+                <RadzenButton Text="导出全部" Icon="file_download" ButtonStyle="ButtonStyle.Light" Click="ExportAll" />
+                <label class="file-action radzen-file-action"><RadzenIcon Icon="upload_file" />导入 JSON<InputFile OnChange="Import" accept="application/json,.json" /></label>
+            </div>
+        </HeaderTemplate>
+        <Columns>
+            <RadzenDataGridColumn TItem="object" Width="48px" Filterable="false" Sortable="false" Frozen="true">
+                <Template Context="item">
+                    <RadzenCheckBox TValue="bool" Value="@SelectedItems.Contains(item)" Change="@(_ => ToggleSelection(item))"
+                                    Class="grid-selection-checkbox" @onclick:stopPropagation="true" />
+                </Template>
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="object" Property="Index" Type="typeof(int)" Title="序号" Width="76px" Frozen="true" />
             @foreach (GameDataColumnDefinition column in Table.Columns)
             {
                 Type fieldType = GetFieldType(column.Field);
@@ -74,47 +70,77 @@
                 bool isEnum = (Nullable.GetUnderlyingType(fieldType) ?? fieldType).IsEnum;
                 @if (isReference)
                 {
-                    <GridColumn Field="@column.Field" FieldType="@fieldType" Title="@column.Title" Width="@ColumnWidth(column, fieldType)"
-                                Editable="@(column.Editable && IsEditable(column.Field, fieldType))">
+                    <RadzenDataGridColumn TItem="object" Property="@column.Field" Type="@fieldType" Title="@column.Title" Width="@ColumnWidth(column, fieldType)">
                         <Template Context="cell">
                             @FormatReference(cell, column.Field)
                         </Template>
-                        <EditorTemplate Context="editItem">
-                            <GameDataReferenceEditor Item="@editItem" Field="@column.Field" ReferenceType="@fieldType" />
-                        </EditorTemplate>
-                    </GridColumn>
+                        <EditTemplate Context="editItem">
+                            @if (column.Editable && IsEditable(column.Field, fieldType))
+                            {
+                                <GameDataReferenceEditor Item="@editItem" Field="@column.Field" ReferenceType="@fieldType" />
+                            }
+                            else
+                            {
+                                @FormatReference(editItem, column.Field)
+                            }
+                        </EditTemplate>
+                    </RadzenDataGridColumn>
                 }
                 else if (isEnum)
                 {
                     Type enumType = Nullable.GetUnderlyingType(fieldType) ?? fieldType;
-                    <GridColumn Field="@column.Field" FieldType="@fieldType" Title="@column.Title" Width="@ColumnWidth(column, fieldType)"
-                                Editable="@(column.Editable && IsEditable(column.Field, fieldType))" Filterable="false">
-                        <EditorTemplate Context="editItem">
-                            <GameDataEnumEditor Item="@editItem" Field="@column.Field" EnumType="@enumType" />
-                        </EditorTemplate>
-                    </GridColumn>
+                    <RadzenDataGridColumn TItem="object" Property="@column.Field" Type="@fieldType" Title="@column.Title" Width="@ColumnWidth(column, fieldType)" Filterable="false">
+                        <EditTemplate Context="editItem">
+                            @if (column.Editable && IsEditable(column.Field, fieldType))
+                            {
+                                <GameDataEnumEditor Item="@editItem" Field="@column.Field" EnumType="@enumType" />
+                            }
+                            else
+                            {
+                                @GetValue(editItem, column.Field)
+                            }
+                        </EditTemplate>
+                    </RadzenDataGridColumn>
                 }
                 else
                 {
-                    <GridColumn Field="@column.Field" FieldType="@fieldType" Title="@column.Title" Width="@ColumnWidth(column, fieldType)"
-                                Editable="@(column.Editable && IsEditable(column.Field, fieldType))" />
+                    <RadzenDataGridColumn TItem="object" Property="@column.Field" Type="@fieldType" Title="@column.Title" Width="@ColumnWidth(column, fieldType)">
+                        <EditTemplate Context="editItem">
+                            @if (column.Editable && IsEditable(column.Field, fieldType))
+                            {
+                                <GameDataValueEditor Item="@editItem" Field="@column.Field" ValueType="@fieldType" />
+                            }
+                            else
+                            {
+                                @GetValue(editItem, column.Field)
+                            }
+                        </EditTemplate>
+                    </RadzenDataGridColumn>
                 }
             }
-            <GridCommandColumn Width="160px" Locked="true">
-                <GridCommandButton Command="Edit">编辑</GridCommandButton>
-                <GridCommandButton Command="Save" ShowInEdit="true" ThemeColor="@ThemeConstants.Button.ThemeColor.Primary">保存</GridCommandButton>
-                <GridCommandButton Command="Cancel" ShowInEdit="true">取消</GridCommandButton>
-                <GridCommandButton Command="Delete" ThemeColor="@ThemeConstants.Button.ThemeColor.Error">删除</GridCommandButton>
-            </GridCommandColumn>
-        </GridColumns>
-    </TelerikGrid>
+            <RadzenDataGridColumn TItem="object" Title="操作" Width="156px" Filterable="false" Sortable="false" Frozen="true" FrozenPosition="FrozenColumnPosition.Right">
+                <Template Context="item">
+                    <div class="grid-row-actions">
+                        <RadzenButton Icon="edit" title="编辑" Variant="Variant.Flat" ButtonStyle="ButtonStyle.Light" Size="ButtonSize.Small" Click="@(() => EditRow(item))" @onclick:stopPropagation="true" />
+                        <RadzenButton Icon="delete" title="删除" Variant="Variant.Flat" ButtonStyle="ButtonStyle.Danger" Size="ButtonSize.Small" Click="@(() => DeleteRow(item))" @onclick:stopPropagation="true" />
+                    </div>
+                </Template>
+                <EditTemplate Context="item">
+                    <div class="grid-row-actions">
+                        <RadzenButton Icon="check" title="保存" Variant="Variant.Flat" ButtonStyle="ButtonStyle.Success" Size="ButtonSize.Small" Click="@(() => SaveRow(item))" />
+                        <RadzenButton Icon="close" title="取消" Variant="Variant.Flat" ButtonStyle="ButtonStyle.Light" Size="ButtonSize.Small" Click="@(() => CancelRow(item))" />
+                    </div>
+                </EditTemplate>
+            </RadzenDataGridColumn>
+        </Columns>
+    </RadzenDataGrid>
 </section>
 
 @if (SelectedParent is { } selectedParent && Table.Relations.Count > 0)
 {
     <section class="relation-workbench migrated-relations">
         <div class="page-heading compact relation-heading">
-            <div><span class="eyebrow">MASTER / DETAIL</span><h2>关联与子项</h2><p>选中主表的一行后，在与原 DevExpress 主从表对应的 Telerik Grid 中管理子项。</p></div>
+            <div><span class="eyebrow">MASTER / DETAIL</span><h2>关联与子项</h2><p>选中主表的一行后，在与原 DevExpress 主从表对应的 Radzen DataGrid 中管理子项。</p></div>
         </div>
         <div class="entity-switcher view-tabs" role="tablist" aria-label="关联数据">
             @foreach (GameDataRelationDefinition candidate in Table.Relations)
@@ -135,7 +161,8 @@
     private GameDataViewDefinition View = default!;
     private GameDataTableDefinition Table = default!;
     private IReadOnlyList<object> Rows = [];
-    private IEnumerable<object> SelectedItems { get; set; } = [];
+    private IList<object> SelectedItems { get; set; } = [];
+    private RadzenDataGrid<object>? Grid;
     private GameDataRelationDefinition? SelectedRelation;
     private MirDB.DBObject? SelectedParent => SelectedItems.OfType<MirDB.DBObject>().Take(2).ToArray() is { Length: 1 } selected ? selected[0] : null;
     private string? Message;
@@ -159,28 +186,43 @@
         await LoadRows();
     }
 
-    private object CreateModel() => Activator.CreateInstance(Table.ModelType)!;
-
-    private async Task CreateRow(GridCommandEventArgs args) => await Run(async user =>
+    private Task AddRow() => Grid?.InsertRow(Activator.CreateInstance(Table.ModelType)!) ?? Task.CompletedTask;
+    private Task EditRow(object item) => Grid?.EditRow(item) ?? Task.CompletedTask;
+    private Task SaveRow(object item) => Grid?.UpdateRow(item) ?? Task.CompletedTask;
+    private void CancelRow(object item) => Grid?.CancelEditRow(item);
+    private void ToggleSelection(object item)
     {
-        await DataSession.CreateAsync(Table, CommandItem(args), user);
+        List<object> selected = SelectedItems.ToList();
+        if (!selected.Remove(item)) selected.Add(item);
+        SelectedItems = selected;
+    }
+
+    private async Task CreateRow(object item) => await Run(async user =>
+    {
+        await DataSession.CreateAsync(Table, (MirDB.DBObject)item, user);
         await LoadRows();
         Message = "已新增并保存记录。";
     });
 
-    private async Task UpdateRow(GridCommandEventArgs args) => await Run(async user =>
+    private async Task UpdateRow(object item) => await Run(async user =>
     {
-        await DataSession.UpdateAsync(Table, CommandItem(args), user);
+        await DataSession.UpdateAsync(Table, (MirDB.DBObject)item, user);
         await LoadRows();
         Message = "修改已保存。";
     });
 
-    private async Task DeleteRow(GridCommandEventArgs args) => await Run(async user =>
+    private async Task DeleteRow(object item)
     {
-        await DataSession.DeleteAsync(Table, CommandItem(args).Index, user);
-        await LoadRows();
-        Message = "记录已删除。";
-    });
+        bool? confirmed = await DialogService.Confirm("删除后将立即保存数据库，确定继续吗？", "删除记录",
+            new ConfirmOptions { OkButtonText = "删除", CancelButtonText = "取消" });
+        if (confirmed != true) return;
+        await Run(async user =>
+        {
+            await DataSession.DeleteAsync(Table, ((MirDB.DBObject)item).Index, user);
+            await LoadRows();
+            Message = "记录已删除。";
+        });
+    }
 
     private async Task Reload()
     {
@@ -259,13 +301,6 @@
     }
 
     private Type GetFieldType(string field) => Table.ModelType.GetProperty(field)?.PropertyType ?? typeof(string);
-    private static MirDB.DBObject CommandItem(GridCommandEventArgs args)
-    {
-        MirDB.DBObject? item = args.Items.OfType<MirDB.DBObject>().SingleOrDefault();
-#pragma warning disable CS0618 // Item remains the fallback for Telerik single-row command events.
-        return item ?? (MirDB.DBObject)args.Item;
-#pragma warning restore CS0618
-    }
     private bool IsEditable(string field, Type type) => Table.ModelType.GetProperty(field)?.SetMethod?.IsPublic == true &&
         (typeof(MirDB.DBObject).IsAssignableFrom(type) || IsSimple(type));
     private static bool IsSimple(Type type)
@@ -280,6 +315,7 @@
         MirDB.DBObject? value = item.GetType().GetProperty(field)?.GetValue(item) as MirDB.DBObject;
         return value is null ? "—" : $"{value.Index}: {value}";
     }
+    private static string GetValue(object item, string field) => item.GetType().GetProperty(field)?.GetValue(item)?.ToString() ?? "—";
 
     public async ValueTask DisposeAsync()
     {

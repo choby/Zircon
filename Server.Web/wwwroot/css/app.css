@@ -12,9 +12,24 @@
     --green: #62d49b;
     --sans: 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
     --mono: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
-     --kendo-table-header-bg: #0c1113ee;
-     --kendo-grid-sticky-bg : #0c1113ee;
-     --kendo-grid-sticky-hover-bg : #0c1113ee;
+    --rz-primary: #f1b84b;
+    --rz-primary-light: #ffd989;
+    --rz-primary-dark: #b98220;
+    --rz-on-primary: #17130b;
+    --rz-base-background-color: #111719;
+    --rz-body-background-color: #090d0f;
+    --rz-panel-background-color: #111719;
+    --rz-text-color: #e7ecee;
+    --rz-text-secondary-color: #7f9096;
+    --rz-border-color: #2a3539;
+    --rz-grid-header-background-color: #0c1113;
+    --rz-grid-header-color: #a6b3b7;
+    --rz-grid-stripe-background-color: #0e1416;
+    --rz-grid-hover-background-color: #1a2427;
+    --rz-grid-selected-background-color: #392f1d;
+    --rz-input-background-color: #0c1214;
+    --rz-input-border: 1px solid #334044;
+    --rz-text-font-family: var(--sans);
 }
 
 * { box-sizing: border-box; }
@@ -147,28 +162,27 @@ input:focus, select:focus { border-color: var(--cyan); box-shadow: 0 0 0 2px #54
 .runtime-editor { max-height: calc(100vh - 170px); border: 1px solid var(--line); background: var(--panel); }
 .game-data-reference { min-width: 180px; }
 
-/* Telerik Grid is treated as the Web equivalent of the original DevExpress Grid. */
-.legacy-data-grid.k-grid { max-height: calc(100vh - 220px); border: 0; color: #c2cbce; background: #0d1315; font-size: 12px; --kendo-color-surface: #111719; --kendo-color-on-app-surface: #dbe2e4; --kendo-color-border: #2a3539; }
-.legacy-data-grid .k-grid-header, .legacy-data-grid .k-grid-header-wrap, .legacy-data-grid .k-table-thead { color: #91a1a6; background: #0a0f11; }
-.legacy-data-grid .k-table-th { border-color: #2a3539; font: 600 10px var(--mono); letter-spacing: .02em; }
-.legacy-data-grid .k-table-td { border-color: #1d272a; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.legacy-data-grid .k-table-row:hover > .k-table-td { background: #ffffff08; color: var(--text) }
-.legacy-data-grid .k-selected > .k-table-td { color: #fff2d1; background: #f1b84b14; }
-.legacy-data-grid .k-grid-toolbar { gap: 7px; padding: 9px; border-color: var(--line); background: #12191b; }
-.legacy-data-grid .k-grid-content { min-height: 420px; max-height: calc(100vh - 310px); background: #0d1315; }
-.legacy-data-grid .k-pager { border-color: var(--line); color: var(--muted); background: #101719; }
-.legacy-data-grid .k-input, .legacy-data-grid .k-picker, .legacy-data-grid .k-textbox { color: var(--text); border-color: #334044; background: #0c1214; }
-.legacy-data-grid .k-button { border-color: #354247; color: #c6d0d3; background: #182124; }
-.legacy-data-grid .k-button:hover { border-color: #53646a; color: white; background: #222e32; }
-.legacy-data-grid .k-button-solid-primary { border-color: var(--amber); color: #16130d; background: var(--amber); }
-.legacy-data-grid .k-button-solid-error { border-color: #7d302a; color: #ffc1bc; background: #5e211d; }
-.legacy-data-grid .k-filtercell { min-width: 120px; }
-.telerik-file-action { min-height: 32px; background: #182124; }
+/* Radzen DataGrid preserves the dense desktop-style workflow of the original DevExpress views. */
+.legacy-data-grid.rz-data-grid { max-height: calc(100vh - 220px); border: 0; color: #c2cbce; background: #0d1315; font-size: 12px; }
+.legacy-data-grid .rz-grid-table { background: #0d1315; }
+.legacy-data-grid .rz-data-grid-data { min-height: 420px; max-height: calc(100vh - 310px); background: #0d1315; }
+.legacy-data-grid .rz-grid-table thead th { border-color: var(--line); color: #91a1a6; background: #0a0f11; font: 600 10px var(--mono); letter-spacing: .02em; }
+.legacy-data-grid .rz-grid-table td { border-color: #1d272a; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.legacy-data-grid .rz-grid-table tbody > tr:hover > td { color: var(--text); background: #ffffff08; }
+.legacy-data-grid .rz-grid-table tbody > tr.rz-state-highlight > td { color: #fff2d1; background: #f1b84b14; }
+.legacy-data-grid .rz-paginator { border-color: var(--line); color: var(--muted); background: #101719; }
+.legacy-data-grid .rz-column-title { font: inherit; }
+.legacy-data-grid .rz-grid-filter { color: var(--muted); }
+.radzen-grid-toolbar { display: flex; align-items: center; flex-wrap: wrap; gap: 7px; width: 100%; padding: 9px; border-bottom: 1px solid var(--line); background: #12191b; }
+.radzen-grid-toolbar .rz-button, .control-cluster .rz-button { min-height: 34px; }
+.radzen-file-action { min-height: 34px; gap: 7px; color: #c6d0d3; background: #182124; }
+.grid-row-actions { display: flex; align-items: center; gap: 2px; }
+.grid-row-actions .rz-button { min-width: 32px; padding-inline: 6px; }
 .migrated-relations { margin-top: 18px; }
 .relation-heading { margin: 0 0 12px; }
 .relation-heading h2 { margin: 4px 0; font-size: 20px; }
 .relation-grid-shell { border: 1px solid var(--line); background: var(--panel); }
-.relation-telerik-grid .k-grid-content { min-height: 260px; max-height: 520px; }
+.relation-radzen-grid .rz-data-grid-data { min-height: 260px; max-height: 520px; }
 .relation-message { padding: 9px 14px; color: var(--green); border-bottom: 1px solid var(--line); font-size: 11px; }
 .relation-message.danger { color: #ffaaa3; }
 

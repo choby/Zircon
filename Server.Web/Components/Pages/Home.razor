@@ -15,8 +15,8 @@
         <p>游戏循环与网络状态的只读快照，每秒刷新。</p>
     </div>
     <div class="control-cluster">
-        <TelerikButton ThemeColor="@ThemeConstants.Button.ThemeColor.Primary" OnClick="Start" Enabled="@CanStart">启动服务器</TelerikButton>
-        <TelerikButton ThemeColor="@ThemeConstants.Button.ThemeColor.Error" OnClick="Stop" Enabled="@CanStop">停止服务器</TelerikButton>
+        <RadzenButton Text="启动服务器" Icon="play_arrow" ButtonStyle="ButtonStyle.Primary" Click="Start" Disabled="@(!CanStart)" />
+        <RadzenButton Text="停止服务器" Icon="stop" ButtonStyle="ButtonStyle.Danger" Click="Stop" Disabled="@(!CanStop)" />
     </div>
 </div>
 

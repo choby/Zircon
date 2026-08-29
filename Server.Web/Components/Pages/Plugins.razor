@@ -24,7 +24,8 @@
         <article class="plugin-card @(plugin.Loaded ? "loaded" : "failed")">
             <header><span class="plugin-mark">@plugin.Name[..1].ToUpperInvariant()</span><div><h2>@plugin.Name</h2><code>@plugin.Id · @plugin.Version</code></div></header>
             <div class="plugin-state"><span></span>@(plugin.Loaded ? "已加载" : plugin.Enabled ? "加载失败" : "已禁用")</div>
-            <TelerikButton OnClick="() => Toggle(plugin)">@(plugin.Enabled ? "下次启动时禁用" : "下次启动时启用")</TelerikButton>
+            <RadzenButton Text="@(plugin.Enabled ? "下次启动时禁用" : "下次启动时启用")"
+                          Icon="@(plugin.Enabled ? "toggle_off" : "toggle_on")" ButtonStyle="ButtonStyle.Light" Click="() => Toggle(plugin)" />
             @if (!string.IsNullOrEmpty(plugin.Error)) { <p class="plugin-error">@plugin.Error</p> }
             @foreach (var navItem in plugin.Navigation)
             {

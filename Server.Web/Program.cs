@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Antiforgery;
 using Microsoft.AspNetCore.RateLimiting;
+using Radzen;
 using Server.Envir;
 using Server.Web.Auth;
 using Server.Web.Components;
@@ -60,7 +61,7 @@ builder.Services.AddAuthorization();
 builder.Services.AddCascadingAuthenticationState();
 builder.Services.AddScoped<AuthenticationStateProvider, RevalidatingAdminAuthenticationStateProvider>();
 builder.Services.AddRazorComponents().AddInteractiveServerComponents();
-builder.Services.AddTelerikBlazor();
+builder.Services.AddRadzenComponents();
 
 builder.Services.AddRateLimiter(options =>
 {

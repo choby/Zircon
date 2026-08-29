@@ -14,24 +14,23 @@
         <p>采集数据包处理次数、耗时和大小。监控会增加少量运行开销。</p>
     </div>
     <div class="control-cluster">
-        <TelerikButton OnClick="Toggle" ThemeColor="@(BaseConnection.Monitor ? ThemeConstants.Button.ThemeColor.Warning : ThemeConstants.Button.ThemeColor.Primary)">
-            @(BaseConnection.Monitor ? "停止监控" : "开始监控")
-        </TelerikButton>
-        <TelerikButton OnClick="Reset">清零统计</TelerikButton>
+        <RadzenButton Text="@(BaseConnection.Monitor ? "停止监控" : "开始监控")" Icon="monitor_heart"
+                      Click="Toggle" ButtonStyle="@(BaseConnection.Monitor ? ButtonStyle.Warning : ButtonStyle.Primary)" />
+        <RadzenButton Text="清零统计" Icon="restart_alt" ButtonStyle="ButtonStyle.Light" Click="Reset" />
     </div>
 </div>
 
 <div class="page-heading compact diagnostic-subheading">
     <div><span class="eyebrow">MIRDB / INTEGRITY</span><h2>孤立数据诊断</h2><p>在游戏线程扫描聚合子项；清理会将可清理孤立项标记为临时并立即保存。</p></div>
     <div class="control-cluster">
-        <TelerikButton OnClick="ScanOrphans" Enabled="@(GameServer.State == GameServerState.Running)">扫描孤立项</TelerikButton>
+        <RadzenButton Text="扫描孤立项" Icon="search" ButtonStyle="ButtonStyle.Light" Click="ScanOrphans" Disabled="@(GameServer.State != GameServerState.Running)" />
         @if (!ConfirmClean)
         {
-            <TelerikButton OnClick="() => ConfirmClean = true" Enabled="@(GameServer.State == GameServerState.Running)">准备清理</TelerikButton>
+            <RadzenButton Text="准备清理" Icon="cleaning_services" ButtonStyle="ButtonStyle.Warning" Click="() => ConfirmClean = true" Disabled="@(GameServer.State != GameServerState.Running)" />
         }
         else
         {
-            <TelerikButton OnClick="CleanOrphans" ThemeColor="@ThemeConstants.Button.ThemeColor.Error">确认清理</TelerikButton>
+            <RadzenButton Text="确认清理" Icon="delete_forever" ButtonStyle="ButtonStyle.Danger" Click="CleanOrphans" />
         }
     </div>
 </div>

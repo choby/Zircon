@@ -6,14 +6,14 @@
     <base href="/" />
     <link rel="icon" href="@Assets["favicon.svg"]" type="image/svg+xml" />
     <ResourcePreloader />
-    <link rel="stylesheet" href="@Assets["_content/Telerik.UI.for.Blazor/css/kendo-theme-fluent/all.css"]" />
+    <RadzenTheme Theme="material-dark" />
     <link rel="stylesheet" href="@Assets["css/app.css"]" />
     <ImportMap />
     <HeadOutlet @rendermode="InteractiveServer" />
 </head>
 <body>
     <Routes @rendermode="InteractiveServer" />
-    <script src="@Assets["_content/Telerik.UI.for.Blazor/js/telerik-blazor.js"]"></script>
+    <script src="@Assets["_content/Radzen.Blazor/Radzen.Blazor.js"]"></script>
     <script src="@Assets["_framework/blazor.web.js"]"></script>
 </body>
 </html>

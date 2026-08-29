@@ -27,22 +27,24 @@ else
 
     <div class="runtime-grid-layout">
         <section class="legacy-grid-shell">
-            <TelerikGrid TItem="RuntimeDataRow" Data="@Rows" Pageable="true" PageSize="40" Sortable="true"
-                         Resizable="true" Reorderable="true" SelectionMode="@GridSelectionMode.Single"
-                         SelectedItems="@SelectedItems" SelectedItemsChanged="@SelectionChanged" Class="legacy-data-grid runtime-telerik-grid">
-                <GridToolBarTemplate>
-                    <TelerikButton OnClick="Load">刷新快照</TelerikButton>
-                </GridToolBarTemplate>
-                <GridColumns>
-                    <GridColumn Field="@nameof(RuntimeDataRow.Index)" Title="序号" Width="86px" Locked="true" />
+            <RadzenDataGrid TItem="RuntimeDataRow" Data="@Rows" AllowPaging="true" PageSize="40" AllowSorting="true"
+                            AllowFiltering="true" FilterMode="FilterMode.Simple" AllowColumnResize="true" AllowColumnReorder="true"
+                            SelectionMode="DataGridSelectionMode.Single" AllowRowSelectOnRowClick="true" Value="@SelectedItems" Change="SelectionChanged"
+                            Density="Density.Compact" Class="legacy-data-grid runtime-radzen-grid" EmptyText="暂无运行时数据"
+                            ShowPagingSummary="true" PagingSummaryFormat="第 {0}–{1} 条，共 {2} 条">
+                <HeaderTemplate>
+                    <div class="radzen-grid-toolbar"><RadzenButton Text="刷新快照" Icon="refresh" ButtonStyle="ButtonStyle.Light" Click="Load" /></div>
+                </HeaderTemplate>
+                <Columns>
+                    <RadzenDataGridColumn TItem="RuntimeDataRow" Property="Index" Title="序号" Width="86px" Frozen="true" />
                     @foreach (RuntimeColumnDefinition column in Definition.Columns)
                     {
-                        <GridColumn Title="@column.Title" Width="180px">
-                            <Template Context="row">@Format((RuntimeDataRow)row, column.Field)</Template>
-                        </GridColumn>
+                        <RadzenDataGridColumn TItem="RuntimeDataRow" Title="@column.Title" Width="180px" Filterable="false" Sortable="false">
+                            <Template Context="row">@Format(row, column.Field)</Template>
+                        </RadzenDataGridColumn>
                     }
-                </GridColumns>
-            </TelerikGrid>
+                </Columns>
+            </RadzenDataGrid>
         </section>
 
         <aside class="editor-panel runtime-editor">
@@ -63,7 +65,7 @@ else
                         </label>
                     }
                 </div>
-                <div class="editor-actions"><TelerikButton ThemeColor="@ThemeConstants.Button.ThemeColor.Primary" OnClick="Save">保存到 Users.db</TelerikButton></div>
+                <div class="editor-actions"><RadzenButton Text="保存到 Users.db" Icon="save" ButtonStyle="ButtonStyle.Primary" Click="Save" /></div>
             }
         </aside>
     </div>
@@ -74,7 +76,7 @@ else
 
     private RuntimeCollectionDescriptor Definition = default!;
     private IReadOnlyList<RuntimeDataRow> Rows = [];
-    private IEnumerable<RuntimeDataRow> SelectedItems { get; set; } = [];
+    private IList<RuntimeDataRow> SelectedItems { get; set; } = [];
     private RuntimeDataRow? SelectedRow => SelectedItems.SingleOrDefault();
     private Dictionary<string, string?> EditValues = [];
     private string? Message;
@@ -86,7 +88,7 @@ else
         await Load();
     }
 
-    private void SelectionChanged(IEnumerable<RuntimeDataRow> selected)
+    private void SelectionChanged(IList<RuntimeDataRow> selected)
     {
         SelectedItems = selected;
         EditValues = SelectedRow?.Values.ToDictionary(pair => pair.Key, pair => pair.Value?.ToString()) ?? [];

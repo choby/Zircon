@@ -12,13 +12,13 @@
         <p>敏感值留空表示保持原值；端口和主机修改后需重启进程。</p>
     </div>
     <div class="control-cluster">
-        <TelerikButton OnClick="Reload">重新载入</TelerikButton>
-        <TelerikButton OnClick="CheckVersion">检查客户端版本</TelerikButton>
-        <TelerikButton OnClick="LocalSync">本地同步</TelerikButton>
-        <TelerikButton OnClick="RemoteSync">远程同步</TelerikButton>
-        <TelerikButton OnClick="GenerateKey">生成加密密钥</TelerikButton>
-        <TelerikButton OnClick="Reencrypt">转换数据库加密</TelerikButton>
-        <TelerikButton ThemeColor="@ThemeConstants.Button.ThemeColor.Primary" OnClick="Save">保存配置</TelerikButton>
+        <RadzenButton Text="重新载入" Icon="refresh" ButtonStyle="ButtonStyle.Light" Click="Reload" />
+        <RadzenButton Text="检查客户端版本" Icon="fact_check" ButtonStyle="ButtonStyle.Light" Click="CheckVersion" />
+        <RadzenButton Text="本地同步" Icon="sync" ButtonStyle="ButtonStyle.Light" Click="LocalSync" />
+        <RadzenButton Text="远程同步" Icon="cloud_sync" ButtonStyle="ButtonStyle.Light" Click="RemoteSync" />
+        <RadzenButton Text="生成加密密钥" Icon="key" ButtonStyle="ButtonStyle.Light" Click="GenerateKey" />
+        <RadzenButton Text="转换数据库加密" Icon="enhanced_encryption" ButtonStyle="ButtonStyle.Light" Click="Reencrypt" />
+        <RadzenButton Text="保存配置" Icon="save" ButtonStyle="ButtonStyle.Primary" Click="Save" />
     </div>
 </div>
 

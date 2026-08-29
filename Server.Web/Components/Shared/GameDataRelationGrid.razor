@@ -1,21 +1,26 @@
 @inject GameDataSessionService DataSession
 @inject AuthenticationStateProvider AuthenticationStateProvider
+@inject DialogService DialogService
 
 <section class="relation-grid-shell">
     @if (!string.IsNullOrWhiteSpace(Message))
     {
         <div class="relation-message @(HasError ? "danger" : null)">@Message</div>
     }
-    <TelerikGrid @key="Relation.Property" TItem="object" Data="@Rows" Pageable="true" PageSize="15" Sortable="true"
-                 Resizable="true" Reorderable="true" FilterMode="@GridFilterMode.FilterRow"
-                 EditMode="@GridEditMode.Inline" OnModelInit="@CreateModel" OnCreate="@CreateRow"
-                 OnUpdate="@UpdateRow" OnDelete="@DeleteRow" ConfirmDelete="true" Class="legacy-data-grid relation-telerik-grid">
-        <GridToolBarTemplate>
-            <GridCommandButton Command="Add" ThemeColor="@ThemeConstants.Button.ThemeColor.Primary">新增子项</GridCommandButton>
-            <TelerikButton OnClick="Load">刷新明细</TelerikButton>
-        </GridToolBarTemplate>
-        <GridColumns>
-            <GridColumn Field="@nameof(MirDB.DBObject.Index)" FieldType="@typeof(int)" Title="序号" Width="86px" Editable="false" Locked="true" />
+    <RadzenDataGrid @key="Relation.Property" @ref="Grid" TItem="object" Data="@Rows" AllowPaging="true" PageSize="15"
+                    AllowSorting="true" AllowFiltering="true" FilterMode="FilterMode.Simple"
+                    AllowColumnResize="true" AllowColumnReorder="true" EditMode="DataGridEditMode.Single"
+                    RowCreate="CreateRow" RowUpdate="UpdateRow" Density="Density.Compact"
+                    Class="legacy-data-grid relation-radzen-grid" EmptyText="暂无关联数据"
+                    ShowPagingSummary="true" PagingSummaryFormat="第 {0}–{1} 条，共 {2} 条">
+        <HeaderTemplate>
+            <div class="radzen-grid-toolbar">
+                <RadzenButton Text="新增子项" Icon="add" ButtonStyle="ButtonStyle.Primary" Click="AddRow" />
+                <RadzenButton Text="刷新明细" Icon="refresh" ButtonStyle="ButtonStyle.Light" Click="Load" />
+            </div>
+        </HeaderTemplate>
+        <Columns>
+            <RadzenDataGridColumn TItem="object" Property="Index" Type="typeof(int)" Title="序号" Width="86px" Frozen="true" />
             @foreach (GameDataColumnDefinition column in Relation.Columns)
             {
                 Type fieldType = Relation.ItemType.GetProperty(column.Field)?.PropertyType ?? typeof(string);
@@ -23,31 +28,68 @@
                 bool isEnum = (Nullable.GetUnderlyingType(fieldType) ?? fieldType).IsEnum;
                 @if (isReference)
                 {
-                    <GridColumn Field="@column.Field" FieldType="@fieldType" Title="@column.Title" Width="220px" Editable="@IsEditable(column.Field, fieldType)">
+                    <RadzenDataGridColumn TItem="object" Property="@column.Field" Type="@fieldType" Title="@column.Title" Width="220px">
                         <Template Context="cell">@FormatReference(cell, column.Field)</Template>
-                        <EditorTemplate Context="editItem"><GameDataReferenceEditor Item="@editItem" Field="@column.Field" ReferenceType="@fieldType" /></EditorTemplate>
-                    </GridColumn>
+                        <EditTemplate Context="editItem">
+                            @if (column.Editable && IsEditable(column.Field, fieldType))
+                            {
+                                <GameDataReferenceEditor Item="@editItem" Field="@column.Field" ReferenceType="@fieldType" />
+                            }
+                            else
+                            {
+                                @FormatReference(editItem, column.Field)
+                            }
+                        </EditTemplate>
+                    </RadzenDataGridColumn>
                 }
                 else if (isEnum)
                 {
                     Type enumType = Nullable.GetUnderlyingType(fieldType) ?? fieldType;
-                    <GridColumn Field="@column.Field" FieldType="@fieldType" Title="@column.Title" Width="150px" Editable="@IsEditable(column.Field, fieldType)" Filterable="false">
-                        <EditorTemplate Context="editItem"><GameDataEnumEditor Item="@editItem" Field="@column.Field" EnumType="@enumType" /></EditorTemplate>
-                    </GridColumn>
+                    <RadzenDataGridColumn TItem="object" Property="@column.Field" Type="@fieldType" Title="@column.Title" Width="150px" Filterable="false">
+                        <EditTemplate Context="editItem">
+                            @if (column.Editable && IsEditable(column.Field, fieldType))
+                            {
+                                <GameDataEnumEditor Item="@editItem" Field="@column.Field" EnumType="@enumType" />
+                            }
+                            else
+                            {
+                                @GetValue(editItem, column.Field)
+                            }
+                        </EditTemplate>
+                    </RadzenDataGridColumn>
                 }
                 else
                 {
-                    <GridColumn Field="@column.Field" FieldType="@fieldType" Title="@column.Title" Width="150px" Editable="@IsEditable(column.Field, fieldType)" />
+                    <RadzenDataGridColumn TItem="object" Property="@column.Field" Type="@fieldType" Title="@column.Title" Width="150px">
+                        <EditTemplate Context="editItem">
+                            @if (column.Editable && IsEditable(column.Field, fieldType))
+                            {
+                                <GameDataValueEditor Item="@editItem" Field="@column.Field" ValueType="@fieldType" />
+                            }
+                            else
+                            {
+                                @GetValue(editItem, column.Field)
+                            }
+                        </EditTemplate>
+                    </RadzenDataGridColumn>
                 }
             }
-            <GridCommandColumn Width="216px" Locked="true">
-                <GridCommandButton Command="Edit">编辑</GridCommandButton>
-                <GridCommandButton Command="Save" ShowInEdit="true" ThemeColor="@ThemeConstants.Button.ThemeColor.Primary">保存</GridCommandButton>
-                <GridCommandButton Command="Cancel" ShowInEdit="true">取消</GridCommandButton>
-                <GridCommandButton Command="Delete" ThemeColor="@ThemeConstants.Button.ThemeColor.Error">@(Relation.Aggregate ? "删除" : "解除关联")</GridCommandButton>
-            </GridCommandColumn>
-        </GridColumns>
-    </TelerikGrid>
+            <RadzenDataGridColumn TItem="object" Title="操作" Width="156px" Filterable="false" Sortable="false" Frozen="true" FrozenPosition="FrozenColumnPosition.Right">
+                <Template Context="item">
+                    <div class="grid-row-actions">
+                        <RadzenButton Icon="edit" title="编辑" Variant="Variant.Flat" ButtonStyle="ButtonStyle.Light" Size="ButtonSize.Small" Click="@(() => EditRow(item))" @onclick:stopPropagation="true" />
+                        <RadzenButton Icon="delete" title="@(Relation.Aggregate ? "删除" : "解除关联")" Variant="Variant.Flat" ButtonStyle="ButtonStyle.Danger" Size="ButtonSize.Small" Click="@(() => DeleteRow(item))" @onclick:stopPropagation="true" />
+                    </div>
+                </Template>
+                <EditTemplate Context="item">
+                    <div class="grid-row-actions">
+                        <RadzenButton Icon="check" title="保存" Variant="Variant.Flat" ButtonStyle="ButtonStyle.Success" Size="ButtonSize.Small" Click="@(() => SaveRow(item))" />
+                        <RadzenButton Icon="close" title="取消" Variant="Variant.Flat" ButtonStyle="ButtonStyle.Light" Size="ButtonSize.Small" Click="@(() => CancelRow(item))" />
+                    </div>
+                </EditTemplate>
+            </RadzenDataGridColumn>
+        </Columns>
+    </RadzenDataGrid>
 </section>
 
 @code {
@@ -56,32 +98,43 @@
     [Parameter, EditorRequired] public int ParentIndex { get; set; }
 
     private IReadOnlyList<object> Rows = [];
+    private RadzenDataGrid<object>? Grid;
     private string? Message;
     private bool HasError;
 
     protected override Task OnParametersSetAsync() => Load();
-    private object CreateModel() => Activator.CreateInstance(Relation.ItemType)!;
+    private Task AddRow() => Grid?.InsertRow(Activator.CreateInstance(Relation.ItemType)!) ?? Task.CompletedTask;
+    private Task EditRow(object item) => Grid?.EditRow(item) ?? Task.CompletedTask;
+    private Task SaveRow(object item) => Grid?.UpdateRow(item) ?? Task.CompletedTask;
+    private void CancelRow(object item) => Grid?.CancelEditRow(item);
 
-    private async Task CreateRow(GridCommandEventArgs args) => await Run(async user =>
+    private async Task CreateRow(object item) => await Run(async user =>
     {
-        await DataSession.CreateRelationAsync(Table, ParentIndex, Relation, CommandItem(args), user);
+        await DataSession.CreateRelationAsync(Table, ParentIndex, Relation, (MirDB.DBObject)item, user);
         await Load();
         Message = "子项已新增并保存。";
     });
 
-    private async Task UpdateRow(GridCommandEventArgs args) => await Run(async user =>
+    private async Task UpdateRow(object item) => await Run(async user =>
     {
-        await DataSession.UpdateRelationAsync(Table, ParentIndex, Relation, CommandItem(args), user);
+        await DataSession.UpdateRelationAsync(Table, ParentIndex, Relation, (MirDB.DBObject)item, user);
         await Load();
         Message = "子项修改已保存。";
     });
 
-    private async Task DeleteRow(GridCommandEventArgs args) => await Run(async user =>
+    private async Task DeleteRow(object item)
     {
-        await DataSession.DeleteRelationAsync(Table, ParentIndex, Relation, CommandItem(args).Index, user);
-        await Load();
-        Message = Relation.Aggregate ? "子项已删除。" : "关联已解除。";
-    });
+        string action = Relation.Aggregate ? "删除子项" : "解除关联";
+        bool? confirmed = await DialogService.Confirm($"确定要{action}吗？", action,
+            new ConfirmOptions { OkButtonText = "确定", CancelButtonText = "取消" });
+        if (confirmed != true) return;
+        await Run(async user =>
+        {
+            await DataSession.DeleteRelationAsync(Table, ParentIndex, Relation, ((MirDB.DBObject)item).Index, user);
+            await Load();
+            Message = Relation.Aggregate ? "子项已删除。" : "关联已解除。";
+        });
+    }
 
     private async Task Load() => Rows = await DataSession.ReadRelationAsync(Table, ParentIndex, Relation);
 
@@ -101,13 +154,6 @@
         }
     }
 
-    private static MirDB.DBObject CommandItem(GridCommandEventArgs args)
-    {
-        MirDB.DBObject? item = args.Items.OfType<MirDB.DBObject>().SingleOrDefault();
-#pragma warning disable CS0618 // Item remains the fallback for Telerik single-row command events.
-        return item ?? (MirDB.DBObject)args.Item;
-#pragma warning restore CS0618
-    }
     private bool IsEditable(string field, Type type) => Relation.ItemType.GetProperty(field)?.SetMethod?.IsPublic == true &&
         (typeof(MirDB.DBObject).IsAssignableFrom(type) || IsSimple(type));
     private static bool IsSimple(Type type)
@@ -120,4 +166,5 @@
         MirDB.DBObject? value = item.GetType().GetProperty(field)?.GetValue(item) as MirDB.DBObject;
         return value is null ? "—" : $"{value.Index}: {value}";
     }
+    private static string GetValue(object item, string field) => item.GetType().GetProperty(field)?.GetValue(item)?.ToString() ?? "—";
 }
