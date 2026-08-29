@@ -34,7 +34,7 @@
         <span class="status-caption">GAME SERVER STATE</span>
         <strong>@StateText</strong>
     </div>
-    <div class="pulse-track"><span></span></div>
+    <div class="pulse-track @(Snapshot.State == GameServerState.Running ? "active" : null)"><span></span></div>
     <time>@Snapshot.CapturedAt.ToString("yyyy-MM-dd HH:mm:ss")</time>
 </section>
 

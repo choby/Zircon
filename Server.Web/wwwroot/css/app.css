@@ -78,7 +78,7 @@ a { color: inherit; }
 .eyebrow { color: var(--amber); font: 600 10px var(--mono); letter-spacing: .2em; }
 .control-cluster { display: flex; gap: 10px; align-items: center; }
 
-.hero-status { position: relative; overflow: hidden; display: grid; grid-template-columns: 1fr 2fr auto; align-items: center; gap: 30px; min-height: 112px; padding: 24px 30px; border: 1px solid var(--line); background: linear-gradient(120deg, #11191c, #0d1214); }
+.hero-status { margin-top: 10px; position: relative; overflow: hidden; display: grid; grid-template-columns: 1fr 2fr auto; align-items: center; gap: 30px; min-height: 112px; padding: 24px 30px; border: 1px solid var(--line); background: linear-gradient(120deg, #11191c, #0d1214); }
 .hero-status::before { content: ''; position: absolute; inset: 0 auto 0 0; width: 4px; background: var(--muted); }
 .hero-status.running::before { background: var(--green); box-shadow: 0 0 20px var(--green); }
 .hero-status.starting::before, .hero-status.stopping::before { background: var(--amber); }
@@ -87,7 +87,9 @@ a { color: inherit; }
 .status-caption { color: var(--muted); font: 10px var(--mono); letter-spacing: .16em; }
 .hero-status time { color: #68797e; font: 11px var(--mono); }
 .pulse-track { height: 1px; background: var(--line); position: relative; }
-.pulse-track span { position: absolute; top: -3px; left: 0; width: 7px; height: 7px; background: var(--cyan); border-radius: 50%; animation: scan 4s linear infinite; }
+.pulse-track span { position: absolute; top: -3px; left: 0; width: 7px; height: 7px; background: var(--red); border-radius: 50%; }
+.pulse-track.active span { background: var(--cyan); animation: scan 4s linear infinite; }
+
 @keyframes scan { to { left: calc(100% - 7px); } }
 
 .metric-grid { display: grid; grid-template-columns: repeat(6, minmax(130px, 1fr)); gap: 12px; margin: 16px 0; }
