@@ -97,6 +97,7 @@ builder.Services.AddSingleton<GameDataSessionService>();
 builder.Services.AddSingleton<PluginRegistry>();
 builder.Services.AddHostedService(provider => provider.GetRequiredService<PluginRegistry>());
 builder.Services.AddSingleton<MapDataService>();
+builder.Services.AddSingleton<MapImageService>();
 builder.Services.AddSingleton<RuntimeDataService>();
 builder.Services.AddSingleton<OrphanDiagnosticService>();
 
@@ -160,6 +161,31 @@ app.MapGet("/health/live", () => Results.Ok(new { status = "live", time = DateTi
 
 app.MapGet("/api/maps/{fileName}", async (string fileName, MapDataService maps, CancellationToken cancellationToken) =>
     Results.Json(await maps.LoadAsync(fileName, cancellationToken))).RequireAuthorization();
+
+app.MapGet("/api/map-assets/status", (MapImageService images, HttpContext context) =>
+    {
+        context.Response.Headers.CacheControl = "no-store";
+        return Results.Json(images.GetStatus());
+    })
+    .RequireAuthorization();
+
+app.MapGet("/api/map-assets/{mapFile:int}/{imageIndex:int}",
+    (int mapFile, int imageIndex, MapImageService images, HttpContext context) =>
+    {
+        try
+        {
+            MapImageResult? image = images.GetImage(mapFile, imageIndex);
+            if (image is null) return Results.NotFound();
+            context.Response.Headers.ETag = image.ETag;
+            context.Response.Headers.CacheControl = "private,max-age=31536000,immutable";
+            context.Response.Headers["X-Map-Asset-Decoder"] = MapImageService.DecoderVersion;
+            return Results.File(image.Content, "image/png");
+        }
+        catch (Exception ex)
+        {
+            return Results.Problem($"地图贴图解码失败：{ex.Message}");
+        }
+    }).RequireAuthorization();
 
 app.MapGet("/plugin-assets/{pluginId}/{**assetPath}", (string pluginId, string assetPath, PluginRegistry plugins) =>
 {

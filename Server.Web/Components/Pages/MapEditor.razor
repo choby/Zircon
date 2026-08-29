@@ -59,13 +59,22 @@
     private async Task RegionChanged(ChangeEventArgs args)
     {
         if (!int.TryParse(args.Value?.ToString(), out int index)) return;
-        SelectedRegion = Regions.Single(region => region.Index == index);
-        Module ??= await JS.InvokeAsync<IJSObjectReference>("import", "./js/map-editor.js");
-        if (Editor is not null) await Editor.DisposeAsync();
-        Callback?.Dispose();
-        Callback = DotNetObjectReference.Create(this);
-        Editor = await Module.InvokeAsync<IJSObjectReference>("createMapEditor", Viewport, SelectedRegion.MapFileName, SelectedRegion.Index, SelectedRegion.ETag, Callback);
-        Message = null;
+        try
+        {
+            SelectedRegion = Regions.Single(region => region.Index == index);
+            Module ??= await JS.InvokeAsync<IJSObjectReference>("import", "./js/map-editor.js");
+            if (Editor is not null) await Editor.DisposeAsync();
+            Callback?.Dispose();
+            Callback = DotNetObjectReference.Create(this);
+            HasError = false;
+            Message = null;
+            Editor = await Module.InvokeAsync<IJSObjectReference>("createMapEditor", Viewport, SelectedRegion.MapFileName, SelectedRegion.Index, SelectedRegion.ETag, Callback);
+        }
+        catch (Exception ex)
+        {
+            HasError = true;
+            Message = $"地图加载失败：{ex.Message}";
+        }
     }
 
     [JSInvokable]
@@ -73,6 +82,15 @@
     {
         CursorText = $"{x}, {y}";
         SelectedCount = selected;
+        StateHasChanged();
+        return Task.CompletedTask;
+    }
+
+    [JSInvokable]
+    public Task ReportMapWarning(string message)
+    {
+        HasError = true;
+        Message = message;
         StateHasChanged();
         return Task.CompletedTask;
     }
