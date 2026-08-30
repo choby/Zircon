@@ -21,9 +21,7 @@ namespace MirDB
         public const string SystemDatabaseInfoName = "System";
         private static readonly Regex SystemVersionRegex = new Regex(@"^(?<year>\d{4})\.(?<month>\d{2})\.(?<day>\d{2})\.(?<count>\d+)$", RegexOptions.Compiled);
 
-        public static string ExecutionRoot => AppDomain.CurrentDomain.BaseDirectory;
-        public static string DefaultBackupRoot => Path.Combine(ExecutionRoot, "Backup");
-
+       
         public string Root { get; }
         public SessionMode Mode { get; }
 
@@ -75,11 +73,10 @@ namespace MirDB
             BackupRoot = PlatformPath.Resolve(args["BACKUP"]);
             Mode = mode;
         }
-
-        public Session(SessionMode mode, string root = null, string backup = null)
+        public Session(SessionMode mode, string root = @".\Database\", string backup = @".\Backup\")
         {
-            Root = PlatformPath.Resolve(string.IsNullOrWhiteSpace(root) ? ExecutionRoot : root);
-            BackupRoot = PlatformPath.Resolve(string.IsNullOrWhiteSpace(backup) ? DefaultBackupRoot : backup);
+            Root = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, root));
+            BackupRoot = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, backup));
 
             Mode = mode;
         }

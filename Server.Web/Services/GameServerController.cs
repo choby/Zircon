@@ -93,8 +93,7 @@ public sealed class GameServerController(ILogger<GameServerController> logger)
         ValidatePort(address, Config.Port, "游戏端口");
         ValidatePort(address, Config.UserCountPort, "用户统计端口");
 
-        string database = Path.Combine(MirDB.Session.ExecutionRoot, "System.db");
-        if (!File.Exists(database)) throw new FileNotFoundException("找不到 System.db。", database);
+       
         if (!Directory.Exists(Library.PlatformPath.Resolve(Config.MapPath)))
             Directory.CreateDirectory(Library.PlatformPath.Resolve(Config.MapPath));
     }
