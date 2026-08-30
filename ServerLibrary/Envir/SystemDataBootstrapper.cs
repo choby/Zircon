@@ -22,9 +22,10 @@ public static class SystemDataBootstrapper
         DBCollection<ItemInfo> items = session.GetCollection<ItemInfo>();
         DBCollection<CurrencyInfo> currencies = session.GetCollection<CurrencyInfo>();
 
-        ItemInfo EnsureCurrencyItem(string name, int image, bool canDrop)
+        ItemInfo EnsureCurrencyItem(CurrencyType currencyType, string name, int image, bool canDrop)
         {
-            ItemInfo item = items.Binding.FirstOrDefault(value => value.ItemName == name);
+            ItemInfo item = currencies.Binding.FirstOrDefault(value => value.Type == currencyType)?.DropItem
+                            ?? items.Binding.FirstOrDefault(value => value.ItemName == name);
             if (item is null)
             {
                 item = items.CreateNewObject();
@@ -55,7 +56,7 @@ public static class SystemDataBootstrapper
             return currency;
         }
 
-        ItemInfo goldItem = EnsureCurrencyItem("Gold", 121, true);
+        ItemInfo goldItem = EnsureCurrencyItem(CurrencyType.Gold, "Gold", 121, true);
         CurrencyInfo gold = EnsureCurrency(CurrencyType.Gold, "Gold", "Gold", CurrencyCategory.Basic, goldItem);
         if (gold.Images.Count == 0)
         {
@@ -73,9 +74,9 @@ public static class SystemDataBootstrapper
         EnsureCurrency(CurrencyType.GameGold, "Game Gold", "GG", CurrencyCategory.Other);
         EnsureCurrency(CurrencyType.HuntGold, "Hunt Gold", "HG", CurrencyCategory.Other);
         EnsureCurrency(CurrencyType.FP, "Fame Point", "FP", CurrencyCategory.Player,
-            EnsureCurrencyItem("Fame Point", 4010, false));
+            EnsureCurrencyItem(CurrencyType.FP, "Fame Point", 4010, false));
         EnsureCurrency(CurrencyType.CP, "Contribution Point", "CP", CurrencyCategory.Player,
-            EnsureCurrencyItem("Contribution Point", 4012, false));
+            EnsureCurrencyItem(CurrencyType.CP, "Contribution Point", 4012, false));
 
         foreach (CurrencyInfo currency in currencies.Binding)
             if (currency.DropItem is not null && currency.DropItem.ItemType != ItemType.Currency)

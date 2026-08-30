@@ -13,7 +13,17 @@
      --output /path/to/translation-work
    ```
 
-3. 将 `AI_INSTRUCTIONS.md` 和 `translations.json` 交给 AI。AI 只能填写 `entries[].translation`。
+3. 可将 `AI_INSTRUCTIONS.md` 和 `translations.json` 交给 AI，或直接调用远程 Codex 大模型。远程命令按唯一原文分批翻译、校验 ID 与格式约束，并在每批后断点保存：
+
+   ```bash
+   dotnet run --project GameData.AiTranslation -- translate-remote \
+     --database /path/to/database \
+     --input /path/to/translation-work/translations.json \
+     --model gpt-5.6-sol
+   ```
+
+   增加 `--overwrite` 可清空已有译文后从头翻译；`--batch-chars` 可调整每批字符预算。无论采用哪种方式，AI 都只能填写 `entries[].translation`。
+
 4. 在不修改数据库的情况下预演：
 
    ```bash
@@ -30,7 +40,7 @@
      --input /path/to/translation-work/translations.json
    ```
 
-数据库加密时，三个命令都应增加 `--key <32字节密钥的Base64文本>`。
+数据库加密时，`export`、`validate` 和 `import` 命令都应增加 `--key <32字节密钥的Base64文本>`。
 
 如果导出后数据库存在确认无关的修改，可增加 `--allow-database-changes` 跳过整库 SHA-256 比较；工具仍会逐条校验原文、对象 Index 和保护哈希。
 
