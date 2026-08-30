@@ -33,7 +33,7 @@ namespace Server.Views
 
             #region Gold
             var gold = SMain.Session.GetCollection<CurrencyInfo>().Binding.FirstOrDefault(x => x.Type == CurrencyType.Gold);
-            var goldItem = SMain.Session.GetCollection<ItemInfo>().Binding.FirstOrDefault(x => x.ItemName == "Gold");
+            var goldItem = gold?.DropItem ?? SMain.Session.GetCollection<ItemInfo>().Binding.FirstOrDefault(x => x.ItemName == "Gold");
 
             if (goldItem == null)
             {
@@ -154,7 +154,7 @@ namespace Server.Views
 
             #region FamePoint
             var fp = SMain.Session.GetCollection<CurrencyInfo>().Binding.FirstOrDefault(x => x.Type == CurrencyType.FP);
-            var fpItem = SMain.Session.GetCollection<ItemInfo>().Binding.FirstOrDefault(x => x.ItemName == "Fame Point");
+            var fpItem = fp?.DropItem ?? SMain.Session.GetCollection<ItemInfo>().Binding.FirstOrDefault(x => x.ItemName == "Fame Point");
 
             if (fpItem == null)
             {
@@ -181,7 +181,7 @@ namespace Server.Views
 
             #region ContributionPoint
             var cp = SMain.Session.GetCollection<CurrencyInfo>().Binding.FirstOrDefault(x => x.Type == CurrencyType.CP);
-            var cpItem = SMain.Session.GetCollection<ItemInfo>().Binding.FirstOrDefault(x => x.ItemName == "Contribution Point");
+            var cpItem = cp?.DropItem ?? SMain.Session.GetCollection<ItemInfo>().Binding.FirstOrDefault(x => x.ItemName == "Contribution Point");
 
             if (cpItem == null)
             {
