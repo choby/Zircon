@@ -58,7 +58,8 @@
                 bool isEnum = (Nullable.GetUnderlyingType(fieldType) ?? fieldType).IsEnum;
                 @if (isReference)
                 {
-                    <RadzenDataGridColumn TItem="object" Property="@column.Field" Type="@fieldType" Title="@column.Title" Width="220px">
+                    <RadzenDataGridColumn TItem="object" Property="@column.Field" Type="@fieldType" Title="@column.Title" Width="220px"
+                                          SortComparer="@GameDataReferenceComparer.Instance" Filterable="false">
                         <Template Context="cell">@FormatReference(cell, column.Field)</Template>
                         <EditTemplate Context="editItem">
                             @if (column.Editable && IsEditable(column.Field, fieldType))

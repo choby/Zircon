@@ -113,7 +113,8 @@
                 bool isEnum = (Nullable.GetUnderlyingType(fieldType) ?? fieldType).IsEnum;
                 @if (isReference)
                 {
-                    <RadzenDataGridColumn TItem="object" Property="@column.Field" Type="@fieldType" Title="@column.Title" Width="@ColumnWidth(column, fieldType)">
+                    <RadzenDataGridColumn TItem="object" Property="@column.Field" Type="@fieldType" Title="@column.Title" Width="@ColumnWidth(column, fieldType)"
+                                          SortComparer="@GameDataReferenceComparer.Instance" Filterable="false">
                         <Template Context="cell">
                             @FormatReference(cell, column.Field)
                         </Template>
