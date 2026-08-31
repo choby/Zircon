@@ -11,3 +11,4 @@ packages/
 /milestones
 **/node_modules/
 .DS_Store
+/tmp
