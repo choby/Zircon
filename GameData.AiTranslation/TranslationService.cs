@@ -349,7 +349,7 @@ internal sealed class TranslationService
             QuestTask value => $"任务={value.Quest?.QuestName ?? "未设置"}; 类型={value.Task}",
             MapRegion value => $"地图={value.Map?.Description ?? "未设置"}",
             StoreInfo value => $"商城物品={value.Item?.ItemName ?? "未设置"}",
-            CompanionSpeech value => $"伙伴={value.Companion?.Description ?? "未设置"}; 动作={value.Action}",
+            CompanionSpeech value => $"宠物={value.Companion?.Description ?? "未设置"}; 动作={value.Action}",
             BaseEventAction value => $"事件动作={value.Type}",
             _ => item.ToString() ?? item.GetType().Name
         };

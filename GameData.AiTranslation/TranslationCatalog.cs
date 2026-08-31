@@ -31,8 +31,8 @@ internal static class TranslationCatalog
     [
         Name<BundleInfo>(nameof(BundleInfo.Description), "礼包显示说明"),
         Name<CastleInfo>(nameof(CastleInfo.Name), "城堡名称"),
-        Text<CompanionInfo>(nameof(CompanionInfo.Description), "伙伴说明"),
-        Text<CompanionSpeech>(nameof(CompanionSpeech.Speech), "伙伴台词"),
+        Text<CompanionInfo>(nameof(CompanionInfo.Description), "宠物说明"),
+        Text<CompanionSpeech>(nameof(CompanionSpeech.Speech), "宠物台词"),
         Name<CurrencyInfo>(nameof(CurrencyInfo.Name), "货币显示名称", "导入时会同步更新 NPC 货币动作和检查中的名称引用。"),
         Name<CurrencyInfo>(nameof(CurrencyInfo.Abbreviation), "货币简称"),
         Name<DungeonInfo>(nameof(DungeonInfo.Name), "地牢名称"),

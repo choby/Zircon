@@ -22,7 +22,7 @@ public sealed class GameDataViewCatalog
                 "Name", "Shape", "Description", "Cost", "Order", "Stat", "Amount", "Item"),
             View<DisciplineInfo>("disciplines", "/data/disciplines", "修炼数据", "DisciplineInfoView", "成长", "修炼等级、经验、金币与专注点要求。",
                 "Level", "RequiredLevel", "RequiredExperience", "RequiredGold", "FocusPoints"),
-            View<CompanionInfo>("companions", "/data/companions", "伙伴数据", "CompanionInfoView", "成长", "伙伴信息、对白、等级与技能。",
+            View<CompanionInfo>("companions", "/data/companions", "宠物数据", "CompanionInfoView", "成长", "宠物信息、对白、等级与技能。",
                 "MonsterInfo", "Price", "Available", "UnlockItem", "Currency", "Description", "Speech"),
             View<CurrencyInfo>("currencies", "/data/currencies", "货币数据", "CurrencyInfoView", "成长", "货币、掉落物品、兑换率与图像。",
                 "Name", "Abbreviation", "Type", "DropItem", "ExchangeRate", "Category", "Image", "Amount"),
