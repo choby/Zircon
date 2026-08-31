@@ -9,9 +9,9 @@
 <div class="login-page">
     <div class="login-grid"></div>
     <section class="login-card">
-        <div class="login-kicker">CONTROL PLANE / AUTHORIZATION</div>
+        <div class="login-kicker">服务器控制台 / 身份验证</div>
         <h1>进入服务器控制平面</h1>
-        <p>使用 Server.ini 中配置的管理员账号与 MasterPassword。</p>
+        <p>使用 Server.ini 中配置的管理员账号与主密码。</p>
 
         @if (HasError)
         {
@@ -25,7 +25,7 @@
                 <input name="username" autocomplete="username" required autofocus />
             </label>
             <label>
-                <span>MasterPassword</span>
+                <span>主密码</span>
                 <input name="password" type="password" autocomplete="current-password" required />
             </label>
             <button type="submit" class="primary-action">验证并进入</button>

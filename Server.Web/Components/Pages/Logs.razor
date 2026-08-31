@@ -7,7 +7,7 @@
 
 <div class="page-heading compact">
     <div>
-        <span class="eyebrow">运行 / @Kind.ToUpperInvariant()</span>
+        <span class="eyebrow">运行 / @KindText</span>
         <h1>@Title</h1>
         <p>最近的服务器输出，自动滚动缓冲但不会影响持久日志。</p>
     </div>
@@ -30,6 +30,7 @@
     private readonly CancellationTokenSource _cts = new();
     private IReadOnlyList<string> Entries => Kind == "chat" ? LogBuffer.GetChatLogs() : LogBuffer.GetSystemLogs();
     private string Title => Kind == "chat" ? "聊天日志" : "系统日志";
+    private string KindText => Kind == "chat" ? "聊天" : "系统";
 
     protected override void OnInitialized() => _ = RefreshLoop();
 

@@ -8,9 +8,9 @@
 
 <div class="page-heading compact map-heading">
     <div>
-        <span class="eyebrow">MAP REGION / WEBGL</span>
+        <span class="eyebrow">地图区域 / WebGL 编辑器</span>
         <h1>地图区域编辑</h1>
-        <p>左键添加、右键移除、中键连通填充；保存只更新 MapRegion，不改写 .map。</p>
+        <p>左键添加、右键移除、中键连通填充；保存只更新地图区域数据，不改写 .map 文件。</p>
     </div>
     <div class="map-readout"><span>位置</span><strong>@CursorText</strong><span>已选</span><strong>@SelectedCount</strong></div>
 </div>
@@ -40,7 +40,7 @@
 
 
 <div class="map-viewport" @ref="Viewport">
-    @if (SelectedRegion is null) { <div class="map-placeholder"><span>MAP CHANNEL IDLE</span><p>选择一个地图区域以加载 WebGL 编辑器。</p></div> }
+    @if (SelectedRegion is null) { <div class="map-placeholder"><span>等待选择地图区域</span><p>选择一个地图区域以加载 WebGL 编辑器。</p></div> }
 </div>
 
 @code {

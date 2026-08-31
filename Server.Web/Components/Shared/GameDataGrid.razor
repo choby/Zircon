@@ -11,7 +11,7 @@
 
 <div class="page-heading compact game-data-heading">
     <div>
-        <span class="eyebrow">游戏数据 / @View.Category.ToUpperInvariant()</span>
+        <span class="eyebrow">游戏数据 / @View.Category</span>
         <h1>@View.Title</h1>
         <p>@View.Description</p>
     </div>
@@ -40,7 +40,16 @@
                     EditMode="DataGridEditMode.Single" RowCreate="CreateRow" RowUpdate="UpdateRow"
                     RowRender="RenderRow"
                     Density="Density.Compact" EmptyText="暂无数据" SelectionMode="DataGridSelectionMode.Multiple"
-                    ShowPagingSummary="true" PagerHorizontalAlign="HorizontalAlign.Left" PagerInputSize="InputSize.Small">
+                    ShowPagingSummary="true" PagingSummaryFormat="第 {0}–{1} 条，共 {2} 条"
+                    FilterText="筛选" ApplyFilterText="应用" ClearFilterText="清除" AndOperatorText="并且" OrOperatorText="或者"
+                    EqualsText="等于" NotEqualsText="不等于" LessThanText="小于" LessThanOrEqualsText="小于或等于"
+                    GreaterThanText="大于" GreaterThanOrEqualsText="大于或等于" ContainsText="包含"
+                    DoesNotContainText="不包含" StartsWithText="开头是" EndsWithText="结尾是"
+                    IsNullText="为空" IsNotNullText="不为空" IsEmptyText="空字符串" IsNotEmptyText="非空字符串"
+                    FirstPageTitle="首页" FirstPageAriaLabel="转到首页" PrevPageTitle="上一页" PrevPageAriaLabel="转到上一页"
+                    NextPageTitle="下一页" NextPageAriaLabel="转到下一页" LastPageTitle="末页" LastPageAriaLabel="转到末页"
+                    PageTitleFormat="第 {0} 页" PageAriaLabelFormat="转到第 {0} 页"
+                    PagerHorizontalAlign="HorizontalAlign.Left" PagerInputSize="InputSize.Small">
         <Template Context="parent">
             @if (Table.Relations.Count > 0 && parent is MirDB.DBObject parentObject)
             {
@@ -87,7 +96,7 @@
         <Columns>
             <RadzenDataGridColumn TItem="object" Width="40px" Reorderable="false" Filterable="false" Sortable="false" Frozen="true">
                 <HeaderTemplate>
-                    <RadzenCheckBox TabIndex="-1" TriState="false" TValue="bool?" InputAttributes="@(new Dictionary<string,object>(){ { "aria-label", "Select all items" }})"
+                    <RadzenCheckBox TabIndex="-1" TriState="false" TValue="bool?" InputAttributes="@(new Dictionary<string,object>(){ { "aria-label", "选择全部记录" }})"
                                     Value="@(SelectedItems.Any() != true ? false : !Rows.All(i => SelectedItems.Contains(i)) ? null : Rows.Any(i => SelectedItems.Contains(i)))"
                                     Change="@(args => SelectedItems = args == true ? Rows.ToList() : [])" />
                 </HeaderTemplate>
@@ -124,6 +133,7 @@
                 {
                     Type enumType = Nullable.GetUnderlyingType(fieldType) ?? fieldType;
                     <RadzenDataGridColumn TItem="object" Property="@column.Field" Type="@fieldType" Title="@column.Title" Width="@ColumnWidth(column, fieldType)" Filterable="false">
+                        <Template Context="cell">@GetDisplayValue(cell, column.Field)</Template>
                         <EditTemplate Context="editItem">
                             @if (column.Editable && IsEditable(column.Field, fieldType))
                             {
@@ -131,7 +141,7 @@
                             }
                             else
                             {
-                                @GetValue(editItem, column.Field)
+                                @GetDisplayValue(editItem, column.Field)
                             }
                         </EditTemplate>
                     </RadzenDataGridColumn>
@@ -139,6 +149,7 @@
                 else
                 {
                     <RadzenDataGridColumn TItem="object" Property="@column.Field" Type="@fieldType" Title="@column.Title" Width="@ColumnWidth(column, fieldType)">
+                        <Template Context="cell">@GetDisplayValue(cell, column.Field)</Template>
                         <EditTemplate Context="editItem">
                             @if (column.Editable && IsEditable(column.Field, fieldType))
                             {
@@ -146,7 +157,7 @@
                             }
                             else
                             {
-                                @GetValue(editItem, column.Field)
+                                @GetDisplayValue(editItem, column.Field)
                             }
                         </EditTemplate>
                     </RadzenDataGridColumn>
@@ -182,7 +193,7 @@
     private string? Message;
     private bool HasError;
     private IJSObjectReference? DownloadModule;
-    private string LegacyViewName => View.Description.Split("Windows 端 ", StringSplitOptions.None).ElementAtOrDefault(1)?.TrimEnd('。') ?? View.Title;
+    private string LegacyViewName => View.Title;
 
     protected override async Task OnParametersSetAsync()
     {
@@ -346,7 +357,7 @@
         return value is null ? "—" : $"{value.Index}: {value}";
     }
 
-    private static string GetValue(object item, string field) => item.GetType().GetProperty(field)?.GetValue(item)?.ToString() ?? "—";
+    private static string GetDisplayValue(object item, string field) => UiText.Value(item.GetType().GetProperty(field)?.GetValue(item));
 
     public async ValueTask DisposeAsync()
     {

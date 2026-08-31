@@ -1,7 +1,7 @@
 <select class="game-data-enum" value="@Current" @onchange="Change">
     @foreach (string option in Enum.GetNames(EnumType))
     {
-        <option value="@option">@option</option>
+        <option value="@option">@UiText.EnumValue(EnumType, option)</option>
     }
 </select>
 
@@ -19,4 +19,3 @@
         if (!string.IsNullOrWhiteSpace(value)) Property.SetValue(Item, Enum.Parse(EnumType, value));
     }
 }
-

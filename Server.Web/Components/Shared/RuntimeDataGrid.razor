@@ -7,11 +7,11 @@
 
 <div class="page-heading compact game-data-heading">
     <div>
-        <span class="eyebrow">USERS.DB / LIVE SNAPSHOT</span>
+        <span class="eyebrow">用户数据库 / 实时快照</span>
         <h1>@Definition.DisplayName</h1>
         <p>通过游戏线程读取并受控修改运行时数据；敏感认证字段不会返回浏览器。</p>
     </div>
-    <div class="view-origin"><span>原管理界面</span><strong>@Definition.LegacyView</strong></div>
+    <div class="view-origin"><span>原管理界面</span><strong>@Definition.DisplayName</strong></div>
 </div>
 
 @if (GameServer.State != GameServerState.Running)
@@ -31,7 +31,10 @@ else
                             AllowFiltering="true" FilterMode="FilterMode.Simple" AllowColumnResize="true" AllowColumnReorder="true"
                             SelectionMode="DataGridSelectionMode.Single" AllowRowSelectOnRowClick="true" Value="@SelectedItems" Change="SelectionChanged"
                             Density="Density.Compact" Class="legacy-data-grid runtime-radzen-grid" EmptyText="暂无运行时数据"
-                            ShowPagingSummary="true" PagingSummaryFormat="第 {0}–{1} 条，共 {2} 条">
+                            ShowPagingSummary="true" PagingSummaryFormat="第 {0}–{1} 条，共 {2} 条" FilterText="筛选"
+                            FirstPageTitle="首页" FirstPageAriaLabel="转到首页" PrevPageTitle="上一页" PrevPageAriaLabel="转到上一页"
+                            NextPageTitle="下一页" NextPageAriaLabel="转到下一页" LastPageTitle="末页" LastPageAriaLabel="转到末页"
+                            PageTitleFormat="第 {0} 页" PageAriaLabelFormat="转到第 {0} 页">
                 <HeaderTemplate>
                     <div class="radzen-grid-toolbar"><RadzenButton Text="刷新快照" Icon="refresh" ButtonStyle="ButtonStyle.Light" Click="Load" /></div>
                 </HeaderTemplate>
@@ -50,7 +53,7 @@ else
         <aside class="editor-panel runtime-editor">
             @if (SelectedRow is null)
             {
-                <div class="editor-empty"><span>SELECT ROW</span><p>选择一行以查看和编辑允许的字段。</p></div>
+                <div class="editor-empty"><span>选择一行</span><p>选择一行以查看和编辑允许的字段。</p></div>
             }
             else
             {
@@ -58,10 +61,33 @@ else
                 <div class="editor-fields">
                     @foreach (RuntimeColumnDefinition column in Definition.Columns)
                     {
+                        object? sourceValue = SelectedRow.Values.GetValueOrDefault(column.Field);
                         <label>
                             <span>@column.Title @if (!column.Editable) { <em>只读</em> }</span>
-                            <input value="@EditValues.GetValueOrDefault(column.Field)" disabled="@(!column.Editable)"
-                                   @onchange="args => EditValues[column.Field] = args.Value?.ToString()" />
+                            @if (sourceValue?.GetType().IsEnum == true)
+                            {
+                                Type enumType = sourceValue.GetType();
+                                <select value="@EditValues.GetValueOrDefault(column.Field)" disabled="@(!column.Editable)"
+                                        @onchange="args => EditValues[column.Field] = args.Value?.ToString()">
+                                    @foreach (string option in Enum.GetNames(enumType))
+                                    {
+                                        <option value="@option">@UiText.EnumValue(enumType, option)</option>
+                                    }
+                                </select>
+                            }
+                            else if (sourceValue is bool)
+                            {
+                                <select value="@EditValues.GetValueOrDefault(column.Field)" disabled="@(!column.Editable)"
+                                        @onchange="args => EditValues[column.Field] = args.Value?.ToString()">
+                                    <option value="True">是</option>
+                                    <option value="False">否</option>
+                                </select>
+                            }
+                            else
+                            {
+                                <input value="@EditValues.GetValueOrDefault(column.Field)" disabled="@(!column.Editable)"
+                                       @onchange="args => EditValues[column.Field] = args.Value?.ToString()" />
+                            }
                         </label>
                     }
                 </div>
@@ -119,5 +145,5 @@ else
         }
     }
 
-    private static string Format(RuntimeDataRow row, string field) => row.Values.GetValueOrDefault(field)?.ToString() ?? "—";
+    private static string Format(RuntimeDataRow row, string field) => UiText.Value(row.Values.GetValueOrDefault(field));
 }

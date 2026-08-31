@@ -4,17 +4,24 @@
 
 <PageTitle>审计记录 · Zircon</PageTitle>
 
-<div class="page-heading compact"><div><span class="eyebrow">SECURITY / AUDIT</span><h1>管理操作审计</h1><p>落盘保存并显示最近 2,000 条安全与写操作记录。</p></div></div>
+<div class="page-heading compact"><div><span class="eyebrow">安全 / 审计</span><h1>管理操作审计</h1><p>落盘保存并显示最近 2,000 条安全与写操作记录。</p></div></div>
 
 <section class="legacy-grid-shell">
     <RadzenDataGrid Data="@AuditService.GetEntries()" TItem="AdminAuditEntry" AllowPaging="true" PageSize="50"
                     AllowSorting="true" AllowColumnResize="true" Density="Density.Compact" Class="legacy-data-grid audit-grid"
-                    EmptyText="暂无审计记录" PagingSummaryFormat="第 {0}–{1} 条，共 {2} 条">
+                    EmptyText="暂无审计记录" PagingSummaryFormat="第 {0}–{1} 条，共 {2} 条"
+                    FirstPageTitle="首页" FirstPageAriaLabel="转到首页" PrevPageTitle="上一页" PrevPageAriaLabel="转到上一页"
+                    NextPageTitle="下一页" NextPageAriaLabel="转到下一页" LastPageTitle="末页" LastPageAriaLabel="转到末页"
+                    PageTitleFormat="第 {0} 页" PageAriaLabelFormat="转到第 {0} 页">
         <Columns>
             <RadzenDataGridColumn TItem="AdminAuditEntry" Property="Timestamp" Title="时间" Width="190px" Frozen="true" />
             <RadzenDataGridColumn TItem="AdminAuditEntry" Property="User" Title="管理员" Width="130px" />
-            <RadzenDataGridColumn TItem="AdminAuditEntry" Property="Action" Title="操作" Width="220px" />
-            <RadzenDataGridColumn TItem="AdminAuditEntry" Property="Detail" Title="详情" />
+            <RadzenDataGridColumn TItem="AdminAuditEntry" Property="Action" Title="操作" Width="220px">
+                <Template Context="entry">@UiText.AuditAction(entry.Action)</Template>
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="AdminAuditEntry" Property="Detail" Title="详情">
+                <Template Context="entry">@UiText.AuditDetail(entry.Detail)</Template>
+            </RadzenDataGridColumn>
             <RadzenDataGridColumn TItem="AdminAuditEntry" Property="Address" Title="来源" Width="150px" />
         </Columns>
     </RadzenDataGrid>

@@ -9,7 +9,15 @@
                     AllowColumnResize="true" AllowColumnReorder="true" EditMode="DataGridEditMode.Single"
                     RowCreate="CreateRow" RowUpdate="UpdateRow" RowRender="RenderRow" Density="Density.Compact"
                     Class="legacy-data-grid relation-radzen-grid" EmptyText="暂无关联数据"
-                    ShowPagingSummary="true" PagingSummaryFormat="第 {0}–{1} 条，共 {2} 条">
+                    ShowPagingSummary="true" PagingSummaryFormat="第 {0}–{1} 条，共 {2} 条"
+                    FilterText="筛选" ApplyFilterText="应用" ClearFilterText="清除" AndOperatorText="并且" OrOperatorText="或者"
+                    EqualsText="等于" NotEqualsText="不等于" LessThanText="小于" LessThanOrEqualsText="小于或等于"
+                    GreaterThanText="大于" GreaterThanOrEqualsText="大于或等于" ContainsText="包含"
+                    DoesNotContainText="不包含" StartsWithText="开头是" EndsWithText="结尾是"
+                    IsNullText="为空" IsNotNullText="不为空" IsEmptyText="空字符串" IsNotEmptyText="非空字符串"
+                    FirstPageTitle="首页" FirstPageAriaLabel="转到首页" PrevPageTitle="上一页" PrevPageAriaLabel="转到上一页"
+                    NextPageTitle="下一页" NextPageAriaLabel="转到下一页" LastPageTitle="末页" LastPageAriaLabel="转到末页"
+                    PageTitleFormat="第 {0} 页" PageAriaLabelFormat="转到第 {0} 页">
         <Template Context="child">
             @if (Relation.Relations.Count > 0 && child is MirDB.DBObject childObject)
             {
@@ -69,6 +77,7 @@
                 {
                     Type enumType = Nullable.GetUnderlyingType(fieldType) ?? fieldType;
                     <RadzenDataGridColumn TItem="object" Property="@column.Field" Type="@fieldType" Title="@column.Title" Width="150px" Filterable="false">
+                        <Template Context="cell">@GetDisplayValue(cell, column.Field)</Template>
                         <EditTemplate Context="editItem">
                             @if (column.Editable && IsEditable(column.Field, fieldType))
                             {
@@ -76,7 +85,7 @@
                             }
                             else
                             {
-                                @GetValue(editItem, column.Field)
+                                @GetDisplayValue(editItem, column.Field)
                             }
                         </EditTemplate>
                     </RadzenDataGridColumn>
@@ -84,6 +93,7 @@
                 else
                 {
                     <RadzenDataGridColumn TItem="object" Property="@column.Field" Type="@fieldType" Title="@column.Title" Width="150px">
+                        <Template Context="cell">@GetDisplayValue(cell, column.Field)</Template>
                         <EditTemplate Context="editItem">
                             @if (column.Editable && IsEditable(column.Field, fieldType))
                             {
@@ -91,7 +101,7 @@
                             }
                             else
                             {
-                                @GetValue(editItem, column.Field)
+                                @GetDisplayValue(editItem, column.Field)
                             }
                         </EditTemplate>
                     </RadzenDataGridColumn>
@@ -190,5 +200,5 @@
         MirDB.DBObject? value = item.GetType().GetProperty(field)?.GetValue(item) as MirDB.DBObject;
         return value is null ? "—" : $"{value.Index}: {value}";
     }
-    private static string GetValue(object item, string field) => item.GetType().GetProperty(field)?.GetValue(item)?.ToString() ?? "—";
+    private static string GetDisplayValue(object item, string field) => UiText.Value(item.GetType().GetProperty(field)?.GetValue(item));
 }

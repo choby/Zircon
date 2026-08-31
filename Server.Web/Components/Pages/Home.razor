@@ -10,7 +10,7 @@
 
 <div class="page-heading compact">
     <div>
-        <span class="eyebrow">运行 / LIVE OPERATIONS</span>
+        <span class="eyebrow">运行 / 实时运维</span>
         <h1>服务器总览</h1>
         <p>游戏循环与网络状态的只读快照，每秒刷新。</p>
     </div>
@@ -31,7 +31,7 @@
 
 <section class="hero-status @StateClass">
     <div>
-        <span class="status-caption">GAME SERVER STATE</span>
+        <span class="status-caption">游戏服务器状态</span>
         <strong>@StateText</strong>
     </div>
     <div class="pulse-track @(Snapshot.State == GameServerState.Running ? "active" : null)"><span></span></div>
@@ -39,19 +39,19 @@
 </section>
 
 <section class="metric-grid">
-    <MetricCard Label="连接" Value="@Snapshot.Connections.ToString("N0")" Unit="clients" Accent="cyan" />
-    <MetricCard Label="活动对象" Value="@Snapshot.ActiveObjects.ToString("N0")" Unit="active" Accent="amber" />
-    <MetricCard Label="对象总数" Value="@Snapshot.Objects.ToString("N0")" Unit="objects" />
-    <MetricCard Label="每秒循环" Value="@Snapshot.LoopCount.ToString("N0")" Unit="loops" Accent="cyan" />
-    <MetricCard Label="处理对象" Value="@Snapshot.ProcessedObjects.ToString("N0")" Unit="processed" />
-    <MetricCard Label="已发送邮件" Value="@Snapshot.EmailsSent.ToString("N0")" Unit="messages" />
+    <MetricCard Label="连接" Value="@Snapshot.Connections.ToString("N0")" Unit="个客户端" Accent="cyan" />
+    <MetricCard Label="活动对象" Value="@Snapshot.ActiveObjects.ToString("N0")" Unit="个活动对象" Accent="amber" />
+    <MetricCard Label="对象总数" Value="@Snapshot.Objects.ToString("N0")" Unit="个对象" />
+    <MetricCard Label="每秒循环" Value="@Snapshot.LoopCount.ToString("N0")" Unit="次循环" Accent="cyan" />
+    <MetricCard Label="处理对象" Value="@Snapshot.ProcessedObjects.ToString("N0")" Unit="个已处理" />
+    <MetricCard Label="已发送邮件" Value="@Snapshot.EmailsSent.ToString("N0")" Unit="封邮件" />
 </section>
 
 <section class="data-strip">
     <div><span>下载总量</span><strong>@FormatBytes(Snapshot.TotalBytesReceived)</strong><small>@FormatRate(Snapshot.DownloadSpeed)</small></div>
     <div><span>上传总量</span><strong>@FormatBytes(Snapshot.TotalBytesSent)</strong><small>@FormatRate(Snapshot.UploadSpeed)</small></div>
-    <div><span>连接延迟</span><strong>@Snapshot.ConnectionDelayMilliseconds ms</strong><small>network</small></div>
-    <div><span>保存延迟</span><strong>@Snapshot.SaveDelayMilliseconds ms</strong><small>database</small></div>
+    <div><span>连接延迟</span><strong>@Snapshot.ConnectionDelayMilliseconds 毫秒</strong><small>网络</small></div>
+    <div><span>保存延迟</span><strong>@Snapshot.SaveDelayMilliseconds 毫秒</strong><small>数据库</small></div>
 </section>
 
 @code {

@@ -38,7 +38,7 @@ public sealed class ConfigurationService(AdminAuditService audit, IGameServerCon
                 if (section is not null)
                 {
                     if (currentSection is not null)
-                        sections.Add(new ConfigurationSectionModel(currentSection, fields.ToArray()));
+                        sections.Add(new ConfigurationSectionModel(currentSection, UiText.ConfigSection(currentSection), fields.ToArray()));
                     currentSection = section.Section;
                     fields = [];
                 }
@@ -51,7 +51,7 @@ public sealed class ConfigurationService(AdminAuditService audit, IGameServerCon
                 fields.Add(new ConfigurationField(
                     currentSection,
                     property.Name,
-                    property.Name,
+                    UiText.ConfigField(property.Name),
                     property.PropertyType,
                     secret ? string.Empty : Format(raw),
                     secret,
@@ -59,7 +59,7 @@ public sealed class ConfigurationService(AdminAuditService audit, IGameServerCon
             }
 
             if (currentSection is not null)
-                sections.Add(new ConfigurationSectionModel(currentSection, fields.ToArray()));
+                sections.Add(new ConfigurationSectionModel(currentSection, UiText.ConfigSection(currentSection), fields.ToArray()));
             return sections;
         }
     }

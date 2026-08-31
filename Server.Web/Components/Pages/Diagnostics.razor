@@ -9,7 +9,7 @@
 
 <div class="page-heading compact">
     <div> 
-        <span class="eyebrow">PACKET / PROFILING</span>
+        <span class="eyebrow">数据包 / 性能分析</span>
         <h1>网络诊断</h1>
         <p>采集数据包处理次数、耗时和大小。监控会增加少量运行开销。</p>
     </div>
@@ -21,7 +21,7 @@
 </div>
 
 <div class="page-heading compact diagnostic-subheading">
-    <div><span class="eyebrow">MIRDB / INTEGRITY</span><h2>孤立数据诊断</h2><p>在游戏线程扫描聚合子项；清理会将可清理孤立项标记为临时并立即保存。</p></div>
+    <div><span class="eyebrow">数据库 / 完整性</span><h2>孤立数据诊断</h2><p>在游戏线程扫描聚合子项；清理会将可清理孤立项标记为临时并立即保存。</p></div>
     <div class="control-cluster">
         <RadzenButton Text="扫描孤立项" Icon="search" ButtonStyle="ButtonStyle.Light" Click="ScanOrphans" Disabled="@(GameServer.State != GameServerState.Running)" />
         @if (!ConfirmClean)

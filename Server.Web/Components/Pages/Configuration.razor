@@ -7,7 +7,7 @@
 
 <div class="page-heading compact">
     <div>
-        <span class="eyebrow">运行 / SERVER.INI</span>
+        <span class="eyebrow">运行 / 服务器配置文件</span>
         <h1>服务器配置</h1>
         <p>敏感值留空表示保持原值；端口和主机修改后需重启进程。</p>
     </div>
@@ -31,7 +31,7 @@
     @foreach (ConfigurationSectionModel configSection in Sections)
     {
         <details class="config-section" open="@(configSection.Name is "Network" or "System" or "AdminWeb")">
-            <summary><span>@configSection.Name</span><small>@configSection.Fields.Count 项</small></summary>
+            <summary><span>@configSection.DisplayName</span><small>@configSection.Fields.Count 项</small></summary>
             <div class="config-grid">
                 @foreach (ConfigurationField field in configSection.Fields)
                 {
@@ -40,8 +40,8 @@
                         @if (field.ValueType == typeof(bool))
                         {
                             <select value="@Values[field.Name]" @onchange="e => SetValue(field.Name, e.Value?.ToString())">
-                                <option value="True">True</option>
-                                <option value="False">False</option>
+                                <option value="True">是</option>
+                                <option value="False">否</option>
                             </select>
                         }
                         else

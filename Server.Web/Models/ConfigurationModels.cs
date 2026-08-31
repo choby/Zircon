@@ -9,4 +9,4 @@ public sealed record ConfigurationField(
     bool IsSecret,
     string ApplyMode);
 
-public sealed record ConfigurationSectionModel(string Name, IReadOnlyList<ConfigurationField> Fields);
+public sealed record ConfigurationSectionModel(string Name, string DisplayName, IReadOnlyList<ConfigurationField> Fields);

@@ -224,7 +224,7 @@ public sealed class GameDataViewCatalog
         Route = route,
         Title = title,
         Category = category,
-        Description = $"{description} 对应 Windows 端 {legacyView}。",
+        Description = $"{description} 沿用旧版 Windows 管理界面的字段定义。",
         Tables = [Table<T>(key, title, fields)]
     };
 
@@ -235,21 +235,11 @@ public sealed class GameDataViewCatalog
         IReadOnlyList<GameDataColumnDefinition> columns = fields
             .Where(field => field != nameof(MirDB.DBObject.Index) && modelType.GetProperty(field) is not null)
             .Distinct(StringComparer.Ordinal)
-            .Select(field => new GameDataColumnDefinition(field, Caption(field)))
+            .Select(field => new GameDataColumnDefinition(field, UiText.GameDataField(field)))
             .ToArray();
 
         return new GameDataTableDefinition { Key = key, Title = title, ModelType = modelType, Columns = columns };
     }
-
-    private static string Caption(string field) => field switch
-    {
-        "Index" => "序号", "Name" => "名称", "Description" => "描述", "Title" => "标题",
-        "Amount" => "数量", "Item" => "物品", "Monster" => "怪物", "Map" => "地图",
-        "Region" => "区域", "Level" => "等级", "Class" => "职业", "Category" => "分类",
-        "Price" => "价格", "Type" => "类型", "Chance" => "概率", "Count" => "数量",
-        "Delay" => "延迟", "Order" => "顺序", "Stat" => "属性", "Currency" => "货币",
-        _ => SplitWords(field)
-    };
 
     private static GameDataRelationDefinition BuildRelation(Type ownerType, LegacyRelationSpec definition)
     {
@@ -260,13 +250,13 @@ public sealed class GameDataViewCatalog
             .OfType<AssociationAttribute>().SingleOrDefault()?.Aggregate == true;
         IReadOnlyList<GameDataColumnDefinition> columns = definition.Columns
             .Select(field => itemType.GetProperty(field) is not null
-                ? new GameDataColumnDefinition(field, Caption(field))
+                ? new GameDataColumnDefinition(field, UiText.GameDataField(field))
                 : throw new InvalidOperationException($"{itemType.Name}.{field} 不存在。"))
             .ToArray();
         return new GameDataRelationDefinition
         {
             Property = definition.Property,
-            Title = Caption(definition.Property),
+            Title = UiText.GameDataField(definition.Property),
             ItemType = itemType,
             Aggregate = aggregate,
             Columns = columns,
@@ -282,15 +272,4 @@ public sealed class GameDataViewCatalog
         IReadOnlyList<string> Columns,
         IReadOnlyList<LegacyRelationSpec> Relations);
 
-    private static string SplitWords(string text)
-    {
-        if (string.IsNullOrEmpty(text)) return text;
-        System.Text.StringBuilder result = new();
-        for (int index = 0; index < text.Length; index++)
-        {
-            if (index > 0 && char.IsUpper(text[index]) && !char.IsUpper(text[index - 1])) result.Append(' ');
-            result.Append(text[index]);
-        }
-        return result.ToString();
-    }
 }
