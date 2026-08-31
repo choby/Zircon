@@ -6,19 +6,25 @@ using System.Text;
 using BCnEncoder.Decoder;
 using BCnEncoder.Shared;
 using Library;
+using Microsoft.Extensions.Caching.Memory;
 using Server.Envir;
 using SkiaSharp;
 
 namespace Server.Web.Services;
 
-public sealed class MapImageService
+public sealed class MapImageService : IDisposable
 {
     // Increment whenever decoding or PNG encoding changes. It is part of both the
     // browser URL and ETag so a corrected decoder can never reuse older bad pixels.
     public const string DecoderVersion = "4";
     private static readonly byte[] Zl2Signature = "ZL2"u8.ToArray();
     private static readonly byte[] PngSignature = [0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A];
-    private readonly ConcurrentDictionary<string, CachedLibrary> _libraries = new(StringComparer.OrdinalIgnoreCase);
+    private readonly ConcurrentDictionary<string, CachedLibrarySlot> _libraries = new(StringComparer.OrdinalIgnoreCase);
+    private readonly ConcurrentDictionary<DecodedImageKey, Lazy<byte[]?>> _imageLoads = new();
+    private readonly MemoryCache _decodedImages = new(new MemoryCacheOptions
+    {
+        SizeLimit = 256L * 1024 * 1024
+    });
 
     public MapAssetStatus GetStatus()
     {
@@ -49,16 +55,38 @@ public sealed class MapImageService
         if (imageIndex < 0 || !Libraries.KROrder.TryGetValue(mapFile, out LibraryFile libraryFile) ||
             !TryResolveLibrary(libraryFile, out string path)) return new MapImageLookup(MapImageState.MissingLibrary, null);
 
-        long stamp = File.GetLastWriteTimeUtc(path).Ticks;
-        CachedLibrary cached = _libraries.AddOrUpdate(path,
-            _ => new CachedLibrary(stamp, ZlLibraryIndex.Load(path)),
-            (_, current) => current.LastWriteTicks == stamp ? current : new CachedLibrary(stamp, ZlLibraryIndex.Load(path)));
-        byte[]? png = cached.Index.ReadPng(imageIndex);
+        FileInfo fileInfo = new(path);
+        long stamp = fileInfo.LastWriteTimeUtc.Ticks;
+        CachedLibrary cached = _libraries.GetOrAdd(path, _ => new CachedLibrarySlot()).Get(path, stamp);
+        DecodedImageKey cacheKey = new(path, stamp, imageIndex);
+        if (!_decodedImages.TryGetValue(cacheKey, out byte[]? png))
+        {
+            Lazy<byte[]?> load = _imageLoads.GetOrAdd(cacheKey,
+                _ => new Lazy<byte[]?>(() => cached.Index.ReadPng(imageIndex), LazyThreadSafetyMode.ExecutionAndPublication));
+            try
+            {
+                png = load.Value;
+                if (png is not null)
+                {
+                    _decodedImages.Set(cacheKey, png, new MemoryCacheEntryOptions
+                    {
+                        Size = Math.Max(1, png.LongLength),
+                        SlidingExpiration = TimeSpan.FromMinutes(20)
+                    });
+                }
+            }
+            finally
+            {
+                _imageLoads.TryRemove(cacheKey, out _);
+            }
+        }
         return png is null
             ? new MapImageLookup(MapImageState.Empty, null)
             : new MapImageLookup(MapImageState.Available,
-                new MapImageResult(png, $"\"map-{DecoderVersion}-{stamp:x}-{new FileInfo(path).Length:x}-{mapFile:x2}-{imageIndex:x}\""));
+                new MapImageResult(png, $"\"map-{DecoderVersion}-{stamp:x}-{fileInfo.Length:x}-{mapFile:x2}-{imageIndex:x}\""));
     }
+
+    public void Dispose() => _decodedImages.Dispose();
 
     private static bool TryResolveLibrary(LibraryFile file, out string path)
     {
@@ -70,6 +98,27 @@ public sealed class MapImageService
     }
 
     private sealed record CachedLibrary(long LastWriteTicks, ZlLibraryIndex Index);
+    private sealed record DecodedImageKey(string Path, long LastWriteTicks, int ImageIndex);
+
+    private sealed class CachedLibrarySlot
+    {
+        private readonly object _sync = new();
+        private CachedLibrary? _current;
+
+        public CachedLibrary Get(string path, long stamp)
+        {
+            CachedLibrary? current = Volatile.Read(ref _current);
+            if (current?.LastWriteTicks == stamp) return current;
+            lock (_sync)
+            {
+                current = _current;
+                if (current?.LastWriteTicks == stamp) return current;
+                current = new CachedLibrary(stamp, ZlLibraryIndex.Load(path));
+                Volatile.Write(ref _current, current);
+                return current;
+            }
+        }
+    }
 
     private sealed class ZlLibraryIndex
     {

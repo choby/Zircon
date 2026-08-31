@@ -5,10 +5,30 @@ const CELL_HEIGHT = 8;
 const IMAGE_SCALE = 0.25;
 const ANIMATION_FRAME_MASK = 0x0f;
 const ANIMATION_BLEND_BIT = 0x80;
-const MAX_CONCURRENT_TEXTURE_LOADS =  20;
+const MAX_CONCURRENT_TEXTURE_LOADS = 20;
+const MAX_SHARED_TEXTURES = 4096;
 const DEFAULT_MIN_ZOOM = 0.25;
 const ABSOLUTE_MIN_ZOOM = 0.01;
 const MAX_ZOOM = 8;
+
+// Keep successfully decoded textures between map editor instances. Most maps use
+// the same libraries, so a map switch should only load assets that are genuinely
+// new. Active editors retain their textures; idle least-recently-used entries are
+// discarded once the cache reaches its bound.
+const sharedTextures = new Map();
+let sharedTextureClock = 0;
+
+function evictSharedTextures() {
+    if (sharedTextures.size <= MAX_SHARED_TEXTURES) return;
+    const candidates = [...sharedTextures.entries()]
+        .filter(([, entry]) => entry.references === 0)
+        .sort((left, right) => left[1].lastUsed - right[1].lastUsed);
+    for (const [key, entry] of candidates) {
+        if (sharedTextures.size <= MAX_SHARED_TEXTURES) break;
+        sharedTextures.delete(key);
+        entry.texture.destroy(true);
+    }
+}
 
 export async function createMapEditor(host, mapFileName, regionIndex, initialETag, dotnet) {
     const [mapResponse, assetStatusResponse] = await Promise.all([
@@ -50,8 +70,10 @@ export async function createMapEditor(host, mapFileName, regionIndex, initialETa
 
     const selection = new Set(initialPoints.map(point => `${point.x},${point.y}`));
     const texturePromises = new Map();
+    const retainedTextureKeys = new Set();
     const missingFiles = new Set();
     const textureLoadQueue = [];
+    const priorityTextureLoadQueue = [];
     const textureAbortController = new AbortController();
     let activeTextureLoads = 0;
     let etag = initialETag;
@@ -96,8 +118,9 @@ export async function createMapEditor(host, mapFileName, regionIndex, initialETa
     const selectable = (x, y) => valid(x, y) && isBlocked(x, y) === blockedMode;
 
     function runTextureLoadQueue() {
-        while (!disposed && activeTextureLoads < MAX_CONCURRENT_TEXTURE_LOADS && textureLoadQueue.length > 0) {
-            const job = textureLoadQueue.shift();
+        while (!disposed && activeTextureLoads < MAX_CONCURRENT_TEXTURE_LOADS &&
+            (priorityTextureLoadQueue.length > 0 || textureLoadQueue.length > 0)) {
+            const job = priorityTextureLoadQueue.shift() ?? textureLoadQueue.shift();
             activeTextureLoads++;
             job.load().then(job.resolve, job.reject).finally(() => {
                 activeTextureLoads--;
@@ -106,9 +129,9 @@ export async function createMapEditor(host, mapFileName, regionIndex, initialETa
         }
     }
 
-    function enqueueTextureLoad(load) {
+    function enqueueTextureLoad(load, priority) {
         return new Promise((resolve, reject) => {
-            textureLoadQueue.push({ load, resolve, reject });
+            (priority ? priorityTextureLoadQueue : textureLoadQueue).push({ load, resolve, reject });
             runTextureLoadQueue();
         });
     }
@@ -146,12 +169,45 @@ export async function createMapEditor(host, mapFileName, regionIndex, initialETa
         void dotnet.invokeMethodAsync('UpdateStatus', x, y, selection.size).catch(() => { });
     }
 
-    async function textureFor(file, image) {
-        const key = `${file}:${image}`;
+    function retainSharedTexture(key, entry) {
+        entry.lastUsed = ++sharedTextureClock;
+        if (retainedTextureKeys.has(key)) return;
+        retainedTextureKeys.add(key);
+        entry.references++;
+    }
+
+    async function textureFor(file, image, priority = false) {
+        const key = `${assetVersion}:${file}:${image}`;
         if (texturePromises.has(key)) return texturePromises.get(key);
+
+        const cached = sharedTextures.get(key);
+        if (cached) {
+            retainSharedTexture(key, cached);
+            const promise = Promise.resolve(cached.texture);
+            texturePromises.set(key, promise);
+            return promise;
+        }
+
         const promise = enqueueTextureLoad(async () => {
             try {
-                return await loadTexture(`/api/map-assets/${file}/${image}?v=${assetVersion}`);
+                const texture = await loadTexture(`/api/map-assets/${file}/${image}?v=${assetVersion}`);
+                if (texture === null) return null;
+                if (disposed) {
+                    texture.destroy(true);
+                    return null;
+                }
+
+                // A second editor is not normally active, but prefer an existing
+                // cache entry if two loads happen to finish at the same time.
+                let entry = sharedTextures.get(key);
+                if (entry) {
+                    texture.destroy(true);
+                } else {
+                    entry = { texture, references: 0, lastUsed: ++sharedTextureClock };
+                    sharedTextures.set(key, entry);
+                }
+                retainSharedTexture(key, entry);
+                return entry.texture;
             } catch {
                 if (!disposed && !missingFiles.has(file)) {
                     missingFiles.add(file);
@@ -160,7 +216,7 @@ export async function createMapEditor(host, mapFileName, regionIndex, initialETa
                 }
                 return null;
             }
-        });
+        }, priority);
         texturePromises.set(key, promise);
         return promise;
     }
@@ -171,7 +227,7 @@ export async function createMapEditor(host, mapFileName, regionIndex, initialETa
 
     async function placeTile(container, file, image, x, y, generation, objectLayer = false, blend = false, order = 0,
         animation = null) {
-        const texture = await textureFor(file, image);
+        const texture = await textureFor(file, image, objectLayer);
         if (disposed || generation !== renderGeneration || texture === null) return;
         const sprite = new Sprite(texture);
         sprite.roundPixels = true;
@@ -319,7 +375,8 @@ export async function createMapEditor(host, mapFileName, regionIndex, initialETa
             await Promise.all(targets.map(async item => {
                 const texture = await textureFor(
                     item.file,
-                    item.baseImage + animationPhase % item.frameCount);
+                    item.baseImage + animationPhase % item.frameCount,
+                    true);
                 if (!disposed && animatedSprites === targets && texture !== null)
                     item.sprite.texture = texture;
             }));
@@ -472,10 +529,18 @@ export async function createMapEditor(host, mapFileName, regionIndex, initialETa
             disposed = true;
             textureAbortController.abort();
             for (const job of textureLoadQueue.splice(0)) job.resolve(null);
+            for (const job of priorityTextureLoadQueue.splice(0)) job.resolve(null);
             cancelAnimationFrame(resizeFrame);
             resizeObserver.disconnect();
-            for (const texturePromise of texturePromises.values())
-                texturePromise.then(texture => texture?.destroy(true));
+            for (const key of retainedTextureKeys) {
+                const entry = sharedTextures.get(key);
+                if (entry) {
+                    entry.references = Math.max(0, entry.references - 1);
+                    entry.lastUsed = ++sharedTextureClock;
+                }
+            }
+            retainedTextureKeys.clear();
+            evictSharedTextures();
             app.destroy(true);
         }
     };
