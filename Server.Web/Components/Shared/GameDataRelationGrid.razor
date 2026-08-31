@@ -3,10 +3,7 @@
 @inject DialogService DialogService
 
 <section class="relation-grid-shell">
-    @if (!string.IsNullOrWhiteSpace(Message))
-    {
-        <div class="relation-message @(HasError ? "danger" : null)">@Message</div>
-    }
+    
     <RadzenDataGrid @key="Relation.Property" @ref="Grid" TItem="object" Data="@Rows" AllowPaging="true" PageSize="15"
                     AllowSorting="true" AllowFiltering="true" FilterMode="FilterMode.Simple"
                     AllowColumnResize="true" AllowColumnReorder="true" EditMode="DataGridEditMode.Single"
@@ -35,12 +32,16 @@
         <HeaderTemplate>
             <div class="radzen-grid-toolbar">
                 <span class="relation-grid-title">@Relation.Title</span>
-                <RadzenButton Text="新增子项" Icon="add" ButtonStyle="ButtonStyle.Primary" Click="AddRow" />
-                <RadzenButton Text="刷新明细" Icon="refresh" ButtonStyle="ButtonStyle.Light" Click="Load" />
+                <RadzenButton Size="ButtonSize.Small" Text="新增子项" Icon="add" ButtonStyle="ButtonStyle.Primary" Click="AddRow" />
+                <RadzenButton Size="ButtonSize.Small" Text="刷新明细" Icon="refresh" ButtonStyle="ButtonStyle.Light" Click="Load" />
+                @if (!string.IsNullOrWhiteSpace(Message))
+                {
+                    <span class="relation-message @(HasError ? "danger" : null)">@Message</span>
+                }
             </div>
         </HeaderTemplate>
         <Columns>
-            <RadzenDataGridColumn TItem="object" Property="Index" Type="typeof(int)" Title="序号" Width="86px"
+            <RadzenDataGridColumn TItem="object" Property="Index" Type="typeof(int)" Title="序号" Width="50px"
                                   Reorderable="false" Filterable="false" Sortable="false" Frozen="true" />
             @foreach (GameDataColumnDefinition column in Relation.Columns)
             {

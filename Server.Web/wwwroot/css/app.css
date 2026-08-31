@@ -170,7 +170,7 @@ input:focus, select:focus { border-color: var(--cyan); box-shadow: 0 0 0 2px #54
 .hierarchy-detail-panel { padding: 12px; border-left: 3px solid var(--cyan); background: #0a1012; }
 .hierarchy-relation-tabs { margin: 0 0 10px; }
 .hierarchy-relation-tabs button { padding-block: 6px; font: 10px var(--mono); }
-.relation-grid-shell { min-width: 0; border: 1px solid var(--line); background: var(--panel); }
+.relation-grid-shell { min-width: 0; max-width: calc(100vw - 360px); border: 1px solid var(--line); background: var(--panel); }
 .relation-radzen-grid .rz-data-grid-data { min-height: 160px; max-height: 420px; }
 .relation-grid-title { margin-right: 4px; color: var(--amber); font: 600 11px var(--mono); letter-spacing: .08em; }
 .nested-hierarchy-detail { padding: 10px; border-left-color: var(--amber); }
