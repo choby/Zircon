@@ -155,12 +155,20 @@ namespace Server.Envir
         public static int FishPointFailureRewardMin { get; set; } = 0;
         public static int FishPointFailureRewardMax { get; set; } = 5;
 
+        [ConfigSection("AdminWeb")]
+        public static bool AdminWebEnabled { get; set; } = true;
+        public static string AdminWebHost { get; set; } = "127.0.0.1";
+        public static ushort AdminWebPort { get; set; } = 8080;
+        public static string AdminUserName { get; set; } = "admin";
+        public static bool AdminAutoStartGameServer { get; set; } = false;
+
         public static void LoadVersion()
         {
             try
             {
-                if (File.Exists(VersionPath))
-                    using (FileStream stream = File.OpenRead(VersionPath))
+                string versionPath = PlatformPath.Resolve(VersionPath);
+                if (File.Exists(versionPath))
+                    using (FileStream stream = File.OpenRead(versionPath))
                     using (SHA256 sha256 = SHA256.Create())
                     {
                         ClientHash = sha256.ComputeHash(stream);

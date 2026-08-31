@@ -1,0 +1,123 @@
+@attribute [Authorize]
+@inject RuntimeDataService RuntimeDataManager
+@inject IGameServerController GameServer
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
+<PageTitle>@Definition.DisplayName · Zircon</PageTitle>
+
+<div class="page-heading compact game-data-heading">
+    <div>
+        <span class="eyebrow">USERS.DB / LIVE SNAPSHOT</span>
+        <h1>@Definition.DisplayName</h1>
+        <p>通过游戏线程读取并受控修改运行时数据；敏感认证字段不会返回浏览器。</p>
+    </div>
+    <div class="view-origin"><span>原管理界面</span><strong>@Definition.LegacyView</strong></div>
+</div>
+
+@if (GameServer.State != GameServerState.Running)
+{
+    <div class="alert warning">游戏服务器未运行，运行时集合不可用。</div>
+}
+else
+{
+    @if (!string.IsNullOrWhiteSpace(Message))
+    {
+        <div class="alert @(HasError ? "danger" : "success")" role="status">@Message</div>
+    }
+
+    <div class="runtime-grid-layout">
+        <section class="legacy-grid-shell">
+            <RadzenDataGrid TItem="RuntimeDataRow" Data="@Rows" AllowPaging="true" PageSize="40" AllowSorting="true"
+                            AllowFiltering="true" FilterMode="FilterMode.Simple" AllowColumnResize="true" AllowColumnReorder="true"
+                            SelectionMode="DataGridSelectionMode.Single" AllowRowSelectOnRowClick="true" Value="@SelectedItems" Change="SelectionChanged"
+                            Density="Density.Compact" Class="legacy-data-grid runtime-radzen-grid" EmptyText="暂无运行时数据"
+                            ShowPagingSummary="true" PagingSummaryFormat="第 {0}–{1} 条，共 {2} 条">
+                <HeaderTemplate>
+                    <div class="radzen-grid-toolbar"><RadzenButton Text="刷新快照" Icon="refresh" ButtonStyle="ButtonStyle.Light" Click="Load" /></div>
+                </HeaderTemplate>
+                <Columns>
+                    <RadzenDataGridColumn TItem="RuntimeDataRow" Property="Index" Title="序号" Width="86px" Frozen="true" />
+                    @foreach (RuntimeColumnDefinition column in Definition.Columns)
+                    {
+                        <RadzenDataGridColumn TItem="RuntimeDataRow" Title="@column.Title" Width="180px" Filterable="false" Sortable="false">
+                            <Template Context="row">@Format(row, column.Field)</Template>
+                        </RadzenDataGridColumn>
+                    }
+                </Columns>
+            </RadzenDataGrid>
+        </section>
+
+        <aside class="editor-panel runtime-editor">
+            @if (SelectedRow is null)
+            {
+                <div class="editor-empty"><span>SELECT ROW</span><p>选择一行以查看和编辑允许的字段。</p></div>
+            }
+            else
+            {
+                <div class="editor-title"><span>#@SelectedRow.Index</span><strong>@Definition.DisplayName</strong></div>
+                <div class="editor-fields">
+                    @foreach (RuntimeColumnDefinition column in Definition.Columns)
+                    {
+                        <label>
+                            <span>@column.Title @if (!column.Editable) { <em>只读</em> }</span>
+                            <input value="@EditValues.GetValueOrDefault(column.Field)" disabled="@(!column.Editable)"
+                                   @onchange="args => EditValues[column.Field] = args.Value?.ToString()" />
+                        </label>
+                    }
+                </div>
+                <div class="editor-actions"><RadzenButton Text="保存到 Users.db" Icon="save" ButtonStyle="ButtonStyle.Primary" Click="Save" /></div>
+            }
+        </aside>
+    </div>
+}
+
+@code {
+    [Parameter, EditorRequired] public string CollectionKey { get; set; } = string.Empty;
+
+    private RuntimeCollectionDescriptor Definition = default!;
+    private IReadOnlyList<RuntimeDataRow> Rows = [];
+    private IList<RuntimeDataRow> SelectedItems { get; set; } = [];
+    private RuntimeDataRow? SelectedRow => SelectedItems.SingleOrDefault();
+    private Dictionary<string, string?> EditValues = [];
+    private string? Message;
+    private bool HasError;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        Definition = RuntimeDataManager.Get(CollectionKey);
+        await Load();
+    }
+
+    private void SelectionChanged(IList<RuntimeDataRow> selected)
+    {
+        SelectedItems = selected;
+        EditValues = SelectedRow?.Values.ToDictionary(pair => pair.Key, pair => pair.Value?.ToString()) ?? [];
+    }
+
+    private async Task Load()
+    {
+        Rows = GameServer.State == GameServerState.Running ? await RuntimeDataManager.ReadAsync(Definition) : [];
+        SelectedItems = [];
+        EditValues = [];
+    }
+
+    private async Task Save()
+    {
+        if (SelectedRow is null) return;
+        try
+        {
+            string user = (await AuthenticationStateProvider.GetAuthenticationStateAsync()).User.Identity?.Name ?? "unknown";
+            await RuntimeDataManager.UpdateAsync(Definition, SelectedRow.Index, SelectedRow.ETag, EditValues, user);
+            await Load();
+            HasError = false;
+            Message = "运行时数据已保存。";
+        }
+        catch (Exception ex)
+        {
+            HasError = true;
+            Message = ex.InnerException?.Message ?? ex.Message;
+        }
+    }
+
+    private static string Format(RuntimeDataRow row, string field) => row.Values.GetValueOrDefault(field)?.ToString() ?? "—";
+}

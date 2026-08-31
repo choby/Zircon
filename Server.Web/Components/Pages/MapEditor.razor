@@ -1,0 +1,141 @@
+@page "/map-editor"
+@attribute [Authorize]
+@implements IAsyncDisposable
+@inject GameDataSessionService Catalog
+@inject IJSRuntime JS
+
+<PageTitle>地图区域编辑 · Zircon</PageTitle>
+
+<div class="page-heading compact map-heading">
+    <div>
+        <span class="eyebrow">MAP REGION / WEBGL</span>
+        <h1>地图区域编辑</h1>
+        <p>左键添加、右键移除、中键连通填充；保存只更新 MapRegion，不改写 .map。</p>
+    </div>
+    <div class="map-readout"><span>位置</span><strong>@CursorText</strong><span>已选</span><strong>@SelectedCount</strong></div>
+</div>
+
+<div class="map-toolbar">
+    <select @onchange="RegionChanged">
+        <option value="">选择地图区域…</option>
+        @foreach (MapRegionAdminModel region in Regions)
+        {
+            <option value="@region.Index">@region.MapDescription / @region.Description (@region.Size)</option>
+        }
+    </select>
+    <button @onclick='() => Call("zoomIn")'>放大</button>
+    <button @onclick='() => Call("zoomOut")'>缩小</button>
+    <button @onclick='() => Call("resetView")'>重置</button>
+    <button @onclick='() => ToggleLayer("background")'>背景层</button>
+    <button @onclick='() => ToggleLayer("middle")'>中间层</button>
+    <button @onclick='() => ToggleLayer("front")'>前景层</button>
+    <button @onclick='() => ToggleLayer("light")'>光照层</button>
+    <button @onclick='() => Call("toggleAttributes")'>属性</button>
+    <button @onclick='() => Call("toggleBlockedMode")'>阻挡筛选</button>
+    <label>半径 <input type="range" min="0" max="12" value="0" @oninput="RadiusChanged" /></label>
+    @if (!string.IsNullOrEmpty(Message)) { <div class="alert @(HasError ? "danger" : "success")">@Message</div> }
+
+    <button class="save-map" @onclick="Save" disabled="@(Editor is null)">保存区域</button>
+</div>
+
+
+<div class="map-viewport" @ref="Viewport">
+    @if (SelectedRegion is null) { <div class="map-placeholder"><span>MAP CHANNEL IDLE</span><p>选择一个地图区域以加载 WebGL 编辑器。</p></div> }
+</div>
+
+@code {
+    private ElementReference Viewport;
+    private IJSObjectReference? Module;
+    private IJSObjectReference? Editor;
+    private DotNetObjectReference<MapEditor>? Callback;
+    private IReadOnlyList<MapRegionAdminModel> Regions = [];
+    private MapRegionAdminModel? SelectedRegion;
+    private string CursorText = "—";
+    private int SelectedCount;
+    private string? Message;
+    private bool HasError;
+
+    protected override async Task OnInitializedAsync() => Regions = await Catalog.GetMapRegionsAsync();
+
+    private async Task RegionChanged(ChangeEventArgs args)
+    {
+        if (!int.TryParse(args.Value?.ToString(), out int index)) return;
+        try
+        {
+            SelectedRegion = Regions.Single(region => region.Index == index);
+            Module ??= await JS.InvokeAsync<IJSObjectReference>("import", "./js/map-editor.js");
+            await DisposeEditorAsync();
+            Callback?.Dispose();
+            Callback = DotNetObjectReference.Create(this);
+            HasError = false;
+            Message = null;
+            Editor = await Module.InvokeAsync<IJSObjectReference>("createMapEditor", Viewport, SelectedRegion.MapFileName, SelectedRegion.Index, SelectedRegion.ETag, Callback);
+        }
+        catch (Exception ex)
+        {
+            HasError = true;
+            Message = $"地图加载失败：{ex.Message}";
+        }
+    }
+
+    [JSInvokable]
+    public Task UpdateStatus(int x, int y, int selected)
+    {
+        CursorText = $"{x}, {y}";
+        SelectedCount = selected;
+        StateHasChanged();
+        return Task.CompletedTask;
+    }
+
+    [JSInvokable]
+    public Task ReportMapWarning(string message)
+    {
+        HasError = true;
+        Message = message;
+        StateHasChanged();
+        return Task.CompletedTask;
+    }
+
+    private async Task Call(string method)
+    {
+        if (Editor is not null) await Editor.InvokeVoidAsync(method);
+    }
+
+    private async Task RadiusChanged(ChangeEventArgs args)
+    {
+        if (Editor is not null && int.TryParse(args.Value?.ToString(), out int radius)) await Editor.InvokeVoidAsync("setRadius", radius);
+    }
+
+    private async Task ToggleLayer(string layer)
+    {
+        if (Editor is not null) await Editor.InvokeVoidAsync("toggleLayer", layer);
+    }
+
+    private async Task Save()
+    {
+        if (Editor is null) return;
+        try { await Editor.InvokeVoidAsync("save"); HasError = false; Message = "地图区域已保存到 System.db。"; }
+        catch (Exception ex) { HasError = true; Message = ex.Message; }
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        await DisposeEditorAsync();
+        if (Module is not null) await Module.DisposeAsync();
+        Callback?.Dispose();
+    }
+
+    private async Task DisposeEditorAsync()
+    {
+        if (Editor is null) return;
+        IJSObjectReference editor = Editor;
+        Editor = null;
+        try { await editor.InvokeVoidAsync("dispose"); }
+        catch (JSDisconnectedException) { }
+        finally
+        {
+            try { await editor.DisposeAsync(); }
+            catch (JSDisconnectedException) { }
+        }
+    }
+}

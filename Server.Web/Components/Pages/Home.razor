@@ -1,0 +1,132 @@
+@page "/"
+@attribute [Authorize]
+@implements IAsyncDisposable
+@inject ServerMetricsService Metrics
+@inject IGameServerController GameServer
+@inject AdminAuditService Audit
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
+<PageTitle>服务器总览 · Zircon</PageTitle>
+
+<div class="page-heading compact">
+    <div>
+        <span class="eyebrow">运行 / LIVE OPERATIONS</span>
+        <h1>服务器总览</h1>
+        <p>游戏循环与网络状态的只读快照，每秒刷新。</p>
+    </div>
+    <div class="control-cluster">
+        <RadzenButton Text="启动服务器" Icon="play_arrow" ButtonStyle="ButtonStyle.Primary" Click="Start" Disabled="@(!CanStart)" />
+        <RadzenButton Text="停止服务器" Icon="stop" ButtonStyle="ButtonStyle.Danger" Click="Stop" Disabled="@(!CanStop)" />
+    </div>
+</div>
+
+@if (!string.IsNullOrEmpty(Snapshot.LastError))
+{
+    <div class="alert danger">@Snapshot.LastError</div>
+}
+@if (!string.IsNullOrEmpty(OperationMessage))
+{
+    <div class="alert @(OperationFailed ? "danger" : "success")">@OperationMessage</div>
+}
+
+<section class="hero-status @StateClass">
+    <div>
+        <span class="status-caption">GAME SERVER STATE</span>
+        <strong>@StateText</strong>
+    </div>
+    <div class="pulse-track @(Snapshot.State == GameServerState.Running ? "active" : null)"><span></span></div>
+    <time>@Snapshot.CapturedAt.ToString("yyyy-MM-dd HH:mm:ss")</time>
+</section>
+
+<section class="metric-grid">
+    <MetricCard Label="连接" Value="@Snapshot.Connections.ToString("N0")" Unit="clients" Accent="cyan" />
+    <MetricCard Label="活动对象" Value="@Snapshot.ActiveObjects.ToString("N0")" Unit="active" Accent="amber" />
+    <MetricCard Label="对象总数" Value="@Snapshot.Objects.ToString("N0")" Unit="objects" />
+    <MetricCard Label="每秒循环" Value="@Snapshot.LoopCount.ToString("N0")" Unit="loops" Accent="cyan" />
+    <MetricCard Label="处理对象" Value="@Snapshot.ProcessedObjects.ToString("N0")" Unit="processed" />
+    <MetricCard Label="已发送邮件" Value="@Snapshot.EmailsSent.ToString("N0")" Unit="messages" />
+</section>
+
+<section class="data-strip">
+    <div><span>下载总量</span><strong>@FormatBytes(Snapshot.TotalBytesReceived)</strong><small>@FormatRate(Snapshot.DownloadSpeed)</small></div>
+    <div><span>上传总量</span><strong>@FormatBytes(Snapshot.TotalBytesSent)</strong><small>@FormatRate(Snapshot.UploadSpeed)</small></div>
+    <div><span>连接延迟</span><strong>@Snapshot.ConnectionDelayMilliseconds ms</strong><small>network</small></div>
+    <div><span>保存延迟</span><strong>@Snapshot.SaveDelayMilliseconds ms</strong><small>database</small></div>
+</section>
+
+@code {
+    private readonly CancellationTokenSource _refreshCancellation = new();
+    private ServerMetricsSnapshot Snapshot => Metrics.Current;
+    private string? OperationMessage;
+    private bool OperationFailed;
+    private bool CanStart => Snapshot.State is GameServerState.Stopped or GameServerState.Faulted;
+    private bool CanStop => Snapshot.State is GameServerState.Starting or GameServerState.Running;
+    private string StateClass => Snapshot.State.ToString().ToLowerInvariant();
+    private string StateText => Snapshot.State switch
+    {
+        GameServerState.Stopped => "已停止",
+        GameServerState.Starting => "正在启动",
+        GameServerState.Running => "运行中",
+        GameServerState.Stopping => "正在停止",
+        _ => "故障"
+    };
+
+    protected override void OnInitialized() => _ = RefreshLoop();
+
+    private async Task RefreshLoop()
+    {
+        try
+        {
+            using PeriodicTimer timer = new(TimeSpan.FromSeconds(1));
+            while (await timer.WaitForNextTickAsync(_refreshCancellation.Token))
+                await InvokeAsync(StateHasChanged);
+        }
+        catch (OperationCanceledException) { }
+    }
+
+    private async Task Start()
+    {
+        try
+        {
+            string user = await GetUser();
+            Audit.Record(user, "Server.Start", "Start requested from dashboard");
+            await GameServer.StartAsync();
+            OperationFailed = false;
+            OperationMessage = "游戏服务器已启动。";
+        }
+        catch (Exception ex) { OperationFailed = true; OperationMessage = ex.ToString(); }
+    }
+
+    private async Task Stop()
+    {
+        try
+        {
+            string user = await GetUser();
+            Audit.Record(user, "Server.Stop", "Stop requested from dashboard");
+            await GameServer.StopAsync();
+            OperationFailed = false;
+            OperationMessage = "游戏服务器已停止。";
+        }
+        catch (Exception ex) { OperationFailed = true; OperationMessage = ex.ToString(); }
+    }
+
+    private async Task<string> GetUser() =>
+        (await AuthenticationStateProvider.GetAuthenticationStateAsync()).User.Identity?.Name ?? "unknown";
+
+    private static string FormatRate(long value) => $"{FormatBytes(value)}/s";
+    private static string FormatBytes(long value)
+    {
+        string[] suffix = ["B", "KB", "MB", "GB", "TB"];
+        double current = value;
+        int index = 0;
+        while (current >= 1024 && index < suffix.Length - 1) { current /= 1024; index++; }
+        return $"{current:0.#} {suffix[index]}";
+    }
+
+    public ValueTask DisposeAsync()
+    {
+        _refreshCancellation.Cancel();
+        _refreshCancellation.Dispose();
+        return ValueTask.CompletedTask;
+    }
+}

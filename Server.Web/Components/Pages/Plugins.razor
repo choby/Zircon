@@ -1,0 +1,46 @@
+@page "/plugins"
+@attribute [Authorize]
+@inject PluginRegistry PluginManager
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
+<PageTitle>插件 · Zircon</PageTitle>
+
+<div class="page-heading compact">
+    <div>
+        <span class="eyebrow">EXTENSION RUNTIME</span>
+        <h1>插件</h1>
+        <p>插件是受信任的跨平台 .NET 代码；启用状态在下次进程启动时生效。</p>
+    </div>
+    <span class="safe-mode-hint">启动参数：--safe-mode</span>
+</div>
+
+<div class="plugin-grid">
+    @if (PluginManager.Statuses.Count == 0)
+    {
+        <div class="empty-state"><h2>没有发现 Web 插件</h2><p>将包含 plugin.json 的插件目录放入发布目录的 Plugins 下。</p></div>
+    }
+    @foreach (PluginStatus plugin in PluginManager.Statuses)
+    {
+        <article class="plugin-card @(plugin.Loaded ? "loaded" : "failed")">
+            <header><span class="plugin-mark">@plugin.Name[..1].ToUpperInvariant()</span><div><h2>@plugin.Name</h2><code>@plugin.Id · @plugin.Version</code></div></header>
+            <div class="plugin-state"><span></span>@(plugin.Loaded ? "已加载" : plugin.Enabled ? "加载失败" : "已禁用")</div>
+            <RadzenButton Text="@(plugin.Enabled ? "下次启动时禁用" : "下次启动时启用")"
+                          Icon="@(plugin.Enabled ? "toggle_off" : "toggle_on")" ButtonStyle="ButtonStyle.Light" Click="() => Toggle(plugin)" />
+            @if (!string.IsNullOrEmpty(plugin.Error)) { <p class="plugin-error">@plugin.Error</p> }
+            @foreach (var navItem in plugin.Navigation)
+            {
+                <a class="plugin-link" href="@PluginUrl(plugin.Id, navItem.Key)">@navItem.Title <span>→</span></a>
+            }
+        </article>
+    }
+</div>
+
+@code {
+    private static string PluginUrl(string pluginId, string pageKey) => $"/plugin/{pluginId}/{pageKey}";
+
+    private async Task Toggle(PluginStatus plugin)
+    {
+        string user = (await AuthenticationStateProvider.GetAuthenticationStateAsync()).User.Identity?.Name ?? "unknown";
+        await PluginManager.SetEnabledAsync(plugin.Id, !plugin.Enabled, user);
+    }
+}

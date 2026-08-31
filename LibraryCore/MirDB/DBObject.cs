@@ -1,4 +1,4 @@
-﻿using Library.MirDB;
+using Library.MirDB;
 using System;
 using System.Collections.Concurrent;
 using System.ComponentModel;
@@ -319,10 +319,10 @@ namespace MirDB
         public event PropertyChangedEventHandler PropertyChanged;
         protected internal virtual void OnChanged(object oldValue, object newValue, string propertyName)
         {
-            if (Collection.Session.Relationships == null)
+            if (Collection?.Session?.Relationships == null)
                 IsModified = true;
 
-            if (oldValue is DBObject || newValue is DBObject)
+            if (Collection != null && (oldValue is DBObject || newValue is DBObject))
             {
                 PropertyInfo info = ThisType.GetProperty(propertyName);
 
@@ -330,7 +330,7 @@ namespace MirDB
                 CreateLink(newValue, info);
             }
 
-            if (IsLoaded && Collection.RaisePropertyChanges)
+            if (IsLoaded && (Collection?.RaisePropertyChanges ?? false))
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         #endregion

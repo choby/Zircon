@@ -1,0 +1,21 @@
+@page "/audit"
+@attribute [Authorize]
+@inject AdminAuditService AuditService
+
+<PageTitle>审计记录 · Zircon</PageTitle>
+
+<div class="page-heading compact"><div><span class="eyebrow">SECURITY / AUDIT</span><h1>管理操作审计</h1><p>落盘保存并显示最近 2,000 条安全与写操作记录。</p></div></div>
+
+<section class="legacy-grid-shell">
+    <RadzenDataGrid Data="@AuditService.GetEntries()" TItem="AdminAuditEntry" AllowPaging="true" PageSize="50"
+                    AllowSorting="true" AllowColumnResize="true" Density="Density.Compact" Class="legacy-data-grid audit-grid"
+                    EmptyText="暂无审计记录" PagingSummaryFormat="第 {0}–{1} 条，共 {2} 条">
+        <Columns>
+            <RadzenDataGridColumn TItem="AdminAuditEntry" Property="Timestamp" Title="时间" Width="190px" Frozen="true" />
+            <RadzenDataGridColumn TItem="AdminAuditEntry" Property="User" Title="管理员" Width="130px" />
+            <RadzenDataGridColumn TItem="AdminAuditEntry" Property="Action" Title="操作" Width="220px" />
+            <RadzenDataGridColumn TItem="AdminAuditEntry" Property="Detail" Title="详情" />
+            <RadzenDataGridColumn TItem="AdminAuditEntry" Property="Address" Title="来源" Width="150px" />
+        </Columns>
+    </RadzenDataGrid>
+</section>

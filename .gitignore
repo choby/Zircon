@@ -5,8 +5,9 @@ Build/
 [Oo]bj/
 [Bb]in/
 packages/
-licenses.licx
 /NuGet.Config
 /.dotnet/.dotnet
 /.codex/skills/*
 /milestones
+**/node_modules/
+.DS_Store

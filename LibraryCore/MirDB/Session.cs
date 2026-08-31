@@ -1,4 +1,5 @@
-﻿using Library.MirDB;
+﻿using Library;
+using Library.MirDB;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,6 +21,7 @@ namespace MirDB
         public const string SystemDatabaseInfoName = "System";
         private static readonly Regex SystemVersionRegex = new Regex(@"^(?<year>\d{4})\.(?<month>\d{2})\.(?<day>\d{2})\.(?<count>\d+)$", RegexOptions.Compiled);
 
+       
         public string Root { get; }
         public SessionMode Mode { get; }
 
@@ -27,14 +29,14 @@ namespace MirDB
         public int BackUpDelay { get; set; }
         private string BackupRoot { get; }
 
-        public string SystemPath => Root + "System" + Extension;
-        public string SystemBackupPath => BackupRoot + @"System\";
+        public string SystemPath => Path.Combine(Root, "System" + Extension);
+        public string SystemBackupPath => Path.Combine(BackupRoot, "System") + Path.DirectorySeparatorChar;
         public byte[] SystemHeader;
         public bool SystemDatabaseExists { get; private set; }
         public string SystemDatabaseVersion { get; private set; }
 
-        public string UsersPath => Root + "Users" + Extension;
-        public string UsersBackupPath => BackupRoot + @"Users\";
+        public string UsersPath => Path.Combine(Root, "Users" + Extension);
+        public string UsersBackupPath => Path.Combine(BackupRoot, "Users") + Path.DirectorySeparatorChar;
 
         public Assembly[] Assemblies { get; private set; }
 
@@ -67,16 +69,15 @@ namespace MirDB
                 BackUpDelay = backupDelay;
             }
 
-            Root = args["ROOT"];
-            BackupRoot = args["BACKUP"];
+            Root = PlatformPath.Resolve(args["ROOT"]);
+            BackupRoot = PlatformPath.Resolve(args["BACKUP"]);
             Mode = mode;
         }
-
         public Session(SessionMode mode, string root = @".\Database\", string backup = @".\Backup\")
         {
-            Root = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, root));
-            BackupRoot = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, backup));
-
+            Root = PlatformPath.Resolve(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, root));
+            BackupRoot = PlatformPath.Resolve(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, backup));
+            
             Mode = mode;
         }
 

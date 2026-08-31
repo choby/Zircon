@@ -1,0 +1,22 @@
+<select class="game-data-enum" value="@Current" @onchange="Change">
+    @foreach (string option in Enum.GetNames(EnumType))
+    {
+        <option value="@option">@option</option>
+    }
+</select>
+
+@code {
+    [Parameter, EditorRequired] public object Item { get; set; } = default!;
+    [Parameter, EditorRequired] public string Field { get; set; } = string.Empty;
+    [Parameter, EditorRequired] public Type EnumType { get; set; } = default!;
+
+    private System.Reflection.PropertyInfo Property => Item.GetType().GetProperty(Field)!;
+    private string Current => Property.GetValue(Item)?.ToString() ?? Enum.GetNames(EnumType).FirstOrDefault() ?? string.Empty;
+
+    private void Change(ChangeEventArgs args)
+    {
+        string? value = args.Value?.ToString();
+        if (!string.IsNullOrWhiteSpace(value)) Property.SetValue(Item, Enum.Parse(EnumType, value));
+    }
+}
+

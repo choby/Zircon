@@ -1,0 +1,87 @@
+@if (ActualType == typeof(bool))
+{
+    <RadzenCheckBox TValue="bool" Value="@BoolValue" Change="SetBool" />
+}
+else if (ActualType == typeof(DateTime))
+{
+    <RadzenDatePicker TValue="DateTime?" Value="@(StructValue<DateTime>())" Change="@((DateTime? value) => SetStruct(value))" DateFormat="yyyy-MM-dd HH:mm:ss" ShowTime="true" />
+}
+else if (ActualType == typeof(int))
+{
+    <RadzenNumeric TValue="int?" Value="@(StructValue<int>())" Change="@((int? value) => SetStruct(value))" Style="width: 100%" />
+}
+else if (ActualType == typeof(uint))
+{
+    <RadzenNumeric TValue="uint?" Value="@(StructValue<uint>())" Change="@((uint? value) => SetStruct(value))" Style="width: 100%" />
+}
+else if (ActualType == typeof(long))
+{
+    <RadzenNumeric TValue="long?" Value="@(StructValue<long>())" Change="@((long? value) => SetStruct(value))" Style="width: 100%" />
+}
+else if (ActualType == typeof(ulong))
+{
+    <RadzenNumeric TValue="ulong?" Value="@(StructValue<ulong>())" Change="@((ulong? value) => SetStruct(value))" Style="width: 100%" />
+}
+else if (ActualType == typeof(short))
+{
+    <RadzenNumeric TValue="short?" Value="@(StructValue<short>())" Change="@((short? value) => SetStruct(value))" Style="width: 100%" />
+}
+else if (ActualType == typeof(ushort))
+{
+    <RadzenNumeric TValue="ushort?" Value="@(StructValue<ushort>())" Change="@((ushort? value) => SetStruct(value))" Style="width: 100%" />
+}
+else if (ActualType == typeof(byte))
+{
+    <RadzenNumeric TValue="byte?" Value="@(StructValue<byte>())" Change="@((byte? value) => SetStruct(value))" Style="width: 100%" />
+}
+else if (ActualType == typeof(sbyte))
+{
+    <RadzenNumeric TValue="sbyte?" Value="@(StructValue<sbyte>())" Change="@((sbyte? value) => SetStruct(value))" Style="width: 100%" />
+}
+else if (ActualType == typeof(decimal))
+{
+    <RadzenNumeric TValue="decimal?" Value="@(StructValue<decimal>())" Change="@((decimal? value) => SetStruct(value))" Style="width: 100%" />
+}
+else if (ActualType == typeof(double))
+{
+    <RadzenNumeric TValue="double?" Value="@(StructValue<double>())" Change="@((double? value) => SetStruct(value))" Style="width: 100%" />
+}
+else if (ActualType == typeof(float))
+{
+    <RadzenNumeric TValue="float?" Value="@(StructValue<float>())" Change="@((float? value) => SetStruct(value))" Style="width: 100%" />
+}
+else
+{
+    <RadzenTextBox Value="@TextValue" Change="SetText" Style="width: 100%" />
+}
+
+@code {
+    [Parameter, EditorRequired] public object Item { get; set; } = default!;
+    [Parameter, EditorRequired] public string Field { get; set; } = string.Empty;
+    [Parameter, EditorRequired] public Type ValueType { get; set; } = default!;
+
+    private System.Reflection.PropertyInfo Property => Item.GetType().GetProperty(Field)!;
+    private Type ActualType => Nullable.GetUnderlyingType(ValueType) ?? ValueType;
+    private bool BoolValue => Property.GetValue(Item) is true;
+    private string TextValue => Property.GetValue(Item)?.ToString() ?? string.Empty;
+
+    private void SetBool(bool value) => Property.SetValue(Item, value);
+    private T? StructValue<T>() where T : struct => Property.GetValue(Item) is T value ? value : null;
+    private void SetStruct<T>(T? value) where T : struct =>
+        Property.SetValue(Item, value ?? (Nullable.GetUnderlyingType(ValueType) is null ? default(T) : null));
+
+    private void SetText(string value)
+    {
+        if (string.IsNullOrWhiteSpace(value) && Nullable.GetUnderlyingType(ValueType) is not null)
+        {
+            Property.SetValue(Item, null);
+            return;
+        }
+
+        object converted = ActualType == typeof(string) ? value :
+            ActualType == typeof(TimeSpan) ? TimeSpan.Parse(value, System.Globalization.CultureInfo.InvariantCulture) :
+            ActualType == typeof(Guid) ? Guid.Parse(value) :
+            Convert.ChangeType(value, ActualType, System.Globalization.CultureInfo.InvariantCulture);
+        Property.SetValue(Item, converted);
+    }
+}

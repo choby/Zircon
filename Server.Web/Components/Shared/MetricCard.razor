@@ -1,0 +1,12 @@
+<article class="metric-card @Accent">
+    <span>@Label</span>
+    <strong>@Value</strong>
+    <small>@Unit</small>
+</article>
+
+@code {
+    [Parameter, EditorRequired] public string Label { get; set; } = string.Empty;
+    [Parameter, EditorRequired] public string Value { get; set; } = string.Empty;
+    [Parameter] public string Unit { get; set; } = string.Empty;
+    [Parameter] public string Accent { get; set; } = string.Empty;
+}

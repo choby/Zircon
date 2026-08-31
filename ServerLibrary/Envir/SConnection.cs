@@ -52,7 +52,7 @@ namespace Server.Envir
                 SEnvir.Log(string.Format("连接崩溃：账号：{0}，角色：{1}。", Account?.EMailAddress, Player?.Name));
                 SEnvir.Log(e.ToString());
                 SEnvir.Log(e.StackTrace.ToString());
-                File.AppendAllText(@".\Errors.txt", e.StackTrace + Environment.NewLine);
+                File.AppendAllText(PlatformPath.Resolve(@".\Errors.txt"), e.StackTrace + Environment.NewLine);
             };
 
             SEnvir.Log(string.Format("[连接] IP 地址：{0}", IPAddress));
