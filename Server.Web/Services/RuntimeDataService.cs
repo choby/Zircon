@@ -28,7 +28,7 @@ public sealed class RuntimeDataService(AdminAuditService audit)
             ("Payer_EMail", "付款邮箱"), ("Payer_ID", "付款人 ID"), ("Price", "价格"), ("Currency", "币种"), ("Fee", "手续费"), ("Error", "错误")),
         View("sales", "商店销售", nameof(SEnvir.GameStoreSaleList), "GameStoreSaleView",
             ("Account", "账号"), ("Item", "物品"), ("Date", "日期"), ("Price", "价格"), ("Count", "数量"), ("HuntGold", "赏金")),
-        View("conquest", "争夺战统计", nameof(SEnvir.UserConquestStatsList), "UserConquestStatsView",
+        View("conquest", "攻城战统计", nameof(SEnvir.UserConquestStatsList), "UserConquestStatsView",
             ("WarStartDate", "战争开始"), ("CastleName", "城堡"), ("CharacterName", "角色"), ("GuildName", "行会"),
             ("Level", "等级"), ("Class", "职业"), ("BossDamageTaken", "Boss 承伤"), ("BossDamageDealt", "Boss 伤害"),
             ("BossDeathCount", "Boss 死亡"), ("BossKillCount", "Boss 击杀"), ("PvPDamageTaken", "PvP 承伤"),
